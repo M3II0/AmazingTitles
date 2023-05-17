@@ -9,7 +9,9 @@ import sk.m3ii0.amazingtitles.code.colors.ColorTranslator;
 import sk.m3ii0.amazingtitles.code.colors.ColorUtils;
 
 import java.awt.*;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class ATWaves implements AmazingTitle {
@@ -19,6 +21,7 @@ public class ATWaves implements AmazingTitle {
 	private final String subTitle;
 	private final int speed;
 	private final int duration;
+	private final List<String> frames = new ArrayList<>();
 	
 	private int frameCounter = 0;
 	private int tickCounter = 0;
@@ -85,7 +88,7 @@ public class ATWaves implements AmazingTitle {
 		this.speed = speed;
 		this.duration = duration;
 	}
-	
+
 	@Override
 	public void streamToAll() {
 		for (Player p : Bukkit.getOnlinePlayers()) {

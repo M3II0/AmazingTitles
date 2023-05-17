@@ -7,6 +7,7 @@ import java.util.List;
 public enum AnimationTypes {
 	
 	RAINBOW(
+			3,
 	 true,
 	 List.of("<Number-Speed(20=1s)>"),
 	 List.of("<Number-Duration(InSeconds)>"),
@@ -14,6 +15,7 @@ public enum AnimationTypes {
 	),
 	
 	WAVES(
+			5,
 	 true,
 	 List.of("<Number-Speed(20=1s)>"),
 	 List.of("<Number-Duration(InSeconds)>"),
@@ -22,14 +24,20 @@ public enum AnimationTypes {
 	 List.of("<Text-AnimationText\\n\\AnimationSubText>")
 	);
 	
-	AnimationTypes(boolean infinite, List<String>... completer) {
+	AnimationTypes(int minimum, boolean infinite, List<String>... completer) {
 		this.competitions = completer;
 		this.infinite = infinite;
+		this.minimum = minimum;
 	}
 	
 	private final List<String>[] competitions;
 	private final boolean infinite;
-	
+	private final int minimum;
+
+	public int getMinimum() {
+		return minimum;
+	}
+
 	public List<String>[] getCompetitions() {
 		return competitions;
 	}

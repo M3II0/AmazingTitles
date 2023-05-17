@@ -7,21 +7,21 @@ import sk.m3ii0.amazingtitles.code.AmazingTitles;
 import sk.m3ii0.amazingtitles.code.async.AmazingTitle;
 import sk.m3ii0.amazingtitles.code.colors.ColorTranslator;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 public class ATRainbow implements AmazingTitle {
 	
 	private BukkitTask task;
-	private Set<Player> viewers = new HashSet<>();
+	private final Set<Player> viewers = new HashSet<>();
 	private final String subTitle;
 	private final int speed;
 	private final int duration;
+	private final List<String> frames = new ArrayList<>();
 	
 	private int frameCounter = 0;
 	private int tickCounter = 0;
 	private int durationCounter = 0;
-	
+
 	public ATRainbow(String title) {
 		this(title, "", 1, 10);
 	}
@@ -93,7 +93,7 @@ public class ATRainbow implements AmazingTitle {
 	public void removeFor(Player... player) {
 		for (Player p : player) {
 			if (viewers.remove(p)) {
-				p.resetTitle();
+				p.sendTitle("", "", 0, 0, 0);
 				AmazingTitles.getTitleManager().unsetTitleFor(p);
 			}
 		}
@@ -112,9 +112,7 @@ public class ATRainbow implements AmazingTitle {
 				}
 				if (frameCounter >= frames.size()) frameCounter = 0;
 				String frame = frames.get(frameCounter);
-				for (Player p : viewers) {
-					p.sendTitle(frame, subTitle, 0, 5, 0);
-				}
+				for (Player p : viewers) p .sendTitle(frame, subTitle, 0, 5, 0);
 				if (tickCounter == 20) {
 					tickCounter = 0;
 					++durationCounter;
