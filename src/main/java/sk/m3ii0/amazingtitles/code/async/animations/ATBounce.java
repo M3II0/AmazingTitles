@@ -118,8 +118,7 @@ public class ATBounce implements AmazingTitle {
                 for (Player p : viewers) {
                     p.sendTitle(frame, subTitle, 0, 5, 0);
                 }
-                if (tickCounter == 20) {
-                    tickCounter = 0;
+                if (tickCounter%20==0) {
                     ++durationCounter;
                 }
             }, 0, 1);

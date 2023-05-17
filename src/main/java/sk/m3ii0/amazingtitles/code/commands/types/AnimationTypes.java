@@ -23,15 +23,91 @@ public enum AnimationTypes {
 	 List.of("<HexCode-WaveColor(#ffffff)>"),
 	 List.of("<Text-AnimationText\\n\\AnimationSubText>")
 	),
+	
+	WRITER_STAY(
+	 4,
+	 true,
+	 List.of("<Number-Speed(20=1s)>"),
+	 List.of("<Number-Duration(InSeconds)>"),
+	 List.of("<Text-WriterSymbol>"),
+	 List.of("<Text-AnimationText\\n\\AnimationSubText>")
+	),
+	
+	PULSING(
+	 5,
+	 true,
+	 List.of("<Number-Speed(20=1s)>"),
+	 List.of("<Number-Duration(InSeconds)>"),
+	 List.of("<HexCode-BaseColor(#ffffff)>"),
+	 List.of("<HexCode-PulseColor(#ffffff)>"),
+	 List.of("<Text-AnimationText\\n\\AnimationSubText>")
+	),
+	
+	COMING_FROM_RIGHT(
+	 3,
+	 true,
+	 List.of("<Number-Speed(20=1s)>"),
+	 List.of("<Number-Duration(InSeconds)>"),
+	 List.of("<Text-AnimationText\\n\\AnimationSubText>")
+	),
+	
+	COMING_FROM_LEFT(
+	 3,
+	 true,
+	 List.of("<Number-Speed(20=1s)>"),
+	 List.of("<Number-Duration(InSeconds)>"),
+	 List.of("<Text-AnimationText\\n\\AnimationSubText>")
+	),
+	
+	COMING_FROM_SIDES(
+	 3,
+	 true,
+	 List.of("<Number-Speed(20=1s)>"),
+	 List.of("<Number-Duration(InSeconds)>"),
+	 List.of("<Text-AnimationText\\n\\AnimationSubText>")
+	),
+	
+	FLASHING(
+	 3,
+	 true,
+	 List.of("<Number-Speed(20=1s)>"),
+	 List.of("<Number-Duration(InSeconds)>"),
+	 List.of("<Text-AnimationText\\n\\AnimationSubText>")
+	),
+	
+	SPACE_SPLIT(
+	 3,
+	 true,
+	 List.of("<Number-Speed(20=1s)>"),
+	 List.of("<Number-Duration(InSeconds)>"),
+	 List.of("<Text-AnimationText(Space=NextFrame)\\n\\AnimationSubText>")
+	),
+	
+	SPLIT(
+	 3,
+	 true,
+	 List.of("<Number-Speed(20=1s)>"),
+	 List.of("<Number-Duration(InSeconds)>"),
+	 List.of("<Text-AnimationText(%frame%=NextFrame)\\n\\AnimationSubText>")
+	),
+	
+	OPEN(
+	 4,
+	 true,
+	 List.of("<Number-Speed(20=1s)>"),
+	 List.of("<Number-Duration(InSeconds)>"),
+	 List.of("<HexCode-BaseColor(#ffffff)>"),
+	 List.of("<Text-AnimationText\\n\\AnimationSubText>")
+	),
 
 	BOUNCE(
-			5,
-			true,
-			List.of("<Number-Speed(20=1s)>"),
-			List.of("<Number-Duration(InSeconds)>"),
-			List.of("<HexCode-BaseColor(#ffffff)>"),
-			List.of("<HexCode-BounceColor(#ffffff)>"),
-			List.of("<Text-AnimationText\\n\\AnimationSubText>")
+	 5,
+	 true,
+	 List.of("<Number-Speed(20=1s)>"),
+	 List.of("<Number-Duration(InSeconds)>"),
+	 List.of("<HexCode-BaseColor(#ffffff)>"),
+	 List.of("<HexCode-BounceColor(#ffffff)>"),
+	 List.of("<Text-AnimationText\\n\\AnimationSubText>")
 	);
 	
 	@SafeVarargs

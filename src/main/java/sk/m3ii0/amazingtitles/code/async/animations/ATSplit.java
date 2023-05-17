@@ -9,7 +9,7 @@ import sk.m3ii0.amazingtitles.code.colors.ColorTranslator;
 
 import java.util.*;
 
-public class ATRainbow implements AmazingTitle {
+public class ATSplit implements AmazingTitle {
 	
 	private BukkitTask task;
 	private final Set<Player> viewers = new HashSet<>();
@@ -21,51 +21,22 @@ public class ATRainbow implements AmazingTitle {
 	private int frameCounter = 0;
 	private int tickCounter = 0;
 	private int durationCounter = 0;
-
-	public ATRainbow(String title) {
+	
+	public ATSplit(String title) {
 		this(title, "", 1, 10);
 	}
 	
-	public ATRainbow(String title, String subTitle) {
+	public ATSplit(String title, String subTitle) {
 		this(title, subTitle, 1, 10);
 	}
 	
-	public ATRainbow(String title, String subTitle, int duration) {
+	public ATSplit(String title, String subTitle, int duration) {
 		this(title, subTitle, 1, duration);
 	}
 	
-	public ATRainbow(String title, String subtitle, int speed, int duration) {
-		String red = "#FF2424";
-		String blue = "#002AFF";
-		String green = "#00FF08";
-		int length = title.length();
-		/*
-		 * Red (Blue ->) Green
-		 * */
-		for (int i = 0; i <= length; i++) {
-			String in = title.substring(0, i);
-			String out = title.substring(i);
-			String format = "<" + red + ">&l" + in + "</" + blue + "><" + blue + ">&l" + out + "</" + green + ">";
-			frames.add(ColorTranslator.parse(format));
-		}
-		/*
-		 * Green (Red ->) Blue
-		 * */
-		for (int i = 0; i <= length; i++) {
-			String in = title.substring(0, i);
-			String out = title.substring(i);
-			String format = "<" + green + ">&l" + in + "</" + red + "><" + red + ">&l" + out + "</" + blue + ">";
-			frames.add(ColorTranslator.parse(format));
-		}
-		/*
-		 * Blue (Green ->) Red
-		 * */
-		for (int i = 0; i <= length; i++) {
-			String in = title.substring(0, i);
-			String out = title.substring(i);
-			String format = "<" + blue + ">&l" + in + "</" + green + "><" + green + ">&l" + out + "</" + red + ">";
-			frames.add(ColorTranslator.parse(format));
-		}
+	public ATSplit(String title, String subtitle, int speed, int duration) {
+		title = ColorTranslator.parse(title);
+		frames.addAll(Arrays.asList(title.split("%frame%")));
 		this.subTitle = ColorTranslator.parse(subtitle);
 		this.speed = speed;
 		this.duration = duration;

@@ -10,7 +10,6 @@ import sk.m3ii0.amazingtitles.code.commands.types.AnimationTypes;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.Set;
 
 public class PluginCommand implements CommandExecutor, TabExecutor {
 	

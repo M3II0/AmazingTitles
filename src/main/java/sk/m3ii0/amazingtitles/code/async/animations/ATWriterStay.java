@@ -29,10 +29,10 @@ public class ATWriterStay implements AmazingTitle {
         String resume = "";
         for (char var : text.toCharArray()) {
             String frame = resume + writer;
-            frames.add(frame);
-            resume +=  var;
+            frames.add(ColorTranslator.parse(frame));
+            resume += var;
         }
-        frames.add(text);
+        frames.add(ColorTranslator.parse(text));
         this.subTitle = ColorTranslator.parse(subtitle);
         this.speed = speed;
         this.duration = duration;
@@ -80,8 +80,7 @@ public class ATWriterStay implements AmazingTitle {
                 if (frameCounter >= frames.size()) frameCounter = frames.size()-1;
                 String frame = frames.get(frameCounter);
                 for (Player p : viewers) p .sendTitle(frame, subTitle, 0, 5, 0);
-                if (tickCounter == 20) {
-                    tickCounter = 0;
+                if (tickCounter%20==0) {
                     ++durationCounter;
                 }
             }, 0, 1);

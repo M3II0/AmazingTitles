@@ -7,9 +7,12 @@ import sk.m3ii0.amazingtitles.code.AmazingTitles;
 import sk.m3ii0.amazingtitles.code.async.AmazingTitle;
 import sk.m3ii0.amazingtitles.code.colors.ColorTranslator;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
-public class ATRainbow implements AmazingTitle {
+public class ATFromSides implements AmazingTitle {
 	
 	private BukkitTask task;
 	private final Set<Player> viewers = new HashSet<>();
@@ -21,49 +24,31 @@ public class ATRainbow implements AmazingTitle {
 	private int frameCounter = 0;
 	private int tickCounter = 0;
 	private int durationCounter = 0;
-
-	public ATRainbow(String title) {
+	
+	public ATFromSides(String title) {
 		this(title, "", 1, 10);
 	}
 	
-	public ATRainbow(String title, String subTitle) {
+	public ATFromSides(String title, String subTitle) {
 		this(title, subTitle, 1, 10);
 	}
 	
-	public ATRainbow(String title, String subTitle, int duration) {
+	public ATFromSides(String title, String subTitle, int duration) {
 		this(title, subTitle, 1, duration);
 	}
 	
-	public ATRainbow(String title, String subtitle, int speed, int duration) {
-		String red = "#FF2424";
-		String blue = "#002AFF";
-		String green = "#00FF08";
-		int length = title.length();
-		/*
-		 * Red (Blue ->) Green
-		 * */
-		for (int i = 0; i <= length; i++) {
-			String in = title.substring(0, i);
-			String out = title.substring(i);
-			String format = "<" + red + ">&l" + in + "</" + blue + "><" + blue + ">&l" + out + "</" + green + ">";
-			frames.add(ColorTranslator.parse(format));
+	public ATFromSides(String title, String subtitle, int speed, int duration) {
+		int lastSpaces = 180;
+		String spaces = "";
+		for (int i = lastSpaces; i >=0; i--) {
+			spaces += " ";
 		}
-		/*
-		 * Green (Red ->) Blue
-		 * */
-		for (int i = 0; i <= length; i++) {
-			String in = title.substring(0, i);
-			String out = title.substring(i);
-			String format = "<" + green + ">&l" + in + "</" + red + "><" + red + ">&l" + out + "</" + blue + ">";
-			frames.add(ColorTranslator.parse(format));
-		}
-		/*
-		 * Blue (Green ->) Red
-		 * */
-		for (int i = 0; i <= length; i++) {
-			String in = title.substring(0, i);
-			String out = title.substring(i);
-			String format = "<" + blue + ">&l" + in + "</" + green + "><" + green + ">&l" + out + "</" + red + ">";
+		String pre = title.substring(0, title.length()/2);
+		String aft = title.substring(title.length()/2);
+		for (int i = 30; i > -1; i--) {
+			int newSpaces = lastSpaces-(i*6);
+			String formattedSpaces = spaces.substring(newSpaces+1);
+			String format = pre + formattedSpaces + aft;
 			frames.add(ColorTranslator.parse(format));
 		}
 		this.subTitle = ColorTranslator.parse(subtitle);
@@ -110,7 +95,7 @@ public class ATRainbow implements AmazingTitle {
 				if (tickCounter%speed==0) {
 					++frameCounter;
 				}
-				if (frameCounter >= frames.size()) frameCounter = 0;
+				if (frameCounter >= frames.size()) frameCounter = frames.size()-1;
 				String frame = frames.get(frameCounter);
 				for (Player p : viewers) p .sendTitle(frame, subTitle, 0, 5, 0);
 				if (tickCounter%20==0) {
