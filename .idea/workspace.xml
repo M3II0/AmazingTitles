@@ -4,13 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4242dc22-5de8-4fdd-9807-4cb4d40f239c" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/sk/m3ii0/amazingtitles/code/commands/dispatcher/TitleDispatcher.java" afterDir="false" />
+    <list default="true" id="4242dc22-5de8-4fdd-9807-4cb4d40f239c" name="Changes" comment="- Updated Animations &amp; Added command executor">
+      <change afterPath="$PROJECT_DIR$/src/main/java/sk/m3ii0/amazingtitles/code/async/animations/ATBounce.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/sk/m3ii0/amazingtitles/code/beta/Beta.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/sk/m3ii0/amazingtitles/code/async/AmazingTitle.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sk/m3ii0/amazingtitles/code/async/AmazingTitle.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/sk/m3ii0/amazingtitles/code/async/animations/ATRainbow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sk/m3ii0/amazingtitles/code/async/animations/ATRainbow.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/sk/m3ii0/amazingtitles/code/async/animations/ATWaves.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sk/m3ii0/amazingtitles/code/async/animations/ATWaves.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/sk/m3ii0/amazingtitles/code/commands/PluginCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sk/m3ii0/amazingtitles/code/commands/PluginCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/sk/m3ii0/amazingtitles/code/commands/dispatcher/TitleDispatcher.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sk/m3ii0/amazingtitles/code/commands/dispatcher/TitleDispatcher.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/sk/m3ii0/amazingtitles/code/commands/types/AnimationTypes.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sk/m3ii0/amazingtitles/code/commands/types/AnimationTypes.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -63,6 +61,18 @@
       <option name="presentableId" value="Default" />
       <updated>1684260769780</updated>
     </task>
+    <task id="LOCAL-00001" summary="- Updated Animations &amp; Added command executor">
+      <created>1684310946361</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1684310946361</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="- Updated Animations &amp; Added command executor" />
+    <option name="LAST_COMMIT_MESSAGE" value="- Updated Animations &amp; Added command executor" />
   </component>
 </project>

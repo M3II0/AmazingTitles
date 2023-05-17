@@ -22,8 +22,19 @@ public enum AnimationTypes {
 	 List.of("<HexCode-BaseColor(#ffffff)>"),
 	 List.of("<HexCode-WaveColor(#ffffff)>"),
 	 List.of("<Text-AnimationText\\n\\AnimationSubText>")
+	),
+
+	BOUNCE(
+			5,
+			true,
+			List.of("<Number-Speed(20=1s)>"),
+			List.of("<Number-Duration(InSeconds)>"),
+			List.of("<HexCode-BaseColor(#ffffff)>"),
+			List.of("<HexCode-BounceColor(#ffffff)>"),
+			List.of("<Text-AnimationText\\n\\AnimationSubText>")
 	);
 	
+	@SafeVarargs
 	AnimationTypes(int minimum, boolean infinite, List<String>... completer) {
 		this.competitions = completer;
 		this.infinite = infinite;
