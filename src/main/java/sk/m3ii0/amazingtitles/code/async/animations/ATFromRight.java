@@ -55,6 +55,21 @@ public class ATFromRight implements AmazingTitle {
 	}
 	
 	@Override
+	public List<String> frames() {
+		return frames;
+	}
+	
+	@Override
+	public int duration() {
+		return duration;
+	}
+	
+	@Override
+	public int speed() {
+		return speed;
+	}
+	
+	@Override
 	public void streamToAll() {
 		for (Player p : Bukkit.getOnlinePlayers()) {
 			viewers.add(p);

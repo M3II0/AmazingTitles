@@ -1,9 +1,13 @@
 package sk.m3ii0.amazingtitles.code.commands.dispatcher;
 
+import net.md_5.bungee.api.chat.BaseComponent;
+import net.md_5.bungee.api.chat.ComponentBuilder;
+import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import sk.m3ii0.amazingtitles.code.async.AmazingTitle;
 import sk.m3ii0.amazingtitles.code.async.animations.*;
+import sk.m3ii0.amazingtitles.code.colors.ColorTranslator;
 import sk.m3ii0.amazingtitles.code.commands.types.AnimationTypes;
 
 import java.awt.*;
@@ -19,6 +23,7 @@ public class TitleDispatcher {
                 return;
             }
             title.sendTo(receivers.toArray(new Player[0]));
+            sendSuccess(s, type, receivers, title);
         } catch (Exception e) {
             e.printStackTrace();
             sendError(s);
@@ -185,4 +190,24 @@ public class TitleDispatcher {
         s.sendMessage("§cAT §7-> §4Error with dispatching... (Check your format)");
     }
 
+    private static void sendSuccess(CommandSender sender, AnimationTypes type, List<Player> receivers, AmazingTitle title) {
+        int frames = title.frames().size();
+        int speed = 20/title.speed();
+        int duration = title.duration();
+        int players = receivers.size();
+        String animation = type.name();
+        BaseComponent[] message = new ComponentBuilder()
+         .appendLegacy("\n")
+         .appendLegacy(ColorTranslator.parse("&{#fff34d}AT &7-> &{#fff34d}Title &7dispatcher info:\n"))
+         .appendLegacy("\n")
+         .appendLegacy(ColorTranslator.parse("  &7Receivers: &{#ffb866}" + players + "\n"))
+         .appendLegacy(ColorTranslator.parse("  &7Animation: &{#ffb866}" + animation + "\n"))
+         .appendLegacy(ColorTranslator.parse("  &7Frames: &{#ffb866}" + frames + "\n"))
+         .appendLegacy(ColorTranslator.parse("  &7Speed: &{#ffb866}" + speed + " &8(Frames per second)\n"))
+         .appendLegacy(ColorTranslator.parse("  &7Duration: &{#ffb866}" + duration + " &8(In seconds)\n"))
+         .appendLegacy("")
+         .create();
+        sender.spigot().sendMessage(message);
+    }
+    
 }

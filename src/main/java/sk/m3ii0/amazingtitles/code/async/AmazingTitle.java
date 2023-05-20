@@ -1,9 +1,7 @@
 package sk.m3ii0.amazingtitles.code.async;
 
 import org.bukkit.entity.Player;
-import sk.m3ii0.amazingtitles.code.colors.ColorTranslator;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public interface AmazingTitle {
@@ -12,5 +10,9 @@ public interface AmazingTitle {
 	void sendTo(Player... players);
 	void removeFor(Player... player);
 	void delete();
+	
+	int duration();
+	int speed();
+	List<String> frames();
 	
 }
