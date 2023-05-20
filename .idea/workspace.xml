@@ -4,23 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4242dc22-5de8-4fdd-9807-4cb4d40f239c" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/sk/m3ii0/amazingtitles/code/async/animations/ATFlashing.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/sk/m3ii0/amazingtitles/code/async/animations/ATFromLeft.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/sk/m3ii0/amazingtitles/code/async/animations/ATFromRight.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/sk/m3ii0/amazingtitles/code/async/animations/ATFromSides.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/sk/m3ii0/amazingtitles/code/async/animations/ATOpen.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/sk/m3ii0/amazingtitles/code/async/animations/ATPulsing.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/sk/m3ii0/amazingtitles/code/async/animations/ATSplit.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/sk/m3ii0/amazingtitles/code/async/animations/ATWordSplit.java" afterDir="false" />
+    <list default="true" id="4242dc22-5de8-4fdd-9807-4cb4d40f239c" name="Changes" comment="- Added 2 animations">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/sk/m3ii0/amazingtitles/code/async/animations/ATBounce.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sk/m3ii0/amazingtitles/code/async/animations/ATBounce.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/sk/m3ii0/amazingtitles/code/async/animations/ATRainbow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sk/m3ii0/amazingtitles/code/async/animations/ATRainbow.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/sk/m3ii0/amazingtitles/code/async/animations/ATWaves.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sk/m3ii0/amazingtitles/code/async/animations/ATWaves.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/sk/m3ii0/amazingtitles/code/async/animations/ATWriterStay.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sk/m3ii0/amazingtitles/code/async/animations/ATWriterStay.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/sk/m3ii0/amazingtitles/code/commands/PluginCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sk/m3ii0/amazingtitles/code/commands/PluginCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/sk/m3ii0/amazingtitles/code/commands/dispatcher/TitleDispatcher.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sk/m3ii0/amazingtitles/code/commands/dispatcher/TitleDispatcher.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/sk/m3ii0/amazingtitles/code/commands/types/AnimationTypes.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sk/m3ii0/amazingtitles/code/commands/types/AnimationTypes.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -55,14 +41,22 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/mello/IdeaProjects/Squid&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "last_opened_file_path": "C:/Users/mello/IdeaProjects/AmazingTitles"
   }
-}</component>
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\mello\IdeaProjects\AmazingTitles\gifs" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\mello\IdeaProjects\AmazingTitles\gifs" />
+    </key>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -72,17 +66,18 @@
       <option name="presentableId" value="Default" />
       <updated>1684260769780</updated>
     </task>
+    <task id="LOCAL-00001" summary="- Updated Animations &amp; Added command executor">
+      <created>1684310946361</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1684310946361</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
-  <component name="Vcs.Log.Tabs.Properties">
-    <option name="TAB_STATES">
-      <map>
-        <entry key="MAIN">
-          <value>
-            <State />
-          </value>
-        </entry>
-      </map>
-    </option>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="- Updated Animations &amp; Added command executor" />
+    <option name="LAST_COMMIT_MESSAGE" value="- Updated Animations &amp; Added command executor" />
   </component>
 </project>
