@@ -9,7 +9,7 @@ public enum AnimationTypes {
 	RAINBOW(
 			3,
 	 true,
-	 List.of("<Number-Speed(20=1s)>"),
+	 List.of("<Number-Speed(20=1s),Min:1>"),
 	 List.of("<Number-Duration(InSeconds)>"),
 	 List.of("<Text-AnimationText\\n\\AnimationSubText>")
 	),
@@ -17,7 +17,7 @@ public enum AnimationTypes {
 	WAVES(
 			5,
 	 true,
-	 List.of("<Number-Speed(20=1s)>"),
+	 List.of("<Number-Speed(20=1s),Min:1>"),
 	 List.of("<Number-Duration(InSeconds)>"),
 	 List.of("<HexCode-BaseColor(#ffffff)>"),
 	 List.of("<HexCode-WaveColor(#ffffff)>"),
@@ -27,7 +27,7 @@ public enum AnimationTypes {
 	WRITER_STAY(
 	 4,
 	 true,
-	 List.of("<Number-Speed(20=1s)>"),
+	 List.of("<Number-Speed(20=1s),Min:1>"),
 	 List.of("<Number-Duration(InSeconds)>"),
 	 List.of("<Text-WriterSymbol>"),
 	 List.of("<Text-AnimationText\\n\\AnimationSubText>")
@@ -36,7 +36,7 @@ public enum AnimationTypes {
 	PULSING(
 	 5,
 	 true,
-	 List.of("<Number-Speed(20=1s)>"),
+	 List.of("<Number-Speed(20=1s),Min:1>"),
 	 List.of("<Number-Duration(InSeconds)>"),
 	 List.of("<HexCode-BaseColor(#ffffff)>"),
 	 List.of("<HexCode-PulseColor(#ffffff)>"),
@@ -46,7 +46,7 @@ public enum AnimationTypes {
 	COMING_FROM_RIGHT(
 	 3,
 	 true,
-	 List.of("<Number-Speed(20=1s)>"),
+	 List.of("<Number-Speed(20=1s),Min:1>"),
 	 List.of("<Number-Duration(InSeconds)>"),
 	 List.of("<Text-AnimationText\\n\\AnimationSubText>")
 	),
@@ -54,7 +54,7 @@ public enum AnimationTypes {
 	COMING_FROM_LEFT(
 	 3,
 	 true,
-	 List.of("<Number-Speed(20=1s)>"),
+	 List.of("<Number-Speed(20=1s),Min:1>"),
 	 List.of("<Number-Duration(InSeconds)>"),
 	 List.of("<Text-AnimationText\\n\\AnimationSubText>")
 	),
@@ -62,7 +62,7 @@ public enum AnimationTypes {
 	COMING_FROM_SIDES(
 	 3,
 	 true,
-	 List.of("<Number-Speed(20=1s)>"),
+	 List.of("<Number-Speed(20=1s),Min:1>"),
 	 List.of("<Number-Duration(InSeconds)>"),
 	 List.of("<Text-AnimationText\\n\\AnimationSubText>")
 	),
@@ -70,7 +70,7 @@ public enum AnimationTypes {
 	FLASHING(
 	 3,
 	 true,
-	 List.of("<Number-Speed(20=1s)>"),
+	 List.of("<Number-Speed(20=1s),Min:1>"),
 	 List.of("<Number-Duration(InSeconds)>"),
 	 List.of("<Text-AnimationText\\n\\AnimationSubText>")
 	),
@@ -78,7 +78,7 @@ public enum AnimationTypes {
 	SPACE_SPLIT(
 	 3,
 	 true,
-	 List.of("<Number-Speed(20=1s)>"),
+	 List.of("<Number-Speed(20=1s),Min:1>"),
 	 List.of("<Number-Duration(InSeconds)>"),
 	 List.of("<Text-AnimationText(Space=NextFrame)\\n\\AnimationSubText>")
 	),
@@ -86,7 +86,7 @@ public enum AnimationTypes {
 	SPLIT(
 	 3,
 	 true,
-	 List.of("<Number-Speed(20=1s)>"),
+	 List.of("<Number-Speed(20=1s),Min:1>"),
 	 List.of("<Number-Duration(InSeconds)>"),
 	 List.of("<Text-AnimationText(%frame%=NextFrame)\\n\\AnimationSubText>")
 	),
@@ -94,7 +94,7 @@ public enum AnimationTypes {
 	OPEN(
 	 4,
 	 true,
-	 List.of("<Number-Speed(20=1s)>"),
+	 List.of("<Number-Speed(20=1s),Min:1>"),
 	 List.of("<Number-Duration(InSeconds)>"),
 	 List.of("<HexCode-BaseColor(#ffffff)>"),
 	 List.of("<Text-AnimationText\\n\\AnimationSubText>")
@@ -103,7 +103,7 @@ public enum AnimationTypes {
 	BOUNCE(
 	 5,
 	 true,
-	 List.of("<Number-Speed(20=1s)>"),
+	 List.of("<Number-Speed(20=1s),Min:1>"),
 	 List.of("<Number-Duration(InSeconds)>"),
 	 List.of("<HexCode-BaseColor(#ffffff)>"),
 	 List.of("<HexCode-BounceColor(#ffffff)>"),

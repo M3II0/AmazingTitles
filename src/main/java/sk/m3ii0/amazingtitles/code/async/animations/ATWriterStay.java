@@ -94,7 +94,7 @@ public class ATWriterStay implements AmazingTitle {
                 }
                 if (frameCounter >= frames.size()) frameCounter = frames.size()-1;
                 String frame = frames.get(frameCounter);
-                for (Player p : viewers) p .sendTitle(frame, subTitle, 0, 5, 0);
+                for (Player p : viewers) p.sendTitle(frame, subTitle, 0, 5, 0);
                 if (tickCounter%20==0) {
                     ++durationCounter;
                 }

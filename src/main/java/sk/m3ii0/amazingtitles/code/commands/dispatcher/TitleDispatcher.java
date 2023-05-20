@@ -32,7 +32,8 @@ public class TitleDispatcher {
 
     private static AmazingTitle buildTitle(AnimationTypes type, String[] args) {
         if (type == AnimationTypes.RAINBOW) {
-            int speed = Integer.parseInt(args[0]);
+            int rawSpeed = Integer.parseInt(args[0]);
+            int speed = Math.max(rawSpeed, 1);
             int duration = Integer.parseInt(args[1]);
             String text = "";
             for (int i = 2; i < args.length; i++) {
@@ -44,7 +45,8 @@ public class TitleDispatcher {
             return new ATRainbow(title, subtitle, speed, duration);
         }
         if (type == AnimationTypes.WAVES) {
-            int speed = Integer.parseInt(args[0]);
+            int rawSpeed = Integer.parseInt(args[0]);
+            int speed = Math.max(rawSpeed, 1);
             int duration = Integer.parseInt(args[1]);
             String color1 = args[2];
             String color2 = args[3];
@@ -58,7 +60,8 @@ public class TitleDispatcher {
             return new ATWaves(title, subtitle, color1, color2, speed, duration);
         }
         if (type == AnimationTypes.BOUNCE) {
-            int speed = Integer.parseInt(args[0]);
+            int rawSpeed = Integer.parseInt(args[0]);
+            int speed = Math.max(rawSpeed, 1);
             int duration = Integer.parseInt(args[1]);
             String color1 = args[2];
             String color2 = args[3];
@@ -72,7 +75,8 @@ public class TitleDispatcher {
             return new ATBounce(title, subtitle, color1, color2, speed, duration);
         }
         if (type == AnimationTypes.WRITER_STAY) {
-            int speed = Integer.parseInt(args[0]);
+            int rawSpeed = Integer.parseInt(args[0]);
+            int speed = Math.max(rawSpeed, 1);
             int duration = Integer.parseInt(args[1]);
             String writer = args[2];
             String text = "";
@@ -85,7 +89,8 @@ public class TitleDispatcher {
             return new ATWriterStay(title, subtitle, writer, speed, duration);
         }
         if (type == AnimationTypes.PULSING) {
-            int speed = Integer.parseInt(args[0]);
+            int rawSpeed = Integer.parseInt(args[0]);
+            int speed = Math.max(rawSpeed, 1);
             int duration = Integer.parseInt(args[1]);
             Color color1 = java.awt.Color.decode(args[2]);
             Color color2 = java.awt.Color.decode(args[3]);
@@ -99,7 +104,8 @@ public class TitleDispatcher {
             return new ATPulsing(title, subtitle, color1, color2, speed, duration);
         }
         if (type == AnimationTypes.COMING_FROM_RIGHT) {
-            int speed = Integer.parseInt(args[0]);
+            int rawSpeed = Integer.parseInt(args[0]);
+            int speed = Math.max(rawSpeed, 1);
             int duration = Integer.parseInt(args[1]);
             String text = "";
             for (int i = 2; i < args.length; i++) {
@@ -111,7 +117,8 @@ public class TitleDispatcher {
             return new ATFromRight(title, subtitle, speed, duration);
         }
         if (type == AnimationTypes.COMING_FROM_LEFT) {
-            int speed = Integer.parseInt(args[0]);
+            int rawSpeed = Integer.parseInt(args[0]);
+            int speed = Math.max(rawSpeed, 1);
             int duration = Integer.parseInt(args[1]);
             String text = "";
             for (int i = 2; i < args.length; i++) {
@@ -123,7 +130,8 @@ public class TitleDispatcher {
             return new ATFromLeft(title, subtitle, speed, duration);
         }
         if (type == AnimationTypes.COMING_FROM_SIDES) {
-            int speed = Integer.parseInt(args[0]);
+            int rawSpeed = Integer.parseInt(args[0]);
+            int speed = Math.max(rawSpeed, 1);
             int duration = Integer.parseInt(args[1]);
             String text = "";
             for (int i = 2; i < args.length; i++) {
@@ -135,7 +143,8 @@ public class TitleDispatcher {
             return new ATFromSides(title, subtitle, speed, duration);
         }
         if (type == AnimationTypes.OPEN) {
-            int speed = Integer.parseInt(args[0]);
+            int rawSpeed = Integer.parseInt(args[0]);
+            int speed = Math.max(rawSpeed, 1);
             int duration = Integer.parseInt(args[1]);
             Color color1 = java.awt.Color.decode(args[2]);
             String text = "";
@@ -148,7 +157,8 @@ public class TitleDispatcher {
             return new ATOpen(title, subtitle, color1, speed, duration);
         }
         if (type == AnimationTypes.FLASHING) {
-            int speed = Integer.parseInt(args[0]);
+            int rawSpeed = Integer.parseInt(args[0]);
+            int speed = Math.max(rawSpeed, 1);
             int duration = Integer.parseInt(args[1]);
             String text = "";
             for (int i = 2; i < args.length; i++) {
@@ -160,7 +170,8 @@ public class TitleDispatcher {
             return new ATFlashing(title, subtitle, speed, duration);
         }
         if (type == AnimationTypes.SPACE_SPLIT) {
-            int speed = Integer.parseInt(args[0]);
+            int rawSpeed = Integer.parseInt(args[0]);
+            int speed = Math.max(rawSpeed, 1);
             int duration = Integer.parseInt(args[1]);
             String text = "";
             for (int i = 2; i < args.length; i++) {
@@ -172,7 +183,8 @@ public class TitleDispatcher {
             return new ATWordSplit(title, subtitle, speed, duration);
         }
         if (type == AnimationTypes.SPLIT) {
-            int speed = Integer.parseInt(args[0]);
+            int rawSpeed = Integer.parseInt(args[0]);
+            int speed = Math.max(rawSpeed, 1);
             int duration = Integer.parseInt(args[1]);
             String text = "";
             for (int i = 2; i < args.length; i++) {
