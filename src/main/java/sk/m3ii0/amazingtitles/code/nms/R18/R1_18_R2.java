@@ -29,14 +29,14 @@ public class R1_18_R2 implements NmsProvider {
 	
 	@Override
 	public void sendTitles(Player player, Object... packets) {
-		((CraftPlayer) player).getHandle().b.a().a((ClientboundSetTitlesAnimationPacket) packets[0]);
-		((CraftPlayer) player).getHandle().b.a().a((ClientboundSetTitleTextPacket) packets[1]);
-		((CraftPlayer) player).getHandle().b.a().a((ClientboundSetSubtitleTextPacket) packets[2]);
+		((CraftPlayer) player).getHandle().b.a((ClientboundSetTitlesAnimationPacket) packets[0]);
+		((CraftPlayer) player).getHandle().b.a((ClientboundSetTitleTextPacket) packets[1]);
+		((CraftPlayer) player).getHandle().b.a((ClientboundSetSubtitleTextPacket) packets[2]);
 	}
 	
 	@Override
 	public void sendActionbar(Player player, Object packet) {
-		((CraftPlayer) player).getHandle().b.a().a((ClientboundSetActionBarTextPacket) packet);
+		((CraftPlayer) player).getHandle().b.a((ClientboundSetActionBarTextPacket) packet);
 	}
 	
 }

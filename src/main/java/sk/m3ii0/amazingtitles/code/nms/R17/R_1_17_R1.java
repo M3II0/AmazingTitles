@@ -19,7 +19,7 @@ public class R_1_17_R1 implements NmsProvider {
 	
 	@Override
 	public void sendActionbar(Player player, Object packet) {
-		((CraftPlayer) player).getHandle().b.a().a((ClientboundSetActionBarTextPacket) packet);
+		((CraftPlayer) player).getHandle().b.a((ClientboundSetActionBarTextPacket) packet);
 	}
 	
 	@Override
