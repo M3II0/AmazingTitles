@@ -1,40 +1,54 @@
 package sk.m3ii0.amazingtitles.code.async.animations;
 
 import org.bukkit.Bukkit;
+import org.bukkit.boss.BarColor;
+import org.bukkit.boss.BarStyle;
+import org.bukkit.boss.BossBar;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitTask;
 import sk.m3ii0.amazingtitles.code.AmazingTitles;
-import sk.m3ii0.amazingtitles.code.async.AmazingTitle;
+import sk.m3ii0.amazingtitles.code.async.AmazingComponent;
 import sk.m3ii0.amazingtitles.code.colors.ColorTranslator;
+import sk.m3ii0.amazingtitles.code.commands.types.ActionType;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
-public class ATRainbow implements AmazingTitle {
+public class ATRainbow implements AmazingComponent {
+	
+	/*
+	 *
+	 * Values
+	 *
+	 * */
 	
 	private BukkitTask task;
 	private final Set<Player> viewers = new HashSet<>();
-	private final String subTitle;
-	private final int speed;
-	private final int duration;
 	private final List<String> frames = new ArrayList<>();
+	private final ActionType type;
 	
 	private int frameCounter = 0;
 	private int tickCounter = 0;
 	private int durationCounter = 0;
-
-	public ATRainbow(String title) {
-		this(title, "", 1, 10);
-	}
 	
-	public ATRainbow(String title, String subTitle) {
-		this(title, subTitle, 1, 10);
-	}
+	private Object[] lastPackets;
+	private int lastFrame;
 	
-	public ATRainbow(String title, String subTitle, int duration) {
-		this(title, subTitle, 1, duration);
-	}
+	private String subText = AmazingComponent.super.text();
+	private int speed = AmazingComponent.super.speed();
+	private int duration = AmazingComponent.super.duration();
 	
-	public ATRainbow(String title, String subtitle, int speed, int duration) {
+	private final BossBar bar;
+	
+	/*
+	 *
+	 * Constructor
+	 *
+	 * */
+	
+	public ATRainbow(ActionType type, String title) {
 		String red = "#FF2424";
 		String blue = "#002AFF";
 		String green = "#00FF08";
@@ -66,9 +80,37 @@ public class ATRainbow implements AmazingTitle {
 			String format = "<" + blue + ">&l" + in + "</" + green + "><" + green + ">&l" + out + "</" + red + ">";
 			frames.add(ColorTranslator.parse(format));
 		}
-		this.subTitle = ColorTranslator.parse(subtitle);
+		this.type = type;
+		bar = Bukkit.createBossBar("", BarColor.WHITE, BarStyle.SOLID);
+	}
+	
+	/*
+	 *
+	 * Setter
+	 *
+	 * */
+	
+	public void setSubText(String subText) {
+		this.subText = ColorTranslator.parse(subText);
+	}
+	
+	public void setSpeed(int speed) {
 		this.speed = speed;
+	}
+	
+	public void setDuration(int duration) {
 		this.duration = duration;
+	}
+	
+	/*
+	*
+	* API
+	*
+	* */
+	
+	@Override
+	public ActionType type() {
+		return type;
 	}
 	
 	@Override
@@ -90,6 +132,7 @@ public class ATRainbow implements AmazingTitle {
 	public void streamToAll() {
 		for (Player p : Bukkit.getOnlinePlayers()) {
 			viewers.add(p);
+			if (type == ActionType.BOSS_BAR) bar.addPlayer(p);
 			AmazingTitles.getTitleManager().setTitleFor(p, this);
 		}
 		runTask();
@@ -99,6 +142,7 @@ public class ATRainbow implements AmazingTitle {
 	public void sendTo(Player... players) {
 		for (Player p : players) {
 			viewers.add(p);
+			if (type == ActionType.BOSS_BAR) bar.addPlayer(p);
 			AmazingTitles.getTitleManager().setTitleFor(p, this);
 		}
 		runTask();
@@ -108,11 +152,30 @@ public class ATRainbow implements AmazingTitle {
 	public void removeFor(Player... player) {
 		for (Player p : player) {
 			if (viewers.remove(p)) {
-				p.sendTitle("", "", 0, 0, 0);
+				p.resetTitle();
+				if (type == ActionType.BOSS_BAR) bar.removePlayer(p);
 				AmazingTitles.getTitleManager().unsetTitleFor(p);
 			}
 		}
 	}
+	
+	@Override
+	public void delete() {
+		if (task != null) {
+			task.cancel();
+			task = null;
+		}
+		if (bar != null) {
+			bar.removeAll();
+		}
+		removeFor(viewers.toArray(new Player[0]));
+	}
+	
+	/*
+	*
+	* Tasks
+	*
+	* */
 	
 	private void runTask() {
 		if (task == null) {
@@ -127,21 +190,34 @@ public class ATRainbow implements AmazingTitle {
 				}
 				if (frameCounter >= frames.size()) frameCounter = 0;
 				String frame = frames.get(frameCounter);
-				for (Player p : viewers) p .sendTitle(frame, subTitle, 0, 5, 0);
+				Object[] packets = new Object[0];
+				if (frameCounter == lastFrame) {
+					if (lastPackets == null) {
+						if (type == ActionType.TITLE) lastPackets = AmazingTitles.getProvider().createTitlePacket(frame, subText);
+						if (type == ActionType.SUBTITLE) lastPackets = AmazingTitles.getProvider().createTitlePacket(subText, frame);
+						if (type == ActionType.ACTION_BAR) lastPackets = new Object[] {AmazingTitles.getProvider().createActionbarPacket(frame)};
+					}
+					packets = lastPackets;
+				} else {
+					if (type == ActionType.TITLE) packets = AmazingTitles.getProvider().createTitlePacket(frame, subText);
+					if (type == ActionType.SUBTITLE) packets = AmazingTitles.getProvider().createTitlePacket(subText, frame);
+					if (type == ActionType.ACTION_BAR) packets = new Object[] {AmazingTitles.getProvider().createActionbarPacket(frame)};
+				}
+				lastFrame = frameCounter;
+				lastPackets = packets;
+				for (Player p : viewers) {
+					if (type == ActionType.TITLE || type == ActionType.SUBTITLE) AmazingTitles.getProvider().sendTitles(p, packets);
+					if (type == ActionType.ACTION_BAR) AmazingTitles.getProvider().sendActionbar(p, packets[0]);
+					if (type == ActionType.BOSS_BAR) {
+						bar.setTitle(frame);
+						bar.setProgress(((double) durationCounter/(double) duration));
+					}
+				}
 				if (tickCounter%20==0) {
 					++durationCounter;
 				}
 			}, 0, 1);
 		}
-	}
-	
-	@Override
-	public void delete() {
-		if (task != null) {
-			task.cancel();
-			task = null;
-		}
-		removeFor(viewers.toArray(new Player[0]));
 	}
 	
 }

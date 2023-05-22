@@ -1,7 +1,7 @@
 package sk.m3ii0.amazingtitles.code;
 
 import org.bukkit.entity.Player;
-import sk.m3ii0.amazingtitles.code.async.AmazingTitle;
+import sk.m3ii0.amazingtitles.code.async.AmazingComponent;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -15,7 +15,7 @@ public class TitleManager {
 	*
 	* */
 	
-	private final Map<UUID, AmazingTitle> cache = new HashMap<>();
+	private final Map<UUID, AmazingComponent> cache = new HashMap<>();
 	
 	/*
 	* Protected constructor
@@ -28,8 +28,8 @@ public class TitleManager {
 	*
 	* */
 	
-	public void setTitleFor(Player player, AmazingTitle title) {
-		AmazingTitle old = cache.remove(player.getUniqueId());
+	public void setTitleFor(Player player, AmazingComponent title) {
+		AmazingComponent old = cache.remove(player.getUniqueId());
 		if (old != null) {
 			old.removeFor(player);
 		}
@@ -40,7 +40,7 @@ public class TitleManager {
 		cache.remove(player.getUniqueId());
 	}
 	
-	public AmazingTitle getPlayersAnimation(Player player) {
+	public AmazingComponent getPlayersAnimation(Player player) {
 		return cache.get(player.getUniqueId());
 	}
 	
@@ -50,7 +50,7 @@ public class TitleManager {
 	
 	public void resetTitleAnimationFor(Player... players) {
 		for (Player p : players) {
-			AmazingTitle title = cache.get(p.getUniqueId());
+			AmazingComponent title = cache.get(p.getUniqueId());
 			if (title != null) {
 				title.removeFor(p);
 			}

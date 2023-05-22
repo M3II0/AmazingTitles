@@ -1,4 +1,4 @@
-package sk.m3ii0.amazingtitles.code.async.animations;
+package sk.m3ii0.amazingtitles.code.async.animations.smooth;
 
 import org.bukkit.Bukkit;
 import org.bukkit.boss.BarColor;
@@ -16,7 +16,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class ATOpen implements AmazingComponent {
+public class ATSmoothWaves implements AmazingComponent {
 	
 	/*
 	 *
@@ -48,21 +48,38 @@ public class ATOpen implements AmazingComponent {
 	 *
 	 * */
 	
-	public ATOpen(ActionType type, String title, String color) {
-		int max = title.length();
-		int min = 0;
-		int mid = max/2;
-		int looped = 0;
-		while (true) {
-			boolean canBeDown = mid-looped > min;
-			boolean canBeUp = mid+looped < max;
-			String selected = title.substring((canBeDown)? mid-looped : min, (canBeUp)? mid+looped : max);
-			String format = "|" + "&{" + color + "}" + selected + "|";
-			frames.add(ColorTranslator.parse(format));
-			++looped;
-			if (!canBeUp && !canBeDown) break;
+	public ATSmoothWaves(ActionType type, String title, String color1, String color2) {
+		String smoothed = "          " + title + "          ";
+		int length = smoothed.length();
+		int withGradient = title.length()*17;
+		int start = 10*17;
+		/*
+		 * Red (Blue ->) Green
+		 * */
+		for (int i = 0; i <= length; i++) {
+			String in = smoothed.substring(0, i);
+			String out = smoothed.substring(i);
+			String format = "<" + color1 + ">&l" + in + "</" + color2 + "><" + color2 + ">&l" + out + "</" + color1 + ">";
+			frames.add(ColorTranslator.parse(format).substring(start).substring(0, withGradient));
 		}
-		frames.add(ColorTranslator.parse(title));
+		/*
+		 * Green (Red ->) Blue
+		 * */
+		for (int i = 0; i <= length; i++) {
+			String in = smoothed.substring(0, i);
+			String out = smoothed.substring(i);
+			String format = "<" + color1 + ">&l" + in + "</" + color1 + "><" + color1 + ">&l" + out + "</" + color2 + ">";
+			frames.add(ColorTranslator.parse(format).substring(start).substring(0, withGradient));
+		}
+		/*
+		 * Blue (Green ->) Red
+		 * */
+		for (int i = 0; i <= length; i++) {
+			String in = smoothed.substring(0, i);
+			String out = smoothed.substring(i);
+			String format = "<" + color2 + ">&l" + in + "</" + color1 + "><" + color1 + ">&l" + out + "</" + color1 + ">";
+			frames.add(ColorTranslator.parse(format).substring(start).substring(0, withGradient));
+		}
 		this.type = type;
 		bar = Bukkit.createBossBar("", BarColor.WHITE, BarStyle.SOLID);
 	}
@@ -156,7 +173,7 @@ public class ATOpen implements AmazingComponent {
 	
 	/*
 	*
-	* Tasks
+	* Task
 	*
 	* */
 	
@@ -171,7 +188,7 @@ public class ATOpen implements AmazingComponent {
 				if (tickCounter%speed==0) {
 					++frameCounter;
 				}
-				if (frameCounter >= frames.size()) frameCounter = frames.size()-1;
+				if (frameCounter >= frames.size()) frameCounter = 0;
 				String frame = frames.get(frameCounter);
 				Object[] packets = new Object[0];
 				if (frameCounter == lastFrame) {

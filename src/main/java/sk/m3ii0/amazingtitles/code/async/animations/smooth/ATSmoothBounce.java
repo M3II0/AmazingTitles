@@ -1,4 +1,4 @@
-package sk.m3ii0.amazingtitles.code.async.animations;
+package sk.m3ii0.amazingtitles.code.async.animations.smooth;
 
 import org.bukkit.Bukkit;
 import org.bukkit.boss.BarColor;
@@ -16,7 +16,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class ATWriterStay implements AmazingComponent {
+public class ATSmoothBounce implements AmazingComponent {
     
     /*
      *
@@ -48,14 +48,23 @@ public class ATWriterStay implements AmazingComponent {
      *
      * */
 
-    public ATWriterStay(ActionType type, String text, String writer) {
-        String resume = "";
-        for (char var : text.toCharArray()) {
-            String frame = resume + writer;
-            frames.add(ColorTranslator.parse(frame));
-            resume += var;
+    public ATSmoothBounce(ActionType type, String title, String color1, String color2) {
+        String smoothed = "          " + title + "          ";
+        int length = smoothed.length();
+        int withGradient = title.length()*17;
+        int start = 10*17;
+        for (int i = 0; i <= length; i++) {
+            String to = smoothed.substring(0, i);
+            String from = smoothed.substring(i);
+            if (to.length() == 1 || from.length() == 1) continue;
+            String formatted = "<" + color1 + ">&l" + to + "</" + color2 + ">" + "<" + color2 + ">&l" + from + "</" + color1 + ">";
+            frames.add(ColorTranslator.parse(formatted).substring(start).substring(0, withGradient));
         }
-        frames.add(ColorTranslator.parse(text));
+        int revertSize = frames.size();
+        for (int i = revertSize-1; i > -1; i--) {
+            String reversed = frames.get(i);
+            frames.add(reversed);
+        }
         this.type = type;
         bar = Bukkit.createBossBar("", BarColor.WHITE, BarStyle.SOLID);
     }
@@ -164,7 +173,7 @@ public class ATWriterStay implements AmazingComponent {
                 if (tickCounter%speed==0) {
                     ++frameCounter;
                 }
-                if (frameCounter >= frames.size()) frameCounter = frames.size()-1;
+                if (frameCounter >= frames.size()) frameCounter = 0;
                 String frame = frames.get(frameCounter);
                 Object[] packets = new Object[0];
                 if (frameCounter == lastFrame) {

@@ -6,6 +6,34 @@ import java.util.List;
 
 public enum AnimationTypes {
 	
+	SMOOTH_RAINBOW(
+	 3,
+	 true,
+	 List.of("<Number-Speed(20=1s),Min:1>"),
+	 List.of("<Number-Duration(InSeconds)>"),
+	 List.of("<Text-AnimationText\\n\\AnimationSubText>")
+	),
+	
+	SMOOTH_WAVES(
+	 5,
+	 true,
+	 List.of("<Number-Speed(20=1s),Min:1>"),
+	 List.of("<Number-Duration(InSeconds)>"),
+	 List.of("<HexCode-BaseColor(#ffffff)>"),
+	 List.of("<HexCode-WaveColor(#ffffff)>"),
+	 List.of("<Text-AnimationText\\n\\AnimationSubText>")
+	),
+	
+	SMOOTH_BOUNCE(
+	 5,
+	 true,
+	 List.of("<Number-Speed(20=1s),Min:1>"),
+	 List.of("<Number-Duration(InSeconds)>"),
+	 List.of("<HexCode-BaseColor(#ffffff)>"),
+	 List.of("<HexCode-BounceColor(#ffffff)>"),
+	 List.of("<Text-AnimationText\\n\\AnimationSubText>")
+	),
+	
 	RAINBOW(
 			3,
 	 true,

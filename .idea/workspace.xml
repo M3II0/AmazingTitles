@@ -4,17 +4,57 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4242dc22-5de8-4fdd-9807-4cb4d40f239c" name="Changes" comment="- Debug message">
+    <list default="true" id="4242dc22-5de8-4fdd-9807-4cb4d40f239c" name="Changes" comment="- Added 0 handling">
+      <change afterPath="$PROJECT_DIR$/src/main/java/sk/m3ii0/amazingtitles/code/async/AmazingComponent.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/sk/m3ii0/amazingtitles/code/async/animations/smooth/ATSmoothBounce.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/sk/m3ii0/amazingtitles/code/async/animations/smooth/ATSmoothRainbow.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/sk/m3ii0/amazingtitles/code/async/animations/smooth/ATSmoothWaves.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/sk/m3ii0/amazingtitles/code/commands/types/ActionType.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/sk/m3ii0/amazingtitles/code/nms/NmsProvider.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/sk/m3ii0/amazingtitles/code/nms/R16/R1_16_R1.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/sk/m3ii0/amazingtitles/code/nms/R16/R1_16_R2.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/sk/m3ii0/amazingtitles/code/nms/R16/R1_16_R3.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/sk/m3ii0/amazingtitles/code/nms/R17/R_1_17_R1.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/sk/m3ii0/amazingtitles/code/nms/R18/R1_18_R1.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/sk/m3ii0/amazingtitles/code/nms/R18/R1_18_R2.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/sk/m3ii0/amazingtitles/code/nms/R19/R1_19_R1.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/sk/m3ii0/amazingtitles/code/nms/R19/R1_19_R2.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/sk/m3ii0/amazingtitles/code/nms/R19/R1_19_R3.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gifs/banners/banner1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gifs/banners/banner1.psd" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gifs/banners/banner2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gifs/banners/banner2.psd" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gifs/banners/logo.png" beforeDir="false" afterPath="$PROJECT_DIR$/gifs/banners/logo.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gifs/banners/logo.psd" beforeDir="false" afterPath="$PROJECT_DIR$/gifs/banners/logo.psd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gifs/Bounce.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gifs/Coming From Left.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gifs/Coming From Right.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gifs/Coming From SIdes.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gifs/Flashing.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gifs/Open.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gifs/Pulsing.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gifs/Rainbow.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gifs/Space Split.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gifs/Split.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gifs/Waves.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gifs/Writer Stay.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/sk/m3ii0/amazingtitles/code/AmazingTitles.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sk/m3ii0/amazingtitles/code/AmazingTitles.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/sk/m3ii0/amazingtitles/code/TitleManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sk/m3ii0/amazingtitles/code/TitleManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/sk/m3ii0/amazingtitles/code/async/AmazingTitle.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/sk/m3ii0/amazingtitles/code/async/animations/ATBounce.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sk/m3ii0/amazingtitles/code/async/animations/ATBounce.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/sk/m3ii0/amazingtitles/code/async/animations/ATFlashing.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sk/m3ii0/amazingtitles/code/async/animations/ATFlashing.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/sk/m3ii0/amazingtitles/code/async/animations/ATFromLeft.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sk/m3ii0/amazingtitles/code/async/animations/ATFromLeft.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/sk/m3ii0/amazingtitles/code/async/animations/ATFromRight.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sk/m3ii0/amazingtitles/code/async/animations/ATFromRight.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/sk/m3ii0/amazingtitles/code/async/animations/ATFromSides.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sk/m3ii0/amazingtitles/code/async/animations/ATFromSides.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/sk/m3ii0/amazingtitles/code/async/animations/ATOpen.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sk/m3ii0/amazingtitles/code/async/animations/ATOpen.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/sk/m3ii0/amazingtitles/code/async/animations/ATPulsing.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sk/m3ii0/amazingtitles/code/async/animations/ATPulsing.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/sk/m3ii0/amazingtitles/code/async/animations/ATRainbow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sk/m3ii0/amazingtitles/code/async/animations/ATRainbow.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/sk/m3ii0/amazingtitles/code/async/animations/ATSplit.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sk/m3ii0/amazingtitles/code/async/animations/ATSplit.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/sk/m3ii0/amazingtitles/code/async/animations/ATWaves.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sk/m3ii0/amazingtitles/code/async/animations/ATWaves.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/sk/m3ii0/amazingtitles/code/async/animations/ATWordSplit.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sk/m3ii0/amazingtitles/code/async/animations/ATWordSplit.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/sk/m3ii0/amazingtitles/code/async/animations/ATWriterStay.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sk/m3ii0/amazingtitles/code/async/animations/ATWriterStay.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/sk/m3ii0/amazingtitles/code/beta/Beta.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sk/m3ii0/amazingtitles/code/beta/Beta.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/sk/m3ii0/amazingtitles/code/commands/PluginCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sk/m3ii0/amazingtitles/code/commands/PluginCommand.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/sk/m3ii0/amazingtitles/code/commands/dispatcher/TitleDispatcher.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sk/m3ii0/amazingtitles/code/commands/dispatcher/TitleDispatcher.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/sk/m3ii0/amazingtitles/code/commands/types/AnimationTypes.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sk/m3ii0/amazingtitles/code/commands/types/AnimationTypes.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/sk/m3ii0/amazingtitles/code/testing/TestListener.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -25,8 +65,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Interface" />
-        <option value="Enum" />
         <option value="Class" />
+        <option value="Enum" />
       </list>
     </option>
   </component>
@@ -49,14 +89,26 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/mello/IdeaProjects/Squid&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "last_opened_file_path": "C:/Users/mello/IdeaProjects/AmazingTitles/libs"
   }
-}</component>
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\mello\IdeaProjects\AmazingTitles\libs" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\mello\IdeaProjects\AmazingTitles\libs" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="sk.m3ii0.amazingtitles.code.async.animations.smooth" />
+      <recent name="sk.m3ii0.amazingtitles.code.nms" />
+    </key>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -73,7 +125,14 @@
       <option name="project" value="LOCAL" />
       <updated>1684573173620</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="- Added 0 handling">
+      <created>1684623885885</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1684623885885</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -89,6 +148,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="- Debug message" />
-    <option name="LAST_COMMIT_MESSAGE" value="- Debug message" />
+    <MESSAGE value="- Added 0 handling" />
+    <option name="LAST_COMMIT_MESSAGE" value="- Added 0 handling" />
   </component>
 </project>

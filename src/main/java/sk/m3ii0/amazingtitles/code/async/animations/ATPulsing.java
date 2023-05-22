@@ -2,11 +2,15 @@ package sk.m3ii0.amazingtitles.code.async.animations;
 
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Bukkit;
+import org.bukkit.boss.BarColor;
+import org.bukkit.boss.BarStyle;
+import org.bukkit.boss.BossBar;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitTask;
 import sk.m3ii0.amazingtitles.code.AmazingTitles;
-import sk.m3ii0.amazingtitles.code.async.AmazingTitle;
+import sk.m3ii0.amazingtitles.code.async.AmazingComponent;
 import sk.m3ii0.amazingtitles.code.colors.ColorTranslator;
+import sk.m3ii0.amazingtitles.code.commands.types.ActionType;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -14,54 +18,47 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class ATPulsing implements AmazingTitle {
+public class ATPulsing implements AmazingComponent {
+	
+	/*
+	 *
+	 * Values
+	 *
+	 * */
 	
 	private BukkitTask task;
 	private final Set<Player> viewers = new HashSet<>();
-	private final String subTitle;
-	private final int speed;
-	private final int duration;
 	private final List<String> frames = new ArrayList<>();
+	private final ActionType type;
 	
 	private int frameCounter = 0;
 	private int tickCounter = 0;
 	private int durationCounter = 0;
 	
-	public ATPulsing(String title, String color1, String color2) {
-		this(title, "", Color.decode(color1), Color.decode(color2), 1, 10);
-	}
+	private Object[] lastPackets;
+	private int lastFrame;
 	
-	public ATPulsing(String title, String color1, String color2, String subTitle) {
-		this(title, subTitle, Color.decode(color1), Color.decode(color2), 1, 10);
-	}
+	private String subText = AmazingComponent.super.text();
+	private int speed = AmazingComponent.super.speed();
+	private int duration = AmazingComponent.super.duration();
 	
-	public ATPulsing(String title, String subTitle, String color1, String color2, int duration) {
-		this(title, subTitle, Color.decode(color1), Color.decode(color2), 1, duration);
-	}
+	private final BossBar bar;
 	
-	public ATPulsing(String title, Color color1, Color color2) {
-		this(title, "", color1, color2, 1, 10);
-	}
+	/*
+	 *
+	 * Constructor
+	 *
+	 * */
 	
-	public ATPulsing(String title, Color color1, Color color2, String subTitle) {
-		this(title, subTitle, color1, color2, 1, 10);
-	}
-	
-	public ATPulsing(String title, String subTitle, Color color1, Color color2, int duration) {
-		this(title, subTitle, color1, color2, 1, duration);
-	}
-	
-	public ATPulsing(String title, String subTitle, String color1, String color2, int speed, int duration) {
-		this(title, subTitle, Color.decode(color1), Color.decode(color2), speed, duration);
-	}
-	
-	public ATPulsing(String title, String subtitle, Color color1, Color color2, int speed, int duration) {
-		int r_max = Math.max(color1.getRed(), color2.getRed());
-		int g_max = Math.max(color1.getGreen(), color2.getGreen());
-		int b_max = Math.max(color1.getBlue(), color2.getBlue());
-		int r_min = Math.min(color1.getRed(), color2.getRed());
-		int g_min = Math.min(color1.getGreen(), color2.getGreen());
-		int b_min = Math.min(color1.getBlue(), color2.getBlue());
+	public ATPulsing(ActionType type, String title, String color1, String color2) {
+		Color from = Color.decode(color1);
+		Color to = Color.decode(color2);
+		int r_max = Math.max(from.getRed(), to.getRed());
+		int g_max = Math.max(from.getGreen(), to.getGreen());
+		int b_max = Math.max(from.getBlue(), to.getBlue());
+		int r_min = Math.min(from.getRed(), to.getRed());
+		int g_min = Math.min(from.getGreen(), to.getGreen());
+		int b_min = Math.min(from.getBlue(), to.getBlue());
 		int r_total = r_max - r_min;
 		int g_total = g_max - g_min;
 		int b_total = b_max - b_min;
@@ -117,9 +114,37 @@ public class ATPulsing implements AmazingTitle {
 			frames.add(ColorTranslator.parse(format));
 			if (r == r_min && g == g_min & b == b_min) {break;}
 		}
-		this.subTitle = ColorTranslator.parse(subtitle);
+		this.type = type;
+		bar = Bukkit.createBossBar("", BarColor.WHITE, BarStyle.SOLID);
+	}
+	
+	/*
+	 *
+	 * Setter
+	 *
+	 * */
+	
+	public void setSubText(String subText) {
+		this.subText = ColorTranslator.parse(subText);
+	}
+	
+	public void setSpeed(int speed) {
 		this.speed = speed;
+	}
+	
+	public void setDuration(int duration) {
 		this.duration = duration;
+	}
+	
+	/*
+	*
+	* API
+	*
+	* */
+	
+	@Override
+	public ActionType type() {
+		return type;
 	}
 	
 	@Override
@@ -141,6 +166,7 @@ public class ATPulsing implements AmazingTitle {
 	public void streamToAll() {
 		for (Player p : Bukkit.getOnlinePlayers()) {
 			viewers.add(p);
+			if (type == ActionType.BOSS_BAR) bar.addPlayer(p);
 			AmazingTitles.getTitleManager().setTitleFor(p, this);
 		}
 		runTask();
@@ -150,6 +176,7 @@ public class ATPulsing implements AmazingTitle {
 	public void sendTo(Player... players) {
 		for (Player p : players) {
 			viewers.add(p);
+			if (type == ActionType.BOSS_BAR) bar.addPlayer(p);
 			AmazingTitles.getTitleManager().setTitleFor(p, this);
 		}
 		runTask();
@@ -159,11 +186,30 @@ public class ATPulsing implements AmazingTitle {
 	public void removeFor(Player... player) {
 		for (Player p : player) {
 			if (viewers.remove(p)) {
-				p.sendTitle("", "", 0, 0, 0);
+				p.resetTitle();
+				if (type == ActionType.BOSS_BAR) bar.removePlayer(p);
 				AmazingTitles.getTitleManager().unsetTitleFor(p);
 			}
 		}
 	}
+	
+	@Override
+	public void delete() {
+		if (task != null) {
+			task.cancel();
+			task = null;
+		}
+		if (bar != null) {
+			bar.removeAll();
+		}
+		removeFor(viewers.toArray(new Player[0]));
+	}
+	
+	/*
+	*
+	* Tasks
+	*
+	* */
 	
 	private void runTask() {
 		if (task == null) {
@@ -178,21 +224,34 @@ public class ATPulsing implements AmazingTitle {
 				}
 				if (frameCounter >= frames.size()) frameCounter = 0;
 				String frame = frames.get(frameCounter);
-				for (Player p : viewers) p .sendTitle(frame, subTitle, 0, 5, 0);
+				Object[] packets = new Object[0];
+				if (frameCounter == lastFrame) {
+					if (lastPackets == null) {
+						if (type == ActionType.TITLE) lastPackets = AmazingTitles.getProvider().createTitlePacket(frame, subText);
+						if (type == ActionType.SUBTITLE) lastPackets = AmazingTitles.getProvider().createTitlePacket(subText, frame);
+						if (type == ActionType.ACTION_BAR) lastPackets = new Object[] {AmazingTitles.getProvider().createActionbarPacket(frame)};
+					}
+					packets = lastPackets;
+				} else {
+					if (type == ActionType.TITLE) packets = AmazingTitles.getProvider().createTitlePacket(frame, subText);
+					if (type == ActionType.SUBTITLE) packets = AmazingTitles.getProvider().createTitlePacket(subText, frame);
+					if (type == ActionType.ACTION_BAR) packets = new Object[] {AmazingTitles.getProvider().createActionbarPacket(frame)};
+				}
+				lastFrame = frameCounter;
+				lastPackets = packets;
+				for (Player p : viewers) {
+					if (type == ActionType.TITLE || type == ActionType.SUBTITLE) AmazingTitles.getProvider().sendTitles(p, packets);
+					if (type == ActionType.ACTION_BAR) AmazingTitles.getProvider().sendActionbar(p, packets[0]);
+					if (type == ActionType.BOSS_BAR) {
+						bar.setTitle(frame);
+						bar.setProgress(((double) durationCounter/(double) duration));
+					}
+				}
 				if (tickCounter%20==0) {
 					++durationCounter;
 				}
 			}, 0, 1);
 		}
-	}
-	
-	@Override
-	public void delete() {
-		if (task != null) {
-			task.cancel();
-			task = null;
-		}
-		removeFor(viewers.toArray(new Player[0]));
 	}
 	
 }

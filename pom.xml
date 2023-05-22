@@ -20,6 +20,14 @@
             <id>spigot-repo</id>
             <url>https://hub.spigotmc.org/nexus/content/repositories/snapshots/</url>
         </repository>
+        <repository>
+            <id>netty</id>
+            <url>https://mvnrepository.com/artifact/io.netty/netty-all</url>
+        </repository>
+        <repository>
+            <id>fastutil</id>
+            <url>https://mvnrepository.com/artifact/it.unimi.dsi/fastutil</url>
+        </repository>
     </repositories>
 
     <dependencies>
@@ -28,6 +36,67 @@
             <groupId>org.spigotmc</groupId>
             <artifactId>spigot-api</artifactId>
             <version>1.16.1-R0.1-SNAPSHOT</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>spigot.nms.19.R3</groupId>
+            <artifactId>AllSpigotNMS</artifactId>
+            <version>LATEST</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/libs/spigot-1.19.4-R0.1-SNAPSHOT.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>local.spigot.nms</groupId>
+            <artifactId>AllSpigotNMS</artifactId>
+            <version>LATEST</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/libs/all-spigot-nms.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>spigot.nms.19.R1</groupId>
+            <artifactId>AllSpigotNMS</artifactId>
+            <version>LATEST</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/libs/spigot-1.19.2-R0.1-SNAPSHOT.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>spigot.nms.19.R2</groupId>
+            <artifactId>AllSpigotNMS</artifactId>
+            <version>LATEST</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/libs/spigot-1.19.3-R0.1-SNAPSHOT.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>spigot.nms.17.R1</groupId>
+            <artifactId>AllSpigotNMS</artifactId>
+            <version>LATEST</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/libs/spigot-1.17.1.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>spigot.nms.18.R2</groupId>
+            <artifactId>AllSpigotNMS</artifactId>
+            <version>LATEST</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/libs/spigot-1.18.2-R0.1-SNAPSHOT.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>spigot.nms.18.R1</groupId>
+            <artifactId>AllSpigotNMS</artifactId>
+            <version>LATEST</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/libs/spigot-1.18.1-R0.1-SNAPSHOT.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>io.netty</groupId>
+            <artifactId>netty-all</artifactId>
+            <version>4.1.91.Final</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>it.unimi.dsi</groupId>
+            <artifactId>fastutil</artifactId>
+            <version>8.5.12</version>
             <scope>provided</scope>
         </dependency>
     </dependencies>
