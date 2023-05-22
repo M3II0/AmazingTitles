@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>sk.m3ii0.amazingtitles.code</groupId>
+        <artifactId>AmazingTitles</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+
+    <groupId>sk.m3ii0.amazingtitles.code.providers.R1_16_R2</groupId>
+    <artifactId>R1_16_R2</artifactId>
+
+    <properties>
+        <maven.compiler.source>16</maven.compiler.source>
+        <maven.compiler.target>16</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>sk.m3ii0.amazingtitles.code.api</groupId>
+            <artifactId>API</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>nms</groupId>
+            <artifactId>AllSpigotNMS</artifactId>
+            <version>LATEST</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/../libs/spigot-1.16.2.jar</systemPath>
+        </dependency>
+    </dependencies>
+
+</project>

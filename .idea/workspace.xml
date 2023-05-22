@@ -4,57 +4,72 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4242dc22-5de8-4fdd-9807-4cb4d40f239c" name="Changes" comment="- Added 0 handling">
-      <change afterPath="$PROJECT_DIR$/src/main/java/sk/m3ii0/amazingtitles/code/async/AmazingComponent.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/sk/m3ii0/amazingtitles/code/async/animations/smooth/ATSmoothBounce.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/sk/m3ii0/amazingtitles/code/async/animations/smooth/ATSmoothRainbow.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/sk/m3ii0/amazingtitles/code/async/animations/smooth/ATSmoothWaves.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/sk/m3ii0/amazingtitles/code/commands/types/ActionType.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/sk/m3ii0/amazingtitles/code/nms/NmsProvider.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/sk/m3ii0/amazingtitles/code/nms/R16/R1_16_R1.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/sk/m3ii0/amazingtitles/code/nms/R16/R1_16_R2.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/sk/m3ii0/amazingtitles/code/nms/R16/R1_16_R3.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/sk/m3ii0/amazingtitles/code/nms/R17/R_1_17_R1.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/sk/m3ii0/amazingtitles/code/nms/R18/R1_18_R1.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/sk/m3ii0/amazingtitles/code/nms/R18/R1_18_R2.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/sk/m3ii0/amazingtitles/code/nms/R19/R1_19_R1.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/sk/m3ii0/amazingtitles/code/nms/R19/R1_19_R2.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/sk/m3ii0/amazingtitles/code/nms/R19/R1_19_R3.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+    <list default="true" id="4242dc22-5de8-4fdd-9807-4cb4d40f239c" name="Changes" comment="- Save">
+      <change afterPath="$PROJECT_DIR$/API/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/API/src/main/java/sk/m3ii0/amazingtitles/code/spi/NmsBuilder.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/API/src/main/resources/META-INF/services/sk.m3ii0.amazingtitles.code.spi.NmsBuilder" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/API/src/main/resources/plugin.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FinalJar/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/R1_16_R1/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/R1_16_R1/src/main/java/sk/m3ii0/amazingtitles/code/providers/R1_16_R1/R1_16_R1_Builder.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/R1_16_R2/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/R1_16_R2/src/main/java/sk/m3ii0/amazingtitles/code/providers/R1_16_R2/R1_16_R2_Builder.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/R1_16_R3/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/R1_16_R3/src/main/java/sk/m3ii0/amazingtitles/code/providers/R1_16_R3/R1_16_R3_Builder.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/R1_17_R1/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/R1_17_R1/src/main/java/sk/m3ii0/amazingtitles/code/providers/R1_17_R1/R1_17_R1_Builder.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/R1_18_R1/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/R1_18_R1/src/main/java/sk/m3ii0/amazingtitles/code/providers/R1_18_R1/R1_18_R1_Builder.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/R1_18_R2/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/R1_18_R2/src/main/java/sk/m3ii0/amazingtitles/code/providers/R1_18_R2/R1_18_R2.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/R1_18_R2/src/main/java/sk/m3ii0/amazingtitles/code/providers/R1_18_R2/R1_18_R2_Builder.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/R1_19_R1/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/R1_19_R1/src/main/java/sk/m3ii0/amazingtitles/code/providers/R1_19_R1/R1_19_R1_Builder.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/R1_19_R2/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/R1_19_R2/src/main/java/sk/m3ii0/amazingtitles/code/providers/R1_19_R2/R1_19_R2.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/R1_19_R2/src/main/java/sk/m3ii0/amazingtitles/code/providers/R1_19_R2/R1_19_R2_Builder.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/R1_19_R3/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/R1_19_R3/src/main/java/sk/m3ii0/amazingtitles/code/providers/R1_19_R3/R1_19_R3_Builder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gifs/Bounce.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gifs/Coming From Left.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gifs/Coming From Right.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gifs/Coming From SIdes.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gifs/Flashing.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gifs/Open.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gifs/Pulsing.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gifs/Rainbow.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gifs/Space Split.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gifs/Split.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gifs/Waves.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gifs/Writer Stay.gif" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/sk/m3ii0/amazingtitles/code/AmazingTitles.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sk/m3ii0/amazingtitles/code/AmazingTitles.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/sk/m3ii0/amazingtitles/code/TitleManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sk/m3ii0/amazingtitles/code/TitleManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/sk/m3ii0/amazingtitles/code/async/AmazingTitle.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/sk/m3ii0/amazingtitles/code/async/animations/ATBounce.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sk/m3ii0/amazingtitles/code/async/animations/ATBounce.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/sk/m3ii0/amazingtitles/code/async/animations/ATFlashing.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sk/m3ii0/amazingtitles/code/async/animations/ATFlashing.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/sk/m3ii0/amazingtitles/code/async/animations/ATFromLeft.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sk/m3ii0/amazingtitles/code/async/animations/ATFromLeft.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/sk/m3ii0/amazingtitles/code/async/animations/ATFromRight.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sk/m3ii0/amazingtitles/code/async/animations/ATFromRight.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/sk/m3ii0/amazingtitles/code/async/animations/ATFromSides.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sk/m3ii0/amazingtitles/code/async/animations/ATFromSides.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/sk/m3ii0/amazingtitles/code/async/animations/ATOpen.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sk/m3ii0/amazingtitles/code/async/animations/ATOpen.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/sk/m3ii0/amazingtitles/code/async/animations/ATPulsing.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sk/m3ii0/amazingtitles/code/async/animations/ATPulsing.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/sk/m3ii0/amazingtitles/code/async/animations/ATRainbow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sk/m3ii0/amazingtitles/code/async/animations/ATRainbow.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/sk/m3ii0/amazingtitles/code/async/animations/ATSplit.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sk/m3ii0/amazingtitles/code/async/animations/ATSplit.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/sk/m3ii0/amazingtitles/code/async/animations/ATWaves.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sk/m3ii0/amazingtitles/code/async/animations/ATWaves.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/sk/m3ii0/amazingtitles/code/async/animations/ATWordSplit.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sk/m3ii0/amazingtitles/code/async/animations/ATWordSplit.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/sk/m3ii0/amazingtitles/code/async/animations/ATWriterStay.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sk/m3ii0/amazingtitles/code/async/animations/ATWriterStay.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/sk/m3ii0/amazingtitles/code/beta/Beta.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sk/m3ii0/amazingtitles/code/beta/Beta.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/sk/m3ii0/amazingtitles/code/commands/PluginCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sk/m3ii0/amazingtitles/code/commands/PluginCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/sk/m3ii0/amazingtitles/code/commands/dispatcher/TitleDispatcher.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sk/m3ii0/amazingtitles/code/commands/dispatcher/TitleDispatcher.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/sk/m3ii0/amazingtitles/code/commands/types/AnimationTypes.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sk/m3ii0/amazingtitles/code/commands/types/AnimationTypes.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/sk/m3ii0/amazingtitles/code/testing/TestListener.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/sk/m3ii0/amazingtitles/code/AmazingTitles.java" beforeDir="false" afterPath="$PROJECT_DIR$/API/src/main/java/sk/m3ii0/amazingtitles/code/AmazingTitles.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/sk/m3ii0/amazingtitles/code/TitleManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/API/src/main/java/sk/m3ii0/amazingtitles/code/TitleManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/sk/m3ii0/amazingtitles/code/async/AmazingComponent.java" beforeDir="false" afterPath="$PROJECT_DIR$/API/src/main/java/sk/m3ii0/amazingtitles/code/async/AmazingComponent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/sk/m3ii0/amazingtitles/code/async/animations/ATBounce.java" beforeDir="false" afterPath="$PROJECT_DIR$/API/src/main/java/sk/m3ii0/amazingtitles/code/async/animations/ATBounce.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/sk/m3ii0/amazingtitles/code/async/animations/ATFlashing.java" beforeDir="false" afterPath="$PROJECT_DIR$/API/src/main/java/sk/m3ii0/amazingtitles/code/async/animations/ATFlashing.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/sk/m3ii0/amazingtitles/code/async/animations/ATFromLeft.java" beforeDir="false" afterPath="$PROJECT_DIR$/API/src/main/java/sk/m3ii0/amazingtitles/code/async/animations/ATFromLeft.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/sk/m3ii0/amazingtitles/code/async/animations/ATFromRight.java" beforeDir="false" afterPath="$PROJECT_DIR$/API/src/main/java/sk/m3ii0/amazingtitles/code/async/animations/ATFromRight.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/sk/m3ii0/amazingtitles/code/async/animations/ATFromSides.java" beforeDir="false" afterPath="$PROJECT_DIR$/API/src/main/java/sk/m3ii0/amazingtitles/code/async/animations/ATFromSides.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/sk/m3ii0/amazingtitles/code/async/animations/ATOpen.java" beforeDir="false" afterPath="$PROJECT_DIR$/API/src/main/java/sk/m3ii0/amazingtitles/code/async/animations/ATOpen.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/sk/m3ii0/amazingtitles/code/async/animations/ATPulsing.java" beforeDir="false" afterPath="$PROJECT_DIR$/API/src/main/java/sk/m3ii0/amazingtitles/code/async/animations/ATPulsing.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/sk/m3ii0/amazingtitles/code/async/animations/ATRainbow.java" beforeDir="false" afterPath="$PROJECT_DIR$/API/src/main/java/sk/m3ii0/amazingtitles/code/async/animations/ATRainbow.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/sk/m3ii0/amazingtitles/code/async/animations/ATSplit.java" beforeDir="false" afterPath="$PROJECT_DIR$/API/src/main/java/sk/m3ii0/amazingtitles/code/async/animations/ATSplit.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/sk/m3ii0/amazingtitles/code/async/animations/ATWaves.java" beforeDir="false" afterPath="$PROJECT_DIR$/API/src/main/java/sk/m3ii0/amazingtitles/code/async/animations/ATWaves.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/sk/m3ii0/amazingtitles/code/async/animations/ATWordSplit.java" beforeDir="false" afterPath="$PROJECT_DIR$/API/src/main/java/sk/m3ii0/amazingtitles/code/async/animations/ATWordSplit.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/sk/m3ii0/amazingtitles/code/async/animations/ATWriterStay.java" beforeDir="false" afterPath="$PROJECT_DIR$/API/src/main/java/sk/m3ii0/amazingtitles/code/async/animations/ATWriterStay.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/sk/m3ii0/amazingtitles/code/async/animations/smooth/ATSmoothBounce.java" beforeDir="false" afterPath="$PROJECT_DIR$/API/src/main/java/sk/m3ii0/amazingtitles/code/async/animations/smooth/ATSmoothBounce.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/sk/m3ii0/amazingtitles/code/async/animations/smooth/ATSmoothRainbow.java" beforeDir="false" afterPath="$PROJECT_DIR$/API/src/main/java/sk/m3ii0/amazingtitles/code/async/animations/smooth/ATSmoothRainbow.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/sk/m3ii0/amazingtitles/code/async/animations/smooth/ATSmoothWaves.java" beforeDir="false" afterPath="$PROJECT_DIR$/API/src/main/java/sk/m3ii0/amazingtitles/code/async/animations/smooth/ATSmoothWaves.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/sk/m3ii0/amazingtitles/code/beta/Beta.java" beforeDir="false" afterPath="$PROJECT_DIR$/API/src/main/java/sk/m3ii0/amazingtitles/code/beta/Beta.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/sk/m3ii0/amazingtitles/code/colors/ColorTranslator.java" beforeDir="false" afterPath="$PROJECT_DIR$/API/src/main/java/sk/m3ii0/amazingtitles/code/colors/ColorTranslator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/sk/m3ii0/amazingtitles/code/colors/ColorUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/API/src/main/java/sk/m3ii0/amazingtitles/code/colors/ColorUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/sk/m3ii0/amazingtitles/code/commands/CommandUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/API/src/main/java/sk/m3ii0/amazingtitles/code/commands/CommandUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/sk/m3ii0/amazingtitles/code/commands/PluginCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/API/src/main/java/sk/m3ii0/amazingtitles/code/commands/PluginCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/sk/m3ii0/amazingtitles/code/commands/dispatcher/TitleDispatcher.java" beforeDir="false" afterPath="$PROJECT_DIR$/API/src/main/java/sk/m3ii0/amazingtitles/code/commands/dispatcher/TitleDispatcher.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/sk/m3ii0/amazingtitles/code/commands/types/ActionType.java" beforeDir="false" afterPath="$PROJECT_DIR$/API/src/main/java/sk/m3ii0/amazingtitles/code/commands/types/ActionType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/sk/m3ii0/amazingtitles/code/commands/types/AnimationTypes.java" beforeDir="false" afterPath="$PROJECT_DIR$/API/src/main/java/sk/m3ii0/amazingtitles/code/commands/types/AnimationTypes.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/sk/m3ii0/amazingtitles/code/nms/NmsProvider.java" beforeDir="false" afterPath="$PROJECT_DIR$/API/src/main/java/sk/m3ii0/amazingtitles/code/spi/NmsProvider.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/sk/m3ii0/amazingtitles/code/nms/R16/R1_16_R1.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/sk/m3ii0/amazingtitles/code/nms/R16/R1_16_R2.java" beforeDir="false" afterPath="$PROJECT_DIR$/R1_16_R1/src/main/java/sk/m3ii0/amazingtitles/code/providers/R1_16_R1/R1_16_R1.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/sk/m3ii0/amazingtitles/code/nms/R16/R1_16_R3.java" beforeDir="false" afterPath="$PROJECT_DIR$/R1_16_R2/src/main/java/sk/m3ii0/amazingtitles/code/providers/R1_16_R2/R1_16_R2.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/sk/m3ii0/amazingtitles/code/nms/R17/R_1_17_R1.java" beforeDir="false" afterPath="$PROJECT_DIR$/R1_16_R3/src/main/java/sk/m3ii0/amazingtitles/code/providers/R1_16_R3/R1_16_R3.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/sk/m3ii0/amazingtitles/code/nms/R18/R1_18_R1.java" beforeDir="false" afterPath="$PROJECT_DIR$/R1_17_R1/src/main/java/sk/m3ii0/amazingtitles/code/providers/R1_17_R1/R1_17_R1.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/sk/m3ii0/amazingtitles/code/nms/R18/R1_18_R2.java" beforeDir="false" afterPath="$PROJECT_DIR$/R1_18_R1/src/main/java/sk/m3ii0/amazingtitles/code/providers/R1_18_R1/R1_18_R1.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/sk/m3ii0/amazingtitles/code/nms/R19/R1_19_R1.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/sk/m3ii0/amazingtitles/code/nms/R19/R1_19_R2.java" beforeDir="false" afterPath="$PROJECT_DIR$/R1_19_R1/src/main/java/sk/m3ii0/amazingtitles/code/providers/R1_19_R1/R1_19_R1.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/sk/m3ii0/amazingtitles/code/nms/R19/R1_19_R3.java" beforeDir="false" afterPath="$PROJECT_DIR$/R1_19_R3/src/main/java/sk/m3ii0/amazingtitles/code/providers/R1_19_R3/R1_19_R3.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/plugin.yml" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -64,9 +79,9 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="Enum" />
         <option value="Interface" />
         <option value="Class" />
-        <option value="Enum" />
       </list>
     </option>
   </component>
@@ -94,12 +109,20 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "last_opened_file_path": "C:/Users/mello/IdeaProjects/AmazingTitles/libs"
+    "jdk.selected.JAVA_MODULE": "16",
+    "last_opened_file_path": "C:/Users/mello/IdeaProjects/AmazingTitles/R1_16_R1/src/main/java/sk/m3ii0/amazingtitles/code/providers/R1_16_R1",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.43908045"
   }
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\mello\IdeaProjects\AmazingTitles\libs" />
+      <recent name="C:\Users\mello\IdeaProjects\AmazingTitles\R1_16_R1\src\main\java\sk\m3ii0\amazingtitles\code\providers\R1_16_R1" />
+      <recent name="C:\Users\mello\IdeaProjects\AmazingTitles\R1_16_R2\src\main\java\sk\m3ii0\amazingtitles\code\providers\R1_16_R2" />
+      <recent name="C:\Users\mello\IdeaProjects\AmazingTitles\R1_16_R3\src\main\java\sk\m3ii0\amazingtitles\code\providers\R1_16_R3" />
+      <recent name="C:\Users\mello\IdeaProjects\AmazingTitles\R1_17_R1\src\main\java\sk\m3ii0\amazingtitles\code\providers\R1_17_R1" />
+      <recent name="C:\Users\mello\IdeaProjects\AmazingTitles\R1_18_R1\src\main\java\sk\m3ii0\amazingtitles\code\providers\R1_18_R1" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\mello\IdeaProjects\AmazingTitles\libs" />
@@ -132,7 +155,21 @@
       <option name="project" value="LOCAL" />
       <updated>1684623885885</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="- Save">
+      <created>1684747758416</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1684747758417</updated>
+    </task>
+    <task id="LOCAL-00004" summary="- Save">
+      <created>1684747798751</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1684747798751</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -149,6 +186,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="- Debug message" />
     <MESSAGE value="- Added 0 handling" />
-    <option name="LAST_COMMIT_MESSAGE" value="- Added 0 handling" />
+    <MESSAGE value="- Save" />
+    <option name="LAST_COMMIT_MESSAGE" value="- Save" />
   </component>
 </project>
