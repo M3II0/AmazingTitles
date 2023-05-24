@@ -192,12 +192,14 @@ public class ATBounce implements AmazingComponent {
                 }
                 lastFrame = frameCounter;
                 lastPackets = packets;
-                for (Player p : viewers) {
-                    if (type == ActionType.TITLE || type == ActionType.SUBTITLE) AmazingTitles.getProvider().sendTitles(p, packets);
-                    if (type == ActionType.ACTION_BAR) AmazingTitles.getProvider().sendActionbar(p, packets[0]);
-                    if (type == ActionType.BOSS_BAR) {
-                        bar.setTitle(frame);
-                        bar.setProgress(((double) durationCounter/(double) duration));
+                if (type == ActionType.BOSS_BAR) {
+                    bar.setTitle(frame);
+                    bar.setProgress(((double) durationCounter/(double) duration));
+                } else {
+                    for (Player p : viewers) {
+                        if (type == ActionType.TITLE || type == ActionType.SUBTITLE)
+                            AmazingTitles.getProvider().sendTitles(p, packets);
+                        if (type == ActionType.ACTION_BAR) AmazingTitles.getProvider().sendActionbar(p, packets[0]);
                     }
                 }
                 if (tickCounter%20==0) {
