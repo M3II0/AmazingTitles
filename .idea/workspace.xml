@@ -4,10 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4242dc22-5de8-4fdd-9807-4cb4d40f239c" name="Changes" comment="- Updated BossBar performance">
+    <list default="true" id="4242dc22-5de8-4fdd-9807-4cb4d40f239c" name="Changes" comment="- Edited Discord Message">
+      <change afterPath="$PROJECT_DIR$/API/src/main/java/sk/m3ii0/amazingtitles/code/announcement/UpdateChecker.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/API/src/main/java/sk/m3ii0/amazingtitles/code/AmazingTitles.java" beforeDir="false" afterPath="$PROJECT_DIR$/API/src/main/java/sk/m3ii0/amazingtitles/code/AmazingTitles.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/API/src/main/java/sk/m3ii0/amazingtitles/code/announcement/DiscordAnnouncement.java" beforeDir="false" afterPath="$PROJECT_DIR$/API/src/main/java/sk/m3ii0/amazingtitles/code/announcement/DiscordAnnouncement.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/API/src/main/java/sk/m3ii0/amazingtitles/code/announcement/DiscordAnnouncement.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/R1_19_R3/src/main/java/sk/m3ii0/amazingtitles/code/providers/R1_19_R3/R1_19_R3.java" beforeDir="false" afterPath="$PROJECT_DIR$/R1_19_R3/src/main/java/sk/m3ii0/amazingtitles/code/providers/R1_19_R3/R1_19_R3.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -48,7 +50,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "jdk.selected.JAVA_MODULE": "16",
-    "last_opened_file_path": "C:/Users/mello/IdeaProjects/AmazingTitles",
+    "last_opened_file_path": "C:/Users/mello/IdeaProjects/SmoothEditor",
     "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.43908045"
@@ -128,7 +130,14 @@
       <option name="project" value="LOCAL" />
       <updated>1684924965356</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="- Edited Discord Message">
+      <created>1685111027485</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1685111027485</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -149,6 +158,7 @@
     <MESSAGE value="- Updated Provider" />
     <MESSAGE value="- Added DiscordAnnouncement.java" />
     <MESSAGE value="- Updated BossBar performance" />
-    <option name="LAST_COMMIT_MESSAGE" value="- Updated BossBar performance" />
+    <MESSAGE value="- Edited Discord Message" />
+    <option name="LAST_COMMIT_MESSAGE" value="- Edited Discord Message" />
   </component>
 </project>

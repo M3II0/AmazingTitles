@@ -22,6 +22,7 @@ public class R1_19_R3 implements NmsProvider {
 		try {
 			networkManagerH = PlayerConnection.class.getDeclaredField("h");
 			networkManagerH.setAccessible(true);
+			
 		} catch (NoSuchFieldException e) {
 			throw new RuntimeException(e);
 		}

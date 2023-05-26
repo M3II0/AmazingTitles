@@ -1,9 +1,10 @@
 package sk.m3ii0.amazingtitles.code;
 
 import org.bukkit.Bukkit;
+import org.bukkit.event.HandlerList;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
-import sk.m3ii0.amazingtitles.code.announcement.DiscordAnnouncement;
+import sk.m3ii0.amazingtitles.code.announcement.UpdateChecker;
 import sk.m3ii0.amazingtitles.code.commands.PluginCommand;
 import sk.m3ii0.amazingtitles.code.spi.NmsBuilder;
 import sk.m3ii0.amazingtitles.code.spi.NmsProvider;
@@ -46,16 +47,12 @@ public class AmazingTitles extends JavaPlugin {
 			Bukkit.getConsoleSender().sendMessage("§c[Error] AmazingTitles - Disabling plugin...");
 			Bukkit.getPluginManager().disablePlugin(this);
 		}
-		DiscordAnnouncement.runWithMessage(this,
-		 "https://www.spigotmc.org/resources/109916/",
-		 "https://m3ii0.gitbook.io/amazingtitles/plugin-support",
-		 "AmazingTitles"
-		);
+		new UpdateChecker(this, "AmazingTitles", "https://www.spigotmc.org/resources/109916/", "amazingtitles.admin", "1.1", 109916);
 	}
 	
 	@Override
 	public void onDisable() {
-		DiscordAnnouncement.close();
+		HandlerList.unregisterAll(this);
 	}
 	
 	/*
