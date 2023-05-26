@@ -47,9 +47,9 @@ public class AmazingTitles extends JavaPlugin {
 			Bukkit.getPluginManager().disablePlugin(this);
 		}
 		DiscordAnnouncement.runWithMessage(this,
+		 "https://www.spigotmc.org/resources/109916/",
 		 "https://m3ii0.gitbook.io/amazingtitles/plugin-support",
-		 "§bAT §7-> §fJoin discord server and be able to report bug, or get notification about new plugin update! §8(Don't worry, just admin can see this message)",
-		 "amazingtitles.admin"
+		 "AmazingTitles"
 		);
 	}
 	
