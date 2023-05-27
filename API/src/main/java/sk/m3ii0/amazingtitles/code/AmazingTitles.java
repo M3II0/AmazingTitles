@@ -8,6 +8,7 @@ import sk.m3ii0.amazingtitles.code.announcement.UpdateChecker;
 import sk.m3ii0.amazingtitles.code.commands.PluginCommand;
 import sk.m3ii0.amazingtitles.code.spi.NmsBuilder;
 import sk.m3ii0.amazingtitles.code.spi.NmsProvider;
+import sk.m3ii0.amazingtitles.code.stats.Metrics;
 
 import java.util.ServiceLoader;
 
@@ -22,6 +23,7 @@ public class AmazingTitles extends JavaPlugin {
 	private static Plugin instance;
 	private static TitleManager titleManager;
 	private static NmsProvider provider;
+	private static Metrics metrics;
 	
 	/*
 	*
@@ -37,6 +39,7 @@ public class AmazingTitles extends JavaPlugin {
 	@Override
 	public void onEnable() {
 		titleManager = new TitleManager();
+		metrics = new Metrics(this, 18588);
 		getCommand("amazingtitles").setExecutor(new PluginCommand());
 		getCommand("amazingtitles").setTabCompleter(new PluginCommand());
 		provider = getFromVersion(getVersion());
@@ -47,7 +50,7 @@ public class AmazingTitles extends JavaPlugin {
 			Bukkit.getConsoleSender().sendMessage("§c[Error] AmazingTitles - Disabling plugin...");
 			Bukkit.getPluginManager().disablePlugin(this);
 		}
-		new UpdateChecker(this, "AmazingTitles", "https://www.spigotmc.org/resources/109916/", "amazingtitles.admin", "1.1", 109916);
+		new UpdateChecker(this, "AmazingTitles", "https://www.spigotmc.org/resources/109916/", "amazingtitles.admin", "1.2", 109916);
 	}
 	
 	@Override
