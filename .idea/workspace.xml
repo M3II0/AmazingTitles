@@ -4,10 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4242dc22-5de8-4fdd-9807-4cb4d40f239c" name="Changes" comment="- Added UpdateChecker">
-      <change afterPath="$PROJECT_DIR$/API/src/main/java/sk/m3ii0/amazingtitles/code/stats/Metrics.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-    </list>
+    <list default="true" id="4242dc22-5de8-4fdd-9807-4cb4d40f239c" name="Changes" comment="- Added plugin Metrics.java" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -47,7 +44,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "jdk.selected.JAVA_MODULE": "16",
-    "last_opened_file_path": "C:/Users/mello/IdeaProjects/AmazingTitles",
+    "last_opened_file_path": "C:/Users/mello/IdeaProjects/DynamicIsland",
     "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.43908045"
@@ -141,7 +138,14 @@
       <option name="project" value="LOCAL" />
       <updated>1685114672079</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="- Added plugin Metrics.java">
+      <created>1685223509104</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1685223509104</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -164,6 +168,7 @@
     <MESSAGE value="- Updated BossBar performance" />
     <MESSAGE value="- Edited Discord Message" />
     <MESSAGE value="- Added UpdateChecker" />
-    <option name="LAST_COMMIT_MESSAGE" value="- Added UpdateChecker" />
+    <MESSAGE value="- Added plugin Metrics.java" />
+    <option name="LAST_COMMIT_MESSAGE" value="- Added plugin Metrics.java" />
   </component>
 </project>

@@ -50,12 +50,13 @@ public class AmazingTitles extends JavaPlugin {
 			Bukkit.getConsoleSender().sendMessage("§c[Error] AmazingTitles - Disabling plugin...");
 			Bukkit.getPluginManager().disablePlugin(this);
 		}
-		new UpdateChecker(this, "AmazingTitles", "https://www.spigotmc.org/resources/109916/", "amazingtitles.admin", "1.2", 109916);
+		new UpdateChecker(this, "AmazingTitles", "https://www.spigotmc.org/resources/109916/", "amazingtitles.admin", "1.3", 109916);
 	}
 	
 	@Override
 	public void onDisable() {
 		HandlerList.unregisterAll(this);
+		metrics.shutdown();
 	}
 	
 	/*
@@ -82,6 +83,9 @@ public class AmazingTitles extends JavaPlugin {
 	*
 	* */
 	
+	public static Metrics getMetrics() {
+		return metrics;
+	}
 	private String getVersion() {
 		final String packageName = getServer().getClass().getPackage().getName();
 		return packageName.substring(packageName.lastIndexOf('.') + 1);
