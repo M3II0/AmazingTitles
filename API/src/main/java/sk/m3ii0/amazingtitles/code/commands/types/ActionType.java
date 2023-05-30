@@ -5,6 +5,7 @@ import java.util.List;
 
 public enum ActionType {
 	
+	MESSAGE(),
 	TITLE(),
 	SUBTITLE(),
 	ACTION_BAR(),

@@ -1,7 +1,7 @@
 package sk.m3ii0.amazingtitles.code.commands.dispatcher;
 
-import net.md_5.bungee.api.chat.BaseComponent;
-import net.md_5.bungee.api.chat.ComponentBuilder;
+import net.md_5.bungee.api.chat.*;
+import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import sk.m3ii0.amazingtitles.code.async.AmazingComponent;
@@ -14,10 +14,15 @@ import sk.m3ii0.amazingtitles.code.commands.types.ActionType;
 import sk.m3ii0.amazingtitles.code.commands.types.AnimationTypes;
 
 import java.awt.*;
+import java.util.*;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class TitleDispatcher {
-
+    
+    private static final Pattern match = Pattern.compile("<(.*?)>(.*?)</>");
+    
     public static void asyncDispatch(CommandSender s, ActionType action, AnimationTypes type, List<Player> receivers, String[] args) {
         try {
             AmazingComponent title = buildTitle(action, type, args);
@@ -307,7 +312,58 @@ public class TitleDispatcher {
     private static void sendError(CommandSender s) {
         s.sendMessage("§cAT §7-> §4Error with dispatching... (Check your format)");
     }
-
+    
+    public static BaseComponent[] getMessageFromRaw(String text) {
+        List<BaseComponent> components = new ArrayList<>();
+        StringBuilder builder = new StringBuilder();
+        for (char character : text.toCharArray()) {
+            builder.append(character);
+            String actual = builder.toString();
+            Matcher matcher = match.matcher(actual);
+            if (matcher.find()) {
+                String[] before = text.split(matcher.group(1));
+                String last = before[0].replaceAll("<$", "");
+                if (!last.isEmpty()) {
+                    components.addAll(Arrays.asList(TextComponent.fromLegacyText(ColorTranslator.parse(last))));
+                    text = text.replace(actual, "");
+                    System.out.println(actual);
+                }
+                String arguments = matcher.group(1);
+                String between = matcher.group(2);
+                ClickEvent clickEvent = null;
+                HoverEvent hoverEvent = null;
+                for (String arg : arguments.split(",")) {
+                    if (arg.split("=").length != 2) continue;
+                    String key = arg.split("=")[0];
+                    String val = arg.split("=")[1];
+                    if (key.equalsIgnoreCase("HOVER")) {
+                        hoverEvent = new HoverEvent(HoverEvent.Action.SHOW_TEXT, TextComponent.fromLegacyText(ColorTranslator.parse(val)));
+                    }
+                    if (key.equalsIgnoreCase("COPY_TO_CLIPBOARD")) {
+                        clickEvent = new ClickEvent(ClickEvent.Action.COPY_TO_CLIPBOARD, val);
+                    }
+                    if (key.equalsIgnoreCase("OPEN_URL")) {
+                        clickEvent = new ClickEvent(ClickEvent.Action.OPEN_URL, val);
+                    }
+                    if (key.equalsIgnoreCase("SUGGEST_COMMAND")) {
+                        clickEvent = new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND, val);
+                    }
+                    if (key.equalsIgnoreCase("RUN_COMMAND")) {
+                        clickEvent = new ClickEvent(ClickEvent.Action.RUN_COMMAND, val);
+                    }
+                }
+                for (BaseComponent var : TextComponent.fromLegacyText(ColorTranslator.parse(between))) {
+                    if (clickEvent != null) var.setClickEvent(clickEvent);
+                    if (hoverEvent != null) var.setHoverEvent(hoverEvent);
+                    components.add(var);
+                }
+                builder = new StringBuilder();
+            }
+        }
+        components.addAll(Arrays.asList(TextComponent.fromLegacyText(ColorTranslator.parse(builder.toString()))));
+        return components.toArray(new BaseComponent[0]);
+    }
+    
     private static void sendSuccess(CommandSender sender, AnimationTypes type, List<Player> receivers, AmazingComponent title) {
         int frames = title.frames().size();
         int speed = 20/title.speed();

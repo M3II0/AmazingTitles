@@ -1,5 +1,6 @@
 package sk.m3ii0.amazingtitles.code.commands;
 
+import net.md_5.bungee.api.chat.BaseComponent;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -34,6 +35,13 @@ public class PluginCommand implements CommandExecutor, TabExecutor {
 		* */
 		if (current == 2) {
 			return CommandUtils.copyPartialMatches(using, CommandUtils.buildPlayerParams(using));
+		}
+		
+		/*
+		* Message
+		* */
+		if (args[0].equalsIgnoreCase("MESSAGE"))  {
+			return List.of("<Visit wiki how to build message>");
 		}
 		
 		/*
@@ -73,6 +81,18 @@ public class PluginCommand implements CommandExecutor, TabExecutor {
 		ActionType actionType;
 		try {
 			actionType = ActionType.valueOf(args[0].toUpperCase());
+			if (actionType == ActionType.MESSAGE) {
+				String text = "";
+				for (int i = 2; i < args.length; i++) {
+					text += args[i] + " ";
+				}
+				text = text.replaceAll(" $", "");
+				BaseComponent[] message = TitleDispatcher.getMessageFromRaw(text);
+				for (Player p : receivers) {
+					p.spigot().sendMessage(message);
+				}
+				return true;
+			}
 			animationTypes = AnimationTypes.valueOf(args[2].toUpperCase());
 		} catch (IllegalArgumentException e) {
 			sendHelpMessage(s);
