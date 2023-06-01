@@ -4,13 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4242dc22-5de8-4fdd-9807-4cb4d40f239c" name="Changes" comment="- Improved Metrics">
+    <list default="true" id="4242dc22-5de8-4fdd-9807-4cb4d40f239c" name="Changes" comment="- Added message builder">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/API/src/main/java/sk/m3ii0/amazingtitles/code/AmazingTitles.java" beforeDir="false" afterPath="$PROJECT_DIR$/API/src/main/java/sk/m3ii0/amazingtitles/code/AmazingTitles.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/API/src/main/java/sk/m3ii0/amazingtitles/code/commands/PluginCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/API/src/main/java/sk/m3ii0/amazingtitles/code/commands/PluginCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/API/src/main/java/sk/m3ii0/amazingtitles/code/commands/dispatcher/TitleDispatcher.java" beforeDir="false" afterPath="$PROJECT_DIR$/API/src/main/java/sk/m3ii0/amazingtitles/code/commands/dispatcher/TitleDispatcher.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/API/src/main/java/sk/m3ii0/amazingtitles/code/commands/types/ActionType.java" beforeDir="false" afterPath="$PROJECT_DIR$/API/src/main/java/sk/m3ii0/amazingtitles/code/commands/types/ActionType.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/R1_19_R3/src/main/java/sk/m3ii0/amazingtitles/code/providers/R1_19_R3/R1_19_R3.java" beforeDir="false" afterPath="$PROJECT_DIR$/R1_19_R3/src/main/java/sk/m3ii0/amazingtitles/code/providers/R1_19_R3/R1_19_R3.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/API/src/main/java/sk/m3ii0/amazingtitles/code/commands/CommandUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/API/src/main/java/sk/m3ii0/amazingtitles/code/commands/CommandUtils.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -159,7 +155,14 @@
       <option name="project" value="LOCAL" />
       <updated>1685301726358</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="- Added message builder">
+      <created>1685484462967</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1685484462967</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -184,6 +187,7 @@
     <MESSAGE value="- Added UpdateChecker" />
     <MESSAGE value="- Added plugin Metrics.java" />
     <MESSAGE value="- Improved Metrics" />
-    <option name="LAST_COMMIT_MESSAGE" value="- Improved Metrics" />
+    <MESSAGE value="- Added message builder" />
+    <option name="LAST_COMMIT_MESSAGE" value="- Added message builder" />
   </component>
 </project>

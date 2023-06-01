@@ -94,7 +94,7 @@ public class PluginCommand implements CommandExecutor, TabExecutor {
 				return true;
 			}
 			animationTypes = AnimationTypes.valueOf(args[2].toUpperCase());
-		} catch (IllegalArgumentException e) {
+		} catch (IllegalArgumentException | ArrayIndexOutOfBoundsException e) {
 			sendHelpMessage(s);
 			return true;
 		}

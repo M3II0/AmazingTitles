@@ -13,10 +13,12 @@ public class CommandUtils {
 		Bukkit.getOnlinePlayers().forEach(p -> remainingPlayers.add(p.getName()));
 		if (current.isEmpty()) {
 			remainingPlayers.add("all");
+			remainingPlayers.add("-p:<permission>");
 			return remainingPlayers;
 		}
 		if (!current.endsWith(",")) {
 			remainingPlayers.remove("all");
+			remainingPlayers.remove("-p:<permission>");
 			return remainingPlayers;
 		} else {
 			String[] names = current.split(",");
@@ -42,6 +44,16 @@ public class CommandUtils {
 	public static List<Player> playersFromOperator(String operator) {
 		List<Player> result = new ArrayList<>();
 		if (operator.equalsIgnoreCase("all")) return new ArrayList<>(Bukkit.getOnlinePlayers());
+		else if (operator.startsWith("-p:")) {
+			String permission = operator.replace("-p:", "");
+			if (permission.isEmpty()) return new ArrayList<>(Bukkit.getOnlinePlayers());
+			for (Player p : Bukkit.getOnlinePlayers()) {
+				if (p.hasPermission(permission)) {
+					result.add(p);
+				}
+			}
+			return result;
+		}
 		String[] rawPlayers = operator.split(",");
 		for (String raw : rawPlayers) {
 			Player p = Bukkit.getPlayer(raw);
