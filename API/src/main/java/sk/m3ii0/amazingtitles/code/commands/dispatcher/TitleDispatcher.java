@@ -1,5 +1,6 @@
 package sk.m3ii0.amazingtitles.code.commands.dispatcher;
 
+import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.chat.*;
 import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.command.CommandSender;
@@ -79,6 +80,12 @@ public class TitleDispatcher {
             int duration = Integer.parseInt(args[1]);
             String color1 = args[2];
             String color2 = args[3];
+            if (color1.startsWith("&")) {
+                color1 = "#" + String.format("%06x", 0xFFFFFF & ChatColor.getByChar(color1.charAt(1)).getColor().getRGB());
+            }
+            if (color2.startsWith("&")) {
+                color2 = "#" + String.format("%06x", 0xFFFFFF & ChatColor.getByChar(color2.charAt(1)).getColor().getRGB());
+            }
             String text = "";
             for (int i = 4; i < args.length; i++) {
                 text += args[i] + " ";
@@ -98,6 +105,12 @@ public class TitleDispatcher {
             int duration = Integer.parseInt(args[1]);
             String color1 = args[2];
             String color2 = args[3];
+            if (color1.startsWith("&")) {
+                color1 = "#" + String.format("%06x", 0xFFFFFF & ChatColor.getByChar(color1.charAt(1)).getColor().getRGB());
+            }
+            if (color2.startsWith("&")) {
+                color2 = "#" + String.format("%06x", 0xFFFFFF & ChatColor.getByChar(color2.charAt(1)).getColor().getRGB());
+            }
             String text = "";
             for (int i = 4; i < args.length; i++) {
                 text += args[i] + " ";
@@ -117,6 +130,12 @@ public class TitleDispatcher {
             int duration = Integer.parseInt(args[1]);
             String color1 = args[2];
             String color2 = args[3];
+            if (color1.startsWith("&")) {
+                color1 = "#" + String.format("%06x", 0xFFFFFF & ChatColor.getByChar(color1.charAt(1)).getColor().getRGB());
+            }
+            if (color2.startsWith("&")) {
+                color2 = "#" + String.format("%06x", 0xFFFFFF & ChatColor.getByChar(color2.charAt(1)).getColor().getRGB());
+            }
             String text = "";
             for (int i = 4; i < args.length; i++) {
                 text += args[i] + " ";
@@ -136,6 +155,12 @@ public class TitleDispatcher {
             int duration = Integer.parseInt(args[1]);
             String color1 = args[2];
             String color2 = args[3];
+            if (color1.startsWith("&")) {
+                color1 = "#" + String.format("%06x", 0xFFFFFF & ChatColor.getByChar(color1.charAt(1)).getColor().getRGB());
+            }
+            if (color2.startsWith("&")) {
+                color2 = "#" + String.format("%06x", 0xFFFFFF & ChatColor.getByChar(color2.charAt(1)).getColor().getRGB());
+            }
             String text = "";
             for (int i = 4; i < args.length; i++) {
                 text += args[i] + " ";
@@ -171,8 +196,14 @@ public class TitleDispatcher {
             int rawSpeed = Integer.parseInt(args[0]);
             int speed = Math.max(rawSpeed, 1);
             int duration = Integer.parseInt(args[1]);
-            Color color1 = java.awt.Color.decode(args[2]);
-            Color color2 = java.awt.Color.decode(args[3]);
+            String color1 = args[2];
+            String color2 = args[3];
+            if (color1.startsWith("&")) {
+                color1 = "#" + String.format("%06x", 0xFFFFFF & ChatColor.getByChar(color1.charAt(1)).getColor().getRGB());
+            }
+            if (color2.startsWith("&")) {
+                color2 = "#" + String.format("%06x", 0xFFFFFF & ChatColor.getByChar(color2.charAt(1)).getColor().getRGB());
+            }
             String text = "";
             for (int i = 4; i < args.length; i++) {
                 text += args[i] + " ";
@@ -241,7 +272,7 @@ public class TitleDispatcher {
             int rawSpeed = Integer.parseInt(args[0]);
             int speed = Math.max(rawSpeed, 1);
             int duration = Integer.parseInt(args[1]);
-            Color color1 = java.awt.Color.decode(args[2]);
+            String color1 = args[2];
             String text = "";
             for (int i = 3; i < args.length; i++) {
                 text += args[i] + " ";

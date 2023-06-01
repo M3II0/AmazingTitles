@@ -1,6 +1,7 @@
 package sk.m3ii0.amazingtitles.code.colors;
 
 import net.md_5.bungee.api.ChatColor;
+import org.bukkit.Bukkit;
 
 import java.awt.*;
 import java.util.ArrayList;

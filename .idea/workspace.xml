@@ -4,9 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4242dc22-5de8-4fdd-9807-4cb4d40f239c" name="Changes" comment="- Added message builder">
+    <list default="true" id="4242dc22-5de8-4fdd-9807-4cb4d40f239c" name="Changes" comment="- Added player parameter">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/API/src/main/java/sk/m3ii0/amazingtitles/code/commands/CommandUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/API/src/main/java/sk/m3ii0/amazingtitles/code/commands/CommandUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/API/src/main/java/sk/m3ii0/amazingtitles/code/AmazingTitles.java" beforeDir="false" afterPath="$PROJECT_DIR$/API/src/main/java/sk/m3ii0/amazingtitles/code/AmazingTitles.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/API/src/main/java/sk/m3ii0/amazingtitles/code/colors/ColorTranslator.java" beforeDir="false" afterPath="$PROJECT_DIR$/API/src/main/java/sk/m3ii0/amazingtitles/code/colors/ColorTranslator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/API/src/main/java/sk/m3ii0/amazingtitles/code/commands/dispatcher/TitleDispatcher.java" beforeDir="false" afterPath="$PROJECT_DIR$/API/src/main/java/sk/m3ii0/amazingtitles/code/commands/dispatcher/TitleDispatcher.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -162,7 +164,14 @@
       <option name="project" value="LOCAL" />
       <updated>1685484462967</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="- Added player parameter">
+      <created>1685622045132</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1685622045132</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -188,6 +197,7 @@
     <MESSAGE value="- Added plugin Metrics.java" />
     <MESSAGE value="- Improved Metrics" />
     <MESSAGE value="- Added message builder" />
-    <option name="LAST_COMMIT_MESSAGE" value="- Added message builder" />
+    <MESSAGE value="- Added player parameter" />
+    <option name="LAST_COMMIT_MESSAGE" value="- Added player parameter" />
   </component>
 </project>
