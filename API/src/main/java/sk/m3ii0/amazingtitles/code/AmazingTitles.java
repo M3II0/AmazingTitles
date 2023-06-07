@@ -8,6 +8,7 @@ import org.bukkit.event.entity.EntityPickupItemEvent;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 import sk.m3ii0.amazingtitles.code.announcement.UpdateChecker;
+import sk.m3ii0.amazingtitles.code.async.AmazingComponent;
 import sk.m3ii0.amazingtitles.code.commands.PluginCommand;
 import sk.m3ii0.amazingtitles.code.spi.NmsBuilder;
 import sk.m3ii0.amazingtitles.code.spi.NmsProvider;
@@ -53,7 +54,7 @@ public class AmazingTitles extends JavaPlugin {
 			Bukkit.getConsoleSender().sendMessage("§c[Error] AmazingTitles - Disabling plugin...");
 			Bukkit.getPluginManager().disablePlugin(this);
 		}
-		new UpdateChecker(this, "AmazingTitles", "https://www.spigotmc.org/resources/109916/", "amazingtitles.admin", "1.7", 109916);
+		new UpdateChecker(this, "AmazingTitles", "https://www.spigotmc.org/resources/109916/", "amazingtitles.admin", "1.8", 109916);
 	}
 	
 	@Override
