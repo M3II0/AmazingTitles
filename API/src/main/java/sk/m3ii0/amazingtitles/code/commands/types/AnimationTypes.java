@@ -14,6 +14,15 @@ public enum AnimationTypes {
 	 List.of("<Text-AnimationText\\n\\AnimationSubText>")
 	),
 	
+	STICK_BOUNCE(
+	 3,
+	 true,
+	 List.of("<Number-Speed(20=1s),Min:1>"),
+	 List.of("<Number-Duration(InSeconds)>"),
+	 List.of("<Text-BouncerSymbol>"),
+	 List.of("<Text-AnimationText\\n\\AnimationSubText>")
+	),
+	
 	SMOOTH_WAVES(
 	 5,
 	 true,

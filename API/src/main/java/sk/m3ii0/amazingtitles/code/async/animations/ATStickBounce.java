@@ -17,13 +17,13 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class ATWriterStay implements AmazingComponent {
-    
+public class ATStickBounce implements AmazingComponent {
+
     /*
-     *
-     * Values
-     *
-     * */
+    *
+    * Values
+    *
+    * */
     
     private BukkitTask task;
     private final Set<Player> viewers = new HashSet<>();
@@ -42,30 +42,37 @@ public class ATWriterStay implements AmazingComponent {
     private int duration = AmazingComponent.super.duration();
     
     private final BossBar bar;
-    
-    /*
-     *
-     * Constructor
-     *
-     * */
 
-    public ATWriterStay(ActionType type, String text, String writer) {
-        String resume = "";
-        for (String var : StringUtils.toColoredChars(text)) {
-            String frame = resume + writer;
-            frames.add(ColorTranslator.parse(frame));
-            resume += var;
+    /*
+    *
+    * Constructor
+    *
+    * */
+
+    public ATStickBounce(ActionType type, String bouncer, String text) {
+        for (int i = 0; i < text.length(); i++) {
+            StringBuilder builder = new StringBuilder();
+            int counter = 0;
+            for (String var : StringUtils.toColoredChars(text)) {
+                if (counter == i) builder.append(" ").append(bouncer);
+                else builder.append(var);
+                ++counter;
+            }
+            frames.add(ColorTranslator.parse(builder.toString()));
         }
-        frames.add(ColorTranslator.parse(text));
+    
+        for (int i = frames.size()-1; i > -1; i--) {
+            frames.add(frames.get(i));
+        }
         this.type = type;
         bar = Bukkit.createBossBar("", BarColor.WHITE, BarStyle.SOLID);
     }
     
     /*
-     *
-     * Setter
-     *
-     * */
+    *
+    * Setters
+    *
+    * */
     
     public void setSubText(String subText) {
         this.subText = ColorTranslator.parse(subText);
@@ -93,6 +100,11 @@ public class ATWriterStay implements AmazingComponent {
     @Override
     public List<String> frames() {
         return frames;
+    }
+    
+    @Override
+    public String text() {
+        return subText;
     }
     
     @Override
@@ -135,7 +147,7 @@ public class ATWriterStay implements AmazingComponent {
             }
         }
     }
-    
+
     @Override
     public void delete() {
         if (task != null) {
@@ -165,7 +177,7 @@ public class ATWriterStay implements AmazingComponent {
                 if (tickCounter%speed==0) {
                     ++frameCounter;
                 }
-                if (frameCounter >= frames.size()) frameCounter = frames.size()-1;
+                if (frameCounter >= frames.size()) frameCounter = 0;
                 String frame = frames.get(frameCounter);
                 Object[] packets = new Object[0];
                 if (frameCounter == lastFrame) {

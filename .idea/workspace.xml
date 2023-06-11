@@ -4,25 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4242dc22-5de8-4fdd-9807-4cb4d40f239c" name="Changes" comment="- Added color parameter">
-      <change afterPath="$PROJECT_DIR$/R1_20_R1/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/R1_20_R1/src/main/java/sk/m3ii0/amazingtitles/code/providers/R1_20_R0/R1_20_R1.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/R1_20_R1/src/main/java/sk/m3ii0/amazingtitles/code/providers/R1_20_R0/R1_20_R1_Builder.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/libs/spigot-1.20-R0.1-SNAPSHOT.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+    <list default="true" id="4242dc22-5de8-4fdd-9807-4cb4d40f239c" name="Changes" comment="- Added 1.20 support">
+      <change afterPath="$PROJECT_DIR$/API/src/main/java/sk/m3ii0/amazingtitles/code/async/animations/ATStickBounce.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/API/src/main/java/sk/m3ii0/amazingtitles/code/utils/StringUtils.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/API/src/main/java/sk/m3ii0/amazingtitles/code/AmazingTitles.java" beforeDir="false" afterPath="$PROJECT_DIR$/API/src/main/java/sk/m3ii0/amazingtitles/code/AmazingTitles.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/API/src/main/java/sk/m3ii0/amazingtitles/code/colors/ColorTranslator.java" beforeDir="false" afterPath="$PROJECT_DIR$/API/src/main/java/sk/m3ii0/amazingtitles/code/colors/ColorTranslator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/API/src/main/resources/META-INF/services/sk.m3ii0.amazingtitles.code.spi.NmsBuilder" beforeDir="false" afterPath="$PROJECT_DIR$/API/src/main/resources/META-INF/services/sk.m3ii0.amazingtitles.code.spi.NmsBuilder" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/R1_16_R1/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/R1_16_R1/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/R1_16_R2/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/R1_16_R2/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/R1_16_R3/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/R1_16_R3/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/R1_17_R1/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/R1_17_R1/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/R1_18_R1/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/R1_18_R1/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/R1_18_R2/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/R1_18_R2/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/R1_19_R1/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/R1_19_R1/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/R1_19_R2/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/R1_19_R2/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/R1_19_R3/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/R1_19_R3/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/API/src/main/java/sk/m3ii0/amazingtitles/code/async/animations/ATWriterStay.java" beforeDir="false" afterPath="$PROJECT_DIR$/API/src/main/java/sk/m3ii0/amazingtitles/code/async/animations/ATWriterStay.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/API/src/main/java/sk/m3ii0/amazingtitles/code/async/animations/smooth/ATSmoothRainbow.java" beforeDir="false" afterPath="$PROJECT_DIR$/API/src/main/java/sk/m3ii0/amazingtitles/code/async/animations/smooth/ATSmoothRainbow.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/API/src/main/java/sk/m3ii0/amazingtitles/code/beta/Beta.java" beforeDir="false" afterPath="$PROJECT_DIR$/API/src/main/java/sk/m3ii0/amazingtitles/code/beta/Beta.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/API/src/main/java/sk/m3ii0/amazingtitles/code/commands/dispatcher/TitleDispatcher.java" beforeDir="false" afterPath="$PROJECT_DIR$/API/src/main/java/sk/m3ii0/amazingtitles/code/commands/dispatcher/TitleDispatcher.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/API/src/main/java/sk/m3ii0/amazingtitles/code/commands/types/AnimationTypes.java" beforeDir="false" afterPath="$PROJECT_DIR$/API/src/main/java/sk/m3ii0/amazingtitles/code/commands/types/AnimationTypes.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -64,7 +55,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "jdk.selected.JAVA_MODULE": "16",
-    "last_opened_file_path": "C:/Users/mello/IdeaProjects/AmazingTitles/R1_20_R0/src/main/java/sk/m3ii0/amazingtitles/code/providers/R1_20_R0",
+    "last_opened_file_path": "C:/Users/mello/IdeaProjects/DynamicIsland",
     "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.43908045"
@@ -82,6 +73,7 @@
       <recent name="C:\Users\mello\IdeaProjects\AmazingTitles\libs" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="sk.m3ii0.amazingtitles.code.async.animations" />
       <recent name="sk.m3ii0.amazingtitles.code.async.animations.smooth" />
       <recent name="sk.m3ii0.amazingtitles.code.nms" />
     </key>
@@ -193,7 +185,14 @@
       <option name="project" value="LOCAL" />
       <updated>1685656644459</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="- Added 1.20 support">
+      <created>1686168659568</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1686168659568</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -221,6 +220,7 @@
     <MESSAGE value="- Added message builder" />
     <MESSAGE value="- Added player parameter" />
     <MESSAGE value="- Added color parameter" />
-    <option name="LAST_COMMIT_MESSAGE" value="- Added color parameter" />
+    <MESSAGE value="- Added 1.20 support" />
+    <option name="LAST_COMMIT_MESSAGE" value="- Added 1.20 support" />
   </component>
 </project>

@@ -337,6 +337,24 @@ public class TitleDispatcher {
             split.setSubText(subtitle);
             return split;
         }
+        if (animation == AnimationTypes.STICK_BOUNCE) {
+            int rawSpeed = Integer.parseInt(args[0]);
+            int speed = Math.max(rawSpeed, 1);
+            int duration = Integer.parseInt(args[1]);
+            String bounce = args[2];
+            String text = "";
+            for (int i = 3; i < args.length; i++) {
+                text += args[i] + " ";
+            }
+            text = text.replaceAll(" $", "");
+            String title = text.split("\\\\n\\\\")[0];
+            String subtitle = (text.split("\\\\n\\\\").length > 1)? text.split("\\\\n\\\\")[1] : "";
+            ATStickBounce split = new ATStickBounce(action, bounce, title);
+            split.setSpeed(speed);
+            split.setDuration(duration);
+            split.setSubText(subtitle);
+            return split;
+        }
         return null;
     }
 
