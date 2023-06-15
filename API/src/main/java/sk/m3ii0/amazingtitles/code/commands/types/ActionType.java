@@ -4,7 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public enum ActionType {
-	
+
+	NOTIFICATION(),
 	MESSAGE(),
 	TITLE(),
 	SUBTITLE(),

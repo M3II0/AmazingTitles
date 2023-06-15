@@ -2,7 +2,6 @@ package sk.m3ii0.amazingtitles.code.commands.dispatcher;
 
 import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.chat.*;
-import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import sk.m3ii0.amazingtitles.code.async.AmazingComponent;
@@ -14,8 +13,8 @@ import sk.m3ii0.amazingtitles.code.colors.ColorTranslator;
 import sk.m3ii0.amazingtitles.code.commands.types.ActionType;
 import sk.m3ii0.amazingtitles.code.commands.types.AnimationTypes;
 
-import java.awt.*;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

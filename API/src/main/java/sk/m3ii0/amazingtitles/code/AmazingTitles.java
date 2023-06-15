@@ -1,20 +1,22 @@
 package sk.m3ii0.amazingtitles.code;
 
 import org.bukkit.Bukkit;
-import org.bukkit.event.EventHandler;
+import org.bukkit.entity.Player;
 import org.bukkit.event.HandlerList;
-import org.bukkit.event.Listener;
-import org.bukkit.event.entity.EntityPickupItemEvent;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 import sk.m3ii0.amazingtitles.code.announcement.UpdateChecker;
-import sk.m3ii0.amazingtitles.code.async.AmazingComponent;
+import sk.m3ii0.amazingtitles.code.colors.ColorTranslator;
 import sk.m3ii0.amazingtitles.code.commands.PluginCommand;
+import sk.m3ii0.amazingtitles.code.notifications.BarNotification;
+import sk.m3ii0.amazingtitles.code.notifications.DynamicBar;
+import sk.m3ii0.amazingtitles.code.notifications.NotificationListener;
 import sk.m3ii0.amazingtitles.code.spi.NmsBuilder;
 import sk.m3ii0.amazingtitles.code.spi.NmsProvider;
 import sk.m3ii0.amazingtitles.code.stats.Metrics;
 
-import java.util.ServiceLoader;
+import java.text.DecimalFormat;
+import java.util.*;
 
 public class AmazingTitles extends JavaPlugin {
 	
@@ -28,6 +30,8 @@ public class AmazingTitles extends JavaPlugin {
 	private static TitleManager titleManager;
 	private static NmsProvider provider;
 	private static Metrics metrics;
+	private static final String version = "2.0";
+	private static Map<UUID, DynamicBar> bars = new HashMap<>();
 	
 	/*
 	*
@@ -42,6 +46,7 @@ public class AmazingTitles extends JavaPlugin {
 	
 	@Override
 	public void onEnable() {
+		long mills = -System.nanoTime();
 		titleManager = new TitleManager();
 		metrics = new Metrics(this, 18588);
 		getCommand("amazingtitles").setExecutor(new PluginCommand());
@@ -54,7 +59,19 @@ public class AmazingTitles extends JavaPlugin {
 			Bukkit.getConsoleSender().sendMessage("§c[Error] AmazingTitles - Disabling plugin...");
 			Bukkit.getPluginManager().disablePlugin(this);
 		}
-		new UpdateChecker(this, "AmazingTitles", "https://www.spigotmc.org/resources/109916/", "amazingtitles.admin", "1.9", 109916);
+		new UpdateChecker(this, "AmazingTitles", "https://www.spigotmc.org/resources/109916/", "amazingtitles.admin", version, 109916);
+		Bukkit.getPluginManager().registerEvents(new NotificationListener(), this);
+		Bukkit.getScheduler().runTaskTimerAsynchronously(this, () -> {
+			long sysTime = System.currentTimeMillis();
+			for (DynamicBar bar : bars.values()) {
+				bar.update(sysTime);
+			}
+		}, 0, 1);
+		mills += System.nanoTime();
+		String format = new DecimalFormat("#.###").format(mills/1e+6);
+		Bukkit.getConsoleSender().sendMessage(
+				getEnableMessage(format)
+		);
 	}
 	
 	@Override
@@ -86,7 +103,23 @@ public class AmazingTitles extends JavaPlugin {
 	* Private API
 	*
 	* */
-	
+
+	public static void insertNewBar(Player player) {
+		bars.put(player.getUniqueId(), DynamicBar.getBar(player));
+	}
+	public static void removeBar(Player player) {
+		bars.remove(player.getUniqueId());
+	}
+	public static void setNotificationFor(BarNotification notification, List<Player> players) {
+		for (Player p : players) {
+			UUID uuid = p.getUniqueId();
+			DynamicBar bar = bars.get(uuid);
+			bar.notification("id" + (bar.getNotifications().size()+1), notification);
+		}
+	}
+	public static String getPluginVersion() {
+		return version;
+	}
 	public static Metrics getMetrics() {
 		return metrics;
 	}
@@ -101,6 +134,22 @@ public class AmazingTitles extends JavaPlugin {
 			}
 		}
 		return null;
+	}
+	private String getEnableMessage(String millis) {
+		return ColorTranslator.parse(
+				"\n" +
+						" &d> AmazingTitles - &7Created by M3II0&r\n" +
+						"&r\n" +
+						" &dEnabled:&r\n" +
+						"  &f| NMS: " + getVersion() + "&r\n" +
+						"  &f| Plugin Version: " + getPluginVersion() + "&r\n" +
+						"  &f| Loaded Metrics.java&r\n" +
+						"  &f| Loaded PacketProvider&r\n" +
+						"  &f| Registered Notification bar listener&r\n" +
+						"  &a| Plugin has been enabled!&r\n" +
+						"&r\n" +
+						" &d> Took " + millis + "ms!&r\n"
+		);
 	}
 	
 }

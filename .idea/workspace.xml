@@ -5,16 +5,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4242dc22-5de8-4fdd-9807-4cb4d40f239c" name="Changes" comment="- Added 1.20 support">
-      <change afterPath="$PROJECT_DIR$/API/src/main/java/sk/m3ii0/amazingtitles/code/async/animations/ATStickBounce.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/API/src/main/java/sk/m3ii0/amazingtitles/code/utils/StringUtils.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/API/src/main/java/sk/m3ii0/amazingtitles/code/notifications/BarNotification.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/API/src/main/java/sk/m3ii0/amazingtitles/code/notifications/DynamicBar.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/API/src/main/java/sk/m3ii0/amazingtitles/code/notifications/NotificationListener.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/API/src/main/java/sk/m3ii0/amazingtitles/code/AmazingTitles.java" beforeDir="false" afterPath="$PROJECT_DIR$/API/src/main/java/sk/m3ii0/amazingtitles/code/AmazingTitles.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/API/src/main/java/sk/m3ii0/amazingtitles/code/async/animations/ATWriterStay.java" beforeDir="false" afterPath="$PROJECT_DIR$/API/src/main/java/sk/m3ii0/amazingtitles/code/async/animations/ATWriterStay.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/API/src/main/java/sk/m3ii0/amazingtitles/code/announcement/UpdateChecker.java" beforeDir="false" afterPath="$PROJECT_DIR$/API/src/main/java/sk/m3ii0/amazingtitles/code/announcement/UpdateChecker.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/API/src/main/java/sk/m3ii0/amazingtitles/code/async/animations/smooth/ATSmoothRainbow.java" beforeDir="false" afterPath="$PROJECT_DIR$/API/src/main/java/sk/m3ii0/amazingtitles/code/async/animations/smooth/ATSmoothRainbow.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/API/src/main/java/sk/m3ii0/amazingtitles/code/beta/Beta.java" beforeDir="false" afterPath="$PROJECT_DIR$/API/src/main/java/sk/m3ii0/amazingtitles/code/beta/Beta.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/API/src/main/java/sk/m3ii0/amazingtitles/code/commands/PluginCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/API/src/main/java/sk/m3ii0/amazingtitles/code/commands/PluginCommand.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/API/src/main/java/sk/m3ii0/amazingtitles/code/commands/dispatcher/TitleDispatcher.java" beforeDir="false" afterPath="$PROJECT_DIR$/API/src/main/java/sk/m3ii0/amazingtitles/code/commands/dispatcher/TitleDispatcher.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/API/src/main/java/sk/m3ii0/amazingtitles/code/commands/types/AnimationTypes.java" beforeDir="false" afterPath="$PROJECT_DIR$/API/src/main/java/sk/m3ii0/amazingtitles/code/commands/types/AnimationTypes.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/API/src/main/java/sk/m3ii0/amazingtitles/code/commands/types/ActionType.java" beforeDir="false" afterPath="$PROJECT_DIR$/API/src/main/java/sk/m3ii0/amazingtitles/code/commands/types/ActionType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/API/src/main/java/sk/m3ii0/amazingtitles/code/stats/Metrics.java" beforeDir="false" afterPath="$PROJECT_DIR$/API/src/main/java/sk/m3ii0/amazingtitles/code/stats/Metrics.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/R1_19_R3/src/main/java/sk/m3ii0/amazingtitles/code/providers/R1_19_R3/R1_19_R3.java" beforeDir="false" afterPath="$PROJECT_DIR$/R1_19_R3/src/main/java/sk/m3ii0/amazingtitles/code/providers/R1_19_R3/R1_19_R3.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -36,13 +38,6 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
-  <component name="MavenImportPreferences">
-    <option name="importingSettings">
-      <MavenImportingSettings>
-        <option name="workspaceImportEnabled" value="true" />
-      </MavenImportingSettings>
-    </option>
-  </component>
   <component name="ProjectId" id="2PszqdQfFRvDC54D4FgLsv88EzQ" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
@@ -54,6 +49,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "ignore.virus.scanning.warn.message": "true",
     "jdk.selected.JAVA_MODULE": "16",
     "last_opened_file_path": "C:/Users/mello/IdeaProjects/DynamicIsland",
     "project.structure.last.edited": "Modules",

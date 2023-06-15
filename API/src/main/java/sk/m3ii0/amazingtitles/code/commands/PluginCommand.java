@@ -6,9 +6,13 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabExecutor;
 import org.bukkit.entity.Player;
+import sk.m3ii0.amazingtitles.code.AmazingTitles;
+import sk.m3ii0.amazingtitles.code.colors.ColorTranslator;
+import sk.m3ii0.amazingtitles.code.colors.ColorUtils;
 import sk.m3ii0.amazingtitles.code.commands.dispatcher.TitleDispatcher;
 import sk.m3ii0.amazingtitles.code.commands.types.ActionType;
 import sk.m3ii0.amazingtitles.code.commands.types.AnimationTypes;
+import sk.m3ii0.amazingtitles.code.notifications.BarNotification;
 
 import java.util.Collections;
 import java.util.List;
@@ -42,6 +46,17 @@ public class PluginCommand implements CommandExecutor, TabExecutor {
 		* */
 		if (args[0].equalsIgnoreCase("MESSAGE"))  {
 			return List.of("<Visit wiki how to build message>");
+		}
+
+		/*
+		* Notification
+		* */
+		if (args[0].equalsIgnoreCase("NOTIFICATION")) {
+			if (current == 3) {
+				return List.of("<NotificationSymbol>");
+			} else if (current == 4) {
+				return List.of("<Number(Duration-InSeconds)>");
+			} else return List.of("<NotificationMessage>");
 		}
 		
 		/*
@@ -91,6 +106,18 @@ public class PluginCommand implements CommandExecutor, TabExecutor {
 				for (Player p : receivers) {
 					p.spigot().sendMessage(message);
 				}
+				return true;
+			}
+			if (actionType == ActionType.NOTIFICATION) {
+				String symbol = ColorTranslator.parse(args[2]);
+				int duration = Integer.parseInt(args[3]);
+				String text = "";
+				for (int i = 4; i < args.length; i++) {
+					text += args[i] + " ";
+				}
+				text = text.replaceAll(" $", "");
+				BarNotification notification = BarNotification.create(symbol, text, duration);
+				AmazingTitles.setNotificationFor(notification, receivers);
 				return true;
 			}
 			animationTypes = AnimationTypes.valueOf(args[2].toUpperCase());

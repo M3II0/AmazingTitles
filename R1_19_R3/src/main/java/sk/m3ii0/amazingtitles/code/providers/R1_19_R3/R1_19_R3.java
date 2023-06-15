@@ -2,7 +2,10 @@ package sk.m3ii0.amazingtitles.code.providers.R1_19_R3;
 
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.protocol.Packet;
-import net.minecraft.network.protocol.game.*;
+import net.minecraft.network.protocol.game.ClientboundSetActionBarTextPacket;
+import net.minecraft.network.protocol.game.ClientboundSetSubtitleTextPacket;
+import net.minecraft.network.protocol.game.ClientboundSetTitleTextPacket;
+import net.minecraft.network.protocol.game.ClientboundSetTitlesAnimationPacket;
 import net.minecraft.server.network.PlayerConnection;
 import org.bukkit.craftbukkit.v1_19_R3.entity.CraftPlayer;
 import org.bukkit.craftbukkit.v1_19_R3.util.CraftChatMessage;
