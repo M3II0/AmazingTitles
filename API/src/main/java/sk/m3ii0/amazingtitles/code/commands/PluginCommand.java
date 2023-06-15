@@ -13,6 +13,7 @@ import sk.m3ii0.amazingtitles.code.commands.dispatcher.TitleDispatcher;
 import sk.m3ii0.amazingtitles.code.commands.types.ActionType;
 import sk.m3ii0.amazingtitles.code.commands.types.AnimationTypes;
 import sk.m3ii0.amazingtitles.code.notifications.BarNotification;
+import sk.m3ii0.amazingtitles.code.stats.Metrics;
 
 import java.util.Collections;
 import java.util.List;
@@ -106,6 +107,7 @@ public class PluginCommand implements CommandExecutor, TabExecutor {
 				for (Player p : receivers) {
 					p.spigot().sendMessage(message);
 				}
+				AmazingTitles.getMetrics().addCustomChart(new Metrics.SingleLineChart("used_commands", () -> 1));
 				return true;
 			}
 			if (actionType == ActionType.NOTIFICATION) {
@@ -118,6 +120,7 @@ public class PluginCommand implements CommandExecutor, TabExecutor {
 				text = text.replaceAll(" $", "");
 				BarNotification notification = BarNotification.create(symbol, text, duration);
 				AmazingTitles.setNotificationFor(notification, receivers);
+				AmazingTitles.getMetrics().addCustomChart(new Metrics.SingleLineChart("used_commands", () -> 1));
 				return true;
 			}
 			animationTypes = AnimationTypes.valueOf(args[2].toUpperCase());
@@ -143,7 +146,7 @@ public class PluginCommand implements CommandExecutor, TabExecutor {
 		* Builder
 		* */
 		TitleDispatcher.asyncDispatch(s, actionType, animationTypes, receivers, animation);
-		
+		AmazingTitles.getMetrics().addCustomChart(new Metrics.SingleLineChart("used_commands", () -> 1));
 		return false;
 	}
 
