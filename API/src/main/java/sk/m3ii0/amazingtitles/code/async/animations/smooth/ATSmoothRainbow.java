@@ -47,7 +47,7 @@ public class ATSmoothRainbow implements AmazingComponent {
 	 * Constructor
 	 *
 	 * */
-	
+
 	public ATSmoothRainbow(ActionType type, String title) {
 		String red = "#FF2424";
 		String blue = "#002AFF";
