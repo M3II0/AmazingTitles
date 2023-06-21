@@ -6,8 +6,10 @@ import org.bukkit.event.HandlerList;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 import sk.m3ii0.amazingtitles.code.announcement.UpdateChecker;
+import sk.m3ii0.amazingtitles.code.api.objects.AmazingCreator;
 import sk.m3ii0.amazingtitles.code.colors.ColorTranslator;
 import sk.m3ii0.amazingtitles.code.commands.PluginCommand;
+import sk.m3ii0.amazingtitles.code.configuration.XYaml;
 import sk.m3ii0.amazingtitles.code.notifications.BarNotification;
 import sk.m3ii0.amazingtitles.code.notifications.DynamicBar;
 import sk.m3ii0.amazingtitles.code.notifications.NotificationListener;
@@ -15,6 +17,7 @@ import sk.m3ii0.amazingtitles.code.spi.NmsBuilder;
 import sk.m3ii0.amazingtitles.code.spi.NmsProvider;
 import sk.m3ii0.amazingtitles.code.stats.Metrics;
 
+import java.io.File;
 import java.text.DecimalFormat;
 import java.util.*;
 
@@ -32,6 +35,15 @@ public class AmazingTitles extends JavaPlugin {
 	private static Metrics metrics;
 	private static final String version = "2.0";
 	private static Map<UUID, DynamicBar> bars = new HashMap<>();
+	private static Map<String, AmazingCreator> customComponents = new HashMap<>();
+	
+	/*
+	*
+	* Configuration
+	*
+	* */
+	
+	private static XYaml options;
 	
 	/*
 	*
@@ -47,6 +59,7 @@ public class AmazingTitles extends JavaPlugin {
 	@Override
 	public void onEnable() {
 		long mills = -System.nanoTime();
+		options = XYaml.fromPlugin(this, "options.yml", new File(getDataFolder(), "options.yml"));
 		titleManager = new TitleManager();
 		metrics = new Metrics(this, 18588);
 		getCommand("amazingtitles").setExecutor(new PluginCommand());
@@ -82,28 +95,31 @@ public class AmazingTitles extends JavaPlugin {
 	
 	/*
 	*
-	* AmazingTitles - API
-	*
-	* */
-	
-	public static Plugin getInstance() {
-		return instance;
-	}
-	
-	public static TitleManager getTitleManager() {
-		return titleManager;
-	}
-	
-	public static NmsProvider getProvider() {
-		return provider;
-	}
-	
-	/*
-	*
 	* Private API
 	*
 	* */
-
+	
+	public static Map<String, AmazingCreator> getCustomComponents() {
+		return Map.copyOf(customComponents);
+	}
+	public static void addCustomComponent(String name, AmazingCreator component) {
+		customComponents.put(name, component);
+	}
+	public static AmazingCreator removeCustomComponent(String name) {
+		return customComponents.remove(name);
+	}
+	public static Plugin getInstance() {
+		return instance;
+	}
+	public static TitleManager getTitleManager() {
+		return titleManager;
+	}
+	public static NmsProvider getProvider() {
+		return provider;
+	}
+	public static XYaml getOptions() {
+		return options;
+	}
 	public static void insertNewBar(Player player) {
 		bars.put(player.getUniqueId(), DynamicBar.getBar(player));
 	}

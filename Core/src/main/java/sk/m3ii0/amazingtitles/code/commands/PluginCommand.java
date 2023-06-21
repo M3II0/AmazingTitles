@@ -7,19 +7,18 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabExecutor;
 import org.bukkit.entity.Player;
 import sk.m3ii0.amazingtitles.code.AmazingTitles;
+import sk.m3ii0.amazingtitles.code.api.objects.AmazingCreator;
 import sk.m3ii0.amazingtitles.code.colors.ColorTranslator;
-import sk.m3ii0.amazingtitles.code.colors.ColorUtils;
 import sk.m3ii0.amazingtitles.code.commands.dispatcher.TitleDispatcher;
 import sk.m3ii0.amazingtitles.code.commands.types.ActionType;
-import sk.m3ii0.amazingtitles.code.commands.types.AnimationTypes;
 import sk.m3ii0.amazingtitles.code.notifications.BarNotification;
 import sk.m3ii0.amazingtitles.code.stats.Metrics;
 
+import java.lang.reflect.Method;
 import java.util.Collections;
 import java.util.List;
 
 public class PluginCommand implements CommandExecutor, TabExecutor {
-	
 	
 	@Override
 	public List<String> onTabComplete(CommandSender s, Command cmd, String label, String[] args) {
@@ -64,20 +63,18 @@ public class PluginCommand implements CommandExecutor, TabExecutor {
 		* Animation Selection
 		* */
 		if (current == 3) {
-			return CommandUtils.copyPartialMatches(using, AnimationTypes.toIterable());
+			return CommandUtils.copyPartialMatches(using, AmazingTitles.getCustomComponents().keySet());
 		}
 		
 		/*
 		* Animation arguments
 		* */
 		String animation_name = args[2];
-		AnimationTypes type;
-		try {
-			type = AnimationTypes.valueOf(animation_name);
-		} catch (IllegalArgumentException e) {
-			return List.of("<Error-InvalidAnimationType>");
+		if (!AmazingTitles.getCustomComponents().containsKey(animation_name)) {
+			return List.of("<Invalid Animation>");
 		}
-		return CommandUtils.copyPartialMatches(using, type.getComplete(current-4));
+		AmazingCreator creator = AmazingTitles.getCustomComponents().get(animation_name);
+		return CommandUtils.copyPartialMatches(using, creator.getComplete(current-4));
 	}
 	
 	@Override
@@ -93,7 +90,7 @@ public class PluginCommand implements CommandExecutor, TabExecutor {
 		* */
 
 		List<Player> receivers = CommandUtils.playersFromOperator(args[1]);
-		AnimationTypes animationTypes;
+		String animationTypes;
 		ActionType actionType;
 		try {
 			actionType = ActionType.valueOf(args[0].toUpperCase());
@@ -107,7 +104,6 @@ public class PluginCommand implements CommandExecutor, TabExecutor {
 				for (Player p : receivers) {
 					p.spigot().sendMessage(message);
 				}
-				AmazingTitles.getMetrics().addCustomChart(new Metrics.SingleLineChart("used_commands", () -> 1));
 				return true;
 			}
 			if (actionType == ActionType.NOTIFICATION) {
@@ -120,15 +116,19 @@ public class PluginCommand implements CommandExecutor, TabExecutor {
 				text = text.replaceAll(" $", "");
 				BarNotification notification = BarNotification.create(symbol, text, duration);
 				AmazingTitles.setNotificationFor(notification, receivers);
-				AmazingTitles.getMetrics().addCustomChart(new Metrics.SingleLineChart("used_commands", () -> 1));
 				return true;
 			}
-			animationTypes = AnimationTypes.valueOf(args[2].toUpperCase());
+			animationTypes = args[2];
+			if (!AmazingTitles.getCustomComponents().containsKey(animationTypes)) {
+				sendHelpMessage(s);
+				return true;
+			}
 		} catch (IllegalArgumentException | ArrayIndexOutOfBoundsException e) {
 			sendHelpMessage(s);
 			return true;
 		}
-
+		
+		AmazingCreator creator = AmazingTitles.getCustomComponents().get(animationTypes);
 		int animationArgs = args.length - 3;
 		String[] animation = new String[animationArgs];
 		int counter = 0;
@@ -136,8 +136,8 @@ public class PluginCommand implements CommandExecutor, TabExecutor {
 			animation[counter] = args[i];
 			++counter;
 		}
-
-		if (animationArgs < animationTypes.getMinimum()) {
+		
+		if (animationArgs < creator.getMinimum()) {
 			sendHelpMessage(s);
 			return true;
 		}

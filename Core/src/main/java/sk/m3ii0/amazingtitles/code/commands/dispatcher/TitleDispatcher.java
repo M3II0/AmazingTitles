@@ -11,7 +11,6 @@ import sk.m3ii0.amazingtitles.code.async.animations.smooth.ATSmoothRainbow;
 import sk.m3ii0.amazingtitles.code.async.animations.smooth.ATSmoothWaves;
 import sk.m3ii0.amazingtitles.code.colors.ColorTranslator;
 import sk.m3ii0.amazingtitles.code.commands.types.ActionType;
-import sk.m3ii0.amazingtitles.code.commands.types.AnimationTypes;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -23,7 +22,7 @@ public class TitleDispatcher {
     
     private static final Pattern match = Pattern.compile("<(.*?)>(.*?)</>");
     
-    public static void asyncDispatch(CommandSender s, ActionType action, AnimationTypes type, List<Player> receivers, String[] args) {
+    public static void asyncDispatch(CommandSender s, ActionType action, String type, List<Player> receivers, String[] args) {
         try {
             AmazingComponent title = buildTitle(action, type, args);
             if (title == null) {
@@ -38,7 +37,7 @@ public class TitleDispatcher {
         }
     }
 
-    private static AmazingComponent buildTitle(ActionType action, AnimationTypes animation, String[] args) {
+    private static AmazingComponent buildTitle(ActionType action, String animation, String[] args) {
         if (animation == AnimationTypes.RAINBOW) {
             int rawSpeed = Integer.parseInt(args[0]);
             int speed = Math.max(rawSpeed, 1);
@@ -412,18 +411,17 @@ public class TitleDispatcher {
         return components.toArray(new BaseComponent[0]);
     }
     
-    private static void sendSuccess(CommandSender sender, AnimationTypes type, List<Player> receivers, AmazingComponent title) {
+    private static void sendSuccess(CommandSender sender, String type, List<Player> receivers, AmazingComponent title) {
         int frames = title.frames().size();
         int speed = 20/title.speed();
         int duration = title.duration();
         int players = receivers.size();
-        String animation = type.name();
         BaseComponent[] message = new ComponentBuilder()
          .appendLegacy("\n")
          .appendLegacy(ColorTranslator.parse("&{#fff34d}AT &7-> &{#fff34d}Title &7dispatcher info:\n"))
          .appendLegacy("\n")
          .appendLegacy(ColorTranslator.parse("  &7Receivers: &{#ffb866}" + players + "\n"))
-         .appendLegacy(ColorTranslator.parse("  &7Animation: &{#ffb866}" + animation + "\n"))
+         .appendLegacy(ColorTranslator.parse("  &7Animation: &{#ffb866}" + type + "\n"))
          .appendLegacy(ColorTranslator.parse("  &7Frames: &{#ffb866}" + frames + "\n"))
          .appendLegacy(ColorTranslator.parse("  &7Speed: &{#ffb866}" + speed + " &8(Frames per second)\n"))
          .appendLegacy(ColorTranslator.parse("  &7Duration: &{#ffb866}" + duration + " &8(In seconds)\n"))
