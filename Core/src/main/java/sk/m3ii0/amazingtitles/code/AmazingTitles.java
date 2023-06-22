@@ -5,7 +5,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.HandlerList;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
-import sk.m3ii0.amazingtitles.api.AmazingTitlesAPI;
 import sk.m3ii0.amazingtitles.basicpack.BasicPack;
 import sk.m3ii0.amazingtitles.code.announcement.UpdateChecker;
 import sk.m3ii0.amazingtitles.api.objects.AmazingCreator;

@@ -4,15 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4242dc22-5de8-4fdd-9807-4cb4d40f239c" name="Changes" comment="- Added commands stat">
-      <change afterPath="$PROJECT_DIR$/Core/src/main/java/sk/m3ii0/amazingtitles/basicpack/BasicPack.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="4242dc22-5de8-4fdd-9807-4cb4d40f239c" name="Changes" comment="- Fixed API prestate">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/src/main/java/sk/m3ii0/amazingtitles/api/AmazingTitlesAPI.java" beforeDir="false" afterPath="$PROJECT_DIR$/Core/src/main/java/sk/m3ii0/amazingtitles/api/AmazingTitlesAPI.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Core/src/main/java/sk/m3ii0/amazingtitles/api/objects/AmazingCreator.java" beforeDir="false" afterPath="$PROJECT_DIR$/Core/src/main/java/sk/m3ii0/amazingtitles/api/objects/AmazingCreator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/src/main/java/sk/m3ii0/amazingtitles/basicpack/BasicPack.java" beforeDir="false" afterPath="$PROJECT_DIR$/Core/src/main/java/sk/m3ii0/amazingtitles/basicpack/BasicPack.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Core/src/main/java/sk/m3ii0/amazingtitles/code/AmazingTitles.java" beforeDir="false" afterPath="$PROJECT_DIR$/Core/src/main/java/sk/m3ii0/amazingtitles/code/AmazingTitles.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/src/main/java/sk/m3ii0/amazingtitles/code/commands/PluginCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/Core/src/main/java/sk/m3ii0/amazingtitles/code/commands/PluginCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/src/main/java/sk/m3ii0/amazingtitles/code/commands/dispatcher/TitleDispatcher.java" beforeDir="false" afterPath="$PROJECT_DIR$/Core/src/main/java/sk/m3ii0/amazingtitles/code/commands/dispatcher/TitleDispatcher.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/src/main/java/sk/m3ii0/amazingtitles/code/colors/ColorTranslator.java" beforeDir="false" afterPath="$PROJECT_DIR$/Core/src/main/java/sk/m3ii0/amazingtitles/code/colors/ColorTranslator.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -47,18 +44,19 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;16&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/mello/IdeaProjects/AmazingTitles/Core/src/main/java/sk/m3ii0/amazingtitles/code&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.43908045&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "jdk.selected.JAVA_MODULE": "16",
+    "last_opened_file_path": "C:/Users/mello/IdeaProjects/AmazingTitles-API",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.43908045",
+    "settings.editor.selected.configurable": "reference.settings.project.maven.importing"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\mello\IdeaProjects\AmazingTitles\Core\src\main\java\sk\m3ii0\amazingtitles\code" />
@@ -197,7 +195,14 @@
       <option name="project" value="LOCAL" />
       <updated>1686865782914</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="- Fixed API prestate">
+      <created>1687435729487</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1687435729487</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -227,6 +232,7 @@
     <MESSAGE value="- Added color parameter" />
     <MESSAGE value="- Added 1.20 support" />
     <MESSAGE value="- Added commands stat" />
-    <option name="LAST_COMMIT_MESSAGE" value="- Added commands stat" />
+    <MESSAGE value="- Fixed API prestate" />
+    <option name="LAST_COMMIT_MESSAGE" value="- Fixed API prestate" />
   </component>
 </project>
