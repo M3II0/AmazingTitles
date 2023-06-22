@@ -14,10 +14,10 @@ public class AmazingTitlesAPI {
 		return api;
 	}
 	
-	public void createAndRegister(String name, boolean repeat, FramesBuilder framesBuilder, String... arguments) {
+	public void createAndRegister(String name, boolean repeat, boolean infinite, FramesBuilder framesBuilder, String... arguments) {
 		String enabled = AmazingTitles.getOptions().getOrCreateUnsafeString("ExtensionsManager." + name, "true", true);
 		if (!Boolean.parseBoolean(enabled)) return;
-		AmazingCreator creator = new AmazingCreator(repeat, framesBuilder, arguments);
+		AmazingCreator creator = new AmazingCreator(repeat, infinite, framesBuilder, arguments);
 		AmazingTitles.addCustomComponent(name, creator);
 	}
 	

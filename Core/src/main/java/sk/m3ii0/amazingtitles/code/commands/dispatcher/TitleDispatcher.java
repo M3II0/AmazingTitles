@@ -42,10 +42,8 @@ public class TitleDispatcher {
             AmazingCreator creator = AmazingTitles.getCustomComponents().get(animation);
             if (creator == null) return null;
             int minimum = creator.getMinimum();
-            Object[] objects = new Object[0];
-            for (int i = 2; i < 2+minimum; i++) {
-                objects[i] = args[i];
-            }
+            Object[] objects = new Object[minimum];
+            System.arraycopy(args, 2, objects, 0, minimum);
             String text = "";
             for (int i = minimum+2; i < args.length; i++) {
                 text += " " + args[i];

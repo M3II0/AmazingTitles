@@ -6,6 +6,7 @@ import org.bukkit.event.HandlerList;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 import sk.m3ii0.amazingtitles.api.AmazingTitlesAPI;
+import sk.m3ii0.amazingtitles.basicpack.BasicPack;
 import sk.m3ii0.amazingtitles.code.announcement.UpdateChecker;
 import sk.m3ii0.amazingtitles.api.objects.AmazingCreator;
 import sk.m3ii0.amazingtitles.code.colors.ColorTranslator;
@@ -81,49 +82,12 @@ public class AmazingTitles extends JavaPlugin {
 				bar.update(sysTime);
 			}
 		}, 0, 1);
+		BasicPack.loadDefaultAnimations();
 		mills += System.nanoTime();
 		String format = new DecimalFormat("#.###").format(mills/1e+6);
 		Bukkit.getConsoleSender().sendMessage(
 				getEnableMessage(format)
 		);
-		AmazingTitlesAPI.getApi().createAndRegister("SMOOTH_RAINBOW", true, (type, input, args) -> {
-			List<String> frames = new ArrayList<>();
-			String red = "#FF2424";
-			String blue = "#002AFF";
-			String green = "#00FF08";
-			String smoothed = "          " + input + "          ";
-			int length = smoothed.length();
-			int withGradient = input.length()*17;
-			int start = 10*17;
-			/*
-			 * Red (Blue ->) Green
-			 * */
-			for (int i = 0; i <= length; i++) {
-				String in = smoothed.substring(0, i);
-				String out = smoothed.substring(i);
-				String var = "<" + red + ">&l" + in + "</" + blue + "><" + blue + ">&l" + out + "</" + green + ">";
-				frames.add(ColorTranslator.parse(var).substring(start).substring(0, withGradient));
-			}
-			/*
-			 * Green (Red ->) Blue
-			 * */
-			for (int i = 0; i <= length; i++) {
-				String in = smoothed.substring(0, i);
-				String out = smoothed.substring(i);
-				String var = "<" + green + ">&l" + in + "</" + red + "><" + red + ">&l" + out + "</" + blue + ">";
-				frames.add(ColorTranslator.parse(var).substring(start).substring(0, withGradient));
-			}
-			/*
-			 * Blue (Green ->) Red
-			 * */
-			for (int i = 0; i <= length; i++) {
-				String in = smoothed.substring(0, i);
-				String out = smoothed.substring(i);
-				String var = "<" + blue + ">&l" + in + "</" + green + "><" + green + ">&l" + out + "</" + red + ">";
-				frames.add(ColorTranslator.parse(var).substring(start).substring(0, withGradient));
-			}
-			return frames;
-		});
 	}
 	
 	@Override

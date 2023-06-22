@@ -81,7 +81,7 @@ public class PluginCommand implements CommandExecutor, TabExecutor {
 			return List.of("<Invalid Animation>");
 		}
 		AmazingCreator creator = AmazingTitles.getCustomComponents().get(animation_name);
-		return CommandUtils.copyPartialMatches(using, creator.getComplete(current-4));
+		return CommandUtils.copyPartialMatches(using, creator.getComplete(current-6));
 	}
 	
 	@Override
@@ -144,7 +144,7 @@ public class PluginCommand implements CommandExecutor, TabExecutor {
 			++counter;
 		}
 		
-		if (animationArgs < creator.getMinimum()) {
+		if (animationArgs-2 < creator.getMinimum()) {
 			sendHelpMessage(s);
 			return true;
 		}

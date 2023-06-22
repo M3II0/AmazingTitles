@@ -16,12 +16,14 @@ public class AmazingCreator {
 	private final List<String> arguments;
 	private final FramesBuilder framesBuilder;
 	private final boolean repeat;
+	private final boolean infinite;
 	private final List<String>[] competitions;
 	
-	public AmazingCreator(boolean repeat, FramesBuilder framesBuilder, String... arguments) {
+	public AmazingCreator(boolean repeat, boolean infinite, FramesBuilder framesBuilder, String... arguments) {
 		this.arguments = new ArrayList<>(List.of(arguments));
 		this.framesBuilder = framesBuilder;
 		this.repeat = repeat;
+		this.infinite = infinite;
 		this.competitions = new List[arguments.length];
 		for (int i = 0; i < arguments.length; i++) {
 			this.competitions[i] = new ArrayList<>(Collections.singleton(arguments[i]));
@@ -43,7 +45,12 @@ public class AmazingCreator {
 	public List<String> getComplete(int arg) {
 		int length = competitions.length;
 		if (arg < length) return competitions[arg];
+		else if (infinite) return List.of("<Text\\n\\SubText>");
 		return new ArrayList<>();
+	}
+	
+	public boolean isInfinite() {
+		return infinite;
 	}
 	
 	public AmazingComponent dispatch(Player[] receivers, ActionType type, int speed, int duration, String input, Optional<String> subText, Object... args) {
