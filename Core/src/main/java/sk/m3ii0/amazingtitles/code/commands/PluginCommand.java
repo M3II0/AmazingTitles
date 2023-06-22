@@ -6,15 +6,14 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabExecutor;
 import org.bukkit.entity.Player;
+import sk.m3ii0.amazingtitles.api.objects.types.ActionType;
 import sk.m3ii0.amazingtitles.code.AmazingTitles;
-import sk.m3ii0.amazingtitles.code.api.objects.AmazingCreator;
+import sk.m3ii0.amazingtitles.api.objects.AmazingCreator;
 import sk.m3ii0.amazingtitles.code.colors.ColorTranslator;
 import sk.m3ii0.amazingtitles.code.commands.dispatcher.TitleDispatcher;
-import sk.m3ii0.amazingtitles.code.commands.types.ActionType;
 import sk.m3ii0.amazingtitles.code.notifications.BarNotification;
 import sk.m3ii0.amazingtitles.code.stats.Metrics;
 
-import java.lang.reflect.Method;
 import java.util.Collections;
 import java.util.List;
 
@@ -40,7 +39,7 @@ public class PluginCommand implements CommandExecutor, TabExecutor {
 		if (current == 2) {
 			return CommandUtils.copyPartialMatches(using, CommandUtils.buildPlayerParams(using));
 		}
-		
+
 		/*
 		* Message
 		* */
@@ -58,14 +57,22 @@ public class PluginCommand implements CommandExecutor, TabExecutor {
 				return List.of("<Number(Duration-InSeconds)>");
 			} else return List.of("<NotificationMessage>");
 		}
-		
+
 		/*
 		* Animation Selection
 		* */
 		if (current == 3) {
 			return CommandUtils.copyPartialMatches(using, AmazingTitles.getCustomComponents().keySet());
 		}
-		
+
+		if (current == 4) {
+			return List.of("<Number-Delay>");
+		}
+
+		if (current == 5) {
+			return List.of("<Number-Duration(InSeconds)>");
+		}
+
 		/*
 		* Animation arguments
 		* */

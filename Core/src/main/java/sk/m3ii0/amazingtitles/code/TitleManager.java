@@ -1,7 +1,7 @@
 package sk.m3ii0.amazingtitles.code;
 
 import org.bukkit.entity.Player;
-import sk.m3ii0.amazingtitles.code.async.AmazingComponent;
+import sk.m3ii0.amazingtitles.api.objects.AmazingComponent;
 
 import java.util.HashMap;
 import java.util.Map;

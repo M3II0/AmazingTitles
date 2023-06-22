@@ -1,6 +1,6 @@
 package sk.m3ii0.amazingtitles.api.objects;
 
-import sk.m3ii0.amazingtitles.code.commands.types.ActionType;
+import sk.m3ii0.amazingtitles.api.objects.types.ActionType;
 
 import java.util.List;
 

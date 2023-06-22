@@ -1,4 +1,4 @@
-package sk.m3ii0.amazingtitles.code.commands.types;
+package sk.m3ii0.amazingtitles.api.objects.types;
 
 import java.util.ArrayList;
 import java.util.List;

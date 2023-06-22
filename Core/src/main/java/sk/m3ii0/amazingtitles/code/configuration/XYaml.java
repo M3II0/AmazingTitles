@@ -254,6 +254,7 @@ public class XYaml {
 	}
 	
 	public void set(String path, Object object) {
+		if (path.isEmpty()) return;
 		PathSection section = configuration.createPath(path);
 		section.setObject(object);
 	}
@@ -608,7 +609,7 @@ public class XYaml {
 					}
 					if (!created.contains(preSection.getId())) {
 						totalText += preSection.getComments();
-						if (lineComment.isEmpty()) totalText += System.lineSeparator() + space + workingPath + ": " + O.createStringFromObject(getPosition(), object, spaces);
+						if (preSection.lineComment == null || preSection.lineComment.isEmpty()) totalText += System.lineSeparator() + space + workingPath + ": " + O.createStringFromObject(getPosition(), object, spaces);
 						else totalText += System.lineSeparator() + space + workingPath + ": '" + O.createStringFromObject(getPosition(), object, spaces) + "'" + lineComment;
 						created.add(preSection.getId());
 					}
@@ -617,7 +618,7 @@ public class XYaml {
 			if (!created.contains(getId())) {
 				if (section != null) {
 					totalText += this.comments;
-					if (lineComment.isEmpty()) totalText += System.lineSeparator() + space + section + ": " + O.createStringFromObject(getPosition(), object, spaces);
+					if (lineComment == null || lineComment.isEmpty()) totalText += System.lineSeparator() + space + section + ": " + O.createStringFromObject(getPosition(), object, spaces);
 					else totalText += System.lineSeparator() + space + section + ": '" + O.createStringFromObject(getPosition(), object, spaces) + "'" + lineComment;
 					created.add(getId());
 				}

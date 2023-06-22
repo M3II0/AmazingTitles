@@ -1,4 +1,4 @@
-package sk.m3ii0.amazingtitles.code.api.objects;
+package sk.m3ii0.amazingtitles.api.objects;
 
 import org.bukkit.Bukkit;
 import org.bukkit.boss.BarColor;
@@ -6,9 +6,8 @@ import org.bukkit.boss.BarStyle;
 import org.bukkit.boss.BossBar;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitTask;
+import sk.m3ii0.amazingtitles.api.objects.types.ActionType;
 import sk.m3ii0.amazingtitles.code.AmazingTitles;
-import sk.m3ii0.amazingtitles.code.async.AmazingComponent;
-import sk.m3ii0.amazingtitles.code.commands.types.ActionType;
 
 import java.util.*;
 
@@ -61,10 +60,8 @@ public class AmazingCreator {
 			
 			private Object[] lastPackets;
 			private int lastFrame;
-			
-			private String subText = AmazingComponent.super.text();
-			private int speed = AmazingComponent.super.speed();
-			private int duration = AmazingComponent.super.duration();
+
+			private final String subTitle = subText.orElse("");
 			
 			private final BossBar bar = Bukkit.createBossBar("", BarColor.WHITE, BarStyle.SOLID);;
 			
@@ -148,14 +145,14 @@ public class AmazingCreator {
 						Object[] packets = new Object[0];
 						if (frameCounter == lastFrame) {
 							if (lastPackets == null) {
-								if (type == ActionType.TITLE) lastPackets = AmazingTitles.getProvider().createTitlePacket(frame, subText);
-								if (type == ActionType.SUBTITLE) lastPackets = AmazingTitles.getProvider().createTitlePacket(subText, frame);
+								if (type == ActionType.TITLE) lastPackets = AmazingTitles.getProvider().createTitlePacket(frame, subTitle);
+								if (type == ActionType.SUBTITLE) lastPackets = AmazingTitles.getProvider().createTitlePacket(subTitle, frame);
 								if (type == ActionType.ACTION_BAR) lastPackets = new Object[] {AmazingTitles.getProvider().createActionbarPacket(frame)};
 							}
 							packets = lastPackets;
 						} else {
-							if (type == ActionType.TITLE) packets = AmazingTitles.getProvider().createTitlePacket(frame, subText);
-							if (type == ActionType.SUBTITLE) packets = AmazingTitles.getProvider().createTitlePacket(subText, frame);
+							if (type == ActionType.TITLE) packets = AmazingTitles.getProvider().createTitlePacket(frame, subTitle);
+							if (type == ActionType.SUBTITLE) packets = AmazingTitles.getProvider().createTitlePacket(subTitle, frame);
 							if (type == ActionType.ACTION_BAR) packets = new Object[] {AmazingTitles.getProvider().createActionbarPacket(frame)};
 						}
 						lastFrame = frameCounter;
