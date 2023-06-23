@@ -18,9 +18,14 @@ import sk.m3ii0.amazingtitles.code.spi.NmsBuilder;
 import sk.m3ii0.amazingtitles.code.spi.NmsProvider;
 import sk.m3ii0.amazingtitles.code.stats.Metrics;
 
-import java.io.File;
+import java.io.*;
+import java.net.URL;
+import java.net.URLClassLoader;
 import java.text.DecimalFormat;
 import java.util.*;
+import java.util.jar.JarEntry;
+import java.util.jar.JarFile;
+import java.util.zip.ZipEntry;
 
 public class AmazingTitles extends JavaPlugin {
 	
@@ -37,6 +42,7 @@ public class AmazingTitles extends JavaPlugin {
 	private static final String version = "2.0";
 	private static Map<UUID, DynamicBar> bars = new HashMap<>();
 	private static Map<String, AmazingCreator> customComponents = new HashMap<>();
+	private static File extensions;
 	
 	/*
 	*
@@ -61,6 +67,8 @@ public class AmazingTitles extends JavaPlugin {
 	public void onEnable() {
 		long mills = -System.nanoTime();
 		options = XYaml.fromPlugin(this, "options.yml", new File(getDataFolder(), "options.yml"));
+		extensions = new File(getDataFolder(), "Extensions");
+		if (!extensions.exists()) extensions.mkdirs();
 		titleManager = new TitleManager();
 		metrics = new Metrics(this, 18588);
 		getCommand("amazingtitles").setExecutor(new PluginCommand());
@@ -82,6 +90,7 @@ public class AmazingTitles extends JavaPlugin {
 			}
 		}, 0, 1);
 		BasicPack.loadDefaultAnimations();
+		loadExtensions();
 		mills += System.nanoTime();
 		String format = new DecimalFormat("#.###").format(mills/1e+6);
 		Bukkit.getConsoleSender().sendMessage(
@@ -168,6 +177,29 @@ public class AmazingTitles extends JavaPlugin {
 						"&r\n" +
 						" &d> Took " + millis + "ms!&r\n"
 		);
+	}
+	private void loadExtensions() {
+		File[] files = extensions.listFiles();
+		if (files == null) return;
+		for (File extensionFile : files) {
+			if (extensionFile.getName().endsWith(".jar")) {
+				try (JarFile jarFile = new JarFile(extensionFile);) {
+					ZipEntry document = jarFile.getEntry("extension.yml");
+					try (InputStream stream = jarFile.getInputStream(document)) {
+						Scanner s = new Scanner(stream).useDelimiter("\\A");
+						String result = s.hasNext() ? s.next() : "";
+						String main = result.replace("Class:", "").replace(" ", "");
+						URL[] urls = { new URL("jar:file:" + main +"!/") };
+						try (URLClassLoader classLoader = new URLClassLoader(urls)) {
+							Class<?> clazz = Class.forName(main, true, classLoader);
+
+						}
+					}
+				} catch (Exception e) {
+					System.out.println("§c[AT] - Error with loading extension " + extensionFile.getName() + "!");
+				}
+			}
+		}
 	}
 	
 }

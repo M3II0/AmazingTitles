@@ -1,7 +1,12 @@
 package sk.m3ii0.amazingtitles.animations;
 
-public class Main {
-	public static void main(String[] args) {
-		System.out.println("Hello world!");
+import sk.m3ii0.amazingtitles.api.objects.AmazingTitleExtension;
+
+public class Main implements AmazingTitleExtension {
+
+	@Override
+	public void load() {
+
 	}
+
 }
