@@ -4,11 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4242dc22-5de8-4fdd-9807-4cb4d40f239c" name="Changes" comment="- Added enable meessage&#10;- Added Notification Center">
-      <change afterPath="$PROJECT_DIR$/AnimationPack1/src/main/resources/extension.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Core/src/main/java/sk/m3ii0/amazingtitles/api/objects/AmazingTitleExtension.java" afterDir="false" />
+    <list default="true" id="4242dc22-5de8-4fdd-9807-4cb4d40f239c" name="Changes" comment="- Fixed API prestate">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/AnimationPack1/src/main/java/sk/m3ii0/amazingtitles/animations/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/AnimationPack1/src/main/java/sk/m3ii0/amazingtitles/animations/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/src/main/java/sk/m3ii0/amazingtitles/basicpack/BasicPack.java" beforeDir="false" afterPath="$PROJECT_DIR$/Core/src/main/java/sk/m3ii0/amazingtitles/basicpack/BasicPack.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Core/src/main/java/sk/m3ii0/amazingtitles/code/AmazingTitles.java" beforeDir="false" afterPath="$PROJECT_DIR$/Core/src/main/java/sk/m3ii0/amazingtitles/code/AmazingTitles.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -31,6 +30,13 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
+  <component name="MavenImportPreferences">
+    <option name="importingSettings">
+      <MavenImportingSettings>
+        <option name="workspaceImportEnabled" value="true" />
+      </MavenImportingSettings>
+    </option>
+  </component>
   <component name="ProjectId" id="2PszqdQfFRvDC54D4FgLsv88EzQ" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
@@ -42,30 +48,26 @@
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
     &quot;jdk.selected.JAVA_MODULE&quot;: &quot;16&quot;,
-    &quot;last.edited.regexp&quot;: &quot;&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/mello/IdeaProjects/AmazingTitles/API/src/main/java/sk/m3ii0/amazingtitles/api/objects&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/mello/IdeaProjects/AmazingTitles-API&quot;,
     &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.43908045&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settings.project.maven.importing&quot;
   }
 }</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\mello\IdeaProjects\AmazingTitles\API\src\main\java\sk\m3ii0\amazingtitles\api\objects" />
-      <recent name="C:\Users\mello\IdeaProjects\AmazingTitles\Core\src\main\java\sk\m3ii0\amazingtitles\api\objects" />
+      <recent name="C:\Users\mello\IdeaProjects\AmazingTitles\Core\src\main\java\sk\m3ii0\amazingtitles\code" />
       <recent name="C:\Users\mello\IdeaProjects\AmazingTitles\R1_20_R0\src\main\java\sk\m3ii0\amazingtitles\code\providers\R1_20_R0" />
       <recent name="C:\Users\mello\IdeaProjects\AmazingTitles\libs" />
       <recent name="C:\Users\mello\IdeaProjects\AmazingTitles\R1_16_R1\src\main\java\sk\m3ii0\amazingtitles\code\providers\R1_16_R1" />
+      <recent name="C:\Users\mello\IdeaProjects\AmazingTitles\R1_16_R2\src\main\java\sk\m3ii0\amazingtitles\code\providers\R1_16_R2" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\mello\IdeaProjects\AmazingTitles\libs" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
-      <recent name="sk.m3ii0.amazingtitles.api.objects" />
-      <recent name="sk.m3ii0.amazingtitles.code.api.objects" />
       <recent name="sk.m3ii0.amazingtitles.code.async.animations" />
       <recent name="sk.m3ii0.amazingtitles.code.async.animations.smooth" />
       <recent name="sk.m3ii0.amazingtitles.code.nms" />
@@ -185,14 +187,21 @@
       <option name="project" value="LOCAL" />
       <updated>1686168659568</updated>
     </task>
-    <task id="LOCAL-00016" summary="- Added enable meessage&#10;- Added Notification Center">
-      <created>1686815650671</created>
+    <task id="LOCAL-00016" summary="- Added commands stat">
+      <created>1686865782914</created>
       <option name="number" value="00016" />
       <option name="presentableId" value="LOCAL-00016" />
       <option name="project" value="LOCAL" />
-      <updated>1686815650671</updated>
+      <updated>1686865782914</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="- Fixed API prestate">
+      <created>1687435729487</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1687435729487</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -221,7 +230,8 @@
     <MESSAGE value="- Added player parameter" />
     <MESSAGE value="- Added color parameter" />
     <MESSAGE value="- Added 1.20 support" />
-    <MESSAGE value="- Added enable meessage&#10;- Added Notification Center" />
-    <option name="LAST_COMMIT_MESSAGE" value="- Added enable meessage&#10;- Added Notification Center" />
+    <MESSAGE value="- Added commands stat" />
+    <MESSAGE value="- Fixed API prestate" />
+    <option name="LAST_COMMIT_MESSAGE" value="- Fixed API prestate" />
   </component>
 </project>

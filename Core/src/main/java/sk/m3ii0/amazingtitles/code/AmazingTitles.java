@@ -19,6 +19,8 @@ import sk.m3ii0.amazingtitles.code.spi.NmsProvider;
 import sk.m3ii0.amazingtitles.code.stats.Metrics;
 
 import java.io.*;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.Method;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.text.DecimalFormat;
@@ -39,7 +41,7 @@ public class AmazingTitles extends JavaPlugin {
 	private static TitleManager titleManager;
 	private static NmsProvider provider;
 	private static Metrics metrics;
-	private static final String version = "2.0";
+	private static final String version = "2.1";
 	private static Map<UUID, DynamicBar> bars = new HashMap<>();
 	private static Map<String, AmazingCreator> customComponents = new HashMap<>();
 	private static File extensions;
@@ -180,6 +182,7 @@ public class AmazingTitles extends JavaPlugin {
 	}
 	private void loadExtensions() {
 		File[] files = extensions.listFiles();
+		File f = getServer().getWorldContainer();
 		if (files == null) return;
 		for (File extensionFile : files) {
 			if (extensionFile.getName().endsWith(".jar")) {
@@ -189,10 +192,26 @@ public class AmazingTitles extends JavaPlugin {
 						Scanner s = new Scanner(stream).useDelimiter("\\A");
 						String result = s.hasNext() ? s.next() : "";
 						String main = result.replace("Class:", "").replace(" ", "");
-						URL[] urls = { new URL("jar:file:" + main +"!/") };
-						try (URLClassLoader classLoader = new URLClassLoader(urls)) {
-							Class<?> clazz = Class.forName(main, true, classLoader);
-
+						Enumeration<JarEntry> e = jarFile.entries();
+						System.out.println(this.getClass().getProtectionDomain().getCodeSource().getLocation());
+						URL[] urls = {f.toURI().toURL(), new URL("jar:file:" + extensionFile.getPath() + "!/")};
+						try (URLClassLoader cl = new URLClassLoader(urls, getClassLoader())) {
+							while (e.hasMoreElements()) {
+								JarEntry je = e.nextElement();
+								if(je.isDirectory() || !je.getName().endsWith(".class")){
+									continue;
+								}
+								String className = je.getName().substring(0,je.getName().length()-6);
+								className = className.replace('/', '.');
+								Class<?> c = cl.loadClass(className);
+								if (className.equals(main)) {
+									Constructor<?> constructor = c.getConstructor();
+									Object object = constructor.newInstance();
+									Method method = c.getDeclaredMethod("load");
+									method.setAccessible(true);
+									method.invoke(object);
+								}
+							}
 						}
 					}
 				} catch (Exception e) {

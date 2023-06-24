@@ -7,11 +7,14 @@ import sk.m3ii0.amazingtitles.code.colors.ColorTranslator;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 public class BasicPack {
 	
 	public static void loadDefaultAnimations() {
+		
+		AmazingTitlesAPI.getApi().createAndRegister("NONE", false, true, (type, input, args) -> new ArrayList<>(Collections.singleton(ColorTranslator.parse(input))));
 		
 		AmazingTitlesAPI.getApi().createAndRegister("SMOOTH_RAINBOW", true, true, (type, input, args) -> {
 			List<String> frames = new ArrayList<>();
