@@ -109,7 +109,7 @@ public class ColorTranslator {
 			return value.toArray(new BeforeType[0]);
 		}
 		public static String replaceColors(String text) {
-			return text.replace("&k", "").replace("&b", "").replace("&m", "").replace("&n", "").replace("&o", "").replace("&l", "");
+			return text.replace("&k", "").replace("&m", "").replace("&n", "").replace("&o", "").replace("&l", "");
 		}
 	}
 	

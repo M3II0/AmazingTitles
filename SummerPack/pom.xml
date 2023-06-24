@@ -10,7 +10,7 @@
     </parent>
 
     <groupId>sk.m3ii0.amazingtitles.animations</groupId>
-    <artifactId>AnimationPack1</artifactId>
+    <artifactId>SummerPack</artifactId>
 
     <properties>
         <maven.compiler.source>16</maven.compiler.source>
