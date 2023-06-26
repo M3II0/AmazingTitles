@@ -1,2 +1,2 @@
-# AmazingTitles
-Source code is available for creating your own server modifications
+<h1 align="center">AmazingTitles</h1>
+<br>
