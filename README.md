@@ -9,7 +9,7 @@
 <h2 align="center">Extensions</h2>
 
 - Extension must contain Extension.yml in .jar file
-- Extension must contain "Main" class extends AmazingTitlesExtension
+- Extension must contain "Main" class implements AmazingTitleExtension
 - Visit module named ExtensionExample for example!
 
 <br>

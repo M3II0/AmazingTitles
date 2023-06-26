@@ -21,6 +21,7 @@
         <module>R1_16_R2</module>
         <module>R1_16_R1</module>
         <module>R1_20_R1</module>
+        <module>ExtensionExample</module>
     </modules>
 
     <properties>
