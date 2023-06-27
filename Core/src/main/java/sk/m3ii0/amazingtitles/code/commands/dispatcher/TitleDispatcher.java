@@ -44,16 +44,16 @@ public class TitleDispatcher {
             int minimum = creator.getMinimum();
             Object[] objects = new Object[minimum];
             System.arraycopy(args, 2, objects, 0, minimum);
-            String text = "";
+            StringBuilder text = new StringBuilder();
             for (int i = minimum+2; i < args.length; i++) {
-                text += " " + args[i];
+                text.append(" ").append(args[i]);
             }
-            if (text.length() > 0) text = text.substring(1);
-            String[] split = text.split("\\\\n\\\\");
+            if (text.length() > 0) text = new StringBuilder(text.substring(1));
+            String[] split = text.toString().split("\\\\n\\\\");
             String input = split[0];
-            Optional<String> subText = Optional.empty();
+            String subText = "";
             if (split.length > 1) {
-                subText = Optional.of(split[1]);
+                subText = split[1];
             }
             return creator.dispatch(receivers, action, speed, duration, input, subText, objects);
         } catch (Exception e) {

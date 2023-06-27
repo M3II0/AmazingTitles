@@ -15,8 +15,9 @@ public class AmazingTitlesAPI {
 	}
 	
 	public void createAndRegister(String name, boolean repeat, boolean infinite, FramesBuilder framesBuilder, String... arguments) {
-		String enabled = AmazingTitles.getOptions().getOrCreateUnsafeString("ExtensionsManager." + name, "true", true);
-		if (!Boolean.parseBoolean(enabled)) return;
+		AmazingTitles.tryToSetPathAnimation(name);
+		boolean enabled = AmazingTitles.getOptions().getBoolean("ExtensionsManager." + name);
+		if (!enabled) return;
 		AmazingCreator creator = new AmazingCreator(repeat, infinite, framesBuilder, arguments);
 		AmazingTitles.addCustomComponent(name, creator);
 	}

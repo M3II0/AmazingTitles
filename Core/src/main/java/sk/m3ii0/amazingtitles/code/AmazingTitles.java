@@ -1,6 +1,8 @@
 package sk.m3ii0.amazingtitles.code;
 
 import org.bukkit.Bukkit;
+import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.HandlerList;
 import org.bukkit.plugin.Plugin;
@@ -10,7 +12,6 @@ import sk.m3ii0.amazingtitles.code.announcement.UpdateChecker;
 import sk.m3ii0.amazingtitles.api.objects.AmazingCreator;
 import sk.m3ii0.amazingtitles.code.colors.ColorTranslator;
 import sk.m3ii0.amazingtitles.code.commands.PluginCommand;
-import sk.m3ii0.amazingtitles.code.configuration.XYaml;
 import sk.m3ii0.amazingtitles.code.notifications.BarNotification;
 import sk.m3ii0.amazingtitles.code.notifications.DynamicBar;
 import sk.m3ii0.amazingtitles.code.notifications.NotificationListener;
@@ -52,7 +53,8 @@ public class AmazingTitles extends JavaPlugin {
 	*
 	* */
 	
-	private static XYaml options;
+	private static FileConfiguration options;
+	private static File optionsFile;
 	
 	/*
 	*
@@ -63,14 +65,19 @@ public class AmazingTitles extends JavaPlugin {
 	@Override
 	public void onLoad() {
 		instance = this;
+		getDataFolder().mkdirs();
+		saveResource("options.yml", false);
+		optionsFile = new File(getDataFolder(), "options.yml");
+		options = YamlConfiguration.loadConfiguration(optionsFile);
 	}
 	
 	@Override
 	public void onEnable() {
 		long mills = -System.nanoTime();
-		options = XYaml.fromPlugin(this, "options.yml", new File(getDataFolder(), "options.yml"));
 		extensions = new File(getDataFolder(), "Extensions");
-		if (!extensions.exists()) extensions.mkdirs();
+		if (!extensions.exists()) {
+			boolean make = extensions.mkdirs();
+		}
 		titleManager = new TitleManager();
 		metrics = new Metrics(this, 18588);
 		getCommand("amazingtitles").setExecutor(new PluginCommand());
@@ -112,6 +119,19 @@ public class AmazingTitles extends JavaPlugin {
 	*
 	* */
 	
+	public static File getOptionsFile() {
+		return optionsFile;
+	}
+	public static void tryToSetPathAnimation(String name) {
+		if (!options.contains("ExtensionsManager." + name)) {
+			options.set("ExtensionsManager." + name, true);
+			try {
+				options.save(optionsFile);
+			} catch (IOException e) {
+				throw new RuntimeException(e);
+			}
+		}
+	}
 	public static Map<String, AmazingCreator> getCustomComponents() {
 		return Map.copyOf(customComponents);
 	}
@@ -130,7 +150,7 @@ public class AmazingTitles extends JavaPlugin {
 	public static NmsProvider getProvider() {
 		return provider;
 	}
-	public static XYaml getOptions() {
+	public static FileConfiguration getOptions() {
 		return options;
 	}
 	public static void insertNewBar(Player player) {

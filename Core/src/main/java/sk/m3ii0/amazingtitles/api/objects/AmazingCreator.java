@@ -53,9 +53,11 @@ public class AmazingCreator {
 		return infinite;
 	}
 	
-	public AmazingComponent dispatch(Player[] receivers, ActionType type, int speed, int duration, String input, Optional<String> subText, Object... args) throws Exception {
+	public AmazingComponent dispatch(Player[] receivers, ActionType type, int speed, int duration, String input, String subText, Object... args) throws Exception {
+		if (subText == null || subText.isEmpty()) subText = "";
 		AmazingComponent component;
 		try {
+			String finalSubText = subText;
 			component = new AmazingComponent() {
 				
 				private BukkitTask task;
@@ -69,7 +71,7 @@ public class AmazingCreator {
 				private Object[] lastPackets;
 				private int lastFrame;
 				
-				private final String subTitle = subText.orElse("");
+				private final String subTitle = finalSubText;
 				
 				private final BossBar bar = Bukkit.createBossBar("", BarColor.WHITE, BarStyle.SOLID);;
 				

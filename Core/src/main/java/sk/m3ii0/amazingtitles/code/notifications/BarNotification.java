@@ -60,7 +60,7 @@ public class BarNotification {
             animation.add(builder.toString());
         }
         this.adder = animation.size() / 20 + 1;
-        this.duration = System.currentTimeMillis() + (((adder * 2) + duration) * 1000L);
+        this.duration = System.currentTimeMillis() + (((adder * 2L) + duration) * 1000L);
     }
 
     /*

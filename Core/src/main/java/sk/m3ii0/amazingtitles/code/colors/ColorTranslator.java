@@ -12,7 +12,7 @@ public class ColorTranslator {
 	
 	private static final Pattern gradient = Pattern.compile("<(#[A-Za-z0-9]{6})>(.*?)</(#[A-Za-z0-9]{6})>");
 	private static final Pattern legacyGradient = Pattern.compile("<(&[A-Za-z0-9])>(.*?)</(&[A-Za-z0-9])>");
-	private static final Pattern rgb = Pattern.compile("&\\{(#......)\\}");
+	private static final Pattern rgb = Pattern.compile("&\\{(#......)}");
 	
 	public static String parse(String text) {
 		Matcher g = gradient.matcher(text);
@@ -49,13 +49,13 @@ public class ColorTranslator {
 		final double[] red = linear(from.getRed(), to.getRed(), str.length());
 		final double[] green = linear(from.getGreen(), to.getGreen(), str.length());
 		final double[] blue = linear(from.getBlue(), to.getBlue(), str.length());
-		String before = "";
+		StringBuilder before = new StringBuilder();
 		for (BeforeType var : types) {
-			before += "§" + var.getCode();
+			before.append("§").append(var.getCode());
 		}
 		final StringBuilder builder = new StringBuilder();
 		if (str.length() == 1) {
-			return ChatColor.of(to) + before + str;
+			return ChatColor.of(to) + before.toString() + str;
 		}
 		for (int i = 0; i < str.length(); i++) {
 			builder.append(ChatColor.of(new Color((int) Math.round(red[i]), (int) Math.round(green[i]), (int) Math.round(blue[i])))).append(before).append(str.charAt(i));

@@ -136,10 +136,8 @@ public class BasicPack {
 		AmazingTitlesAPI.getApi().createAndRegister("FROM_LEFT", false, true, (type, input, args) -> {
 			List<String> frames = new ArrayList<>();
 			int lastSpaces = 180;
-			String spaces = "";
-			for (int i = lastSpaces; i >=0; i--) {
-				spaces += " ";
-			}
+			StringBuilder spaces = new StringBuilder();
+			spaces.append(" ".repeat(lastSpaces + 1));
 			for (int i = 30; i > -1; i--) {
 				int newSpaces = lastSpaces-(i*5);
 				String formattedSpaces = spaces.substring(newSpaces);
@@ -152,10 +150,8 @@ public class BasicPack {
 		AmazingTitlesAPI.getApi().createAndRegister("FROM_RIGHT", false, true, (type, input, args) -> {
 			List<String> frames = new ArrayList<>();
 			int lastSpaces = 180;
-			String spaces = "";
-			for (int i = lastSpaces; i >=0; i--) {
-				spaces += " ";
-			}
+			StringBuilder spaces = new StringBuilder();
+			spaces.append(" ".repeat(lastSpaces + 1));
 			for (int i = 30; i > -1; i--) {
 				int newSpaces = lastSpaces-(i*5);
 				String formattedSpaces = spaces.substring(newSpaces);
@@ -168,10 +164,8 @@ public class BasicPack {
 		AmazingTitlesAPI.getApi().createAndRegister("FROM_BOTH_SIDES", false, true, (type, input, args) -> {
 			List<String> frames = new ArrayList<>();
 			int lastSpaces = 180;
-			String spaces = "";
-			for (int i = lastSpaces; i >=0; i--) {
-				spaces += " ";
-			}
+			StringBuilder spaces = new StringBuilder();
+			spaces.append(" ".repeat(lastSpaces + 1));
 			String pre = input.substring(0, input.length()/2);
 			String aft = input.substring(input.length()/2);
 			for (int i = 30; i > -1; i--) {

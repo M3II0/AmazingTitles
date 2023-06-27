@@ -102,12 +102,12 @@ public class PluginCommand implements CommandExecutor, TabExecutor {
 		try {
 			actionType = ActionType.valueOf(args[0].toUpperCase());
 			if (actionType == ActionType.MESSAGE) {
-				String text = "";
+				StringBuilder text = new StringBuilder();
 				for (int i = 2; i < args.length; i++) {
-					text += args[i] + " ";
+					text.append(args[i]).append(" ");
 				}
-				text = text.replaceAll(" $", "");
-				BaseComponent[] message = TitleDispatcher.getMessageFromRaw(text);
+				text = new StringBuilder(text.toString().replaceAll(" $", ""));
+				BaseComponent[] message = TitleDispatcher.getMessageFromRaw(text.toString());
 				for (Player p : receivers) {
 					p.spigot().sendMessage(message);
 				}
@@ -116,12 +116,12 @@ public class PluginCommand implements CommandExecutor, TabExecutor {
 			if (actionType == ActionType.NOTIFICATION) {
 				String symbol = ColorTranslator.parse(args[2]);
 				int duration = Integer.parseInt(args[3]);
-				String text = "";
+				StringBuilder text = new StringBuilder();
 				for (int i = 4; i < args.length; i++) {
-					text += args[i] + " ";
+					text.append(args[i]).append(" ");
 				}
-				text = text.replaceAll(" $", "");
-				BarNotification notification = BarNotification.create(symbol, text, duration);
+				text = new StringBuilder(text.toString().replaceAll(" $", ""));
+				BarNotification notification = BarNotification.create(symbol, text.toString(), duration);
 				AmazingTitles.setNotificationFor(notification, receivers);
 				return true;
 			}
