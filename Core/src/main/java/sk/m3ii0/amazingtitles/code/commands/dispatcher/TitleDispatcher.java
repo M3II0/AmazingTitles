@@ -9,6 +9,7 @@ import sk.m3ii0.amazingtitles.api.objects.types.ActionType;
 import sk.m3ii0.amazingtitles.code.AmazingTitles;
 import sk.m3ii0.amazingtitles.code.colors.ColorTranslator;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -19,15 +20,19 @@ import java.util.regex.Pattern;
 public class TitleDispatcher {
     
     private static final Pattern match = Pattern.compile("<(.*?)>(.*?)</>");
+    private static final DecimalFormat format = new DecimalFormat("#.###");
     
     public static void asyncDispatch(CommandSender s, ActionType action, String type, List<Player> receivers, String[] args) {
         try {
+            long nanos = -System.nanoTime();
             AmazingComponent title = buildTitle(receivers.toArray(new Player[0]), action, type, args);
             if (title == null) {
                 sendError(s);
                 return;
             }
-            sendSuccess(s, type, receivers, title);
+            nanos += System.nanoTime();
+            String took = format.format(nanos/1e+6);
+            sendSuccess(s, took, type, receivers, title);
         } catch (Exception e) {
             e.printStackTrace();
             sendError(s);
@@ -117,23 +122,26 @@ public class TitleDispatcher {
         return components.toArray(new BaseComponent[0]);
     }
     
-    private static void sendSuccess(CommandSender sender, String type, List<Player> receivers, AmazingComponent title) {
+    private static void sendSuccess(CommandSender sender, String took, String type, List<Player> receivers, AmazingComponent title) {
+        if (!AmazingTitles.getOptions().getBoolean("DispatchingMessage.Enabled")) return;
         int frames = title.frames().size();
-        int speed = 20/title.speed();
         int duration = title.duration();
         int players = receivers.size();
-        BaseComponent[] message = new ComponentBuilder()
-         .appendLegacy("\n")
-         .appendLegacy(ColorTranslator.parse("&{#fff34d}AT &7-> &{#fff34d}Title &7dispatcher info:\n"))
-         .appendLegacy("\n")
-         .appendLegacy(ColorTranslator.parse("  &7Receivers: &{#ffb866}" + players + "\n"))
-         .appendLegacy(ColorTranslator.parse("  &7Animation: &{#ffb866}" + type + "\n"))
-         .appendLegacy(ColorTranslator.parse("  &7Frames: &{#ffb866}" + frames + "\n"))
-         .appendLegacy(ColorTranslator.parse("  &7Speed: &{#ffb866}" + speed + " &8(Frames per second)\n"))
-         .appendLegacy(ColorTranslator.parse("  &7Duration: &{#ffb866}" + duration + " &8(In seconds)\n"))
-         .appendLegacy("")
-         .create();
-        sender.spigot().sendMessage(message);
+        ComponentBuilder builder = new ComponentBuilder();
+        List<String> message = AmazingTitles.getOptions().getStringList("DispatchingMessage.Message");
+        int last = message.size()-1;
+        int now = 0;
+        for (String line : message) {
+            builder.append(ColorTranslator.parse(parsePlaceholders(line, frames, duration, players, type, took)));
+            if (last != now) builder.append("\n");
+            ++now;
+        }
+        sender.spigot().sendMessage(builder.create());
+    }
+    
+    private static String parsePlaceholders(String text, int frames, int duration, int players, String type, String took) {
+        return text.replace("%receivers%", players + "").replace("%animation%", type).replace("%frames%", frames + "")
+         .replace("%duration%", duration + "").replace("%creation%", took);
     }
     
 }

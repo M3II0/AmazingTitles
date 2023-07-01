@@ -1,2 +1,15 @@
+DispatchingMessage:
+  Enabled: true
+  Message:
+    - ""
+    - "&{#fff34d}AT &7-> &{#fff34d}Title &7dispatcher info:"
+    - ""
+    - "  &7Receivers: &{#ffb866}%receivers%"
+    - "  &7Animation: &{#ffb866}%animation%"
+    - "  &7Frames: &{#ffb866}%frames%"
+    - "  &7Duration: &{#ffb866}%duration%"
+    - "  &7Creation Took: &{#ffb866}%creation%ms"
+    - ""
+
 # If you want to turn off any extension, use 'false' value
 ExtensionsManager:
