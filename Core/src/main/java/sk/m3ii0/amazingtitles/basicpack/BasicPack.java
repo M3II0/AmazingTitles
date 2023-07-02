@@ -101,7 +101,7 @@ public class BasicPack {
 			for (int i = 0; i <= length; i++) {
 				String in = smoothed.substring(0, i);
 				String out = smoothed.substring(i);
-				String format = "<" + color1 + ">&l" + in + "</" + color1 + "><" + color1 + ">&l" + out + "</" + color2 + ">";
+				String format = "<" + color2 + ">&l" + in + "</" + color1 + "><" + color1 + ">&l" + out + "</" + color2 + ">";
 				frames.add(ColorTranslator.parse(format).substring(start).substring(0, withGradient));
 			}
 			/*
@@ -110,7 +110,7 @@ public class BasicPack {
 			for (int i = 0; i <= length; i++) {
 				String in = smoothed.substring(0, i);
 				String out = smoothed.substring(i);
-				String format = "<" + color2 + ">&l" + in + "</" + color1 + "><" + color1 + ">&l" + out + "</" + color1 + ">";
+				String format = "<" + color2 + ">&l" + in + "</" + color1 + "><" + color1 + ">&l" + out + "</" + color2 + ">";
 				frames.add(ColorTranslator.parse(format).substring(start).substring(0, withGradient));
 			}
 			return frames;
