@@ -12,36 +12,12 @@ public class ColorTranslator {
 	
 	private static final Pattern gradient = Pattern.compile("<(#[A-Za-z0-9]{6})>(.*?)</(#[A-Za-z0-9]{6})>");
 	private static final Pattern legacyGradient = Pattern.compile("<(&[A-Za-z0-9])>(.*?)</(&[A-Za-z0-9])>");
-	private static final Pattern hexLegacyGradient = Pattern.compile("<(#[A-Za-z0-9]{6})>(.*?)</(&[A-Za-z0-9])>");
-	private static final Pattern legacyHexGradient = Pattern.compile("<(&[A-Za-z0-9])>(.*?)</(#[A-Za-z0-9]{6})>");
 	private static final Pattern rgb = Pattern.compile("&\\{(#......)}");
 	
 	public static String parse(String text) {
 		Matcher g = gradient.matcher(text);
 		Matcher l = legacyGradient.matcher(text);
-		Matcher m1 = hexLegacyGradient.matcher(text);
-		Matcher m2 = legacyHexGradient.matcher(text);
 		Matcher r = rgb.matcher(text);
-		while (m1.find()) {
-			Color start = Color.decode(m1.group(1));
-			String between = m1.group(2);
-			char second = m1.group(3).charAt(1);
-			ChatColor secondColor = ChatColor.getByChar(second);
-			BeforeType[] types =  BeforeType.detect(between);
-			between = BeforeType.replaceColors(between);
-			if (secondColor == null) secondColor = ChatColor.WHITE;
-			text = text.replace(m1.group(0), rgbGradient(between, start, secondColor.getColor(), types));
-		}
-		while (m2.find()) {
-			char first = m2.group(1).charAt(1);
-			ChatColor firstColor = ChatColor.getByChar(first);
-			String between = m2.group(2);
-			Color end = Color.decode(m2.group(3));
-			BeforeType[] types =  BeforeType.detect(between);
-			between = BeforeType.replaceColors(between);
-			if (firstColor == null) firstColor = ChatColor.WHITE;
-			text = text.replace(m2.group(0), rgbGradient(between, firstColor.getColor(), end, types));
-		}
 		while (g.find()) {
 			Color start = Color.decode(g.group(1));
 			String between = g.group(2);

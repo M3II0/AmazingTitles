@@ -1,6 +1,6 @@
 name: AmazingTitles
 api-version: 1.16
-version: 2.4
+version: 2.3
 main: sk.m3ii0.amazingtitles.code.AmazingTitles
 author: M3II0
 commands:
