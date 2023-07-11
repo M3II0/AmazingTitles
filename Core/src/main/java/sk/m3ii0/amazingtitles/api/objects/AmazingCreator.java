@@ -186,6 +186,7 @@ public class AmazingCreator {
 				
 			};
 		} catch (Exception e) {
+			e.printStackTrace();
 			throw new Exception("Invalid input or unhandled exception in animation! Contact animation creator or check your arguments!");
 		}
 		

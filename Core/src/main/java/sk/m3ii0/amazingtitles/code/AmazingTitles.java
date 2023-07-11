@@ -7,9 +7,9 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.HandlerList;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
+import sk.m3ii0.amazingtitles.api.objects.AmazingCreator;
 import sk.m3ii0.amazingtitles.basicpack.BasicPack;
 import sk.m3ii0.amazingtitles.code.announcement.UpdateChecker;
-import sk.m3ii0.amazingtitles.api.objects.AmazingCreator;
 import sk.m3ii0.amazingtitles.code.colors.ColorTranslator;
 import sk.m3ii0.amazingtitles.code.commands.PluginCommand;
 import sk.m3ii0.amazingtitles.code.notifications.BarNotification;
@@ -19,7 +19,9 @@ import sk.m3ii0.amazingtitles.code.spi.NmsBuilder;
 import sk.m3ii0.amazingtitles.code.spi.NmsProvider;
 import sk.m3ii0.amazingtitles.code.stats.Metrics;
 
-import java.io.*;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
 import java.net.URL;
@@ -42,9 +44,9 @@ public class AmazingTitles extends JavaPlugin {
 	private static TitleManager titleManager;
 	private static NmsProvider provider;
 	private static Metrics metrics;
-	private static final String version = "2.3";
-	private static Map<UUID, DynamicBar> bars = new HashMap<>();
-	private static Map<String, AmazingCreator> customComponents = new HashMap<>();
+	private static final String version = "2.6";
+	private static final Map<UUID, DynamicBar> bars = new HashMap<>();
+	private static final Map<String, AmazingCreator> customComponents = new HashMap<>();
 	private static File extensions;
 	
 	/*
