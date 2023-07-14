@@ -16,7 +16,7 @@ public class BasicPack {
 		
 		AmazingTitlesAPI.getApi().createAndRegister("NONE", false, true, (type, input, args) -> new ArrayList<>(Collections.singleton(ColorTranslator.parse(input))));
 		
-		AmazingTitlesAPI.getApi().createAndRegister("SMOOTH_RAINBOW", true, true, (type, input, args) -> {
+		AmazingTitlesAPI.getApi().createAndRegister("RAINBOW", true, true, (type, input, args) -> {
 			List<String> frames = new ArrayList<>();
 			String red = "#FF2424";
 			String blue = "#002AFF";
@@ -55,7 +55,45 @@ public class BasicPack {
 			return frames;
 		});
 		
-		AmazingTitlesAPI.getApi().createAndRegister("SMOOTH_BOUNCE", true, true, (type, input, args) -> {
+		AmazingTitlesAPI.getApi().createAndRegister("WAVES", true, true, (type, input, args) -> {
+			List<String> frames = new ArrayList<>();
+			String color1 = (String) args[0];
+			String color2 = (String) args[1];
+			String smoothed = "          " + input + "          ";
+			int length = smoothed.length();
+			int withGradient = input.length()*17;
+			int start = 10*17;
+			/*
+			 * Red (Blue ->) Green
+			 * */
+			for (int i = 0; i <= length; i++) {
+				String in = smoothed.substring(0, i);
+				String out = smoothed.substring(i);
+				String var = "<" + color1 + ">&l" + in + "</" + color2 + "><" + color2 + ">&l" + out + "</" + color1 + ">";
+				frames.add(ColorTranslator.parse(var).substring(start).substring(0, withGradient));
+			}
+			/*
+			 * Green (Red ->) Blue
+			 * */
+			for (int i = 0; i <= length; i++) {
+				String in = smoothed.substring(0, i);
+				String out = smoothed.substring(i);
+				String var = "<" + color2 + ">&l" + in + "</" + color1 + "><" + color1 + ">&l" + out + "</" + color2 + ">";
+				frames.add(ColorTranslator.parse(var).substring(start).substring(0, withGradient));
+			}
+			/*
+			 * Blue (Green ->) Red
+			 * */
+			for (int i = 0; i <= length; i++) {
+				String in = smoothed.substring(0, i);
+				String out = smoothed.substring(i);
+				String var = "<" + color1 + ">&l" + in + "</" + color2 + "><" + color2 + ">&l" + out + "</" + color1 + ">";
+				frames.add(ColorTranslator.parse(var).substring(start).substring(0, withGradient));
+			}
+			return frames;
+		}, "<Color1(Hex/Legacy)>", "<Color2(Hex/Legacy)>");
+		
+		AmazingTitlesAPI.getApi().createAndRegister("BOUNCE", true, true, (type, input, args) -> {
 			List<String> frames = new ArrayList<>();
 			String smoothed = "          " + input + "          ";
 			String color1 = (String) args[0];
@@ -74,21 +112,6 @@ public class BasicPack {
 			for (int i = revertSize-1; i > -1; i--) {
 				String reversed = frames.get(i);
 				frames.add(reversed);
-			}
-			return frames;
-		}, "<Color1(Hex/Legacy)>", "<Color2(Hex/Legacy)>");
-		
-		AmazingTitlesAPI.getApi().createAndRegister("WAVE_COME", false, true, (type, input, args) -> {
-			List<String> frames = new ArrayList<>();
-			String smoothed = "          " + input + "          ";
-			String color1 = (String) args[0];
-			String color2 = (String) args[1];
-			int length = smoothed.length();
-			for (int i = 0; i <= length; i++) {
-				String in = smoothed.substring(0, i);
-				String out = smoothed.substring(i);
-				String format = "<" + color1 + ">&l" + in + "</" + color2 + ">&{" + color2 + "}&l" + out;
-				frames.add(ColorTranslator.parse(format).substring(in.length()*17).substring(0, ((in.length()*17)+(out.length()+17))-1));
 			}
 			return frames;
 		}, "<Color1(Hex/Legacy)>", "<Color2(Hex/Legacy)>");
