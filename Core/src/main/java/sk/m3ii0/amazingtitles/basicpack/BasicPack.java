@@ -16,6 +16,14 @@ public class BasicPack {
 		
 		AmazingTitlesAPI.getApi().createAndRegister("NONE", false, true, (type, input, args) -> new ArrayList<>(Collections.singleton(ColorTranslator.parse(input))));
 		
+		AmazingTitlesAPI.getApi().createAndRegister("FLASHING_SYMBOL_WRAP", true, true, (type, input, args) -> {
+			List<String> frames = new ArrayList<>();
+			String symbol = " " + args[0] + "&r ";
+			frames.add(input);
+			frames.add(ColorTranslator.parse(symbol + input + symbol));
+			return frames;
+		}, "<Symbol(Just one word/character)>");
+		
 		AmazingTitlesAPI.getApi().createAndRegister("RAINBOW", true, true, (type, input, args) -> {
 			List<String> frames = new ArrayList<>();
 			String red = "#FF2424";
