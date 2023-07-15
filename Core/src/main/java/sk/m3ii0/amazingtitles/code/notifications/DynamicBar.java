@@ -81,6 +81,9 @@ public class DynamicBar {
             return;
         }
         notifications.put(id, notification);
+        for (BarNotification notification1 : notifications.values()) {
+            notification1.addToDuration(notification1.getRawDuration()*1000L);
+        }
     }
 
     public void removeInstantly(String notificationId) {
@@ -93,6 +96,7 @@ public class DynamicBar {
         StringBuilder text = new StringBuilder();
         Set<String> toRemove = new HashSet<>();
         int counter = 0;
+        double total = 0.0;
         for (Map.Entry<String, BarNotification> entry : notifications.entrySet()) {
             BarNotification notification = entry.getValue();
             if (overrides.containsKey(entry.getKey())) {

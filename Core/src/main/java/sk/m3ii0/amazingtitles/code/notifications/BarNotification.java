@@ -126,7 +126,15 @@ public class BarNotification {
         if (rawDuration == -1) return true;
         return duration > time && frame >= 0;
     }
-
+    
+    public void addToDuration(long toAdd) {
+        this.duration += toAdd;
+    }
+    
+    public double getRemaining() {
+        return remaining;
+    }
+    
     public String getCurrentFrame(long time) {
         if (rawDuration == -1) return text;
         remaining = (duration-time)/1000.0;
