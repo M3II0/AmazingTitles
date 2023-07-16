@@ -61,7 +61,7 @@ public class AmazingTitles extends JavaPlugin {
 		}
 	}
 	
-	private static final String version = "3.0";
+	private static final String version = "3.1";
 	private static final Map<UUID, DynamicBar> bars = new HashMap<>();
 	private static final Map<String, AmazingCreator> customComponents = new HashMap<>();
 	private static File extensions;
