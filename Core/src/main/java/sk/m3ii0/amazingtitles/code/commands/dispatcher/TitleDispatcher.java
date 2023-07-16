@@ -57,7 +57,7 @@ public class TitleDispatcher {
             String input = split[0];
             String subText = "";
             if (split.length > 1) {
-                subText = split[1];
+                subText = ColorTranslator.parse(split[1]);
             }
             return creator.dispatch(receivers, action, speed, duration, input, subText, objects);
         } catch (Exception e) {
