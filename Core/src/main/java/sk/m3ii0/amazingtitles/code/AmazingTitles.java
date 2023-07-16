@@ -139,6 +139,9 @@ public class AmazingTitles extends JavaPlugin {
 	*
 	* */
 	
+	public static Map<UUID, DynamicBar> getBars() {
+		return bars;
+	}
 	public static ChatColor getFromColor(Color color) {
 		try {
 			return (ChatColor) getColors().invoke(null, color);

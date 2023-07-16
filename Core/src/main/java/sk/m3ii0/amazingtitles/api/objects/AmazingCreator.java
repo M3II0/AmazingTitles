@@ -162,14 +162,14 @@ public class AmazingCreator {
 							Object[] packets = new Object[0];
 							if (frameCounter == lastFrame) {
 								if (lastPackets == null) {
-									if (type == ActionType.TITLE) lastPackets = AmazingTitles.getProvider().createTitlePacket(frame, subTitle);
-									if (type == ActionType.SUBTITLE) lastPackets = AmazingTitles.getProvider().createTitlePacket(subTitle, frame);
+									if (type == ActionType.TITLE) lastPackets = AmazingTitles.getProvider().createTitlePacket(frame, subTitle, 0, 5, 0);
+									if (type == ActionType.SUBTITLE) lastPackets = AmazingTitles.getProvider().createTitlePacket(subTitle, frame, 0, 5, 0);
 									if (type == ActionType.ACTION_BAR) lastPackets = new Object[] {AmazingTitles.getProvider().createActionbarPacket(frame)};
 								}
 								packets = lastPackets;
 							} else {
-								if (type == ActionType.TITLE) packets = AmazingTitles.getProvider().createTitlePacket(frame, subTitle);
-								if (type == ActionType.SUBTITLE) packets = AmazingTitles.getProvider().createTitlePacket(subTitle, frame);
+								if (type == ActionType.TITLE) packets = AmazingTitles.getProvider().createTitlePacket(frame, subTitle, 0, 5, 0);
+								if (type == ActionType.SUBTITLE) packets = AmazingTitles.getProvider().createTitlePacket(subTitle, frame, 0, 5, 0);
 								if (type == ActionType.ACTION_BAR) packets = new Object[] {AmazingTitles.getProvider().createActionbarPacket(frame)};
 							}
 							lastFrame = frameCounter;

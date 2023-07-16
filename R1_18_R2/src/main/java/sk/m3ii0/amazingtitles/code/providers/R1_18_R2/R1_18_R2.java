@@ -33,10 +33,10 @@ public class R1_18_R2 implements NmsProvider {
 	}
 	
 	@Override
-	public Object[] createTitlePacket(String title, String subtitle) {
+	public Object[] createTitlePacket(String title, String subtitle, int in, int keep, int out) {
 		if (title.isEmpty()) title = " ";
 		if (subtitle.isEmpty()) subtitle = " ";
-		ClientboundSetTitlesAnimationPacket animation = new ClientboundSetTitlesAnimationPacket(0, 5, 0);
+		ClientboundSetTitlesAnimationPacket animation = new ClientboundSetTitlesAnimationPacket(in, keep, out);
 		ClientboundSetTitleTextPacket text = new ClientboundSetTitleTextPacket(CraftChatMessage.fromStringOrNull(title));
 		ClientboundSetSubtitleTextPacket subtext = new ClientboundSetSubtitleTextPacket(CraftChatMessage.fromStringOrNull(subtitle));
 		return new Object[] {animation, text, subtext};

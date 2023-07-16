@@ -30,10 +30,10 @@ public class R1_16_R2 implements NmsProvider {
 	}
 	
 	@Override
-	public Object[] createTitlePacket(String title, String subtitle) {
+	public Object[] createTitlePacket(String title, String subtitle, int in, int keep, int out) {
 		if (title.isEmpty()) title = " ";
 		if (subtitle.isEmpty()) subtitle = " ";
-		PacketPlayOutTitle animation = new PacketPlayOutTitle(0, 5, 0);
+		PacketPlayOutTitle animation = new PacketPlayOutTitle(in, keep, out);
 		PacketPlayOutTitle text = new PacketPlayOutTitle(PacketPlayOutTitle.EnumTitleAction.TITLE, CraftChatMessage.fromStringOrNull(title));
 		PacketPlayOutTitle subtext = new PacketPlayOutTitle(PacketPlayOutTitle.EnumTitleAction.SUBTITLE, CraftChatMessage.fromStringOrNull(subtitle));
 		return new Object[] {animation, text, subtext};
