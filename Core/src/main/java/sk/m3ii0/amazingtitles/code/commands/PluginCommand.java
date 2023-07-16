@@ -13,6 +13,7 @@ import sk.m3ii0.amazingtitles.code.colors.ColorTranslator;
 import sk.m3ii0.amazingtitles.code.commands.dispatcher.TitleDispatcher;
 import sk.m3ii0.amazingtitles.code.notifications.BarNotification;
 import sk.m3ii0.amazingtitles.code.stats.Metrics;
+import sk.m3ii0.amazingtitles.code.utils.StringUtils;
 
 import java.util.Collections;
 import java.util.List;
@@ -44,7 +45,7 @@ public class PluginCommand implements CommandExecutor, TabExecutor {
 		* Message
 		* */
 		if (args[0].equalsIgnoreCase("MESSAGE"))  {
-			return List.of("<Visit wiki how to build message>");
+			return StringUtils.of("<Visit wiki how to build message>");
 		}
 
 		/*
@@ -52,10 +53,10 @@ public class PluginCommand implements CommandExecutor, TabExecutor {
 		* */
 		if (args[0].equalsIgnoreCase("NOTIFICATION")) {
 			if (current == 3) {
-				return List.of("<NotificationSymbol>");
+				return StringUtils.of("<NotificationSymbol>");
 			} else if (current == 4) {
-				return List.of("<Number(Duration-InSeconds)>");
-			} else return List.of("<NotificationMessage>");
+				return StringUtils.of("<Number(Duration-InSeconds)>");
+			} else return StringUtils.of("<NotificationMessage>");
 		}
 
 		/*
@@ -66,11 +67,11 @@ public class PluginCommand implements CommandExecutor, TabExecutor {
 		}
 
 		if (current == 4) {
-			return List.of("<Number-Delay>");
+			return StringUtils.of("<Number-Delay>");
 		}
 
 		if (current == 5) {
-			return List.of("<Number-Duration(InSeconds)>");
+			return StringUtils.of("<Number-Duration(InSeconds)>");
 		}
 
 		/*
@@ -78,7 +79,7 @@ public class PluginCommand implements CommandExecutor, TabExecutor {
 		* */
 		String animation_name = args[2];
 		if (!AmazingTitles.getCustomComponents().containsKey(animation_name)) {
-			return List.of("<Invalid Animation>");
+			return StringUtils.of("<Invalid Animation>");
 		}
 		AmazingCreator creator = AmazingTitles.getCustomComponents().get(animation_name);
 		return CommandUtils.copyPartialMatches(using, creator.getComplete(current-6));

@@ -18,7 +18,7 @@ public class AmazingTitlesAPI {
 		AmazingTitles.tryToSetPathAnimation(name);
 		boolean enabled = AmazingTitles.getOptions().getBoolean("ExtensionsManager." + name);
 		if (!enabled) return;
-		AmazingCreator creator = new AmazingCreator(repeat, infinite, framesBuilder, arguments);
+		AmazingCreator creator = new AmazingCreator(repeat, infinite, legacy, framesBuilder, arguments);
 		AmazingTitles.addCustomComponent(name, creator);
 	}
 	

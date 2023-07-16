@@ -2,13 +2,13 @@ DispatchingMessage:
   Enabled: true
   Message:
     - ""
-    - "&{#fff34d}AT &7-> &{#fff34d}Title &7dispatcher info:"
+    - "&eAT &7-> &eTitle &7dispatcher info:"
     - ""
-    - "  &7Receivers: &{#ffb866}%receivers%"
-    - "  &7Animation: &{#ffb866}%animation%"
-    - "  &7Frames: &{#ffb866}%frames%"
-    - "  &7Duration: &{#ffb866}%duration%"
-    - "  &7Creation Took: &{#ffb866}%creation%ms"
+    - "  &7Receivers: &e%receivers%"
+    - "  &7Animation: &e%animation%"
+    - "  &7Frames: &e%frames%"
+    - "  &7Duration: &e%duration%"
+    - "  &7Creation Took: &e%creation%ms"
     - ""
 
 # If you want to turn off any extension, use 'false' value

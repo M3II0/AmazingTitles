@@ -48,15 +48,16 @@ public class AmazingTitles extends JavaPlugin {
 	private static TitleManager titleManager;
 	private static NmsProvider provider;
 	private static Metrics metrics;
-	private static final Method colors;
-	private static final Method color;
+	private static Method colors;
+	private static Method color;
 	
 	static {
 		try {
 			colors = ChatColor.class.getDeclaredMethod("of", Color.class);
 			color = ChatColor.class.getDeclaredMethod("getColor");
-		} catch (NoSuchMethodException e) {
-			throw new RuntimeException(e);
+		} catch (NoSuchMethodException ignore) {
+			colors = null;
+			color = null;
 		}
 	}
 	
@@ -103,12 +104,12 @@ public class AmazingTitles extends JavaPlugin {
 		provider = getFromVersion(getVersion());
 		if (provider == null) {
 			Bukkit.getConsoleSender().sendMessage("§c[Error] AmazingTitles - You're using unsupported version...");
-			Bukkit.getConsoleSender().sendMessage("§c[Error] AmazingTitles - Version must be 1.16 or higher");
+			Bukkit.getConsoleSender().sendMessage("§c[Error] AmazingTitles - Version must be 1.13 or higher");
 			Bukkit.getConsoleSender().sendMessage("§c[Error] AmazingTitles - If you are using correct version, contact plugin author!");
 			Bukkit.getConsoleSender().sendMessage("§c[Error] AmazingTitles - Disabling plugin...");
 			Bukkit.getPluginManager().disablePlugin(this);
+			return;
 		}
-		new UpdateChecker(this, "AmazingTitles", "https://www.spigotmc.org/resources/109916/", "amazingtitles.admin", version, 109916);
 		Bukkit.getPluginManager().registerEvents(new NotificationListener(), this);
 		Bukkit.getScheduler().runTaskTimerAsynchronously(this, () -> {
 			long sysTime = System.currentTimeMillis();
@@ -123,6 +124,7 @@ public class AmazingTitles extends JavaPlugin {
 		Bukkit.getConsoleSender().sendMessage(
 				getEnableMessage(format)
 		);
+		new UpdateChecker(this, "AmazingTitles", "https://www.spigotmc.org/resources/109916/", "amazingtitles.admin", version, 109916);
 	}
 	
 	@Override
@@ -174,7 +176,7 @@ public class AmazingTitles extends JavaPlugin {
 		}
 	}
 	public static Map<String, AmazingCreator> getCustomComponents() {
-		return Map.copyOf(customComponents);
+		return customComponents;
 	}
 	public static void addCustomComponent(String name, AmazingCreator component) {
 		customComponents.put(name, component);

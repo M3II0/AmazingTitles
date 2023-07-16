@@ -146,7 +146,9 @@ public class BasicPack {
 			List<String> frames = new ArrayList<>();
 			int lastSpaces = 180;
 			StringBuilder spaces = new StringBuilder();
-			spaces.append(" ".repeat(lastSpaces + 1));
+			for (int i = 0; i < lastSpaces; i++) {
+				spaces.append(" ");
+			}
 			for (int i = 30; i > -1; i--) {
 				int newSpaces = lastSpaces-(i*5);
 				String formattedSpaces = spaces.substring(newSpaces);
@@ -160,7 +162,9 @@ public class BasicPack {
 			List<String> frames = new ArrayList<>();
 			int lastSpaces = 180;
 			StringBuilder spaces = new StringBuilder();
-			spaces.append(" ".repeat(lastSpaces + 1));
+			for (int i = 0; i < lastSpaces; i++) {
+				spaces.append(" ");
+			}
 			for (int i = 30; i > -1; i--) {
 				int newSpaces = lastSpaces-(i*5);
 				String formattedSpaces = spaces.substring(newSpaces);
@@ -174,7 +178,9 @@ public class BasicPack {
 			List<String> frames = new ArrayList<>();
 			int lastSpaces = 180;
 			StringBuilder spaces = new StringBuilder();
-			spaces.append(" ".repeat(lastSpaces + 1));
+			for (int i = 0; i < lastSpaces; i++) {
+				spaces.append(" ");
+			}
 			String pre = input.substring(0, input.length()/2);
 			String aft = input.substring(input.length()/2);
 			for (int i = 30; i > -1; i--) {

@@ -23,6 +23,10 @@
         <module>R1_20_R1</module>
         <module>ExtensionExample</module>
         <module>SummerExtension</module>
+        <module>R1_15_R1</module>
+        <module>R1_14_R1</module>
+        <module>R1_13_R2</module>
+        <module>R1_13_R1</module>
     </modules>
 
     <properties>

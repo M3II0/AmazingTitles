@@ -8,6 +8,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitTask;
 import sk.m3ii0.amazingtitles.api.objects.types.ActionType;
 import sk.m3ii0.amazingtitles.code.AmazingTitles;
+import sk.m3ii0.amazingtitles.code.utils.StringUtils;
 
 import java.util.*;
 
@@ -17,11 +18,13 @@ public class AmazingCreator {
 	private final FramesBuilder framesBuilder;
 	private final boolean repeat;
 	private final boolean infinite;
+	private final boolean legacy;
 	private final List<String>[] competitions;
 	
-	public AmazingCreator(boolean repeat, boolean infinite, FramesBuilder framesBuilder, String... arguments) {
-		this.arguments = new ArrayList<>(List.of(arguments));
+	public AmazingCreator(boolean repeat, boolean infinite, boolean legacy, FramesBuilder framesBuilder, String... arguments) {
+		this.arguments = new ArrayList<>(StringUtils.of(arguments));
 		this.framesBuilder = framesBuilder;
+		this.legacy = legacy;
 		this.repeat = repeat;
 		this.infinite = infinite;
 		this.competitions = new List[arguments.length];
@@ -45,8 +48,12 @@ public class AmazingCreator {
 	public List<String> getComplete(int arg) {
 		int length = competitions.length;
 		if (arg < length) return competitions[arg];
-		else if (infinite) return List.of("<Text\\n\\SubText>");
+		else if (infinite) return StringUtils.of("<Text\\n\\SubText>");
 		return new ArrayList<>();
+	}
+	
+	public boolean isLegacy() {
+		return legacy;
 	}
 	
 	public boolean isInfinite() {

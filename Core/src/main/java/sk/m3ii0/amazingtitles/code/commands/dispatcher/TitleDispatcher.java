@@ -45,6 +45,9 @@ public class TitleDispatcher {
             int duration = Integer.parseInt(args[1]);
             AmazingCreator creator = AmazingTitles.getCustomComponents().get(animation);
             if (creator == null) return null;
+            if (!creator.isLegacy() && AmazingTitles.legacy()) {
+                return null;
+            }
             int minimum = creator.getMinimum();
             Object[] objects = new Object[minimum];
             System.arraycopy(args, 2, objects, 0, minimum);
@@ -67,7 +70,7 @@ public class TitleDispatcher {
     }
 
     private static void sendError(CommandSender s) {
-        s.sendMessage("§cAT §7-> §4Error with dispatching... (Check your format)");
+        s.sendMessage("§cAT §7-> §4Error with dispatching... (Check your format / version, some animations supports 1.16+ only)");
     }
     
     public static BaseComponent[] getMessageFromRaw(String text) {

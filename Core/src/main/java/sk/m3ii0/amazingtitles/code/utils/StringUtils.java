@@ -1,6 +1,7 @@
 package sk.m3ii0.amazingtitles.code.utils;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class StringUtils {
@@ -29,6 +30,10 @@ public class StringUtils {
 			} else break;
 		}
 		return result;
+	}
+	
+	public static List<String> of(String... strings) {
+		return new ArrayList<>(Arrays.asList(strings));
 	}
 	
 }
