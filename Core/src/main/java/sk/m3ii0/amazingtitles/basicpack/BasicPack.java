@@ -2,6 +2,7 @@ package sk.m3ii0.amazingtitles.basicpack;
 
 import net.md_5.bungee.api.ChatColor;
 import sk.m3ii0.amazingtitles.api.AmazingTitlesAPI;
+import sk.m3ii0.amazingtitles.code.AmazingTitles;
 import sk.m3ii0.amazingtitles.code.colors.ColorTranslator;
 
 import java.awt.*;
@@ -14,9 +15,9 @@ public class BasicPack {
 	
 	public static void loadDefaultAnimations() {
 		
-		AmazingTitlesAPI.getApi().createAndRegister("NONE", false, true, (type, input, args) -> new ArrayList<>(Collections.singleton(ColorTranslator.parse(input))));
+		AmazingTitlesAPI.getApi().createAndRegister("NONE", false, true, true, (type, input, args) -> new ArrayList<>(Collections.singleton(ColorTranslator.parse(input))));
 		
-		AmazingTitlesAPI.getApi().createAndRegister("FLASHING_SYMBOL_WRAP", true, true, (type, input, args) -> {
+		AmazingTitlesAPI.getApi().createAndRegister("FLASHING_SYMBOL_WRAP", true, true, true, (type, input, args) -> {
 			List<String> frames = new ArrayList<>();
 			String symbol = " " + args[0] + "&r ";
 			frames.add(input);
@@ -24,7 +25,7 @@ public class BasicPack {
 			return frames;
 		}, "<Symbol(Just one word/character)>");
 		
-		AmazingTitlesAPI.getApi().createAndRegister("RAINBOW", true, true, (type, input, args) -> {
+		AmazingTitlesAPI.getApi().createAndRegister("RAINBOW", true, true, false, (type, input, args) -> {
 			List<String> frames = new ArrayList<>();
 			String red = "#FF2424";
 			String blue = "#002AFF";
@@ -63,7 +64,7 @@ public class BasicPack {
 			return frames;
 		});
 		
-		AmazingTitlesAPI.getApi().createAndRegister("WAVES", true, true, (type, input, args) -> {
+		AmazingTitlesAPI.getApi().createAndRegister("WAVES", true, true, false, (type, input, args) -> {
 			List<String> frames = new ArrayList<>();
 			String color1 = (String) args[0];
 			String color2 = (String) args[1];
@@ -101,7 +102,7 @@ public class BasicPack {
 			return frames;
 		}, "<Color1(Hex/Legacy)>", "<Color2(Hex/Legacy)>");
 		
-		AmazingTitlesAPI.getApi().createAndRegister("BOUNCE", true, true, (type, input, args) -> {
+		AmazingTitlesAPI.getApi().createAndRegister("BOUNCE", true, true, false, (type, input, args) -> {
 			List<String> frames = new ArrayList<>();
 			String smoothed = "          " + input + "          ";
 			String color1 = (String) args[0];
@@ -124,24 +125,24 @@ public class BasicPack {
 			return frames;
 		}, "<Color1(Hex/Legacy)>", "<Color2(Hex/Legacy)>");
 		
-		AmazingTitlesAPI.getApi().createAndRegister("FLASHING", true, true, (type, input, args) -> {
+		AmazingTitlesAPI.getApi().createAndRegister("FLASHING", true, true, true, (type, input, args) -> {
 			List<String> frames = new ArrayList<>();
 			frames.add(ColorTranslator.parse(input));
 			frames.add("");
 			return frames;
 		});
 		
-		AmazingTitlesAPI.getApi().createAndRegister("SPLIT", true, true, (type, input, args) -> {
+		AmazingTitlesAPI.getApi().createAndRegister("SPLIT", true, true, true, (type, input, args) -> {
 			input = ColorTranslator.parse(input);
 			return new ArrayList<>(Arrays.asList(input.split("%frame%")));
 		});
 		
-		AmazingTitlesAPI.getApi().createAndRegister("WORDS_SPLIT", true, true, (type, input, args) -> {
+		AmazingTitlesAPI.getApi().createAndRegister("WORDS_SPLIT", true, true, true, (type, input, args) -> {
 			input = ColorTranslator.parse(input);
 			return new ArrayList<>(Arrays.asList(input.split(" ")));
 		});
 		
-		AmazingTitlesAPI.getApi().createAndRegister("FROM_LEFT", false, true, (type, input, args) -> {
+		AmazingTitlesAPI.getApi().createAndRegister("FROM_LEFT", false, true, true, (type, input, args) -> {
 			List<String> frames = new ArrayList<>();
 			int lastSpaces = 180;
 			StringBuilder spaces = new StringBuilder();
@@ -155,7 +156,7 @@ public class BasicPack {
 			return frames;
 		});
 		
-		AmazingTitlesAPI.getApi().createAndRegister("FROM_RIGHT", false, true, (type, input, args) -> {
+		AmazingTitlesAPI.getApi().createAndRegister("FROM_RIGHT", false, true, true, (type, input, args) -> {
 			List<String> frames = new ArrayList<>();
 			int lastSpaces = 180;
 			StringBuilder spaces = new StringBuilder();
@@ -169,7 +170,7 @@ public class BasicPack {
 			return frames;
 		});
 		
-		AmazingTitlesAPI.getApi().createAndRegister("FROM_BOTH_SIDES", false, true, (type, input, args) -> {
+		AmazingTitlesAPI.getApi().createAndRegister("FROM_BOTH_SIDES", false, true, true, (type, input, args) -> {
 			List<String> frames = new ArrayList<>();
 			int lastSpaces = 180;
 			StringBuilder spaces = new StringBuilder();
@@ -185,7 +186,7 @@ public class BasicPack {
 			return frames;
 		});
 		
-		AmazingTitlesAPI.getApi().createAndRegister("PULSING", true, true, (type, input, args) -> {
+		AmazingTitlesAPI.getApi().createAndRegister("PULSING", true, true, false, (type, input, args) -> {
 			List<String> frames = new ArrayList<>();
 			String color1 = (String) args[0];
 			String color2 = (String) args[1];
@@ -194,12 +195,12 @@ public class BasicPack {
 			if (color1.startsWith("#")) {
 				from = Color.decode(color1);
 			} else if (color1.startsWith("&")) {
-				from = ChatColor.getByChar(color1.charAt(1)).getColor();
+				from = AmazingTitles.getFromChatColor(ChatColor.getByChar(color1.charAt(1)));
 			} else from = Color.WHITE;
 			if (color2.startsWith("#")) {
 				to = Color.decode(color2);
 			} else if (color2.startsWith("&")) {
-				to = ChatColor.getByChar(color2.charAt(1)).getColor();
+				to = AmazingTitles.getFromChatColor(ChatColor.getByChar(color2.charAt(1)));
 			} else to = Color.BLACK;
 			int r_max = Math.max(from.getRed(), to.getRed());
 			int g_max = Math.max(from.getGreen(), to.getGreen());
@@ -237,7 +238,7 @@ public class BasicPack {
 				if (g > g_max) g = g_max;
 				if (b > b_max) b = b_max;
 				Color c = new Color(r, g, b);
-				String format = ChatColor.of(c) + input;
+				String format = AmazingTitles.getFromColor(c) + input;
 				frames.add(ColorTranslator.parse(format));
 				if (r == r_max && g == g_max & b == b_max) {break;}
 			}
@@ -258,7 +259,7 @@ public class BasicPack {
 				if (g < g_min) g = g_min;
 				if (b < b_min) b = b_min;
 				Color c = new Color(r, g, b);
-				String format = ChatColor.of(c) + input;
+				String format = AmazingTitles.getFromColor(c) + input;
 				frames.add(ColorTranslator.parse(format));
 				if (r == r_min && g == g_min & b == b_min) {break;}
 			}

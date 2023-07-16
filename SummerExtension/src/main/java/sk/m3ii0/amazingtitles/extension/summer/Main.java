@@ -3,6 +3,7 @@ package sk.m3ii0.amazingtitles.extension.summer;
 import net.md_5.bungee.api.ChatColor;
 import sk.m3ii0.amazingtitles.api.AmazingTitlesAPI;
 import sk.m3ii0.amazingtitles.api.objects.AmazingTitleExtension;
+import sk.m3ii0.amazingtitles.code.AmazingTitles;
 import sk.m3ii0.amazingtitles.code.colors.ColorTranslator;
 
 import java.awt.*;
@@ -14,7 +15,7 @@ public class Main implements AmazingTitleExtension {
 	@Override
 	public void load() {
 		
-		AmazingTitlesAPI.getApi().createAndRegister("EXTENSION_SUMMER_WRAPPED_SUN", true, true, (type, input, args) -> {
+		AmazingTitlesAPI.getApi().createAndRegister("EXTENSION_SUMMER_WRAPPED_SUN", true, true, true, (type, input, args) -> {
 			List<String> frames = new ArrayList<>();
 			String sun = " &e☀&r ";
 			frames.add(ColorTranslator.parse(input));
@@ -22,7 +23,7 @@ public class Main implements AmazingTitleExtension {
 			return frames;
 		});
 		
-		AmazingTitlesAPI.getApi().createAndRegister("EXTENSION_SUMMER_WRAPPED_COLORED_SUN", true, true, (type, input, args) -> {
+		AmazingTitlesAPI.getApi().createAndRegister("EXTENSION_SUMMER_WRAPPED_COLORED_SUN", true, true, true, (type, input, args) -> {
 			List<String> frames = new ArrayList<>();
 			String sunColor = (String) args[0];
 			String sun = " &{" + sunColor + "}☀&r ";
@@ -31,7 +32,7 @@ public class Main implements AmazingTitleExtension {
 			return frames;
 		}, "<HEX(Color of the sun)>");
 		
-		AmazingTitlesAPI.getApi().createAndRegister("EXTENSION_SUMMER_GRADIENT", false, true, (type, input, args) -> {
+		AmazingTitlesAPI.getApi().createAndRegister("EXTENSION_SUMMER_GRADIENT", false, true, false, (type, input, args) -> {
 			List<String> frames = new ArrayList<>();
 			int code = Integer.parseInt((String) args[0]);
 			String bold = "";
@@ -40,7 +41,7 @@ public class Main implements AmazingTitleExtension {
 			return frames;
 		}, "<0/1(1=bold,0=normal)>");
 		
-		AmazingTitlesAPI.getApi().createAndRegister("EXTENSION_SUMMER_WAVES", true, true, (type, input, args) -> {
+		AmazingTitlesAPI.getApi().createAndRegister("EXTENSION_SUMMER_WAVES", true, true, false, (type, input, args) -> {
 			List<String> frames = new ArrayList<>();
 			String color1 = "#ffff12";
 			String color2 = "#CC6600";
@@ -48,27 +49,18 @@ public class Main implements AmazingTitleExtension {
 			int length = smoothed.length();
 			int withGradient = input.length()*17;
 			int start = 10*17;
-			/*
-			 * Red (Blue ->) Green
-			 * */
 			for (int i = 0; i <= length; i++) {
 				String in = smoothed.substring(0, i);
 				String out = smoothed.substring(i);
 				String var = "<" + color1 + ">&l" + in + "</" + color2 + "><" + color2 + ">&l" + out + "</" + color1 + ">";
 				frames.add(ColorTranslator.parse(var).substring(start).substring(0, withGradient));
 			}
-			/*
-			 * Green (Red ->) Blue
-			 * */
 			for (int i = 0; i <= length; i++) {
 				String in = smoothed.substring(0, i);
 				String out = smoothed.substring(i);
 				String var = "<" + color2 + ">&l" + in + "</" + color1 + "><" + color1 + ">&l" + out + "</" + color2 + ">";
 				frames.add(ColorTranslator.parse(var).substring(start).substring(0, withGradient));
 			}
-			/*
-			 * Blue (Green ->) Red
-			 * */
 			for (int i = 0; i <= length; i++) {
 				String in = smoothed.substring(0, i);
 				String out = smoothed.substring(i);
@@ -78,7 +70,7 @@ public class Main implements AmazingTitleExtension {
 			return frames;
 		});
 		
-		AmazingTitlesAPI.getApi().createAndRegister("EXTENSION_SUMMER_BOUNCE", true, true, (type, input, args) -> {
+		AmazingTitlesAPI.getApi().createAndRegister("EXTENSION_SUMMER_BOUNCE", true, true, false, (type, input, args) -> {
 			List<String> frames = new ArrayList<>();
 			String smoothed = "          " + input + "          ";
 			String color1 = "#ffff12";
@@ -101,7 +93,7 @@ public class Main implements AmazingTitleExtension {
 			return frames;
 		});
 		
-		AmazingTitlesAPI.getApi().createAndRegister("EXTENSION_SUMMER_PULSING", true, true, (type, input, args) -> {
+		AmazingTitlesAPI.getApi().createAndRegister("EXTENSION_SUMMER_PULSING", true, true, false, (type, input, args) -> {
 			List<String> frames = new ArrayList<>();
 			Color from = Color.decode("#ffff12");
 			Color to = Color.decode("#CC6600");
@@ -141,7 +133,7 @@ public class Main implements AmazingTitleExtension {
 				if (g > g_max) g = g_max;
 				if (b > b_max) b = b_max;
 				Color c = new Color(r, g, b);
-				String format = ChatColor.of(c) + input;
+				String format = AmazingTitles.getFromColor(c) + input;
 				frames.add(ColorTranslator.parse(format));
 				if (r == r_max && g == g_max & b == b_max) {break;}
 			}
@@ -162,7 +154,7 @@ public class Main implements AmazingTitleExtension {
 				if (g < g_min) g = g_min;
 				if (b < b_min) b = b_min;
 				Color c = new Color(r, g, b);
-				String format = ChatColor.of(c) + input;
+				String format = AmazingTitles.getFromColor(c) + input;
 				frames.add(ColorTranslator.parse(format));
 				if (r == r_min && g == g_min & b == b_min) {break;}
 			}

@@ -14,7 +14,7 @@ public class AmazingTitlesAPI {
 		return api;
 	}
 	
-	public void createAndRegister(String name, boolean repeat, boolean infinite, FramesBuilder framesBuilder, String... arguments) {
+	public void createAndRegister(String name, boolean repeat, boolean infinite, boolean legacy, FramesBuilder framesBuilder, String... arguments) {
 		AmazingTitles.tryToSetPathAnimation(name);
 		boolean enabled = AmazingTitles.getOptions().getBoolean("ExtensionsManager." + name);
 		if (!enabled) return;

@@ -16,7 +16,7 @@ public class Main implements AmazingTitleExtension {
 		// How to register new Animation?
 		// Infinite - Text input
 		// Repeat - Should animation begin again or keep on last frame
-		AmazingTitlesAPI.getApi().createAndRegister("TEST", false, true, (type, input, args) -> {
+		AmazingTitlesAPI.getApi().createAndRegister("TEST", false, true, true, (type, input, args) -> {
 			return new ArrayList<>(Collections.singleton("Frames"));
 		 }, "ArgumentHelp....");
 		

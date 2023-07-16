@@ -1,6 +1,7 @@
 package sk.m3ii0.amazingtitles.code.colors;
 
 import net.md_5.bungee.api.ChatColor;
+import sk.m3ii0.amazingtitles.code.AmazingTitles;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -15,37 +16,40 @@ public class ColorTranslator {
 	private static final Pattern rgb = Pattern.compile("&\\{(#......)}");
 	
 	public static String parse(String text) {
-		Matcher g = gradient.matcher(text);
-		Matcher l = legacyGradient.matcher(text);
-		Matcher r = rgb.matcher(text);
-		while (g.find()) {
-			Color start = Color.decode(g.group(1));
-			String between = g.group(2);
-			Color end = Color.decode(g.group(3));
-			BeforeType[] types =  BeforeType.detect(between);
-			between = BeforeType.replaceColors(between);
-			text = text.replace(g.group(0), rgbGradient(between, start, end, types));
-		}
-		while (l.find()) {
-			char first = l.group(1).charAt(1);
-			String between = l.group(2);
-			char second = l.group(3).charAt(1);
-			ChatColor firstColor = ChatColor.getByChar(first);
-			ChatColor secondColor = ChatColor.getByChar(second);
-			BeforeType[] types =  BeforeType.detect(between);
-			between = BeforeType.replaceColors(between);
-			if (firstColor == null) firstColor = ChatColor.WHITE;
-			if (secondColor == null) secondColor = ChatColor.WHITE;
-			text = text.replace(l.group(0), rgbGradient(between, firstColor.getColor(), secondColor.getColor(), types));
-		}
-		while (r.find()) {
-			ChatColor color = ChatColor.of(Color.decode(r.group(1)));
-			text = text.replace(r.group(0), color + "");
+		if (!AmazingTitles.legacy()) {
+			Matcher g = gradient.matcher(text);
+			Matcher l = legacyGradient.matcher(text);
+			Matcher r = rgb.matcher(text);
+			while (g.find()) {
+				Color start = Color.decode(g.group(1));
+				String between = g.group(2);
+				Color end = Color.decode(g.group(3));
+				BeforeType[] types = BeforeType.detect(between);
+				between = BeforeType.replaceColors(between);
+				text = text.replace(g.group(0), rgbGradient(between, start, end, types));
+			}
+			while (l.find()) {
+				char first = l.group(1).charAt(1);
+				String between = l.group(2);
+				char second = l.group(3).charAt(1);
+				ChatColor firstColor = ChatColor.getByChar(first);
+				ChatColor secondColor = ChatColor.getByChar(second);
+				BeforeType[] types = BeforeType.detect(between);
+				between = BeforeType.replaceColors(between);
+				if (firstColor == null) firstColor = ChatColor.WHITE;
+				if (secondColor == null) secondColor = ChatColor.WHITE;
+				text = text.replace(l.group(0), rgbGradient(between, AmazingTitles.getFromChatColor(firstColor), AmazingTitles.getFromChatColor(secondColor), types));
+			}
+			while (r.find()) {
+				ChatColor color = AmazingTitles.getFromColor(Color.decode(r.group(1)));
+				text = text.replace(r.group(0), color + "");
+			}
 		}
 		return ChatColor.translateAlternateColorCodes('&', text);
 	}
 	
 	private static String rgbGradient(String str, Color from, Color to, BeforeType[] types) {
+		final StringBuilder builder = new StringBuilder();
 		final double[] red = linear(from.getRed(), to.getRed(), str.length());
 		final double[] green = linear(from.getGreen(), to.getGreen(), str.length());
 		final double[] blue = linear(from.getBlue(), to.getBlue(), str.length());
@@ -53,12 +57,11 @@ public class ColorTranslator {
 		for (BeforeType var : types) {
 			before.append("§").append(var.getCode());
 		}
-		final StringBuilder builder = new StringBuilder();
 		if (str.length() == 1) {
-			return ChatColor.of(to) + before.toString() + str;
+			return AmazingTitles.getFromColor(to) + before.toString() + str;
 		}
 		for (int i = 0; i < str.length(); i++) {
-			builder.append(ChatColor.of(new Color((int) Math.round(red[i]), (int) Math.round(green[i]), (int) Math.round(blue[i])))).append(before).append(str.charAt(i));
+			builder.append(AmazingTitles.getFromColor(new Color((int) Math.round(red[i]), (int) Math.round(green[i]), (int) Math.round(blue[i])))).append(before).append(str.charAt(i));
 		}
 		return builder.toString();
 	}

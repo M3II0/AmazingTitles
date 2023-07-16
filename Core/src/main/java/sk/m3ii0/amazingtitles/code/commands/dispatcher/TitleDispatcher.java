@@ -96,9 +96,6 @@ public class TitleDispatcher {
                     if (key.equalsIgnoreCase("HOVER")) {
                         hoverEvent = new HoverEvent(HoverEvent.Action.SHOW_TEXT, TextComponent.fromLegacyText(ColorTranslator.parse(val)));
                     }
-                    if (key.equalsIgnoreCase("COPY_TO_CLIPBOARD")) {
-                        clickEvent = new ClickEvent(ClickEvent.Action.COPY_TO_CLIPBOARD, val);
-                    }
                     if (key.equalsIgnoreCase("OPEN_URL")) {
                         clickEvent = new ClickEvent(ClickEvent.Action.OPEN_URL, val);
                     }
@@ -126,7 +123,7 @@ public class TitleDispatcher {
         int frames = title.frames().size();
         int duration = title.duration();
         int players = receivers.size();
-        ComponentBuilder builder = new ComponentBuilder();
+        ComponentBuilder builder = new ComponentBuilder("");
         List<String> message = AmazingTitles.getOptions().getStringList("DispatchingMessage.Message");
         int last = message.size()-1;
         int now = 0;

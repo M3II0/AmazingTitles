@@ -13,9 +13,6 @@ public class NotificationListener implements Listener {
     @EventHandler
     public void join(PlayerJoinEvent e) {
         AmazingTitles.insertNewBar(e.getPlayer());
-        AmazingTitles.setNotificationFor(BarNotification.create("1", "One", 5), List.of(e.getPlayer()));
-        AmazingTitles.setNotificationFor(BarNotification.create("2", "Two", 5), List.of(e.getPlayer()));
-        AmazingTitles.setNotificationFor(BarNotification.create("3", "Three", 5), List.of(e.getPlayer()));
     }
 
     @EventHandler

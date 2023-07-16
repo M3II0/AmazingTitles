@@ -1,5 +1,6 @@
 package sk.m3ii0.amazingtitles.code;
 
+import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -19,14 +20,17 @@ import sk.m3ii0.amazingtitles.code.spi.NmsBuilder;
 import sk.m3ii0.amazingtitles.code.spi.NmsProvider;
 import sk.m3ii0.amazingtitles.code.stats.Metrics;
 
+import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.text.DecimalFormat;
+import java.util.List;
 import java.util.*;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
@@ -44,6 +48,18 @@ public class AmazingTitles extends JavaPlugin {
 	private static TitleManager titleManager;
 	private static NmsProvider provider;
 	private static Metrics metrics;
+	private static final Method colors;
+	private static final Method color;
+	
+	static {
+		try {
+			colors = ChatColor.class.getDeclaredMethod("of", Color.class);
+			color = ChatColor.class.getDeclaredMethod("getColor");
+		} catch (NoSuchMethodException e) {
+			throw new RuntimeException(e);
+		}
+	}
+	
 	private static final String version = "3.0";
 	private static final Map<UUID, DynamicBar> bars = new HashMap<>();
 	private static final Map<String, AmazingCreator> customComponents = new HashMap<>();
@@ -121,6 +137,29 @@ public class AmazingTitles extends JavaPlugin {
 	*
 	* */
 	
+	public static ChatColor getFromColor(Color color) {
+		try {
+			return (ChatColor) getColors().invoke(null, color);
+		} catch (IllegalAccessException | InvocationTargetException e) {
+			throw new RuntimeException(e);
+		}
+	}
+	public static Color getFromChatColor(ChatColor color) {
+		try {
+			return (Color) getColor().invoke(color);
+		} catch (IllegalAccessException | InvocationTargetException e) {
+			throw new RuntimeException(e);
+		}
+	}
+	public static Method getColor() {
+		return color;
+	}
+	public static Method getColors() {
+		return colors;
+	}
+	public static boolean legacy() {
+		return colors == null;
+	}
 	public static File getOptionsFile() {
 		return optionsFile;
 	}
