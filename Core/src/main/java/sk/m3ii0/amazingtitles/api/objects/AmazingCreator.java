@@ -83,6 +83,11 @@ public class AmazingCreator {
 				private final BossBar bar = Bukkit.createBossBar("", BarColor.WHITE, BarStyle.SOLID);;
 				
 				@Override
+				public boolean silent() {
+					return silent;
+				}
+				
+				@Override
 				public ActionType type() {
 					return type;
 				}
