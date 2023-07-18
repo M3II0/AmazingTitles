@@ -31,7 +31,7 @@ public class TitleDispatcher {
             }
             nanos += System.nanoTime();
             String took = format.format(nanos/1e+6);
-            sendSuccess(s, took, type, receivers, title);
+            if (!title.silent()) sendSuccess(s, took, type, receivers, title);
         } catch (Exception e) {
             e.printStackTrace();
             sendError(s);
@@ -56,13 +56,14 @@ public class TitleDispatcher {
                 text.append(" ").append(args[i]);
             }
             if (text.length() > 0) text = new StringBuilder(text.substring(1));
-            String[] split = text.toString().split("\\\\n\\\\");
+            boolean silent = text.toString().endsWith(" -s");
+            String[] split = text.toString().replaceAll(" -s$", "").split("\\\\n\\\\");
             String input = split[0];
             String subText = "";
             if (split.length > 1) {
                 subText = ColorTranslator.colorize(split[1]);
             }
-            return creator.dispatch(receivers, action, speed, duration, input, subText, objects);
+            return creator.dispatch(silent, receivers, action, speed, duration, input, subText, objects);
         } catch (Exception e) {
             e.printStackTrace();
             return null;

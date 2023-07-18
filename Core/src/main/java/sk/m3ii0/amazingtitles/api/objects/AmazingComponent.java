@@ -28,4 +28,8 @@ public interface AmazingComponent {
 	void removeFor(Player... player);
 	void delete();
 	
+	default boolean silent() {
+		return false;
+	}
+	
 }

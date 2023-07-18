@@ -53,11 +53,13 @@ public class AmazingTitlesAPI {
 	public void sendAnimatedTitle(Player[] receivers, String animation, ActionType type, String input, int speed, int duration, Object... args) {
 		if (!isAnimationEnabled(animation)) return;
 		AmazingCreator creator = AmazingTitles.getCustomComponents().get(animation);
+		boolean silent = input.endsWith(" -s");
+		input = input.replaceAll(" -s$", "");
 		String[] split = input.split("\\\\n\\\\");
 		String main = (split.length > 0)? split[0] : "";
 		String sub = ColorTranslator.colorize((split.length > 1)? split[1] : "");
 		try {
-			creator.dispatch(receivers, type, speed, duration, main, sub, args);
+			creator.dispatch(silent, receivers, type, speed, duration, main, sub, args);
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}

@@ -60,7 +60,7 @@ public class AmazingCreator {
 		return infinite;
 	}
 	
-	public AmazingComponent dispatch(Player[] receivers, ActionType type, int speed, int duration, String input, String subText, Object... args) throws Exception {
+	public AmazingComponent dispatch(boolean silent, Player[] receivers, ActionType type, int speed, int duration, String input, String subText, Object... args) throws Exception {
 		if (subText == null || subText.isEmpty()) subText = "";
 		AmazingComponent component;
 		try {
