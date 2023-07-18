@@ -1,9 +1,7 @@
 package sk.m3ii0.amazingtitles.extension.summer;
 
-import net.md_5.bungee.api.ChatColor;
 import sk.m3ii0.amazingtitles.api.AmazingTitlesAPI;
 import sk.m3ii0.amazingtitles.api.objects.AmazingTitleExtension;
-import sk.m3ii0.amazingtitles.code.AmazingTitles;
 import sk.m3ii0.amazingtitles.code.colors.ColorTranslator;
 
 import java.awt.*;
@@ -18,8 +16,8 @@ public class Main implements AmazingTitleExtension {
 		AmazingTitlesAPI.getApi().createAndRegister("EXTENSION_SUMMER_WRAPPED_SUN", true, true, true, (type, input, args) -> {
 			List<String> frames = new ArrayList<>();
 			String sun = " &e☀&r ";
-			frames.add(ColorTranslator.parse(input));
-			frames.add(ColorTranslator.parse(sun + input + sun));
+			frames.add(ColorTranslator.colorize(input));
+			frames.add(ColorTranslator.colorize(sun + input + sun));
 			return frames;
 		});
 		
@@ -27,8 +25,8 @@ public class Main implements AmazingTitleExtension {
 			List<String> frames = new ArrayList<>();
 			String sunColor = (String) args[0];
 			String sun = " &{" + sunColor + "}☀&r ";
-			frames.add(ColorTranslator.parse(input));
-			frames.add(ColorTranslator.parse(sun + input + sun));
+			frames.add(ColorTranslator.colorize(input));
+			frames.add(ColorTranslator.colorize(sun + input + sun));
 			return frames;
 		}, "<HEX(Color of the sun)>");
 		
@@ -37,7 +35,7 @@ public class Main implements AmazingTitleExtension {
 			int code = Integer.parseInt((String) args[0]);
 			String bold = "";
 			if (code == 1) bold = "&l";
-			frames.add(ColorTranslator.parse("<#ffff12>" + bold + input + "</#CC6600>"));
+			frames.add(ColorTranslator.colorize("<#ffff12>" + bold + input + "</#CC6600>"));
 			return frames;
 		}, "<0/1(1=bold,0=normal)>");
 		
@@ -53,19 +51,19 @@ public class Main implements AmazingTitleExtension {
 				String in = smoothed.substring(0, i);
 				String out = smoothed.substring(i);
 				String var = "<" + color1 + ">&l" + in + "</" + color2 + "><" + color2 + ">&l" + out + "</" + color1 + ">";
-				frames.add(ColorTranslator.parse(var).substring(start).substring(0, withGradient));
+				frames.add(ColorTranslator.colorize(var).substring(start).substring(0, withGradient));
 			}
 			for (int i = 0; i <= length; i++) {
 				String in = smoothed.substring(0, i);
 				String out = smoothed.substring(i);
 				String var = "<" + color2 + ">&l" + in + "</" + color1 + "><" + color1 + ">&l" + out + "</" + color2 + ">";
-				frames.add(ColorTranslator.parse(var).substring(start).substring(0, withGradient));
+				frames.add(ColorTranslator.colorize(var).substring(start).substring(0, withGradient));
 			}
 			for (int i = 0; i <= length; i++) {
 				String in = smoothed.substring(0, i);
 				String out = smoothed.substring(i);
 				String var = "<" + color1 + ">&l" + in + "</" + color2 + "><" + color2 + ">&l" + out + "</" + color1 + ">";
-				frames.add(ColorTranslator.parse(var).substring(start).substring(0, withGradient));
+				frames.add(ColorTranslator.colorize(var).substring(start).substring(0, withGradient));
 			}
 			return frames;
 		});
@@ -83,7 +81,7 @@ public class Main implements AmazingTitleExtension {
 				String from = smoothed.substring(i);
 				if (to.length() == 1 || from.length() == 1) continue;
 				String formatted = "<" + color1 + ">&l" + to + "</" + color2 + ">" + "<" + color2 + ">&l" + from + "</" + color1 + ">";
-				frames.add(ColorTranslator.parse(formatted).substring(start).substring(0, withGradient));
+				frames.add(ColorTranslator.colorize(formatted).substring(start).substring(0, withGradient));
 			}
 			int revertSize = frames.size();
 			for (int i = revertSize-1; i > -1; i--) {
@@ -133,8 +131,8 @@ public class Main implements AmazingTitleExtension {
 				if (g > g_max) g = g_max;
 				if (b > b_max) b = b_max;
 				Color c = new Color(r, g, b);
-				String format = AmazingTitles.getFromColor(c) + input;
-				frames.add(ColorTranslator.parse(format));
+				String format = ColorTranslator.fromColor(c) + input;
+				frames.add(ColorTranslator.colorize(format));
 				if (r == r_max && g == g_max & b == b_max) {break;}
 			}
 			for (int i = 0; i <= total_max-1; i++) {
@@ -154,8 +152,8 @@ public class Main implements AmazingTitleExtension {
 				if (g < g_min) g = g_min;
 				if (b < b_min) b = b_min;
 				Color c = new Color(r, g, b);
-				String format = AmazingTitles.getFromColor(c) + input;
-				frames.add(ColorTranslator.parse(format));
+				String format = ColorTranslator.fromColor(c) + input;
+				frames.add(ColorTranslator.colorize(format));
 				if (r == r_min && g == g_min & b == b_min) {break;}
 			}
 			return frames;

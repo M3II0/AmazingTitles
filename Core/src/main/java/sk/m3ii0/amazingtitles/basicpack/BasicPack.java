@@ -2,7 +2,6 @@ package sk.m3ii0.amazingtitles.basicpack;
 
 import net.md_5.bungee.api.ChatColor;
 import sk.m3ii0.amazingtitles.api.AmazingTitlesAPI;
-import sk.m3ii0.amazingtitles.code.AmazingTitles;
 import sk.m3ii0.amazingtitles.code.colors.ColorTranslator;
 
 import java.awt.*;
@@ -15,13 +14,13 @@ public class BasicPack {
 	
 	public static void loadDefaultAnimations() {
 		
-		AmazingTitlesAPI.getApi().createAndRegister("NONE", false, true, true, (type, input, args) -> new ArrayList<>(Collections.singleton(ColorTranslator.parse(input))));
+		AmazingTitlesAPI.getApi().createAndRegister("NONE", false, true, true, (type, input, args) -> new ArrayList<>(Collections.singleton(ColorTranslator.colorize(input))));
 		
 		AmazingTitlesAPI.getApi().createAndRegister("FLASHING_SYMBOL_WRAP", true, true, true, (type, input, args) -> {
 			List<String> frames = new ArrayList<>();
 			String symbol = " " + args[0] + "&r ";
 			frames.add(input);
-			frames.add(ColorTranslator.parse(symbol + input + symbol));
+			frames.add(ColorTranslator.colorize(symbol + input + symbol));
 			return frames;
 		}, "<Symbol(Just one word/character)>");
 		
@@ -41,7 +40,7 @@ public class BasicPack {
 				String in = smoothed.substring(0, i);
 				String out = smoothed.substring(i);
 				String var = "<" + red + ">&l" + in + "</" + blue + "><" + blue + ">&l" + out + "</" + green + ">";
-				frames.add(ColorTranslator.parse(var).substring(start).substring(0, withGradient));
+				frames.add(ColorTranslator.colorize(var).substring(start).substring(0, withGradient));
 			}
 			/*
 			 * Green (Red ->) Blue
@@ -50,7 +49,7 @@ public class BasicPack {
 				String in = smoothed.substring(0, i);
 				String out = smoothed.substring(i);
 				String var = "<" + green + ">&l" + in + "</" + red + "><" + red + ">&l" + out + "</" + blue + ">";
-				frames.add(ColorTranslator.parse(var).substring(start).substring(0, withGradient));
+				frames.add(ColorTranslator.colorize(var).substring(start).substring(0, withGradient));
 			}
 			/*
 			 * Blue (Green ->) Red
@@ -59,7 +58,7 @@ public class BasicPack {
 				String in = smoothed.substring(0, i);
 				String out = smoothed.substring(i);
 				String var = "<" + blue + ">&l" + in + "</" + green + "><" + green + ">&l" + out + "</" + red + ">";
-				frames.add(ColorTranslator.parse(var).substring(start).substring(0, withGradient));
+				frames.add(ColorTranslator.colorize(var).substring(start).substring(0, withGradient));
 			}
 			return frames;
 		});
@@ -79,7 +78,7 @@ public class BasicPack {
 				String in = smoothed.substring(0, i);
 				String out = smoothed.substring(i);
 				String var = "<" + color1 + ">&l" + in + "</" + color2 + "><" + color2 + ">&l" + out + "</" + color1 + ">";
-				frames.add(ColorTranslator.parse(var).substring(start).substring(0, withGradient));
+				frames.add(ColorTranslator.colorize(var).substring(start).substring(0, withGradient));
 			}
 			/*
 			 * Green (Red ->) Blue
@@ -88,7 +87,7 @@ public class BasicPack {
 				String in = smoothed.substring(0, i);
 				String out = smoothed.substring(i);
 				String var = "<" + color2 + ">&l" + in + "</" + color1 + "><" + color1 + ">&l" + out + "</" + color2 + ">";
-				frames.add(ColorTranslator.parse(var).substring(start).substring(0, withGradient));
+				frames.add(ColorTranslator.colorize(var).substring(start).substring(0, withGradient));
 			}
 			/*
 			 * Blue (Green ->) Red
@@ -97,7 +96,7 @@ public class BasicPack {
 				String in = smoothed.substring(0, i);
 				String out = smoothed.substring(i);
 				String var = "<" + color1 + ">&l" + in + "</" + color2 + "><" + color2 + ">&l" + out + "</" + color1 + ">";
-				frames.add(ColorTranslator.parse(var).substring(start).substring(0, withGradient));
+				frames.add(ColorTranslator.colorize(var).substring(start).substring(0, withGradient));
 			}
 			return frames;
 		}, "<Color1(Hex/Legacy)>", "<Color2(Hex/Legacy)>");
@@ -115,7 +114,7 @@ public class BasicPack {
 				String from = smoothed.substring(i);
 				if (to.length() == 1 || from.length() == 1) continue;
 				String formatted = "<" + color1 + ">&l" + to + "</" + color2 + ">" + "<" + color2 + ">&l" + from + "</" + color1 + ">";
-				frames.add(ColorTranslator.parse(formatted).substring(start).substring(0, withGradient));
+				frames.add(ColorTranslator.colorize(formatted).substring(start).substring(0, withGradient));
 			}
 			int revertSize = frames.size();
 			for (int i = revertSize-1; i > -1; i--) {
@@ -127,18 +126,18 @@ public class BasicPack {
 		
 		AmazingTitlesAPI.getApi().createAndRegister("FLASHING", true, true, true, (type, input, args) -> {
 			List<String> frames = new ArrayList<>();
-			frames.add(ColorTranslator.parse(input));
+			frames.add(ColorTranslator.colorize(input));
 			frames.add("");
 			return frames;
 		});
 		
 		AmazingTitlesAPI.getApi().createAndRegister("SPLIT", true, true, true, (type, input, args) -> {
-			input = ColorTranslator.parse(input);
+			input = ColorTranslator.colorize(input);
 			return new ArrayList<>(Arrays.asList(input.split("%frame%")));
 		});
 		
 		AmazingTitlesAPI.getApi().createAndRegister("WORDS_SPLIT", true, true, true, (type, input, args) -> {
-			input = ColorTranslator.parse(input);
+			input = ColorTranslator.colorize(input);
 			return new ArrayList<>(Arrays.asList(input.split(" ")));
 		});
 		
@@ -152,9 +151,9 @@ public class BasicPack {
 			for (int i = 30; i > -1; i--) {
 				int newSpaces = lastSpaces-(i*5);
 				String formattedSpaces = spaces.substring(newSpaces);
-				frames.add(ColorTranslator.parse(input + formattedSpaces));
+				frames.add(ColorTranslator.colorize(input + formattedSpaces));
 			}
-			frames.add(ColorTranslator.parse(input));
+			frames.add(ColorTranslator.colorize(input));
 			return frames;
 		});
 		
@@ -168,9 +167,9 @@ public class BasicPack {
 			for (int i = 30; i > -1; i--) {
 				int newSpaces = lastSpaces-(i*5);
 				String formattedSpaces = spaces.substring(newSpaces);
-				frames.add(ColorTranslator.parse(formattedSpaces + input));
+				frames.add(ColorTranslator.colorize(formattedSpaces + input));
 			}
-			frames.add(ColorTranslator.parse(input));
+			frames.add(ColorTranslator.colorize(input));
 			return frames;
 		});
 		
@@ -187,7 +186,7 @@ public class BasicPack {
 				int newSpaces = lastSpaces-(i*6);
 				String formattedSpaces = spaces.substring(newSpaces+1);
 				String format = pre + formattedSpaces + aft;
-				frames.add(ColorTranslator.parse(format));
+				frames.add(ColorTranslator.colorize(format));
 			}
 			return frames;
 		});
@@ -201,12 +200,12 @@ public class BasicPack {
 			if (color1.startsWith("#")) {
 				from = Color.decode(color1);
 			} else if (color1.startsWith("&")) {
-				from = AmazingTitles.getFromChatColor(ChatColor.getByChar(color1.charAt(1)));
+				from = ColorTranslator.fromChatColor(ChatColor.getByChar(color1.charAt(1)));
 			} else from = Color.WHITE;
 			if (color2.startsWith("#")) {
 				to = Color.decode(color2);
 			} else if (color2.startsWith("&")) {
-				to = AmazingTitles.getFromChatColor(ChatColor.getByChar(color2.charAt(1)));
+				to = ColorTranslator.fromChatColor(ChatColor.getByChar(color2.charAt(1)));
 			} else to = Color.BLACK;
 			int r_max = Math.max(from.getRed(), to.getRed());
 			int g_max = Math.max(from.getGreen(), to.getGreen());
@@ -244,8 +243,8 @@ public class BasicPack {
 				if (g > g_max) g = g_max;
 				if (b > b_max) b = b_max;
 				Color c = new Color(r, g, b);
-				String format = AmazingTitles.getFromColor(c) + input;
-				frames.add(ColorTranslator.parse(format));
+				String format = ColorTranslator.fromColor(c) + input;
+				frames.add(ColorTranslator.colorize(format));
 				if (r == r_max && g == g_max & b == b_max) {break;}
 			}
 			for (int i = 0; i <= total_max-1; i++) {
@@ -265,8 +264,8 @@ public class BasicPack {
 				if (g < g_min) g = g_min;
 				if (b < b_min) b = b_min;
 				Color c = new Color(r, g, b);
-				String format = AmazingTitles.getFromColor(c) + input;
-				frames.add(ColorTranslator.parse(format));
+				String format = ColorTranslator.fromColor(c) + input;
+				frames.add(ColorTranslator.colorize(format));
 				if (r == r_min && g == g_min & b == b_min) {break;}
 			}
 			return frames;

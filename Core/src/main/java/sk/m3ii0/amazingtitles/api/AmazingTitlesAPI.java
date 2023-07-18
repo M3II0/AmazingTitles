@@ -32,7 +32,7 @@ public class AmazingTitlesAPI {
 	}
 	
 	public boolean bootedInLegacyMode() {
-		return AmazingTitles.legacy();
+		return !ColorTranslator.isHexSupport();
 	}
 	
 	public Set<String> getAvailableAnimations() {
@@ -55,7 +55,7 @@ public class AmazingTitlesAPI {
 		AmazingCreator creator = AmazingTitles.getCustomComponents().get(animation);
 		String[] split = input.split("\\\\n\\\\");
 		String main = (split.length > 0)? split[0] : "";
-		String sub = ColorTranslator.parse((split.length > 1)? split[1] : "");
+		String sub = ColorTranslator.colorize((split.length > 1)? split[1] : "");
 		try {
 			creator.dispatch(receivers, type, speed, duration, main, sub, args);
 		} catch (Exception e) {
@@ -68,8 +68,8 @@ public class AmazingTitlesAPI {
 	}
 	
 	public void sendNormalTitle(Player[] receivers, String title, String subtitle, int in, int keep, int out) {
-		title = ColorTranslator.parse(title);
-		subtitle = ColorTranslator.parse(subtitle);
+		title = ColorTranslator.colorize(title);
+		subtitle = ColorTranslator.colorize(subtitle);
 		Object[] packets = AmazingTitles.getProvider().createTitlePacket(title, subtitle, in, keep, out);
 		for (Player p : receivers) {
 			AmazingTitles.getProvider().sendTitles(p, packets);

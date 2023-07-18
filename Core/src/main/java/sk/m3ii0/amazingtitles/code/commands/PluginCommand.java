@@ -115,7 +115,7 @@ public class PluginCommand implements CommandExecutor, TabExecutor {
 				return true;
 			}
 			if (actionType == ActionType.NOTIFICATION) {
-				String symbol = ColorTranslator.parse(args[2]);
+				String symbol = ColorTranslator.colorize(args[2]);
 				int duration = Integer.parseInt(args[3]);
 				StringBuilder text = new StringBuilder();
 				for (int i = 4; i < args.length; i++) {

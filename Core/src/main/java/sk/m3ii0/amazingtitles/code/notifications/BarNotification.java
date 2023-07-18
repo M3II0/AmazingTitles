@@ -47,10 +47,10 @@ public class BarNotification {
      * */
 
     private BarNotification(String symbol, String text, int duration, Placeholders placeholders) {
-        this.symbol = ColorTranslator.parse(symbol);
+        this.symbol = ColorTranslator.colorize(symbol);
         this.rawText = text + "";
         this.rawDuration = duration;
-        this.text = ColorTranslator.parse(placeholders.setPlaceholders(symbol + " " + text));
+        this.text = ColorTranslator.colorize(placeholders.setPlaceholders(symbol + " " + text));
         this.frame = 0;
         this.animation = new ArrayList<>();
         StringBuilder builder = new StringBuilder();

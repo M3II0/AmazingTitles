@@ -45,7 +45,7 @@ public class TitleDispatcher {
             int duration = Integer.parseInt(args[1]);
             AmazingCreator creator = AmazingTitles.getCustomComponents().get(animation);
             if (creator == null) return null;
-            if (!creator.isLegacy() && AmazingTitles.legacy()) {
+            if (!creator.isLegacy() && !ColorTranslator.isHexSupport()) {
                 return null;
             }
             int minimum = creator.getMinimum();
@@ -60,7 +60,7 @@ public class TitleDispatcher {
             String input = split[0];
             String subText = "";
             if (split.length > 1) {
-                subText = ColorTranslator.parse(split[1]);
+                subText = ColorTranslator.colorize(split[1]);
             }
             return creator.dispatch(receivers, action, speed, duration, input, subText, objects);
         } catch (Exception e) {
@@ -84,7 +84,7 @@ public class TitleDispatcher {
                 String[] before = text.split(matcher.group(1));
                 String last = before[0].replaceAll("<$", "");
                 if (!last.isEmpty()) {
-                    components.addAll(Arrays.asList(TextComponent.fromLegacyText(ColorTranslator.parse(last))));
+                    components.addAll(Arrays.asList(TextComponent.fromLegacyText(ColorTranslator.colorize(last))));
                     text = text.replace(actual, "");
                     System.out.println(actual);
                 }
@@ -97,7 +97,7 @@ public class TitleDispatcher {
                     String key = arg.split("=")[0];
                     String val = arg.split("=")[1];
                     if (key.equalsIgnoreCase("HOVER")) {
-                        hoverEvent = new HoverEvent(HoverEvent.Action.SHOW_TEXT, TextComponent.fromLegacyText(ColorTranslator.parse(val)));
+                        hoverEvent = new HoverEvent(HoverEvent.Action.SHOW_TEXT, TextComponent.fromLegacyText(ColorTranslator.colorize(val)));
                     }
                     if (key.equalsIgnoreCase("OPEN_URL")) {
                         clickEvent = new ClickEvent(ClickEvent.Action.OPEN_URL, val);
@@ -109,7 +109,7 @@ public class TitleDispatcher {
                         clickEvent = new ClickEvent(ClickEvent.Action.RUN_COMMAND, val);
                     }
                 }
-                for (BaseComponent var : TextComponent.fromLegacyText(ColorTranslator.parse(between))) {
+                for (BaseComponent var : TextComponent.fromLegacyText(ColorTranslator.colorize(between))) {
                     if (clickEvent != null) var.setClickEvent(clickEvent);
                     if (hoverEvent != null) var.setHoverEvent(hoverEvent);
                     components.add(var);
@@ -117,7 +117,7 @@ public class TitleDispatcher {
                 builder = new StringBuilder();
             }
         }
-        components.addAll(Arrays.asList(TextComponent.fromLegacyText(ColorTranslator.parse(builder.toString()))));
+        components.addAll(Arrays.asList(TextComponent.fromLegacyText(ColorTranslator.colorize(builder.toString()))));
         return components.toArray(new BaseComponent[0]);
     }
     
@@ -131,7 +131,7 @@ public class TitleDispatcher {
         int last = message.size()-1;
         int now = 0;
         for (String line : message) {
-            builder.append(ColorTranslator.parse(parsePlaceholders(line, frames, duration, players, type, took)));
+            builder.append(ColorTranslator.colorize(parsePlaceholders(line, frames, duration, players, type, took)));
             if (last != now) builder.append("\n");
             ++now;
         }

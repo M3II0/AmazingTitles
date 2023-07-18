@@ -6,8 +6,6 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import sk.m3ii0.amazingtitles.code.AmazingTitles;
 
-import java.util.List;
-
 public class NotificationListener implements Listener {
 
     @EventHandler

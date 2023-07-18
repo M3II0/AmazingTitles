@@ -1,9 +1,10 @@
 package sk.m3ii0.amazingtitles.code.colors;
 
 import net.md_5.bungee.api.ChatColor;
-import sk.m3ii0.amazingtitles.code.AmazingTitles;
 
 import java.awt.*;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -11,57 +12,140 @@ import java.util.regex.Pattern;
 
 public class ColorTranslator {
 	
-	private static final Pattern gradient = Pattern.compile("<(#[A-Za-z0-9]{6})>(.*?)</(#[A-Za-z0-9]{6})>");
-	private static final Pattern legacyGradient = Pattern.compile("<(&[A-Za-z0-9])>(.*?)</(&[A-Za-z0-9])>");
-	private static final Pattern rgb = Pattern.compile("&\\{(#......)}");
+	/*
+	 *
+	 * Class Values
+	 *
+	 * */
 	
-	public static String parse(String text) {
-		if (!AmazingTitles.legacy()) {
-			Matcher g = gradient.matcher(text);
-			Matcher l = legacyGradient.matcher(text);
-			Matcher r = rgb.matcher(text);
-			while (g.find()) {
-				Color start = Color.decode(g.group(1));
-				String between = g.group(2);
-				Color end = Color.decode(g.group(3));
-				BeforeType[] types = BeforeType.detect(between);
-				between = BeforeType.replaceColors(between);
-				text = text.replace(g.group(0), rgbGradient(between, start, end, types));
-			}
-			while (l.find()) {
-				char first = l.group(1).charAt(1);
-				String between = l.group(2);
-				char second = l.group(3).charAt(1);
-				ChatColor firstColor = ChatColor.getByChar(first);
-				ChatColor secondColor = ChatColor.getByChar(second);
-				BeforeType[] types = BeforeType.detect(between);
-				between = BeforeType.replaceColors(between);
-				if (firstColor == null) firstColor = ChatColor.WHITE;
-				if (secondColor == null) secondColor = ChatColor.WHITE;
-				text = text.replace(l.group(0), rgbGradient(between, AmazingTitles.getFromChatColor(firstColor), AmazingTitles.getFromChatColor(secondColor), types));
-			}
-			while (r.find()) {
-				ChatColor color = AmazingTitles.getFromColor(Color.decode(r.group(1)));
-				text = text.replace(r.group(0), color + "");
-			}
+	private static Method COLOR_FROM_CHAT_COLOR;
+	private static Method CHAT_COLOR_FROM_COLOR;
+	private static final boolean hexSupport;
+	private static final Pattern gradient = Pattern.compile("<(#[A-Za-z0-9]{6})>(.*?)</(#[A-Za-z0-9]{6})>");;
+	private static final Pattern legacyGradient = Pattern.compile("<(&[A-Za-z0-9])>(.*?)</(&[A-Za-z0-9])>");;
+	private static final Pattern rgb = Pattern.compile("&\\{(#......)}");;
+	
+	static {
+		try {
+			COLOR_FROM_CHAT_COLOR = ChatColor.class.getDeclaredMethod("getColor");
+			CHAT_COLOR_FROM_COLOR = ChatColor.class.getDeclaredMethod("of", Color.class);
+		} catch (NoSuchMethodException e) {
+			COLOR_FROM_CHAT_COLOR = null;
+			CHAT_COLOR_FROM_COLOR = null;
 		}
-		return ChatColor.translateAlternateColorCodes('&', text);
+		hexSupport = CHAT_COLOR_FROM_COLOR != null;
 	}
 	
-	private static String rgbGradient(String str, Color from, Color to, BeforeType[] types) {
+	/*
+	 *
+	 * Class API
+	 *
+	 * */
+	
+	public static boolean isHexSupport() {
+		return hexSupport;
+	}
+	
+	public static String colorize(String text) {
+		return colorize(text, '&');
+	}
+	
+	public static String colorize(String text, char colorSymbol) {
+		Matcher g = gradient.matcher(text);
+		Matcher l = legacyGradient.matcher(text);
+		Matcher r = rgb.matcher(text);
+		while (g.find()) {
+			Color start = Color.decode(g.group(1));
+			String between = g.group(2);
+			Color end = Color.decode(g.group(3));
+			if (hexSupport) text = text.replace(g.group(0), rgbGradient(between, start, end, colorSymbol));
+			else text = text.replace(g.group(0), between);
+		}
+		while (l.find()) {
+			char first = l.group(1).charAt(1);
+			String between = l.group(2);
+			char second = l.group(3).charAt(1);
+			ChatColor firstColor = ChatColor.getByChar(first);
+			ChatColor secondColor = ChatColor.getByChar(second);
+			if (firstColor == null) firstColor = ChatColor.WHITE;
+			if (secondColor == null) secondColor = ChatColor.WHITE;
+			if (hexSupport) text = text.replace(l.group(0), rgbGradient(between, fromChatColor(firstColor), fromChatColor(secondColor), colorSymbol));
+			else text = text.replace(l.group(0), between);
+		}
+		while (r.find()) {
+			if (hexSupport) {
+				ChatColor color = fromColor(Color.decode(r.group(1)));
+				text = text.replace(r.group(0), color + "");
+			} else {
+				text = text.replace(r.group(0), "");
+			}
+		}
+		return ChatColor.translateAlternateColorCodes(colorSymbol, text);
+	}
+	
+	public static String removeColors(String text) {
+		return ChatColor.stripColor(text);
+	}
+	
+	public static List<Character> charactersWithoutColors(String text) {
+		text = removeColors(text);
+		final List<Character> result = new ArrayList<>();
+		for (char var : text.toCharArray()) {
+			result.add(var);
+		}
+		return result;
+	}
+	
+	public static List<String> charactersWithColors(String text) {
+		return charactersWithColors(text, '§');
+	}
+	
+	public static List<String> charactersWithColors(String text, char colorSymbol) {
+		final List<String> result = new ArrayList<>();
+		StringBuilder colors = new StringBuilder();
+		boolean colorInput = false;
+		boolean reading = false;
+		for (char var : text.toCharArray()) {
+			if (colorInput) {
+				colors.append(var);
+				colorInput = false;
+			} else {
+				if (var == colorSymbol) {
+					if (!reading) {
+						colors = new StringBuilder();
+					}
+					colorInput = true;
+					reading = true;
+					colors.append(var);
+				} else {
+					reading = false;
+					result.add(colors.toString() + var);
+				}
+			}
+		}
+		return result;
+	}
+	
+	/*
+	 *
+	 * Class Utilities
+	 *
+	 * */
+	
+	private static String rgbGradient(String text, Color start, Color end, char colorSymbol) {
 		final StringBuilder builder = new StringBuilder();
-		final double[] red = linear(from.getRed(), to.getRed(), str.length());
-		final double[] green = linear(from.getGreen(), to.getGreen(), str.length());
-		final double[] blue = linear(from.getBlue(), to.getBlue(), str.length());
-		StringBuilder before = new StringBuilder();
-		for (BeforeType var : types) {
-			before.append("§").append(var.getCode());
+		text = ChatColor.translateAlternateColorCodes(colorSymbol, text);
+		final List<String> characters = charactersWithColors(text);
+		final double[] red = linear(start.getRed(), end.getRed(), characters.size());
+		final double[] green = linear(start.getGreen(), end.getGreen(), characters.size());
+		final double[] blue = linear(start.getBlue(), end.getBlue(), characters.size());
+		if (text.length() == 1) {
+			return fromColor(end) + text;
 		}
-		if (str.length() == 1) {
-			return AmazingTitles.getFromColor(to) + before.toString() + str;
-		}
-		for (int i = 0; i < str.length(); i++) {
-			builder.append(AmazingTitles.getFromColor(new Color((int) Math.round(red[i]), (int) Math.round(green[i]), (int) Math.round(blue[i])))).append(before).append(str.charAt(i));
+		for (int i = 0; i < characters.size(); i++) {
+			String currentText = characters.get(i);
+			ChatColor current = fromColor(new Color((int) Math.round(red[i]), (int) Math.round(green[i]), (int) Math.round(blue[i])));
+			builder.append(current).append(currentText.replace("§r", ""));
 		}
 		return builder.toString();
 	}
@@ -74,45 +158,19 @@ public class ColorTranslator {
 		return res;
 	}
 	
-	public enum BeforeType {
-		MIXED("k"),
-		BOLD("l"),
-		CROSSED("m"),
-		UNDERLINED("n"),
-		CURSIVE("o");
-		BeforeType(String code) {
-			this.code = code;
+	public static Color fromChatColor(ChatColor color) {
+		try {
+			return (Color) COLOR_FROM_CHAT_COLOR.invoke(color);
+		} catch (IllegalAccessException | InvocationTargetException e) {
+			throw new RuntimeException(e);
 		}
-		private final String code;
-		public String getCode() {
-			return code;
-		}
-		public static BeforeType[] detect(String text) {
-			List<BeforeType> value = new ArrayList<>();
-			boolean hasMix = text.contains("&k");
-			boolean hasBold = text.contains("&l");
-			boolean hasCrossed = text.contains("&m");
-			boolean hasUnder = text.contains("&n");
-			boolean hasCursive = text.contains("&o");
-			if (hasMix) {
-				value.add(MIXED);
-			}
-			if (hasBold) {
-				value.add(BOLD);
-			}
-			if (hasCrossed) {
-				value.add(CROSSED);
-			}
-			if (hasUnder) {
-				value.add(UNDERLINED);
-			}
-			if (hasCursive) {
-				value.add(CURSIVE);
-			}
-			return value.toArray(new BeforeType[0]);
-		}
-		public static String replaceColors(String text) {
-			return text.replace("&k", "").replace("&m", "").replace("&n", "").replace("&o", "").replace("&l", "");
+	}
+	
+	public static ChatColor fromColor(Color color) {
+		try {
+			return (ChatColor) CHAT_COLOR_FROM_COLOR.invoke(null, color);
+		} catch (IllegalAccessException | InvocationTargetException e) {
+			throw new RuntimeException(e);
 		}
 	}
 	
