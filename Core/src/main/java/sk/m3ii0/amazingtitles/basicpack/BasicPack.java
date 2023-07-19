@@ -173,6 +173,32 @@ public class BasicPack {
 			return frames;
 		});
 		
+		AmazingTitlesAPI.getApi().createAndRegister("FADE_IN", false, true, true, (type, input, args) -> {
+			List<String> frames = new ArrayList<>();
+			List<String> chars = ColorTranslator.charactersWithColors(ColorTranslator.colorize(input));
+			StringBuilder frameBuilder = new StringBuilder();
+			for (String var : chars) {
+				frameBuilder.append(var);
+				frames.add(frameBuilder.toString());
+			}
+			return frames;
+		});
+		
+		AmazingTitlesAPI.getApi().createAndRegister("FADE_IN_WRITER", false, true, true, (type, input, args) -> {
+			List<String> frames = new ArrayList<>();
+			String symbol = ColorTranslator.colorize((String) args[0]);
+			String colorizedInput = ColorTranslator.colorize(input);
+			List<String> chars = ColorTranslator.charactersWithColors(colorizedInput);
+			StringBuilder frameBuilder = new StringBuilder();
+			frames.add(symbol);
+			for (String var : chars) {
+				frameBuilder.append(var);
+				frames.add(frameBuilder.toString() + symbol);
+			}
+			frames.add(colorizedInput);
+			return frames;
+		}, "<Symbol(Writer)>");
+		
 		AmazingTitlesAPI.getApi().createAndRegister("FROM_BOTH_SIDES", false, true, true, (type, input, args) -> {
 			List<String> frames = new ArrayList<>();
 			int lastSpaces = 180;

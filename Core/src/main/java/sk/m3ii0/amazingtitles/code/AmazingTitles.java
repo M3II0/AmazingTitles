@@ -45,7 +45,7 @@ public class AmazingTitles extends JavaPlugin {
 	private static NmsProvider provider;
 	private static Metrics metrics;
 	
-	private static final String version = "3.3";
+	private static final String version = "3.4";
 	private static final Map<UUID, DynamicBar> bars = new HashMap<>();
 	private static final Map<String, AmazingCreator> customComponents = new HashMap<>();
 	private static File extensions;
