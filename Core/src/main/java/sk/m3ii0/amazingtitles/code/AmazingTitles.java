@@ -4,7 +4,10 @@ import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
 import org.bukkit.event.HandlerList;
+import org.bukkit.event.Listener;
+import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 import sk.m3ii0.amazingtitles.api.objects.AmazingCreator;
@@ -32,7 +35,7 @@ import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 import java.util.zip.ZipEntry;
 
-public class AmazingTitles extends JavaPlugin {
+public class AmazingTitles extends JavaPlugin implements Listener {
 	
 	/*
 	*
@@ -45,7 +48,7 @@ public class AmazingTitles extends JavaPlugin {
 	private static NmsProvider provider;
 	private static Metrics metrics;
 	
-	private static final String version = "3.4";
+	private static final String version = "3.5";
 	private static final Map<UUID, DynamicBar> bars = new HashMap<>();
 	private static final Map<String, AmazingCreator> customComponents = new HashMap<>();
 	private static File extensions;
@@ -85,6 +88,7 @@ public class AmazingTitles extends JavaPlugin {
 		metrics = new Metrics(this, 18588);
 		getCommand("amazingtitles").setExecutor(new PluginCommand());
 		getCommand("amazingtitles").setTabCompleter(new PluginCommand());
+		Bukkit.getPluginManager().registerEvents(this, this);
 		provider = getFromVersion(getVersion());
 		if (provider == null) {
 			Bukkit.getConsoleSender().sendMessage("§c[Error] AmazingTitles - You're using unsupported version...");
@@ -113,8 +117,19 @@ public class AmazingTitles extends JavaPlugin {
 	
 	@Override
 	public void onDisable() {
-		HandlerList.unregisterAll(this);
+		HandlerList.unregisterAll((Plugin) this);
 		metrics.shutdown();
+	}
+	
+	/*
+	*
+	* Events
+	*
+	* */
+	
+	@EventHandler
+	public void quit(PlayerQuitEvent e) {
+		getTitleManager().unsetTitleFor(e.getPlayer());
 	}
 	
 	/*
