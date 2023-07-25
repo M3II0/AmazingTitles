@@ -11,6 +11,7 @@ import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 import sk.m3ii0.amazingtitles.api.objects.AmazingCreator;
+import sk.m3ii0.amazingtitles.api.objects.types.ActionType;
 import sk.m3ii0.amazingtitles.basicpack.BasicPack;
 import sk.m3ii0.amazingtitles.code.announcement.UpdateChecker;
 import sk.m3ii0.amazingtitles.code.colors.ColorTranslator;
@@ -48,10 +49,20 @@ public class AmazingTitles extends JavaPlugin implements Listener {
 	private static NmsProvider provider;
 	private static Metrics metrics;
 	
-	private static final String version = "3.5";
+	private static final String version = "3.6";
 	private static final Map<UUID, DynamicBar> bars = new HashMap<>();
 	private static final Map<String, AmazingCreator> customComponents = new HashMap<>();
 	private static File extensions;
+	
+	private static boolean staticBar;
+	private static boolean staticBarNotifications;
+	private static boolean staticBarAnimations;
+	private static int staticBarSpeed;
+	private static int staticBarTickCounter;
+	private static int staticBarFrame;
+	private static List<String> staticBarFrames;
+	private static AmazingCreator staticBarAnimation;
+	private static Object[] staticBarArgs;
 	
 	/*
 	*
@@ -99,12 +110,6 @@ public class AmazingTitles extends JavaPlugin implements Listener {
 			return;
 		}
 		Bukkit.getPluginManager().registerEvents(new NotificationListener(), this);
-		Bukkit.getScheduler().runTaskTimerAsynchronously(this, () -> {
-			long sysTime = System.currentTimeMillis();
-			for (DynamicBar bar : bars.values()) {
-				bar.update(sysTime);
-			}
-		}, 0, 1);
 		BasicPack.loadDefaultAnimations();
 		loadExtensions();
 		mills += System.nanoTime();
@@ -113,6 +118,25 @@ public class AmazingTitles extends JavaPlugin implements Listener {
 				getEnableMessage(format)
 		);
 		new UpdateChecker(this, "AmazingTitles", "https://www.spigotmc.org/resources/109916/", "amazingtitles.admin", version, 109916);
+		staticBar = options.getBoolean("StaticBar.Enabled", false);
+		staticBarAnimations = options.getBoolean("StaticBar.Animations", false);
+		staticBarNotifications = options.getBoolean("StaticBar.Notifications", false);
+		staticBarAnimation = customComponents.get(options.getString("StaticBar.Animation", "NONE"));
+		staticBarSpeed = options.getInt("StaticBar.Speed", 1);
+		List<String> args = options.getStringList("StaticBar.Animation_Arguments");
+		Object[] s = new Object[args.size()];
+		for (int i = 0; i < args.size(); i++) {
+			s[i] = args.get(i);
+		}
+		staticBarArgs = s;
+		staticBarFrames = staticBarAnimation.getFramesBuilder().frameBuilder(ActionType.ACTION_BAR, ColorTranslator.colorize(options.getString("StaticBar.Text", "Set your text!")), s);
+		Bukkit.getScheduler().runTaskTimerAsynchronously(this, () -> {
+			long sysTime = System.currentTimeMillis();
+			for (DynamicBar bar : bars.values()) {
+				bar.update(sysTime);
+			}
+			tryToUpdateText();
+		}, 20, 1);
 	}
 	
 	@Override
@@ -138,6 +162,24 @@ public class AmazingTitles extends JavaPlugin implements Listener {
 	*
 	* */
 	
+	public static boolean isStaticBar() {
+		return staticBar;
+	}
+	public static boolean isStaticBarNotifications() {
+		return staticBarNotifications;
+	}
+	public static boolean isStaticBarAnimations() {
+		return staticBarAnimations;
+	}
+	public static int getStaticBarSpeed() {
+		return staticBarSpeed;
+	}
+	public static AmazingCreator getStaticBarAnimation() {
+		return staticBarAnimation;
+	}
+	public static Object[] getStaticBarArgs() {
+		return staticBarArgs;
+	}
 	public static Map<UUID, DynamicBar> getBars() {
 		return bars;
 	}
@@ -195,6 +237,9 @@ public class AmazingTitles extends JavaPlugin implements Listener {
 	public static Metrics getMetrics() {
 		return metrics;
 	}
+	public static String getStaticBarText() {
+		return staticBarFrames.get(staticBarFrame);
+	}
 	private String getVersion() {
 		final String packageName = getServer().getClass().getPackage().getName();
 		return packageName.substring(packageName.lastIndexOf('.') + 1);
@@ -222,6 +267,16 @@ public class AmazingTitles extends JavaPlugin implements Listener {
 						"&r\n" +
 						" &d> Took " + millis + "ms!&r\n"
 		);
+	}
+	private void tryToUpdateText() {
+		++staticBarTickCounter;
+		if (staticBarTickCounter == staticBarSpeed) {
+			staticBarTickCounter = 0;
+			++staticBarFrame;
+			if (staticBarFrame == staticBarFrames.size()) {
+				staticBarFrame = 0;
+			}
+		}
 	}
 	private void loadExtensions() {
 		File[] files = extensions.listFiles();

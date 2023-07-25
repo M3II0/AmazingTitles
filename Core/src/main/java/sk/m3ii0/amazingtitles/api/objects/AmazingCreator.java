@@ -8,6 +8,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitTask;
 import sk.m3ii0.amazingtitles.api.objects.types.ActionType;
 import sk.m3ii0.amazingtitles.code.AmazingTitles;
+import sk.m3ii0.amazingtitles.code.notifications.DynamicBar;
 import sk.m3ii0.amazingtitles.code.utils.StringUtils;
 
 import java.util.*;
@@ -54,6 +55,10 @@ public class AmazingCreator {
 	
 	public boolean isLegacy() {
 		return legacy;
+	}
+	
+	public FramesBuilder getFramesBuilder() {
+		return framesBuilder;
 	}
 	
 	public boolean isInfinite() {
@@ -111,6 +116,10 @@ public class AmazingCreator {
 				public void streamToAll() {
 					for (Player p : Bukkit.getOnlinePlayers()) {
 						viewers.add(p);
+						if (type == ActionType.ACTION_BAR && AmazingTitles.isStaticBarAnimations()) {
+							DynamicBar bar = AmazingTitles.getBars().get(p.getUniqueId());
+							bar.disableBar();
+						}
 						if (type == ActionType.BOSS_BAR) bar.addPlayer(p);
 						AmazingTitles.getTitleManager().setTitleFor(p, this);
 					}
@@ -121,6 +130,10 @@ public class AmazingCreator {
 				public void sendTo(Player... players) {
 					for (Player p : players) {
 						viewers.add(p);
+						if (type == ActionType.ACTION_BAR && AmazingTitles.isStaticBarAnimations()) {
+							DynamicBar bar = AmazingTitles.getBars().get(p.getUniqueId());
+							bar.disableBar();
+						}
 						if (type == ActionType.BOSS_BAR) bar.addPlayer(p);
 						AmazingTitles.getTitleManager().setTitleFor(p, this);
 					}
@@ -132,6 +145,10 @@ public class AmazingCreator {
 					for (Player p : player) {
 						if (viewers.remove(p)) {
 							p.resetTitle();
+							if (type == ActionType.ACTION_BAR && AmazingTitles.isStaticBarAnimations()) {
+								DynamicBar bar = AmazingTitles.getBars().get(p.getUniqueId());
+								bar.enableBar();
+							}
 							if (type == ActionType.BOSS_BAR) bar.removePlayer(p);
 							AmazingTitles.getTitleManager().unsetTitleFor(p);
 						}
@@ -153,9 +170,11 @@ public class AmazingCreator {
 				private void runTask() {
 					if (task == null) {
 						task = Bukkit.getScheduler().runTaskTimerAsynchronously(AmazingTitles.getInstance(), () -> {
-							if (duration == durationCounter) {
-								delete();
-								return;
+							if (duration != -999) {
+								if (duration == durationCounter) {
+									delete();
+									return;
+								}
 							}
 							++tickCounter;
 							if (tickCounter%speed==0) {

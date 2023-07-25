@@ -1,5 +1,10 @@
+# Message that appears after dispatching Title
 DispatchingMessage:
+
+  # Turn on/off message
   Enabled: true
+
+  # Customize message
   Message:
     - ""
     - "&eAT &7-> &eTitle &7dispatcher info:"
@@ -10,6 +15,32 @@ DispatchingMessage:
     - "  &7Duration: &e%duration%"
     - "  &7Creation Took: &e%creation%ms"
     - ""
+
+# Permanent ActionBar
+StaticBar:
+
+  # Turn on/off static bar
+  Enabled: true
+
+  # Turn on/off notifications in this StaticBar
+  Notifications: true
+
+  # Turn on/off overrides by custom Animations
+  Animations: true
+
+  # Insert here name of the animation, for Static-Bar
+  Animation: WAVES
+
+  # Arguments of Animation, ([] = none)
+  Animation_Arguments:
+    - "#ffcc00"
+    - "#000000"
+
+  # Speed of animation (1-20)
+  Speed: 1
+
+  # Text
+  Text: "Welcome to our server!"
 
 # If you want to turn off any extension, use 'false' value
 ExtensionsManager:

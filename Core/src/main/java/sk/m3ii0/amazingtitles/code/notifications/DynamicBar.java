@@ -14,7 +14,8 @@ public class DynamicBar {
      * */
 
     private static final Map<UUID, DynamicBar> bars = new HashMap<>();
-
+    
+    
     /*
      *
      * Builders
@@ -45,6 +46,7 @@ public class DynamicBar {
     private final Player player;
     private final LinkedHashMap<String, BarNotification> notifications = new LinkedHashMap<>();
     private final HashMap<String, BarNotification> overrides = new HashMap<>();
+    private boolean showBar = true;
 
     /*
      *
@@ -70,6 +72,14 @@ public class DynamicBar {
         return overrides;
     }
 
+    public void enableBar() {
+        showBar = true;
+    }
+    
+    public void disableBar() {
+        showBar = false;
+    }
+    
     public void removeNotificationsInstantly() {
         notifications.clear();
         overrides.clear();
@@ -92,7 +102,23 @@ public class DynamicBar {
     }
 
     public void update(long time) {
-        if (notifications.isEmpty()) return;
+        if (!showBar) return;
+        if (notifications.isEmpty() && !AmazingTitles.isStaticBar()) return;
+        String finalText;
+        if (AmazingTitles.isStaticBar() && !notifications.isEmpty()) {
+            if (AmazingTitles.isStaticBarNotifications()) {
+                finalText = createText(time);
+            } else {
+                finalText = AmazingTitles.getStaticBarText();
+            }
+        } else if (AmazingTitles.isStaticBar()) {
+            finalText = AmazingTitles.getStaticBarText();
+        } else return;
+        Object packet = AmazingTitles.getProvider().createActionbarPacket(finalText);
+        AmazingTitles.getProvider().sendActionbar(player, packet);
+    }
+    
+    private String createText(long time) {
         StringBuilder text = new StringBuilder();
         Set<String> toRemove = new HashSet<>();
         int counter = 0;
@@ -133,8 +159,7 @@ public class DynamicBar {
         if (text.length() > 1) {
             finalText = text.substring(0, text.length() - 1);
         }
-        Object packet = AmazingTitles.getProvider().createActionbarPacket(finalText);
-        AmazingTitles.getProvider().sendActionbar(player, packet);
+        return finalText;
     }
 
     public void unregister() {
