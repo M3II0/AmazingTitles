@@ -57,7 +57,7 @@ public class TitleDispatcher {
             }
             if (text.length() > 0) text = new StringBuilder(text.substring(1));
             boolean silent = text.toString().endsWith(" -s");
-            String[] split = text.toString().replaceAll(" -s$", "").split("\\\\n\\\\");
+            String[] split = text.toString().replaceAll(" -s$", "").split(AmazingTitles.getLineSeparator());
             String input = split[0];
             String subText = "";
             if (split.length > 1) {

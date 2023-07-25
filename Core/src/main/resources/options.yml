@@ -16,6 +16,8 @@ DispatchingMessage:
     - "  &7Creation Took: &e%creation%ms"
     - ""
 
+LineSeparator: "%subtitle%"
+
 # Permanent ActionBar
 StaticBar:
 

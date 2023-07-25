@@ -49,10 +49,12 @@ public class AmazingTitles extends JavaPlugin implements Listener {
 	private static NmsProvider provider;
 	private static Metrics metrics;
 	
-	private static final String version = "3.6";
+	private static final String version = "3.8";
 	private static final Map<UUID, DynamicBar> bars = new HashMap<>();
 	private static final Map<String, AmazingCreator> customComponents = new HashMap<>();
 	private static File extensions;
+	
+	private static String lineSeparator;
 	
 	private static boolean staticBar;
 	private static boolean staticBarNotifications;
@@ -130,6 +132,7 @@ public class AmazingTitles extends JavaPlugin implements Listener {
 		}
 		staticBarArgs = s;
 		staticBarFrames = staticBarAnimation.getFramesBuilder().frameBuilder(ActionType.ACTION_BAR, ColorTranslator.colorize(options.getString("StaticBar.Text", "Set your text!")), s);
+		lineSeparator = options.getString("LineSeparator", "%subtitle%");
 		Bukkit.getScheduler().runTaskTimerAsynchronously(this, () -> {
 			long sysTime = System.currentTimeMillis();
 			for (DynamicBar bar : bars.values()) {
@@ -162,6 +165,9 @@ public class AmazingTitles extends JavaPlugin implements Listener {
 	*
 	* */
 	
+	public static String getLineSeparator() {
+		return lineSeparator;
+	}
 	public static boolean isStaticBar() {
 		return staticBar;
 	}
