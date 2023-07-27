@@ -297,8 +297,7 @@ public class AmazingTitles extends JavaPlugin implements Listener {
 						String result = s.hasNext() ? s.next() : "";
 						String main = result.replace("Class:", "").replace(" ", "");
 						Enumeration<JarEntry> e = jarFile.entries();
-						System.out.println(this.getClass().getProtectionDomain().getCodeSource().getLocation());
-						URL[] urls = {f.toURI().toURL(), new URL("jar:file:" + extensionFile.getPath() + "!/")};
+						URL[] urls = {new URL("jar:file:" + extensionFile.getPath() + "!/")};
 						try (URLClassLoader cl = new URLClassLoader(urls, getClassLoader())) {
 							while (e.hasMoreElements()) {
 								JarEntry je = e.nextElement();
