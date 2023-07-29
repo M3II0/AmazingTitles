@@ -102,18 +102,22 @@ public class DynamicBar {
     }
 
     public void update(long time) {
-        if (!showBar) return;
+        if (!showBar && AmazingTitles.isStaticBar()) return;
         if (notifications.isEmpty() && !AmazingTitles.isStaticBar()) return;
         String finalText;
-        if (AmazingTitles.isStaticBar() && !notifications.isEmpty()) {
-            if (AmazingTitles.isStaticBarNotifications()) {
-                finalText = createText(time);
+        if (!notifications.isEmpty()) {
+            if (AmazingTitles.isStaticBar()) {
+                if (AmazingTitles.isStaticBarNotifications()) {
+                    finalText = createText(time);
+                } else {
+                    finalText = AmazingTitles.getStaticBarText();
+                }
             } else {
-                finalText = AmazingTitles.getStaticBarText();
+                finalText = createText(time);
             }
-        } else if (AmazingTitles.isStaticBar()) {
+        } else {
             finalText = AmazingTitles.getStaticBarText();
-        } else return;
+        }
         Object packet = AmazingTitles.getProvider().createActionbarPacket(finalText);
         AmazingTitles.getProvider().sendActionbar(player, packet);
     }

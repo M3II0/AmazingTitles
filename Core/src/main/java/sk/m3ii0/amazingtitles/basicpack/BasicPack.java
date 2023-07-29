@@ -210,7 +210,7 @@ public class BasicPack {
 			String aft = input.substring(input.length()/2);
 			for (int i = 30; i > -1; i--) {
 				int newSpaces = lastSpaces-(i*6);
-				String formattedSpaces = spaces.substring(newSpaces+1);
+				String formattedSpaces = spaces.substring(newSpaces);
 				String format = pre + formattedSpaces + aft;
 				frames.add(ColorTranslator.colorize(format));
 			}
