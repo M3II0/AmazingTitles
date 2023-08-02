@@ -49,7 +49,7 @@ public class AmazingTitles extends JavaPlugin implements Listener {
 	private static NmsProvider provider;
 	private static Metrics metrics;
 	
-	private static final String version = "3.9";
+	private static final String version = "4.0";
 	private static final Map<UUID, DynamicBar> bars = new HashMap<>();
 	private static final Map<String, AmazingCreator> customComponents = new HashMap<>();
 	private static File extensions;

@@ -49,7 +49,7 @@ public class AmazingCreator {
 	public List<String> getComplete(int arg) {
 		int length = competitions.length;
 		if (arg < length) return competitions[arg];
-		else if (infinite) return StringUtils.of("<Text\\n\\SubText>");
+		else if (infinite) return StringUtils.of("<Text" + AmazingTitles.getLineSeparator() + "SubText>");
 		return new ArrayList<>();
 	}
 	
