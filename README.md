@@ -24,7 +24,7 @@
 - Interactive message builder
 
 # Available Extensions
-- Summer Extension
+- Summer Extension | [⬇️ Download](https://www.spigotmc.org/resources/111223/)
 - Bounce Extension (In development)
 - Timer Extension (In development)
 
