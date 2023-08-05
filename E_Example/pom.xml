@@ -10,7 +10,7 @@
     </parent>
 
     <groupId>sk.m3ii0.amazingtitles.example</groupId>
-    <artifactId>ExtensionExample</artifactId>
+    <artifactId>E_Example</artifactId>
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>

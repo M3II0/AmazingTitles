@@ -9,15 +9,14 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <groupId>sk.m3ii0.amazingtitles.extension.timerextension</groupId>
-    <artifactId>TimerExtension</artifactId>
+    <groupId>sk.m3ii0.amazingtitles.extension.summer</groupId>
+    <artifactId>E_Summer</artifactId>
 
     <properties>
-        <maven.compiler.source>19</maven.compiler.source>
-        <maven.compiler.target>19</maven.compiler.target>
+        <maven.compiler.source>8</maven.compiler.source>
+        <maven.compiler.target>8</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
-
     <dependencies>
         <dependency>
             <groupId>sk.m3ii0.amazingtitles.code.api</groupId>

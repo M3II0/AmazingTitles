@@ -9,7 +9,8 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>TextBounceExtension</artifactId>
+    <groupId>sk.m3ii0.amazingtitles.extension.timerextension</groupId>
+    <artifactId>E_Timer</artifactId>
 
     <properties>
         <maven.compiler.source>19</maven.compiler.source>
