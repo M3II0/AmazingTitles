@@ -1,5 +1,6 @@
 package sk.m3ii0.amazingtitles.code.internal;
 
+import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 import sk.m3ii0.amazingtitles.code.internal.configuration.CustomConfiguration;
 import sk.m3ii0.amazingtitles.code.internal.loaders.PluginLoader;
@@ -21,6 +22,7 @@ public class Booter extends JavaPlugin {
 	private static CustomConfiguration customConfiguration;
 	private static NmsProvider nmsProvider;
 	private static PluginMode pluginMode;
+	private static Plugin instance;
 	
 	/*
 	*
@@ -30,6 +32,9 @@ public class Booter extends JavaPlugin {
 	
 	@Override
 	public void onLoad() {
+		
+		// Load plugin
+		instance = this;
 		
 		// Load custom configuration
 		customConfiguration = new CustomConfiguration(this);
@@ -86,6 +91,10 @@ public class Booter extends JavaPlugin {
 	* API
 	*
 	* */
+	
+	public static Plugin getInstance() {
+		return instance;
+	}
 	
 	public static CustomConfiguration getCustomConfiguration() {
 		return customConfiguration;

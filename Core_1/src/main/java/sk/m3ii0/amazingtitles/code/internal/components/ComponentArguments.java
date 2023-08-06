@@ -14,26 +14,13 @@ public class ComponentArguments {
 	/*
 	* RawArguments
 	* -> [args=value,...]
+	*
+	*
+	*
 	* */
 	
-	public static ComponentArguments create(String rawArguments, ComponentArguments defaults) {
-		String mainText = defaults.getMainText();
-		String subText = defaults.getSubText();
-		BarColor componentColor = defaults.getComponentColor();
-		int duration = defaults.getDuration();
-		int speed = defaults.getSpeed();
-		DisplayType displayType = defaults.getDisplayType();
-		if (rawArguments.length() > 3) {
-			rawArguments = rawArguments.substring(1, rawArguments.length()-1);
-			for (String data : rawArguments.split(",")) {
-				// Read & write
-			}
-		}
-		return new ComponentArguments(mainText, subText, componentColor, duration, speed, displayType);
-	}
-	
-	public static ComponentArguments create(String mainText, String subText, BarColor componentColor, int duration, int speed, DisplayType displayType) {
-		return new ComponentArguments(mainText, subText, componentColor, duration, speed, displayType);
+	public static ComponentArguments create(String mainText, String subText, BarColor componentColor, int duration, int fps, DisplayType displayType) {
+		return new ComponentArguments(mainText, subText, componentColor, duration, fps, displayType);
 	}
 	
 	/*
@@ -46,7 +33,7 @@ public class ComponentArguments {
 	private final String subText;
 	private final BarColor componentColor;
 	private final int duration;
-	private final int speed;
+	private final int fps;
 	private final DisplayType displayType;
 	
 	/*
@@ -55,12 +42,12 @@ public class ComponentArguments {
 	*
 	* */
 	
-	private ComponentArguments(String mainText, String subText, BarColor componentColor, int duration, int speed, DisplayType displayType) {
+	private ComponentArguments(String mainText, String subText, BarColor componentColor, int duration, int fps, DisplayType displayType) {
 		this.mainText = mainText;
 		this.subText = subText;
 		this.componentColor = componentColor;
 		this.duration = duration;
-		this.speed = speed;
+		this.fps = fps;
 		this.displayType = displayType;
 	}
 	
@@ -86,8 +73,8 @@ public class ComponentArguments {
 		return duration;
 	}
 	
-	public int getSpeed() {
-		return speed;
+	public int getFps() {
+		return fps;
 	}
 	
 	public DisplayType getDisplayType() {
