@@ -18,6 +18,7 @@ public class SmartBar {
 	private final boolean staticAnimation;
 	private final boolean staticAnimationNotifications;
 	
+	private boolean hide = true;
 	private List<String> staticAnimationContent = new ArrayList<>();
 	private Map<String, SmartNotification> notificationsContent = new HashMap<>();
 	
@@ -51,7 +52,12 @@ public class SmartBar {
 		}
 	}
 	
+	public void setHide(boolean hide) {
+		this.hide = hide;
+	}
+	
 	public void prepareAndTryToSend() {
+		if (hide) return;
 		final StringBuilder text = new StringBuilder();
 		if (staticAnimation) {
 			if (staticAnimationNotifications) {
@@ -66,6 +72,7 @@ public class SmartBar {
 		} else if (notifications) {
 			text.append(prepareNotifications());
 		}
+		if (text.isEmpty()) return;
 		final Object packet = Booter.getNmsProvider().createActionbarPacket(text.toString());
 		Booter.getNmsProvider().sendActionbar(owner, packet);
 	}

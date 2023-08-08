@@ -5,6 +5,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import sk.m3ii0.amazingtitles.code.internal.configuration.CustomConfiguration;
 import sk.m3ii0.amazingtitles.code.internal.loaders.PluginLoader;
 import sk.m3ii0.amazingtitles.code.internal.loaders.PluginMode;
+import sk.m3ii0.amazingtitles.code.internal.smartbar.SmartBarManager;
 import sk.m3ii0.amazingtitles.code.internal.spi.NmsBuilder;
 import sk.m3ii0.amazingtitles.code.internal.spi.NmsProvider;
 import sk.m3ii0.amazingtitles.code.internal.utils.ColorTranslator;
@@ -23,6 +24,7 @@ public class Booter extends JavaPlugin {
 	private static NmsProvider nmsProvider;
 	private static PluginMode pluginMode;
 	private static Plugin instance;
+	private static SmartBarManager smartBarManager;
 	
 	/*
 	*
@@ -62,7 +64,8 @@ public class Booter extends JavaPlugin {
 					pluginMode = PluginMode.WITHOUT_RGB;
 				}
 				
-				
+				// Load smart bar manager
+				smartBarManager = new SmartBarManager(this);
 				
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -94,6 +97,10 @@ public class Booter extends JavaPlugin {
 	
 	public static Plugin getInstance() {
 		return instance;
+	}
+	
+	public static SmartBarManager getSmartBarManager() {
+		return smartBarManager;
 	}
 	
 	public static CustomConfiguration getCustomConfiguration() {
