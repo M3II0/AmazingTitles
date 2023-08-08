@@ -24,6 +24,9 @@ public class AnimationBuilder {
 	*
 	* */
 	
+	private static List<String> textArgument = List.of(
+	 "(Animation Text - visit wiki for more)"
+	);
 	private ComponentArguments componentArguments = ComponentArguments.create("Default Text", "Default SubText", BarColor.WHITE, 1, 20, DisplayType.TITLE);
 	private FramesBuilder framesBuilder = (componentArguments) -> {
 		String mainText = componentArguments.getMainText();
@@ -39,7 +42,7 @@ public class AnimationBuilder {
 	
 	private final AnimationType animationType;
 	private final boolean requiresHex;
-	private final String[] arguments;
+	private final List<String> arguments;
 	
 	/*
 	*
@@ -50,7 +53,7 @@ public class AnimationBuilder {
 	public AnimationBuilder(AnimationType animationType, boolean requiresHex, String... arguments) {
 		this.animationType = animationType;
 		this.requiresHex = requiresHex;
-		this.arguments = arguments;
+		this.arguments = new ArrayList<>(List.of(arguments));
 	}
 	
 	/*
@@ -67,8 +70,15 @@ public class AnimationBuilder {
 		return requiresHex;
 	}
 	
-	public String[] getArguments() {
+	public List<String> getArguments() {
 		return arguments;
+	}
+	
+	public List<String> getArgumentAt(int position) {
+		if (position >= arguments.size()) {
+			return textArgument;
+		}
+		return List.of(arguments.get(position));
 	}
 	
 	/*
