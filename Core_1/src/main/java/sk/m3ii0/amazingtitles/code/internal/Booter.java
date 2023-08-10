@@ -1,8 +1,11 @@
 package sk.m3ii0.amazingtitles.code.internal;
 
+import org.bukkit.command.Command;
 import org.bukkit.event.HandlerList;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
+import sk.m3ii0.amazingtitles.code.api.AmazingTitles;
+import sk.m3ii0.amazingtitles.code.internal.commands.PluginCommand;
 import sk.m3ii0.amazingtitles.code.internal.configuration.CustomConfiguration;
 import sk.m3ii0.amazingtitles.code.internal.loaders.PluginLoader;
 import sk.m3ii0.amazingtitles.code.internal.loaders.PluginMode;
@@ -26,6 +29,7 @@ public class Booter extends JavaPlugin {
 	private static PluginMode pluginMode;
 	private static Plugin instance;
 	private static SmartBarManager smartBarManager;
+	private static PluginCommand pluginCommand;
 	
 	/*
 	*
@@ -68,6 +72,12 @@ public class Booter extends JavaPlugin {
 				// Load smart bar manager
 				smartBarManager = new SmartBarManager(this);
 				
+				// Register command
+				org.bukkit.command.PluginCommand command = getCommand("amazingtitles");
+				pluginCommand = new PluginCommand(this);
+				command.setExecutor(pluginCommand);
+				command.setTabCompleter(pluginCommand);
+				
 			} catch (Exception e) {
 				e.printStackTrace();
 				pluginMode = PluginMode.UNEXPECTED_ERROR;
@@ -101,6 +111,10 @@ public class Booter extends JavaPlugin {
 	
 	public static Plugin getInstance() {
 		return instance;
+	}
+	
+	public static PluginCommand getPluginCommand() {
+		return pluginCommand;
 	}
 	
 	public static SmartBarManager getSmartBarManager() {

@@ -53,7 +53,7 @@ public class PluginCommand implements CommandExecutor, TabExecutor {
 	
 	@Override
 	public boolean onCommand(CommandSender s, Command cmd, String label, String[] args) {
-		return parseCommand(s, cmd, label, args);
+		return parseCommand(s, args);
 	}
 	
 	/*
@@ -109,7 +109,7 @@ public class PluginCommand implements CommandExecutor, TabExecutor {
 		return value;
 	}
 	
-	private boolean parseCommand(CommandSender s, Command cmd, String label, String[] args) {
+	public boolean parseCommand(CommandSender s, String[] args) {
 		if (args.length == 0) {
 			return pluginActions.readAndExecute(s, args);
 		}

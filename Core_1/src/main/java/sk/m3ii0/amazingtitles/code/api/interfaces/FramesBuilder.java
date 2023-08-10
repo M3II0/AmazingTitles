@@ -6,6 +6,6 @@ import java.util.List;
 
 public interface FramesBuilder {
 	
-	List<String> buildFrames(ComponentArguments arguments);
+	List<String> buildFrames(ComponentArguments arguments, String[] args);
 	
 }

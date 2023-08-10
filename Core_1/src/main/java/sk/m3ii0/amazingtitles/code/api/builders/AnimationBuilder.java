@@ -28,7 +28,7 @@ public class AnimationBuilder {
 	 "(Animation Text - visit wiki for more)"
 	);
 	private ComponentArguments componentArguments = ComponentArguments.create("Default Text", "Default SubText", BarColor.WHITE, 1, 20, DisplayType.TITLE);
-	private FramesBuilder framesBuilder = (componentArguments) -> {
+	private FramesBuilder framesBuilder = (componentArguments, args) -> {
 		String mainText = componentArguments.getMainText();
 		return new ArrayList<>(Collections.singletonList(mainText));
 	};
@@ -135,7 +135,7 @@ public class AnimationBuilder {
 		AmazingTitles.registerCustomAnimation(name, this);
 	}
 	
-	public AnimationComponent createComponent(ComponentArguments arguments) {
+	public AnimationComponent createComponent(ComponentArguments arguments, String[] args) {
 		String mainText = (overrideMainText != null)? overrideMainText : (arguments.getMainText() != null)? arguments.getMainText() : componentArguments.getMainText();
 		String subText = (overrideSubText != null)? overrideSubText : (arguments.getSubText() != null)? arguments.getSubText() : componentArguments.getSubText();
 		BarColor barColor = (overrideBarColor != null)? overrideBarColor : (arguments.getComponentColor() != null)? arguments.getComponentColor() : componentArguments.getComponentColor();
@@ -143,7 +143,7 @@ public class AnimationBuilder {
 		int fps = (overrideFps != -99)? overrideFps : (arguments.getFps() > 0)? arguments.getFps() : componentArguments.getFps();
 		DisplayType displayType = (overrideDisplayType != null)? overrideDisplayType : (arguments.getDisplayType() != null)? arguments.getDisplayType() : componentArguments.getDisplayType();
 		ComponentArguments builtArguments = ComponentArguments.create(mainText, subText, barColor, duration, fps, displayType);
-		List<String> frames = framesBuilder.buildFrames(builtArguments);
+		List<String> frames = framesBuilder.buildFrames(builtArguments, args);
 		if (animationType == AnimationType.REPEATING) {
 			return new RepeatingAnimationComponent(Booter.getInstance(), frames, mainText, subText, fps, duration, displayType, barColor);
 		}

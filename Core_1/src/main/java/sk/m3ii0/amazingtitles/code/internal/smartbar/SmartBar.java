@@ -19,8 +19,9 @@ public class SmartBar {
 	private final boolean staticAnimationNotifications;
 	
 	private boolean hide = true;
-	private List<String> staticAnimationContent = new ArrayList<>();
-	private Map<String, SmartNotification> notificationsContent = new HashMap<>();
+	private final List<String> staticAnimationContent = new ArrayList<>();
+	private int staticAnimationContentCounter = 0;
+	private final Map<String, SmartNotification> notificationsContent = new HashMap<>();
 	
 	/*
 	*
@@ -62,12 +63,12 @@ public class SmartBar {
 		if (staticAnimation) {
 			if (staticAnimationNotifications) {
 				if (notificationsContent.isEmpty()) {
-					// Set here current frame from static notification
+					text.append(pickCurrentStaticFrame());
 				} else {
 					text.append(prepareNotifications());
 				}
 			} else {
-				// Set here current frame from static notification
+				text.append(pickCurrentStaticFrame());
 			}
 		} else if (notifications) {
 			text.append(prepareNotifications());
@@ -101,6 +102,16 @@ public class SmartBar {
 			notificationsContent.remove(var);
 		}
 		return notificationsText.substring(1);
+	}
+	
+	private String pickCurrentStaticFrame() {
+		String frame = staticAnimationContent.get(staticAnimationContentCounter);
+		++staticAnimationContentCounter;
+		if (staticAnimationContentCounter >= staticAnimationContent.size()) {
+			staticAnimationContentCounter = 0;
+		}
+		if (frame == null) return "";
+		return frame;
 	}
 	
 }
