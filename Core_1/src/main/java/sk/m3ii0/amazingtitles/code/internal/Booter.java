@@ -1,5 +1,6 @@
 package sk.m3ii0.amazingtitles.code.internal;
 
+import org.bukkit.event.HandlerList;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 import sk.m3ii0.amazingtitles.code.internal.configuration.CustomConfiguration;
@@ -81,12 +82,15 @@ public class Booter extends JavaPlugin {
 		
 		// Send report about enabling
 		sendEnableReport(took, pluginMode);
-	
+		
 	}
 	
 	@Override
 	public void onDisable() {
 	
+		// Unregister listeners
+		HandlerList.unregisterAll(this);
+		
 	}
 	
 	/*

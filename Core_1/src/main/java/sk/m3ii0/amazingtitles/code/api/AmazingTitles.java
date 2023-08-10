@@ -3,12 +3,12 @@ package sk.m3ii0.amazingtitles.code.api;
 import org.bukkit.entity.Player;
 import sk.m3ii0.amazingtitles.code.api.builders.AnimationBuilder;
 import sk.m3ii0.amazingtitles.code.internal.Booter;
+import sk.m3ii0.amazingtitles.code.internal.components.AnimationComponent;
+import sk.m3ii0.amazingtitles.code.internal.components.ComponentArguments;
 import sk.m3ii0.amazingtitles.code.internal.smartbar.SmartBar;
 import sk.m3ii0.amazingtitles.code.internal.smartbar.SmartNotification;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 
 public class AmazingTitles {
 	
@@ -44,17 +44,45 @@ public class AmazingTitles {
 		return animations.containsKey(name);
 	}
 	
+	public static Collection<AnimationBuilder> getAnimations() {
+		return animations.values();
+	}
+	
+	public static Set<String> getAnimationNames() {
+		return animations.keySet();
+	}
+	
+	public static void sendAnimation(String animation, ComponentArguments arguments, Collection<Player> players) {
+		AnimationBuilder builder = animations.get(animation);
+		if (builder != null) {
+			AnimationComponent component = builder.createComponent(arguments);
+			component.prepare();
+			component.addReceivers(players);
+			component.run();
+		}
+	}
+	
+	public static void sendAnimation(String animation, ComponentArguments arguments, Player... players) {
+		AnimationBuilder builder = animations.get(animation);
+		if (builder != null) {
+			AnimationComponent component = builder.createComponent(arguments);
+			component.prepare();
+			component.addReceivers(players);
+			component.run();
+		}
+	}
+	
 	/*
 	*
 	* Smart bar
 	*
 	* */
 	
-	public SmartBar getSmartBar(Player player) {
+	public static SmartBar getSmartBar(Player player) {
 		return Booter.getSmartBarManager().getBar(player);
 	}
 	
-	public void sendNotification(String customId, SmartNotification notification, Player... players) {
+	public static void sendNotification(String customId, SmartNotification notification, Collection<Player> players) {
 		for (Player var : players) {
 			SmartBar bar = getSmartBar(var);
 			if (bar != null) {
@@ -63,22 +91,24 @@ public class AmazingTitles {
 		}
 	}
 	
-	public void sendNotification(SmartNotification notification, Player... players) {
-		sendNotification(new SmartNotification[]{notification}, players);
+	public static void sendNotification(SmartNotification notification, Collection<Player> players) {
+		sendNotification(UUID.randomUUID().toString(), notification, players);
 	}
 	
-	public void sendNotification(SmartNotification[] notifications, Player... players) {
+	public static void sendNotification(String customId, SmartNotification notification, Player... players) {
 		for (Player var : players) {
 			SmartBar bar = getSmartBar(var);
 			if (bar != null) {
-				for (SmartNotification notification : notifications) {
-					bar.setNotification(UUID.randomUUID().toString(), notification);
-				}
+				bar.setNotification(customId, notification);
 			}
 		}
 	}
 	
-	public void hideSmartBar(Player player) {
+	public static void sendNotification(SmartNotification notification, Player... players) {
+		sendNotification(UUID.randomUUID().toString(), notification, players);
+	}
+	
+	public static void hideSmartBar(Player player) {
 		SmartBar bar = getSmartBar(player);
 		if (bar == null) {
 			return;
@@ -86,7 +116,7 @@ public class AmazingTitles {
 		bar.setHide(true);
 	}
 	
-	public void showSmartBar(Player player) {
+	public static void showSmartBar(Player player) {
 		SmartBar bar = getSmartBar(player);
 		if (bar == null) {
 			return;
