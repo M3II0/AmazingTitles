@@ -1,7 +1,7 @@
 package sk.m3ii0.amazingtitles.code.providers.R1_18_R1;
 
-import sk.m3ii0.amazingtitles.code.spi.NmsBuilder;
-import sk.m3ii0.amazingtitles.code.spi.NmsProvider;
+import sk.m3ii0.amazingtitles.code.internal.spi.NmsBuilder;
+import sk.m3ii0.amazingtitles.code.internal.spi.NmsProvider;
 
 public class R1_18_R1_Builder implements NmsBuilder {
 	

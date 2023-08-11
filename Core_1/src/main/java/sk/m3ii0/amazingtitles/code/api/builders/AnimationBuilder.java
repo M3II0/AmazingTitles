@@ -62,6 +62,10 @@ public class AnimationBuilder {
 	*
 	* */
 	
+	public FramesBuilder getFramesBuilder() {
+		return framesBuilder;
+	}
+	
 	public AnimationType getAnimationType() {
 		return animationType;
 	}

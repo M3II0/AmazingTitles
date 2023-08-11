@@ -33,6 +33,10 @@ public class SmartBarManager {
 	*
 	* */
 	
+	public Map<Player, SmartBar> getBars() {
+		return bars;
+	}
+	
 	public void insertBar(Player player, SmartBar bar) {
 		this.bars.put(player, bar);
 	}

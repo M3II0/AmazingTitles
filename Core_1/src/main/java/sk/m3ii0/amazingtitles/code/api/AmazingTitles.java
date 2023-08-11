@@ -5,6 +5,8 @@ import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import sk.m3ii0.amazingtitles.code.api.builders.AnimationBuilder;
 import sk.m3ii0.amazingtitles.code.internal.Booter;
+import sk.m3ii0.amazingtitles.code.internal.commands.PluginCommand;
+import sk.m3ii0.amazingtitles.code.internal.commands.commandreaders.CommandHandler;
 import sk.m3ii0.amazingtitles.code.internal.components.AnimationComponent;
 import sk.m3ii0.amazingtitles.code.internal.components.ComponentArguments;
 import sk.m3ii0.amazingtitles.code.internal.interactivemessages.InteractiveMessageHelper;
@@ -54,6 +56,20 @@ public class AmazingTitles {
 	
 	/*
 	*
+	* Command handlers
+	*
+	* */
+	
+	public static void registerCommandHandler(String argument, CommandHandler commandHandler) {
+		PluginCommand.addHandler(argument, commandHandler);
+	}
+	
+	public static void unregisterCommandHandler(String argument) {
+		PluginCommand.removeHandler(argument);
+	}
+	
+	/*
+	*
 	* Animations
 	*
 	* */
@@ -62,6 +78,10 @@ public class AmazingTitles {
 		if (name == null || animationBuilder == null) return;
 		name = name.replace(" ", "_").toUpperCase();
 		animations.put(name, animationBuilder);
+	}
+	
+	public static void unregisterCustomAnimation(String name) {
+		animations.remove(name);
 	}
 	
 	public static AnimationBuilder getCustomAnimation(String name) {

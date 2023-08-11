@@ -5,6 +5,6 @@ main: sk.m3ii0.amazingtitles.code.internal.Booter
 author: M3II0
 commands:
   amazingtitles:
-    permission: "amazingtitles.admin"
+    permission: "amazingtitles.command"
     aliases:
       - at

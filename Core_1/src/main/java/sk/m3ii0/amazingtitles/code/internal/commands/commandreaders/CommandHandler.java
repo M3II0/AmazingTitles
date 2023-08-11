@@ -10,4 +10,8 @@ public interface CommandHandler {
 	
 	List<String> readAndReturn(CommandSender s, String[] args);
 	
+	String permission();
+	
+	HandlerType handlerType();
+	
 }

@@ -19,10 +19,9 @@
 
     <dependencies>
         <dependency>
-            <groupId>sk.m3ii0.amazingtitles.code.api</groupId>
-            <artifactId>Core</artifactId>
+            <groupId>sk.m3ii0.amazingtitles.code</groupId>
+            <artifactId>Core_1</artifactId>
             <version>1.0-SNAPSHOT</version>
-            <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>sk.m3ii0.amazingtitles.code.providers</groupId>

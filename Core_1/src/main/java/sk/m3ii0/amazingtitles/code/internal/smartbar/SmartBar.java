@@ -18,8 +18,8 @@ public class SmartBar {
 	private final boolean staticAnimation;
 	private final boolean staticAnimationNotifications;
 	
-	private boolean hide = true;
-	private final List<String> staticAnimationContent = new ArrayList<>();
+	private boolean hide = false;
+	private static List<String> staticAnimationContent = new ArrayList<>();
 	private int staticAnimationContentCounter = 0;
 	private final Map<String, SmartNotification> notificationsContent = new HashMap<>();
 	
@@ -42,7 +42,15 @@ public class SmartBar {
 	*
 	* */
 	
+	public static void setStaticAnimationContent(List<String> staticAnimationContent) {
+		SmartBar.staticAnimationContent = staticAnimationContent;
+	}
+	
 	public void setNotification(String id, SmartNotification notification) {
+		double time = notification.getTime();
+		for (SmartNotification notification1 : notificationsContent.values()) {
+			notification1.extend(time);
+		}
 		this.notificationsContent.put(id, notification);
 	}
 	
@@ -82,10 +90,24 @@ public class SmartBar {
 		final StringBuilder notificationsText = new StringBuilder();
 		int counter = 0;
 		long mills = System.currentTimeMillis();
-		int size = notificationsContent.size()-1;
+		int size = notificationsContent.size();
 		final Set<String> toRemove = new HashSet<>();
 		for (Map.Entry<String, SmartNotification> entry : notificationsContent.entrySet()) {
-			boolean latest = counter == size;
+			int next = counter+1;
+			boolean latest = true;
+			if (next < size) {
+				SmartNotification nextOne = null;
+				int internalCounter = 0;
+				for (Map.Entry<String, SmartNotification> entry1 : notificationsContent.entrySet()) {
+					if (internalCounter == next) {
+						nextOne = entry1.getValue();
+					}
+					++internalCounter;
+				}
+				if (nextOne != null) {
+					if (!nextOne.isEnding(mills)) latest = false;
+				}
+			}
 			String key = entry.getKey();
 			SmartNotification value = entry.getValue();
 			if (!value.isStarted()) {
@@ -101,6 +123,7 @@ public class SmartBar {
 		for (String var : toRemove) {
 			notificationsContent.remove(var);
 		}
+		if (notificationsText.length() < 2) return "";
 		return notificationsText.substring(1);
 	}
 	

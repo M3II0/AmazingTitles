@@ -7,7 +7,7 @@ import net.minecraft.server.v1_16_R3.PlayerConnection;
 import org.bukkit.craftbukkit.v1_16_R3.entity.CraftPlayer;
 import org.bukkit.craftbukkit.v1_16_R3.util.CraftChatMessage;
 import org.bukkit.entity.Player;
-import sk.m3ii0.amazingtitles.code.spi.NmsProvider;
+import sk.m3ii0.amazingtitles.code.internal.spi.NmsProvider;
 
 import java.lang.reflect.Field;
 

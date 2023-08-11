@@ -1,16 +1,25 @@
 package sk.m3ii0.amazingtitles.code.internal.commands;
 
+import net.md_5.bungee.api.chat.BaseComponent;
+import net.md_5.bungee.api.chat.ClickEvent;
+import net.md_5.bungee.api.chat.ComponentBuilder;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabExecutor;
 import org.bukkit.plugin.Plugin;
-import sk.m3ii0.amazingtitles.code.internal.commands.commandreaders.subs.*;
-import sk.m3ii0.amazingtitles.code.internal.utils.ColorTranslator;
-import sk.m3ii0.amazingtitles.code.internal.utils.Permissions;
+import sk.m3ii0.amazingtitles.code.internal.commands.commandreaders.CommandHandler;
+import sk.m3ii0.amazingtitles.code.internal.commands.commandreaders.subs.CHAnimations;
+import sk.m3ii0.amazingtitles.code.internal.commands.commandreaders.subs.CHMessages;
+import sk.m3ii0.amazingtitles.code.internal.commands.commandreaders.subs.CHNotifications;
+import sk.m3ii0.amazingtitles.code.internal.commands.commandreaders.subs.CHPluginActions;
+import sk.m3ii0.amazingtitles.code.internal.utils.CommandUtils;
+import sk.m3ii0.amazingtitles.code.internal.utils.MessageUtils;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class PluginCommand implements CommandExecutor, TabExecutor {
 	
@@ -20,11 +29,7 @@ public class PluginCommand implements CommandExecutor, TabExecutor {
 	*
 	* */
 	
-	private final CHAnimations animations;
-	private final CHMessages messages;
-	private final CHNotifications notifications;
-	private final CHPlayerSelector playerSelector;
-	private final CHPluginActions pluginActions;
+	private static final Map<String, CommandHandler> handlers = new HashMap<>();
 	
 	/*
 	*
@@ -33,11 +38,10 @@ public class PluginCommand implements CommandExecutor, TabExecutor {
 	* */
 	
 	public PluginCommand(Plugin plugin) {
-		this.animations = new CHAnimations();
-		this.messages = new CHMessages();
-		this.notifications = new CHNotifications();
-		this.playerSelector = new CHPlayerSelector(plugin);
-		this.pluginActions = new CHPluginActions();
+		handlers.put("sendAnimation", new CHAnimations());
+		handlers.put("sendNotification", new CHNotifications());
+		handlers.put("sendMessage", new CHMessages());
+		handlers.put("pluginActions", new CHPluginActions());
 	}
 	
 	/*
@@ -69,41 +73,35 @@ public class PluginCommand implements CommandExecutor, TabExecutor {
 		
 		/*
 		*
-		* 0 - Actions
+		* 0 - Handler list
 		*
 		* */
 		if (args.length == 1) {
-			if (s.hasPermission(Permissions.RELOAD_PERMISSION)) value.add("reloadPlugin");
-			if (s.hasPermission(Permissions.NOTIFICATION_PERMISSION)) value.add("sendNotification");
-			if (s.hasPermission(Permissions.ANIMATION_PERMISSION)) value.add("sendAnimation");
-			if (s.hasPermission(Permissions.INTERACTIVE_MESSAGE_PERMISSION)) value.add("sendMessage");
+			String begin = args[0];
+			for (Map.Entry<String, CommandHandler> entry : handlers.entrySet()) {
+				CommandHandler handler = entry.getValue();
+				String argument = entry.getKey();
+				if (s.hasPermission(handler.permission())) {
+					value.add(argument);
+				}
+			}
+			return CommandUtils.copyAllStartingWith(value, begin);
 		}
 		
 		/*
 		*
-		* 1 - PlayerSelection
+		* 1 - Handler return
 		*
 		* */
-		if (args.length == 2) {
-			String[] builtArgs = new String[1];
-			builtArgs[0] = args[1];
-			if (pluginActions.isPluginAction(s, builtArgs)) return pluginActions.readAndReturn(s, builtArgs);
-			return playerSelector.readAndReturn(s, builtArgs);
-		}
-		
-		/*
-		*
-		* 2 - CommandHandlers
-		*
-		* */
-		if (args.length >= 3) {
-			String firstArgument = args[0];
-			String[] builtArgs = new String[args.length-2];
-			System.arraycopy(args, 2, builtArgs, 0, builtArgs.length);
-			if (pluginActions.isPluginAction(s, builtArgs)) return pluginActions.readAndReturn(s, builtArgs);
-			if (firstArgument.equalsIgnoreCase("sendNotification")) return notifications.readAndReturn(s, builtArgs);
-			if (firstArgument.equalsIgnoreCase("sendAnimation")) return animations.readAndReturn(s, builtArgs);
-			if (firstArgument.equalsIgnoreCase("sendMessage")) return messages.readAndReturn(s, builtArgs);
+		if (args.length > 1) {
+			String handlerName = args[0];
+			CommandHandler handler = handlers.get(handlerName);
+			if (handler != null) {
+				return handler.readAndReturn(s, args);
+			} else {
+				value.add("Invalid argument (Use wiki for help)");
+				return value;
+			}
 		}
 		
 		return value;
@@ -111,22 +109,44 @@ public class PluginCommand implements CommandExecutor, TabExecutor {
 	
 	public boolean parseCommand(CommandSender s, String[] args) {
 		if (args.length == 0) {
-			return pluginActions.readAndExecute(s, args);
+			s.spigot().sendMessage(getHelpMessage());
+			return true;
 		}
-		String arg1 = args[0];
-		String[] builtArgs;
-		if (args.length > 1) {
-			builtArgs = new String[args.length-1];
-			System.arraycopy(args, 2, builtArgs, 0, builtArgs.length);
-		} else {
-			builtArgs = new String[0];
+		String handlerName = args[0];
+		CommandHandler handler = handlers.get(handlerName);
+		if (handler != null) {
+			return handler.readAndExecute(s, args);
 		}
-		if (pluginActions.isPluginAction(s, builtArgs)) return pluginActions.readAndExecute(s, builtArgs);
-		if (arg1.equalsIgnoreCase("sendNotification")) return notifications.readAndExecute(s, builtArgs);
-		if (arg1.equalsIgnoreCase("sendAnimation")) return animations.readAndExecute(s, builtArgs);
-		if (arg1.equalsIgnoreCase("sendMessage")) return messages.readAndExecute(s, builtArgs);
-		s.sendMessage(ColorTranslator.colorize("&cAmazingTitles &7| &fInvalid command structure!"));
+		s.spigot().sendMessage(getHelpMessage());
 		return true;
+	}
+	
+	public static BaseComponent[] getHelpMessage() {
+		ComponentBuilder builder = new ComponentBuilder("");
+		builder.append("\n");
+		builder.append("\n§5§lAmazingTitles §7✦ §fHelp message");
+		builder.append("\n");
+		builder.append("\n  §dAvailable commands");
+		for (Map.Entry<String, CommandHandler> entry : handlers.entrySet()) {
+			CommandHandler handler = entry.getValue();
+			String argument = entry.getKey();
+			builder.append(MessageUtils.quickCreate("\n   §7✎ §7/at §f" + argument, "§aClick to suggest\n§fType: §7" + handler.handlerType().id() + "\n§fPermission: §7" + handler.permission(), ClickEvent.Action.SUGGEST_COMMAND, "/at " + argument));
+		}
+		builder.append("\n");
+		BaseComponent[] wiki = MessageUtils.quickCreate("§dWiki", "§fClick to open", ClickEvent.Action.OPEN_URL, "https://m3ii0.gitbook.io/amazingtitles/");
+		BaseComponent[] discord = MessageUtils.quickCreate("§9Discord", "§fClick to open", ClickEvent.Action.OPEN_URL, "https://discord.com/invite/Ms7uAAAtcT");
+		BaseComponent[] spigot = MessageUtils.quickCreate("§6Spigot", "§fClick to open", ClickEvent.Action.OPEN_URL, "https://www.spigotmc.org/resources/109916/");
+		builder.append("\n  ").append(wiki).append("§7 | ").append(discord).append("§7 | ").append(spigot);
+		builder.append("\n");
+		return builder.create();
+	}
+	
+	public static void addHandler(String argument, CommandHandler handler) {
+		handlers.put(argument, handler);
+	}
+	
+	public static void removeHandler(String argument) {
+		handlers.remove(argument);
 	}
 	
 }

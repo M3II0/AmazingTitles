@@ -1,22 +1,34 @@
 package sk.m3ii0.amazingtitles.code.internal;
 
-import org.bukkit.command.Command;
+import org.bukkit.Bukkit;
+import org.bukkit.boss.BarColor;
+import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
 import org.bukkit.event.HandlerList;
+import org.bukkit.event.Listener;
+import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 import sk.m3ii0.amazingtitles.code.api.AmazingTitles;
+import sk.m3ii0.amazingtitles.code.api.builders.AnimationBuilder;
+import sk.m3ii0.amazingtitles.code.api.enums.DisplayType;
 import sk.m3ii0.amazingtitles.code.internal.commands.PluginCommand;
+import sk.m3ii0.amazingtitles.code.internal.components.ComponentArguments;
 import sk.m3ii0.amazingtitles.code.internal.configuration.CustomConfiguration;
 import sk.m3ii0.amazingtitles.code.internal.loaders.PluginLoader;
 import sk.m3ii0.amazingtitles.code.internal.loaders.PluginMode;
+import sk.m3ii0.amazingtitles.code.internal.smartbar.SmartBar;
 import sk.m3ii0.amazingtitles.code.internal.smartbar.SmartBarManager;
+import sk.m3ii0.amazingtitles.code.internal.smartbar.SmartNotification;
 import sk.m3ii0.amazingtitles.code.internal.spi.NmsBuilder;
 import sk.m3ii0.amazingtitles.code.internal.spi.NmsProvider;
 import sk.m3ii0.amazingtitles.code.internal.utils.ColorTranslator;
 
 import java.text.DecimalFormat;
+import java.util.List;
 
-public class Booter extends JavaPlugin {
+public class Booter extends JavaPlugin implements Listener {
 	
 	/*
 	*
@@ -72,11 +84,33 @@ public class Booter extends JavaPlugin {
 				// Load smart bar manager
 				smartBarManager = new SmartBarManager(this);
 				
+				// Register listeners
+				Bukkit.getPluginManager().registerEvents(this, this);
+				
 				// Register command
 				org.bukkit.command.PluginCommand command = getCommand("amazingtitles");
 				pluginCommand = new PluginCommand(this);
 				command.setExecutor(pluginCommand);
 				command.setTabCompleter(pluginCommand);
+				
+				// Load static-bar
+				String staticBarText = getCustomConfiguration().getShortcutSmartBar().getStaticBarText();
+				String staticBarAnimation = getCustomConfiguration().getShortcutSmartBar().getStaticBarAnimation();
+				String[] staticBarArguments = getCustomConfiguration().getShortcutSmartBar().getStaticBarArguments().toArray(new String[0]);
+				AnimationBuilder animationBuilder = AmazingTitles.getCustomAnimation(staticBarAnimation);
+				if (animationBuilder != null && getCustomConfiguration().getShortcutSmartBar().getStaticBarPermission()) {
+					List<String> frames = animationBuilder.getFramesBuilder().buildFrames(ComponentArguments.create(staticBarText, "", BarColor.WHITE, 0, 0, DisplayType.ACTION_BAR), staticBarArguments);
+					SmartBar.setStaticAnimationContent(frames);
+				}
+				
+				// Run smart-bar task
+				Bukkit.getScheduler().runTaskTimerAsynchronously(this, () -> {
+					for (SmartBar bar : getSmartBarManager().getBars().values()) {
+						if (bar != null) {
+							bar.prepareAndTryToSend();
+						}
+					}
+				}, 0, 1);
 				
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -99,8 +133,32 @@ public class Booter extends JavaPlugin {
 	public void onDisable() {
 	
 		// Unregister listeners
-		HandlerList.unregisterAll(this);
+		HandlerList.unregisterAll((Plugin) this);
 		
+	}
+	
+	/*
+	*
+	* Listeners
+	*
+	* */
+	
+	@EventHandler
+	public void join(PlayerJoinEvent e) {
+		boolean notifications = getCustomConfiguration().getShortcutSmartBar().getNotificationsPermission();
+		boolean staticbar = getCustomConfiguration().getShortcutSmartBar().getStaticBarPermission();
+		boolean staticbarnotifications = getCustomConfiguration().getShortcutSmartBar().getStaticBarNotificationsPermission();
+		Player player = e.getPlayer();
+		SmartBar bar = new SmartBar(player, notifications, staticbar, staticbarnotifications);
+		getSmartBarManager().insertBar(player, bar);
+		AmazingTitles.sendNotification(new SmartNotification(15, "?", "Hello there!"), player);
+		AmazingTitles.sendNotification(new SmartNotification(10, "??", "Hello there!"), player);
+	}
+	
+	@EventHandler
+	public void quit(PlayerQuitEvent e) {
+		Player player = e.getPlayer();
+		getSmartBarManager().removeBar(player);
 	}
 	
 	/*

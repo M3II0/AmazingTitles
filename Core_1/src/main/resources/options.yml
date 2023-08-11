@@ -1,3 +1,32 @@
 # Do not edit this value! Plugin will handle this value
 # WARNING: You can destroy plugin functionality...
 Config: 0.1
+
+# Settings of SmartBar & Static animation
+# WARNING: Can affect server performance
+SmartBar:
+
+  # Enable / Disable notifications
+  Notifications: true
+
+  # Settings of StaticBar
+  StaticBar:
+
+    # Turn on/off StaticBar
+    Enabled: false
+
+    # Notification interruption
+    Notifications: false
+
+    # Animation settings
+    Animation: NONE
+
+    # Animation fps
+    # NOTE: Max is 20
+    Fps: 1
+
+    # Animation arguments
+    Arguments: []
+
+    # Animation text
+    Text: "§aWelcome on our server!"

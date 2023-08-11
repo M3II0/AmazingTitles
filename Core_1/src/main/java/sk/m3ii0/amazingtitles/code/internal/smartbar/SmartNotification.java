@@ -34,6 +34,7 @@ public class SmartNotification {
 		this.text = ColorTranslator.colorize(text);
 		this.frames = new ArrayList<>();
 		final StringBuilder builder = new StringBuilder();
+		frames.add("");
 		for (String var : ColorTranslator.charactersWithColors(this.text)) {
 			builder.append(var);
 			this.frames.add(builder.toString());
@@ -55,6 +56,10 @@ public class SmartNotification {
 		this.out += seconds;
 	}
 	
+	public double getTime() {
+		return time;
+	}
+	
 	public void quickRemove() {
 		this.out = 0L;
 	}
@@ -68,12 +73,12 @@ public class SmartNotification {
 			}
 		} else {
 			if (systemTime >= out) {
-				if (lastFrame > -1) {
+				if (lastFrame > 0) {
 					--lastFrame;
 					frame.append(" ").append(frames.get(lastFrame));
 				}
 			} else {
-				if (lastFrame < frames.size()) {
+				if (lastFrame+1 < frames.size()) {
 					++lastFrame;
 					frame.append(" ").append(frames.get(lastFrame));
 				} else {
@@ -88,8 +93,12 @@ public class SmartNotification {
 		return start != -1L;
 	}
 	
-	public boolean isOver(long systemTime) {
+	public boolean isEnding(long systemTime) {
 		return systemTime >= out;
+	}
+	
+	public boolean isOver(long systemTime) {
+		return systemTime >= out && lastFrame < 1;
 	}
 	
 	

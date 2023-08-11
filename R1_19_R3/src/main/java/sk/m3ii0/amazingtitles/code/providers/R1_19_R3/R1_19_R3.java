@@ -10,7 +10,7 @@ import net.minecraft.server.network.PlayerConnection;
 import org.bukkit.craftbukkit.v1_19_R3.entity.CraftPlayer;
 import org.bukkit.craftbukkit.v1_19_R3.util.CraftChatMessage;
 import org.bukkit.entity.Player;
-import sk.m3ii0.amazingtitles.code.spi.NmsProvider;
+import sk.m3ii0.amazingtitles.code.internal.spi.NmsProvider;
 
 import java.lang.reflect.Field;
 
