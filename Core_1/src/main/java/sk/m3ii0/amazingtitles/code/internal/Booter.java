@@ -20,7 +20,6 @@ import sk.m3ii0.amazingtitles.code.internal.loaders.PluginLoader;
 import sk.m3ii0.amazingtitles.code.internal.loaders.PluginMode;
 import sk.m3ii0.amazingtitles.code.internal.smartbar.SmartBar;
 import sk.m3ii0.amazingtitles.code.internal.smartbar.SmartBarManager;
-import sk.m3ii0.amazingtitles.code.internal.smartbar.SmartNotification;
 import sk.m3ii0.amazingtitles.code.internal.spi.NmsBuilder;
 import sk.m3ii0.amazingtitles.code.internal.spi.NmsProvider;
 import sk.m3ii0.amazingtitles.code.internal.utils.ColorTranslator;
@@ -80,6 +79,9 @@ public class Booter extends JavaPlugin implements Listener {
 				if (!ColorTranslator.isHexSupport()) {
 					pluginMode = PluginMode.WITHOUT_RGB;
 				}
+				
+				// Load default animations
+				PluginLoader.loadDefaultAnimations();
 				
 				// Load smart bar manager
 				smartBarManager = new SmartBarManager(this);
@@ -146,13 +148,11 @@ public class Booter extends JavaPlugin implements Listener {
 	@EventHandler
 	public void join(PlayerJoinEvent e) {
 		boolean notifications = getCustomConfiguration().getShortcutSmartBar().getNotificationsPermission();
-		boolean staticbar = getCustomConfiguration().getShortcutSmartBar().getStaticBarPermission();
-		boolean staticbarnotifications = getCustomConfiguration().getShortcutSmartBar().getStaticBarNotificationsPermission();
+		boolean staticBar = getCustomConfiguration().getShortcutSmartBar().getStaticBarPermission();
+		boolean staticBarNotifications = getCustomConfiguration().getShortcutSmartBar().getStaticBarNotificationsPermission();
 		Player player = e.getPlayer();
-		SmartBar bar = new SmartBar(player, notifications, staticbar, staticbarnotifications);
+		SmartBar bar = new SmartBar(player, notifications, staticBar, staticBarNotifications);
 		getSmartBarManager().insertBar(player, bar);
-		AmazingTitles.sendNotification(new SmartNotification(15, "?", "Hello there!"), player);
-		AmazingTitles.sendNotification(new SmartNotification(10, "??", "Hello there!"), player);
 	}
 	
 	@EventHandler

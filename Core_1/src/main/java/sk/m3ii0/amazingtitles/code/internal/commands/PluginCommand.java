@@ -97,7 +97,9 @@ public class PluginCommand implements CommandExecutor, TabExecutor {
 			String handlerName = args[0];
 			CommandHandler handler = handlers.get(handlerName);
 			if (handler != null) {
-				return handler.readAndReturn(s, args);
+				String[] handlerArguments = new String[args.length-1];
+				System.arraycopy(args, 1, handlerArguments, 0, handlerArguments.length);
+				return handler.readAndReturn(s, handlerArguments);
 			} else {
 				value.add("Invalid argument (Use wiki for help)");
 				return value;
@@ -115,7 +117,9 @@ public class PluginCommand implements CommandExecutor, TabExecutor {
 		String handlerName = args[0];
 		CommandHandler handler = handlers.get(handlerName);
 		if (handler != null) {
-			return handler.readAndExecute(s, args);
+			String[] handlerArguments = new String[args.length-1];
+			System.arraycopy(args, 1, handlerArguments, 0, handlerArguments.length);
+			return handler.readAndExecute(s, handlerArguments);
 		}
 		s.spigot().sendMessage(getHelpMessage());
 		return true;
