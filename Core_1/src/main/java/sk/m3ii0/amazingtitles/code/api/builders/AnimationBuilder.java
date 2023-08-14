@@ -13,6 +13,7 @@ import sk.m3ii0.amazingtitles.code.internal.components.implementations.LightAnim
 import sk.m3ii0.amazingtitles.code.internal.components.implementations.RepeatingAnimationComponent;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -24,7 +25,7 @@ public class AnimationBuilder {
 	*
 	* */
 	
-	private static List<String> textArgument = List.of(
+	private static final List<String> textArgument = Collections.singletonList(
 	 "(Animation Text - visit wiki for more)"
 	);
 	private ComponentArguments componentArguments = ComponentArguments.create("Default Text", "Default SubText", BarColor.WHITE, 1, 20, DisplayType.TITLE);
@@ -53,7 +54,7 @@ public class AnimationBuilder {
 	public AnimationBuilder(AnimationType animationType, boolean requiresHex, String... arguments) {
 		this.animationType = animationType;
 		this.requiresHex = requiresHex;
-		this.arguments = new ArrayList<>(List.of(arguments));
+		this.arguments = Arrays.asList((arguments));
 	}
 	
 	/*
@@ -82,7 +83,7 @@ public class AnimationBuilder {
 		if (position >= arguments.size()) {
 			return textArgument;
 		}
-		return List.of(arguments.get(position));
+		return Collections.singletonList((arguments.get(position)));
 	}
 	
 	/*

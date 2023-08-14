@@ -14,6 +14,7 @@ import sk.m3ii0.amazingtitles.code.api.AmazingTitles;
 import sk.m3ii0.amazingtitles.code.api.builders.AnimationBuilder;
 import sk.m3ii0.amazingtitles.code.api.enums.DisplayType;
 import sk.m3ii0.amazingtitles.code.internal.commands.PluginCommand;
+import sk.m3ii0.amazingtitles.code.internal.commands.commandreaders.readers.ArgsHelper;
 import sk.m3ii0.amazingtitles.code.internal.components.ComponentArguments;
 import sk.m3ii0.amazingtitles.code.internal.configuration.CustomConfiguration;
 import sk.m3ii0.amazingtitles.code.internal.loaders.PluginLoader;
@@ -88,6 +89,7 @@ public class Booter extends JavaPlugin implements Listener {
 				
 				// Register listeners
 				Bukkit.getPluginManager().registerEvents(this, this);
+				Bukkit.getPluginManager().registerEvents(new ArgsHelper(), this);
 				
 				// Register command
 				org.bukkit.command.PluginCommand command = getCommand("amazingtitles");
