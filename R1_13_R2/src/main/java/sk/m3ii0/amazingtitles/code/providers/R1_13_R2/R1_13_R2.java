@@ -1,9 +1,6 @@
 package sk.m3ii0.amazingtitles.code.providers.R1_13_R2;
 
-import net.minecraft.server.v1_13_R2.NetworkManager;
-import net.minecraft.server.v1_13_R2.Packet;
-import net.minecraft.server.v1_13_R2.PacketPlayOutTitle;
-import net.minecraft.server.v1_13_R2.PlayerConnection;
+import net.minecraft.server.v1_13_R2.*;
 import org.bukkit.craftbukkit.v1_13_R2.entity.CraftPlayer;
 import org.bukkit.craftbukkit.v1_13_R2.util.CraftChatMessage;
 import org.bukkit.entity.Player;

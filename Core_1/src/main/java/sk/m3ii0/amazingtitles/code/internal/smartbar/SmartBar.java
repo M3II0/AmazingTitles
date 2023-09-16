@@ -81,7 +81,7 @@ public class SmartBar {
 		} else if (notifications) {
 			text.append(prepareNotifications());
 		}
-		if (text.isEmpty()) return;
+		if (text.toString().isEmpty()) return;
 		final Object packet = Booter.getNmsProvider().createActionbarPacket(text.toString());
 		Booter.getNmsProvider().sendActionbar(owner, packet);
 	}

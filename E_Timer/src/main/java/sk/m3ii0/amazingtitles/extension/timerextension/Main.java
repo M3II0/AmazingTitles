@@ -22,7 +22,7 @@ public class Main implements AmazingTitleExtension {
 			if (format[1] > 0) counts = 2;
 			if (format[0] > 0) counts = 1;
 			if (counts == 0) {
-				return new ArrayList<>() {{
+				return new ArrayList<String>() {{
 					add("0 is not an option");
 				}};
 			}

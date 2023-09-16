@@ -1,5 +1,6 @@
 package sk.m3ii0.amazingtitles.code.internal.commands.commandreaders.readers;
 
+import org.bukkit.Bukkit;
 import org.bukkit.boss.BarColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -29,6 +30,10 @@ public class ArgsHelper implements Listener {
 	
 	public static List<Player> readPlayers(String argument) {
 		List<Player> result = new ArrayList<>();
+		if (argument.equalsIgnoreCase("all")) {
+			result.addAll(Bukkit.getOnlinePlayers());
+			return result;
+		}
 		if (argument.startsWith("-p:")) {
 			argument = argument.replaceFirst("-p:", "");
 			for (Player player : players.values()) {
@@ -50,6 +55,12 @@ public class ArgsHelper implements Listener {
 	public static List<String> preparePlayers(String argument) {
 		List<String> results = new ArrayList<>();
 		Set<String> contains = new HashSet<>(Arrays.asList(argument.split(",")));
+		results.add("all");
+		for (Player var : Bukkit.getOnlinePlayers()) {
+			String name = var.getName();
+			if (contains.contains(name)) continue;
+			results.add(var.getName());
+		}
 		if (argument.endsWith(",")) {
 			for (String name : players.keySet()) {
 				if (contains.contains(name)) continue;
@@ -57,6 +68,32 @@ public class ArgsHelper implements Listener {
 			}
 		}
 		return results;
+	}
+	
+	public static List<String> prepareArguments(String argument) {
+		List<String> list = new ArrayList<String>() {{
+			add("cc:PINK");
+			add("cc:BLUE");
+			add("cc:RED");
+			add("cc:GREEN");
+			add("cc:YELLOW");
+			add("cc:PURPLE");
+			add("cc:WHITE");
+			add("p:TITLE");
+			add("p:SUBTITLE");
+			add("p:BOSSBAR");
+			add("p:ACTIONBAR");
+			add("d:(DurationInSeconds)");
+			add("fps:(1-20)");
+		}};
+		Set<String> contains = new HashSet<>(Arrays.asList(argument.split(",")));
+		for (String var : contains) {
+			if (var.startsWith("cc:")) list.removeIf(line -> line.startsWith("cc:"));
+			if (var.startsWith("p:")) list.removeIf(line -> line.startsWith("p:"));
+			if (var.startsWith("d:")) list.removeIf(line -> line.startsWith("d:"));
+			if (var.startsWith("fps:")) list.removeIf(line -> line.startsWith("fps:"));
+		}
+		return list;
 	}
 	
 	public static ComponentArguments readArguments(String argument) {
