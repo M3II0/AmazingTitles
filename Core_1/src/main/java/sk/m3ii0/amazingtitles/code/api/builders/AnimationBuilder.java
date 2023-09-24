@@ -86,6 +86,10 @@ public class AnimationBuilder {
 		return Collections.singletonList((arguments.get(position)));
 	}
 	
+	public int getTotalArguments() {
+		return arguments.size();
+	}
+	
 	/*
 	*
 	* Setters

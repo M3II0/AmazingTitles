@@ -24,6 +24,7 @@ public class AmazingTitles {
 	* */
 	
 	private static final Map<String, AnimationBuilder> animations = new HashMap<>();
+	private static final Map<UUID, AnimationComponent> components = new HashMap<>();
 
 	/*
 	*
@@ -126,6 +127,46 @@ public class AmazingTitles {
 			component.addReceivers(players);
 			component.run();
 		}
+	}
+	
+	/*
+	*
+	* Components
+	*
+	* */
+	
+	public static void insertAnimation(Player player, AnimationComponent component) {
+		components.put(player.getUniqueId(), component);
+	}
+	
+	public static AnimationComponent getAnimationBy(Player player) {
+		return getAnimationBy(player.getUniqueId());
+	}
+	
+	public static AnimationComponent getAnimationBy(UUID uuid) {
+		return components.get(uuid);
+	}
+	
+	public static void removeAnimation(Player player) {
+		AnimationComponent component = getAnimationBy(player);
+		if (component == null) return;
+		component.removeReceivers(player);
+	}
+	
+	public static void removeAnimation(UUID uuid) {
+		removeAnimation(Bukkit.getPlayer(uuid));
+	}
+	
+	public static boolean hasAnimation(Player player) {
+		return hasAnimation(player.getUniqueId());
+	}
+	
+	public static boolean hasAnimation(UUID uuid) {
+		return components.get(uuid) != null;
+	}
+	
+	public static void removeAnimationFromCache(UUID uuid) {
+		components.remove(uuid);
 	}
 	
 	/*

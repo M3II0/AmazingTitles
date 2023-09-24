@@ -7,6 +7,7 @@ import org.bukkit.boss.BossBar;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.scheduler.BukkitTask;
+import sk.m3ii0.amazingtitles.code.api.AmazingTitles;
 import sk.m3ii0.amazingtitles.code.api.enums.DisplayType;
 import sk.m3ii0.amazingtitles.code.internal.Booter;
 import sk.m3ii0.amazingtitles.code.internal.components.AnimationComponent;
@@ -136,6 +137,10 @@ public class FadeInAnimationComponent implements AnimationComponent {
 	
 	@Override
 	public void prepare() {
+		for (Player p : receivers) {
+			AmazingTitles.removeAnimation(p);
+			AmazingTitles.insertAnimation(p, this);
+		}
 		if (displayType == DisplayType.BOSS_BAR) {
 			bossBar = Bukkit.createBossBar("", componentColor, BarStyle.SOLID);
 			for (Player p : receivers) {
@@ -207,6 +212,9 @@ public class FadeInAnimationComponent implements AnimationComponent {
 	
 	@Override
 	public void end() {
+		for (Player p : receivers) {
+			AmazingTitles.removeAnimationFromCache(p.getUniqueId());
+		}
 		if (task != null) {
 			task.cancel();
 		}

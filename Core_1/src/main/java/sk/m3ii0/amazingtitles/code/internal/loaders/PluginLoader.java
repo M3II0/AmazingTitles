@@ -1,8 +1,11 @@
 package sk.m3ii0.amazingtitles.code.internal.loaders;
 
 import org.bukkit.Bukkit;
+import org.bukkit.boss.BarColor;
 import sk.m3ii0.amazingtitles.code.api.builders.AnimationBuilder;
 import sk.m3ii0.amazingtitles.code.api.enums.AnimationType;
+import sk.m3ii0.amazingtitles.code.api.enums.DisplayType;
+import sk.m3ii0.amazingtitles.code.internal.components.ComponentArguments;
 import sk.m3ii0.amazingtitles.code.internal.spi.NmsBuilder;
 import sk.m3ii0.amazingtitles.code.internal.utils.ColorTranslator;
 
@@ -25,6 +28,7 @@ public class PluginLoader {
 	public static void loadDefaultAnimations() {
 		
 		AnimationBuilder rainbow = new AnimationBuilder(AnimationType.REPEATING, true);
+		rainbow.setComponentArguments(ComponentArguments.create("Text is null", "SubText is null", BarColor.WHITE, 20, 20, DisplayType.TITLE));
 		rainbow.setFramesBuilder((arguments, args) -> {
 			List<String> frames = new ArrayList<>();
 			String red = "#FF2424";

@@ -93,6 +93,13 @@ public class ArgsHelper implements Listener {
 			if (var.startsWith("d:")) list.removeIf(line -> line.startsWith("d:"));
 			if (var.startsWith("fps:")) list.removeIf(line -> line.startsWith("fps:"));
 		}
+		if (argument.endsWith(",")) {
+			List<String> news = new ArrayList<>();
+			for (String var : list) {
+				news.add(argument + var);
+			}
+			return news;
+		}
 		return list;
 	}
 	
