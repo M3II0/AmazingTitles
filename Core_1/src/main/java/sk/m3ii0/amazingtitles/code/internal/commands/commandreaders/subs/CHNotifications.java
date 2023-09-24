@@ -7,7 +7,6 @@ import sk.m3ii0.amazingtitles.code.internal.commands.commandreaders.CommandHandl
 import sk.m3ii0.amazingtitles.code.internal.commands.commandreaders.HandlerType;
 import sk.m3ii0.amazingtitles.code.internal.commands.commandreaders.InternalHandlerType;
 import sk.m3ii0.amazingtitles.code.internal.commands.commandreaders.readers.ArgsHelper;
-import sk.m3ii0.amazingtitles.code.internal.smartbar.SmartBar;
 import sk.m3ii0.amazingtitles.code.internal.smartbar.SmartNotification;
 import sk.m3ii0.amazingtitles.code.internal.utils.ColorTranslator;
 import sk.m3ii0.amazingtitles.code.internal.utils.CommandUtils;

@@ -37,14 +37,15 @@ public class CHAnimations implements CommandHandler {
 			String[] totalArguments = new String[builder.getTotalArguments()];
 			if (builder.getTotalArguments() >= 0)
 				System.arraycopy(args, 2, totalArguments, 0, builder.getTotalArguments());
-			final StringBuilder text = new StringBuilder();
+			StringBuilder text = new StringBuilder();
 			for (int i = 3+builder.getTotalArguments(); i < args.length; i++) {
-				text.append(args[i]);
+				text.append(args[i]).append(' ');
 			}
-			String mainText = text.toString().split("%subtitle%")[0];
+			String total = text.toString().replaceAll(" $", "");
+			String mainText = total.split("%subtitle%")[0];
 			String subtitle = "";
 			if (text.toString().split("%subtitle%").length > 1) {
-				subtitle = text.toString().split("%subtitle%")[1];
+				subtitle = total.split("%subtitle%")[1];
 			}
 			AnimationComponent component = builder.createComponent(
 			 ComponentArguments.create(mainText, subtitle, arguments.getComponentColor(), arguments.getDuration(), arguments.getFps(), arguments.getDisplayType())
@@ -52,8 +53,7 @@ public class CHAnimations implements CommandHandler {
 			component.addReceivers(players);
 			component.prepare();
 			component.run();
-		} catch (Exception ignore) {
-			ignore.printStackTrace();
+		} catch (Exception e) {
 			return false;
 		}
 		return false;
