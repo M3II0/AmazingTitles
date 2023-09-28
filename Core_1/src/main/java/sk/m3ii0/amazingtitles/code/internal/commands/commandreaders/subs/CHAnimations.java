@@ -10,6 +10,7 @@ import sk.m3ii0.amazingtitles.code.internal.commands.commandreaders.InternalHand
 import sk.m3ii0.amazingtitles.code.internal.commands.commandreaders.readers.ArgsHelper;
 import sk.m3ii0.amazingtitles.code.internal.components.AnimationComponent;
 import sk.m3ii0.amazingtitles.code.internal.components.ComponentArguments;
+import sk.m3ii0.amazingtitles.code.internal.utils.ColorTranslator;
 import sk.m3ii0.amazingtitles.code.internal.utils.CommandUtils;
 
 import java.util.ArrayList;
@@ -45,7 +46,7 @@ public class CHAnimations implements CommandHandler {
 			String mainText = total.split("%subtitle%")[0];
 			String subtitle = "";
 			if (text.toString().split("%subtitle%").length > 1) {
-				subtitle = total.split("%subtitle%")[1];
+				subtitle = ColorTranslator.colorize(total.split("%subtitle%")[1]);
 			}
 			AnimationComponent component = builder.createComponent(
 			 ComponentArguments.create(mainText, subtitle, arguments.getComponentColor(), arguments.getDuration(), arguments.getFps(), arguments.getDisplayType())
