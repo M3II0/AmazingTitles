@@ -119,7 +119,11 @@ public class PluginCommand implements CommandExecutor, TabExecutor {
 		if (handler != null) {
 			String[] handlerArguments = new String[args.length-1];
 			System.arraycopy(args, 1, handlerArguments, 0, handlerArguments.length);
-			return handler.readAndExecute(s, handlerArguments);
+			boolean result = handler.readAndExecute(s, handlerArguments);
+			if (!result) {
+				s.spigot().sendMessage(handler.helpMessage());
+			}
+			return result;
 		}
 		s.spigot().sendMessage(getHelpMessage());
 		return true;
