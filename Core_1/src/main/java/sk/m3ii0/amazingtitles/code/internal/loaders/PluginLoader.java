@@ -277,7 +277,7 @@ public class PluginLoader {
 		});
 		from_both_sides.register("FROM_BOTH_SIDES");
 		
-		AnimationBuilder pulsing = new AnimationBuilder(AnimationType.REPEATING, true);
+		AnimationBuilder pulsing = new AnimationBuilder(AnimationType.REPEATING, true, "Color1(Hex/Legacy)", "Color2(Hex/Legacy)");
 		pulsing.setComponentArguments(ComponentArguments.create("Text is null", "SubText is null", BarColor.WHITE, 20, 20, DisplayType.TITLE));
 		pulsing.setFramesBuilder((arguments, args) -> {
 			List<String> frames = new ArrayList<>();

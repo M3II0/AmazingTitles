@@ -52,7 +52,7 @@ public class CHAnimations implements CommandHandler {
 			AnimationBuilder builder = AmazingTitles.getCustomAnimation(args[2]);
 			String[] totalArguments = new String[builder.getTotalArguments()];
 			if (builder.getTotalArguments() >= 0)
-				System.arraycopy(args, 2, totalArguments, 0, builder.getTotalArguments());
+				System.arraycopy(args, 3, totalArguments, 0, builder.getTotalArguments());
 			StringBuilder text = new StringBuilder();
 			for (int i = 3+builder.getTotalArguments(); i < args.length; i++) {
 				text.append(args[i]).append(' ');
@@ -70,9 +70,10 @@ public class CHAnimations implements CommandHandler {
 			component.prepare();
 			component.run();
 		} catch (Exception e) {
+			e.printStackTrace();
 			return false;
 		}
-		return false;
+		return true;
 	}
 	
 	@Override
@@ -91,7 +92,7 @@ public class CHAnimations implements CommandHandler {
 			if (animation == null) {
 				return Collections.singletonList("Invalid animation!");
 			}
-			return animation.getArgumentAt(args.length-1);
+			return animation.getArgumentAt(args.length-4);
 		}
 		return null;
 	}

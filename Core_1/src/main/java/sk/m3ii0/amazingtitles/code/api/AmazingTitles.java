@@ -76,7 +76,10 @@ public class AmazingTitles {
 	* */
 	
 	public static void registerCustomAnimation(String name, AnimationBuilder animationBuilder) {
-		if (name == null || animationBuilder == null) return;
+		if (name == null || animationBuilder == null) {
+			System.out.println("[AT] Name or AnimationBuilder is null!");
+			return;
+		}
 		name = name.replace(" ", "_").toUpperCase();
 		animations.put(name, animationBuilder);
 	}
