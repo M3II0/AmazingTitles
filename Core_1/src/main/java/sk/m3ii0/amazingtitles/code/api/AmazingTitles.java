@@ -258,4 +258,17 @@ public class AmazingTitles {
 		Bukkit.spigot().broadcast(message);
 	}
 	
+	/*
+	*
+	* System (Internal)
+	*
+	* */
+	
+	public static void clearCacheInternally() {
+		animations.clear();
+		for (AnimationComponent component : components.values()) {
+			component.end();
+		}
+	}
+	
 }

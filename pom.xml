@@ -30,6 +30,7 @@
         <module>E_TextBounce</module>
         <module>E_Timer</module>
         <module>Core_1</module>
+        <module>R1_20_R2</module>
     </modules>
 
     <properties>
