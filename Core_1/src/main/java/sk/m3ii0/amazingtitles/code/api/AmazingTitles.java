@@ -2,8 +2,12 @@ package sk.m3ii0.amazingtitles.code.api;
 
 import net.md_5.bungee.api.chat.BaseComponent;
 import org.bukkit.Bukkit;
+import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.event.HandlerList;
+import org.bukkit.event.Listener;
 import sk.m3ii0.amazingtitles.code.api.builders.AnimationBuilder;
+import sk.m3ii0.amazingtitles.code.api.interfaces.AmazingExtension;
 import sk.m3ii0.amazingtitles.code.internal.Booter;
 import sk.m3ii0.amazingtitles.code.internal.commands.PluginCommand;
 import sk.m3ii0.amazingtitles.code.internal.commands.commandreaders.CommandHandler;
@@ -25,7 +29,68 @@ public class AmazingTitles {
 	
 	private static final Map<String, AnimationBuilder> animations = new HashMap<>();
 	private static final Map<UUID, AnimationComponent> components = new HashMap<>();
-
+	private static final Map<String, AmazingExtension> extensions = new HashMap<>();
+	private static final Map<String, List<Listener>> extensionsListeners = new HashMap<>();
+	
+	/*
+	*
+	* Internal
+	*
+	* */
+	
+	public static void reloadPlugin(CommandSender sender) {
+		Booter.getBooter().reload(sender);
+	}
+	
+	public static void reloadPlugin() {
+		Booter.getBooter().reload(null);
+	}
+	
+	/*
+	*
+	* Extensions
+	*
+	* */
+	
+	public static void loadExtension(AmazingExtension extension) {
+		extensions.put(extension.extension_name(), extension);
+		extension.load();
+	}
+	
+	public static void unloadExtension(String extensionName) {
+		AmazingExtension extension = extensions.get(extensionName);
+		if (extension == null) return;
+		extension.unload();
+		unregisterExtensionListeners(extensionName);
+	}
+	
+	public static void registerExtensionListener(AmazingExtension extension, Listener listener) {
+		List<Listener> listeners = extensionsListeners.getOrDefault(extension.extension_name(), new ArrayList<>());
+		Bukkit.getPluginManager().registerEvents(listener, Booter.getInstance());
+		listeners.add(listener);
+		extensionsListeners.put(extension.extension_name(), listeners);
+	}
+	
+	public static List<Listener> getExtensionListeners(String extension) {
+		return extensionsListeners.getOrDefault(extension, new ArrayList<>());
+	}
+	
+	public static void unregisterExtensionListeners(String extension) {
+		List<Listener> listeners = extensionsListeners.get(extension);
+		if (listeners == null) return;
+		for (Listener var : listeners) {
+			HandlerList.unregisterAll(var);
+		}
+	}
+	
+	public static void unloadAllExtensions() {
+		for (AmazingExtension extension : extensions.values()) {
+			unloadExtension(extension.extension_name());
+		}
+		extensions.clear();
+		extensionsListeners.clear();
+	}
+	
 	/*
 	*
 	* System

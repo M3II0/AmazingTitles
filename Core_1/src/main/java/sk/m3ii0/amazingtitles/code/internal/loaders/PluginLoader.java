@@ -3,16 +3,30 @@ package sk.m3ii0.amazingtitles.code.internal.loaders;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Bukkit;
 import org.bukkit.boss.BarColor;
+import org.bukkit.plugin.Plugin;
+import sk.m3ii0.amazingtitles.code.api.AmazingTitles;
 import sk.m3ii0.amazingtitles.code.api.builders.AnimationBuilder;
 import sk.m3ii0.amazingtitles.code.api.enums.AnimationType;
 import sk.m3ii0.amazingtitles.code.api.enums.DisplayType;
+import sk.m3ii0.amazingtitles.code.api.interfaces.AmazingExtension;
 import sk.m3ii0.amazingtitles.code.internal.components.ComponentArguments;
 import sk.m3ii0.amazingtitles.code.internal.spi.NmsBuilder;
 import sk.m3ii0.amazingtitles.code.internal.utils.ColorTranslator;
 
 import java.awt.*;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.net.URL;
+import java.net.URLClassLoader;
 import java.util.*;
 import java.util.List;
+import java.util.jar.JarEntry;
+import java.util.jar.JarFile;
+import java.util.zip.ZipEntry;
 
 public class PluginLoader {
 	
@@ -24,6 +38,50 @@ public class PluginLoader {
 			}
 		}
 		return null;
+	}
+	
+	public static void loadExtensions(Plugin owner) {
+		ClassLoader parent = owner.getClass().getClassLoader();
+		File directory = owner.getDataFolder();
+		File location = new File(directory, "Extensions");
+		location.mkdirs();
+		File[] extensions = location.listFiles();
+		if (extensions == null) return;
+		for (File var : extensions) {
+			if (!var.getName().endsWith(".jar")) continue;
+			try (JarFile jar = new JarFile(var)) {
+				ZipEntry document = jar.getEntry("extension.yml");
+				try (InputStream stream = jar.getInputStream(document)) {
+					Scanner s = new Scanner(stream).useDelimiter("\\A");
+					String result = s.hasNext() ? s.next() : "";
+					String main = result.replace("Class:", "").replace(" ", "");
+					Enumeration<JarEntry> e = jar.entries();
+					URL[] urls = {new URL("jar:file:" + var.getPath() + "!/")};
+					try (URLClassLoader cl = new URLClassLoader(urls, parent)) {
+						while (e.hasMoreElements()) {
+							JarEntry je = e.nextElement();
+							if(je.isDirectory() || !je.getName().endsWith(".class")){
+								continue;
+							}
+							String className = je.getName().substring(0,je.getName().length()-6);
+							className = className.replace('/', '.');
+							Class<?> c = cl.loadClass(className);
+							if (className.equals(main)) {
+								Constructor<?> constructor = c.getConstructor();
+								Object object = constructor.newInstance();
+								AmazingExtension extension = (AmazingExtension) object;
+								AmazingTitles.loadExtension(extension);
+							}
+						}
+					} catch (ClassNotFoundException | InvocationTargetException | NoSuchMethodException |
+					         InstantiationException | IllegalAccessException ex) {
+						throw new RuntimeException(ex);
+					}
+				}
+			} catch (IOException e) {
+				throw new RuntimeException(e);
+			}
+		}
 	}
 	
 	public static void loadDefaultAnimations() {

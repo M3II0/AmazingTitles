@@ -144,6 +144,9 @@ public class Booter extends JavaPlugin implements Listener {
 			
 			try {
 				
+				// Unload extensions
+				AmazingTitles.unloadAllExtensions();
+				
 				// Try to load NmsProvider
 				NmsBuilder builder = PluginLoader.loadBuilder(getClassLoader());
 				if (builder == null) {
@@ -159,6 +162,7 @@ public class Booter extends JavaPlugin implements Listener {
 				
 				// Load default animations
 				PluginLoader.loadDefaultAnimations();
+				PluginLoader.loadExtensions(this);
 				
 				// Load smart bar manager
 				smartBarManager = new SmartBarManager(this);

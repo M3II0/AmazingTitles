@@ -50,15 +50,18 @@ public class CHNotifications implements CommandHandler {
 				String symbol = ColorTranslator.colorize(args[2]);
 				final StringBuilder argsHelper = new StringBuilder();
 				for (int i = 3; i < args.length; i++) {
-					argsHelper.append(args[i]);
+					argsHelper.append(' ').append(args[i]);
 				}
-				String message = ColorTranslator.colorize(argsHelper.toString());
+				String message;
+				if (argsHelper.length() > 0) {
+					message = ColorTranslator.colorize(argsHelper.substring(1));
+				} else message = "Invalid notification message!";
 				AmazingTitles.sendNotification(new SmartNotification(duration, symbol, message), players);
 			} catch (Exception e) {
 				return false;
 			}
 		}
-		return false;
+		return true;
 	}
 	
 	@Override

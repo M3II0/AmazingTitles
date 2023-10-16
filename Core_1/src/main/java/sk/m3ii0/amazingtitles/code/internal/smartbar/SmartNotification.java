@@ -76,6 +76,8 @@ public class SmartNotification {
 				if (lastFrame > 0) {
 					--lastFrame;
 					frame.append(" ").append(frames.get(lastFrame));
+				} else {
+					return "";
 				}
 			} else {
 				if (lastFrame+1 < frames.size()) {

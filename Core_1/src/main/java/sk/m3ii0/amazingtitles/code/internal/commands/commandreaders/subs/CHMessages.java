@@ -45,9 +45,13 @@ public class CHMessages implements CommandHandler {
 			List<Player> players = ArgsHelper.readPlayers(args[0]);
 			final StringBuilder builder = new StringBuilder();
 			for (int i = 1; i < args.length; i++) {
-				builder.append(args[i]);
+				builder.append(' ').append(args[i]);
 			}
-			BaseComponent[] message = InteractiveMessageHelper.getMessageFromRaw(builder.toString());
+			String finalRaw;
+			if (builder.length() > 0) {
+				finalRaw = builder.substring(1);
+			} else finalRaw = "";
+			BaseComponent[] message = InteractiveMessageHelper.getMessageFromRaw(finalRaw);
 			for (Player var : players) {
 				var.spigot().sendMessage(message);
 			}
