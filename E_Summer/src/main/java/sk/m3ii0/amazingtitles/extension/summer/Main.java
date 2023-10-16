@@ -20,6 +20,11 @@ public class Main implements AmazingExtension {
 	}
 	
 	@Override
+	public void unload() {
+	
+	}
+	
+	@Override
 	public void load() {
 		
 		AnimationBuilder wrapped_sun = new AnimationBuilder(AnimationType.LIGHT, false);
