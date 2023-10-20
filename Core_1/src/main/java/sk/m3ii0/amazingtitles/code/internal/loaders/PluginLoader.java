@@ -70,7 +70,28 @@ public class PluginLoader {
 								Constructor<?> constructor = c.getConstructor();
 								Object object = constructor.newInstance();
 								AmazingExtension extension = (AmazingExtension) object;
-								AmazingTitles.loadExtension(extension);
+								AmazingExtension finalExtension = new AmazingExtension() {
+									@Override
+									public String extension_name() {
+										return extension.extension_name();
+									}
+									
+									@Override
+									public void load() {
+										extension.load();
+									}
+									
+									@Override
+									public void unload() {
+										extension.unload();
+									}
+									
+									@Override
+									public File getAsFile() {
+										return var;
+									}
+								};
+								AmazingTitles.loadExtension(finalExtension);
 							}
 						}
 					} catch (ClassNotFoundException | InvocationTargetException | NoSuchMethodException |

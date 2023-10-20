@@ -13,6 +13,7 @@ import sk.m3ii0.amazingtitles.code.internal.components.AnimationComponent;
 import sk.m3ii0.amazingtitles.code.internal.components.ComponentArguments;
 import sk.m3ii0.amazingtitles.code.internal.utils.ColorTranslator;
 import sk.m3ii0.amazingtitles.code.internal.utils.CommandUtils;
+import sk.m3ii0.amazingtitles.code.internal.utils.TextComponentBuilder;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -22,16 +23,18 @@ public class CHAnimations implements CommandHandler {
 	
 	@Override
 	public BaseComponent[] helpMessage() {
-		BaseComponent[] message = new ComponentBuilder("").append("\n§a§lAnimations module help:\n").create();
-		BaseComponent[] clickable = TextComponent.fromLegacyText(" §7> /at sendAnimation <Players> <arguments/@> <Animation> [AnimationArguments] <Text%subtitle%subText>\n");
-		for (BaseComponent var : clickable) {
-			var.setClickEvent(new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND, "/at sendAnimation "));
-			var.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, TextComponent.fromLegacyText("§fClick to suggest command")));
+		if (ColorTranslator.isHexSupport()) {
+			TextComponentBuilder builder = new TextComponentBuilder();
+			builder.appendLegacy("\n<#a217ff>AmazingTitles ✎ </#ff7ae9> &fAnimated Messages\n");
+			builder.appendLegacy(" &7> <#dedede>/at sendAnimation <Players> <arguments/@> <Animation> [AnimationArguments] <Text%subtitle%subText></#c7c7c7>\n", "&{#ffa6fc}Click to suggest command", ClickEvent.Action.SUGGEST_COMMAND, "/at sendAnimation ");
+			builder.appendLegacy("§f");
+			return builder.createMessage();
 		}
-		BaseComponent[] finalMessage = new BaseComponent[message.length + clickable.length];
-		System.arraycopy(message, 0, finalMessage, 0, message.length);
-		System.arraycopy(clickable, 0, finalMessage, message.length, clickable.length);
-		return finalMessage;
+		TextComponentBuilder builder = new TextComponentBuilder();
+		builder.appendLegacy("\n&5AmazingTitles ✎ &fAnimatedMessages\n");
+		builder.appendLegacy(" &7> &7/at sendAnimation <Players> <arguments/@> <Animation> [AnimationArguments] <Text%subtitle%subText>\n", "&{#ffa6fc}Click to suggest command", ClickEvent.Action.SUGGEST_COMMAND, "/at sendAnimation ");
+		builder.appendLegacy("§f");
+		return builder.createMessage();
 	}
 	
 	@Override

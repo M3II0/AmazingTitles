@@ -5,6 +5,7 @@ import org.bukkit.plugin.Plugin;
 import sk.m3ii0.amazingtitles.code.api.AmazingTitles;
 import sk.m3ii0.amazingtitles.code.internal.Booter;
 
+import java.io.File;
 import java.util.List;
 
 public interface AmazingExtension {
@@ -28,6 +29,10 @@ public interface AmazingExtension {
 	
 	default void unregisterListeners() {
 		AmazingTitles.unregisterExtensionListeners(extension_name());
+	}
+	
+	default File getAsFile() {
+		return null;
 	}
 	
 }

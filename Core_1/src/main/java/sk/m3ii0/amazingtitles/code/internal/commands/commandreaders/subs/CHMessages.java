@@ -8,7 +8,9 @@ import sk.m3ii0.amazingtitles.code.internal.commands.commandreaders.HandlerType;
 import sk.m3ii0.amazingtitles.code.internal.commands.commandreaders.InternalHandlerType;
 import sk.m3ii0.amazingtitles.code.internal.commands.commandreaders.readers.ArgsHelper;
 import sk.m3ii0.amazingtitles.code.internal.interactivemessages.InteractiveMessageHelper;
+import sk.m3ii0.amazingtitles.code.internal.utils.ColorTranslator;
 import sk.m3ii0.amazingtitles.code.internal.utils.CommandUtils;
+import sk.m3ii0.amazingtitles.code.internal.utils.TextComponentBuilder;
 
 import java.util.Collections;
 import java.util.List;
@@ -17,16 +19,18 @@ public class CHMessages implements CommandHandler {
 	
 	@Override
 	public BaseComponent[] helpMessage() {
-		BaseComponent[] message = new ComponentBuilder("").append("\n§a§lMessages module help:\n").create();
-		BaseComponent[] clickable = TextComponent.fromLegacyText(" §7> /at sendMessage <Players> <Message>\n");
-		for (BaseComponent var : clickable) {
-			var.setClickEvent(new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND, "/at sendMessage "));
-			var.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, TextComponent.fromLegacyText("§fClick to suggest command")));
+		if (ColorTranslator.isHexSupport()) {
+			TextComponentBuilder builder = new TextComponentBuilder();
+			builder.appendLegacy("\n<#a217ff>AmazingTitles ✎ </#ff7ae9> &fInteractive Message\n");
+			builder.appendLegacy(" &7> <#dedede>/at sendMessage <Players> <Message></#c7c7c7>\n", "&{#ffa6fc}Click to suggest command", ClickEvent.Action.SUGGEST_COMMAND, "/at sendMessage ");
+			builder.appendLegacy("§f");
+			return builder.createMessage();
 		}
-		BaseComponent[] finalMessage = new BaseComponent[message.length + clickable.length];
-		System.arraycopy(message, 0, finalMessage, 0, message.length);
-		System.arraycopy(clickable, 0, finalMessage, message.length, clickable.length);
-		return finalMessage;
+		TextComponentBuilder builder = new TextComponentBuilder();
+		builder.appendLegacy("\n&5AmazingTitles ✎ &fInteractive Message\n");
+		builder.appendLegacy(" &7> &7/at sendMessage <Players> <Message>\n", "&{#ffa6fc}Click to suggest command", ClickEvent.Action.SUGGEST_COMMAND, "/at sendMessage ");
+		builder.appendLegacy("§f");
+		return builder.createMessage();
 	}
 	
 	@Override

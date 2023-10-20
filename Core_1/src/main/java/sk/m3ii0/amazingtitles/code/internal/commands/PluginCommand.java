@@ -111,7 +111,7 @@ public class PluginCommand implements CommandExecutor, TabExecutor {
 	
 	public boolean parseCommand(CommandSender s, String[] args) {
 		if (args.length == 0) {
-			s.spigot().sendMessage(getHelpMessage());
+			s.spigot().sendMessage(MessageUtils.getPluginHelp());
 			return true;
 		}
 		String handlerName = args[0];
@@ -125,28 +125,12 @@ public class PluginCommand implements CommandExecutor, TabExecutor {
 			}
 			return result;
 		}
-		s.spigot().sendMessage(getHelpMessage());
+		s.spigot().sendMessage(MessageUtils.getPluginHelp());
 		return true;
 	}
 	
-	public static BaseComponent[] getHelpMessage() {
-		ComponentBuilder builder = new ComponentBuilder("");
-		builder.append("\n");
-		builder.append("\n§5§lAmazingTitles §7✦ §fHelp message");
-		builder.append("\n");
-		builder.append("\n  §dAvailable commands");
-		for (Map.Entry<String, CommandHandler> entry : handlers.entrySet()) {
-			CommandHandler handler = entry.getValue();
-			String argument = entry.getKey();
-			builder.append(MessageUtils.quickCreate("\n   §7✎ §7/at §f" + argument, "§aClick to suggest\n§fType: §7" + handler.handlerType().id() + "\n§fPermission: §7" + handler.permission(), ClickEvent.Action.SUGGEST_COMMAND, "/at " + argument));
-		}
-		builder.append("\n");
-		BaseComponent[] wiki = MessageUtils.quickCreate("§dWiki", "§fClick to open", ClickEvent.Action.OPEN_URL, "https://m3ii0.gitbook.io/amazingtitles/");
-		BaseComponent[] discord = MessageUtils.quickCreate("§9Discord", "§fClick to open", ClickEvent.Action.OPEN_URL, "https://discord.com/invite/Ms7uAAAtcT");
-		BaseComponent[] spigot = MessageUtils.quickCreate("§6Spigot", "§fClick to open", ClickEvent.Action.OPEN_URL, "https://www.spigotmc.org/resources/109916/");
-		builder.append("\n  ").append(wiki).append("§7 | ").append(discord).append("§7 | ").append(spigot);
-		builder.append("\n");
-		return builder.create();
+	public static Map<String, CommandHandler> getHandlers() {
+		return handlers;
 	}
 	
 	public static void addHandler(String argument, CommandHandler handler) {

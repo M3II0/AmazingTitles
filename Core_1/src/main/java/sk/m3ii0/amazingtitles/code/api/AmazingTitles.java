@@ -31,6 +31,7 @@ public class AmazingTitles {
 	private static final Map<UUID, AnimationComponent> components = new HashMap<>();
 	private static final Map<String, AmazingExtension> extensions = new HashMap<>();
 	private static final Map<String, List<Listener>> extensionsListeners = new HashMap<>();
+	private static final Set<String> loadedExtensions = new HashSet<>();
 	
 	/*
 	*
@@ -52,14 +53,20 @@ public class AmazingTitles {
 	*
 	* */
 	
+	public static Set<String> getLoadedExtensionFileNames() {
+		return loadedExtensions;
+	}
+	
 	public static void loadExtension(AmazingExtension extension) {
 		extensions.put(extension.extension_name(), extension);
 		extension.load();
+		loadedExtensions.add(extension.getAsFile().getName());
 	}
 	
 	public static void unloadExtension(String extensionName) {
 		AmazingExtension extension = extensions.get(extensionName);
 		if (extension == null) return;
+		loadedExtensions.remove(extension.getAsFile().getName());
 		extension.unload();
 		unregisterExtensionListeners(extensionName);
 	}

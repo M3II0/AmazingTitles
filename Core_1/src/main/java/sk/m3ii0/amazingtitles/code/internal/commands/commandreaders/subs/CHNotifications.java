@@ -11,6 +11,7 @@ import sk.m3ii0.amazingtitles.code.internal.commands.commandreaders.readers.Args
 import sk.m3ii0.amazingtitles.code.internal.smartbar.SmartNotification;
 import sk.m3ii0.amazingtitles.code.internal.utils.ColorTranslator;
 import sk.m3ii0.amazingtitles.code.internal.utils.CommandUtils;
+import sk.m3ii0.amazingtitles.code.internal.utils.TextComponentBuilder;
 
 import java.util.Collections;
 import java.util.List;
@@ -19,16 +20,18 @@ public class CHNotifications implements CommandHandler {
 	
 	@Override
 	public BaseComponent[] helpMessage() {
-		BaseComponent[] message = new ComponentBuilder("").append("\n§a§lNotifications module help:\n").create();
-		BaseComponent[] clickable = TextComponent.fromLegacyText(" §7> /at sendNotification <Players> <Duration> <Symbol> <Message>\n");
-		for (BaseComponent var : clickable) {
-			var.setClickEvent(new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND, "/at sendNotification "));
-			var.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, TextComponent.fromLegacyText("§fClick to suggest command")));
+		if (ColorTranslator.isHexSupport()) {
+			TextComponentBuilder builder = new TextComponentBuilder();
+			builder.appendLegacy("\n<#a217ff>AmazingTitles ✎ </#ff7ae9> &fNotifications\n");
+			builder.appendLegacy(" &7> <#dedede>/at sendNotification <Players> <Duration> <Symbol> <Message></#c7c7c7>\n", "&{#ffa6fc}Click to suggest command", ClickEvent.Action.SUGGEST_COMMAND, "/at sendNotification ");
+			builder.appendLegacy("§f");
+			return builder.createMessage();
 		}
-		BaseComponent[] finalMessage = new BaseComponent[message.length + clickable.length];
-		System.arraycopy(message, 0, finalMessage, 0, message.length);
-		System.arraycopy(clickable, 0, finalMessage, message.length, clickable.length);
-		return finalMessage;
+		TextComponentBuilder builder = new TextComponentBuilder();
+		builder.appendLegacy("\n&5AmazingTitles ✎ &fNotifications\n");
+		builder.appendLegacy(" &7> &7/at sendNotification <Players> <Duration> <Symbol> <Message>\n", "&{#ffa6fc}Click to suggest command", ClickEvent.Action.SUGGEST_COMMAND, "/at sendNotification ");
+		builder.appendLegacy("§f");
+		return builder.createMessage();
 	}
 	
 	@Override
