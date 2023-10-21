@@ -57,6 +57,10 @@ public class AmazingTitles {
 		return loadedExtensions;
 	}
 	
+	public static Set<String> getLoadedExtensionNames() {
+		return extensions.keySet();
+	}
+	
 	public static void loadExtension(AmazingExtension extension) {
 		extensions.put(extension.extension_name(), extension);
 		extension.load();

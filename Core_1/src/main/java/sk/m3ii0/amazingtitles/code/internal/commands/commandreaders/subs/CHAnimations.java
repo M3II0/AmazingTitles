@@ -73,7 +73,6 @@ public class CHAnimations implements CommandHandler {
 			component.prepare();
 			component.run();
 		} catch (Exception e) {
-			e.printStackTrace();
 			return false;
 		}
 		return true;

@@ -18,14 +18,14 @@ public class CHPluginActions implements CommandHandler {
 	
 	private static final File extensionsFolder = new File(Booter.getInstance().getDataFolder(), "Extensions");
 	private static final Map<String, Integer> firstArgs = new HashMap<String, Integer>() {{
+		put("extensionList", -1);
 		put("loadExtension", 0);
-		put("reloadExtension", 1);
-		put("unloadExtension", 1);
-		put("reload", -1);
+		put("reloadExtension", 3);
+		put("unloadExtension", 3);
 		put("reloadExtensions", -1);
 		put("unloadExtensions", -1);
-		put("extensionList", 2);
 		put("loadExtensions", -1);
+		put("reload", -1);
 	}};
 	
 	@Override
@@ -56,6 +56,43 @@ public class CHPluginActions implements CommandHandler {
 	
 	@Override
 	public boolean readAndExecute(CommandSender s, String[] args) {
+		try {
+			String action = args[0];
+			if (action.equalsIgnoreCase("extensionList")) {
+				/*send extension list*/
+				return true;
+			}
+			if (action.equalsIgnoreCase("loadExtension")) {
+				String extension = args[1];
+				
+				return true;
+			}
+			if (action.equalsIgnoreCase("reloadExtension")) {
+				String extension = args[1];
+				return true;
+			}
+			if (action.equalsIgnoreCase("unloadExtension")) {
+				String extension = args[1];
+				return true;
+			}
+			if (action.equalsIgnoreCase("loadExtensions")) {
+				String extension = args[1];
+				return true;
+			}
+			if (action.equalsIgnoreCase("reloadExtensions")) {
+				String extension = args[1];
+				return true;
+			}
+			if (action.equalsIgnoreCase("unloadExtensions")) {
+				String extension = args[1];
+				return true;
+			}
+			if (action.equalsIgnoreCase("reload")) {
+				return true;
+			}
+		} catch (Exception ignore) {
+			return false;
+		}
 		return false;
 	}
 	
@@ -69,6 +106,7 @@ public class CHPluginActions implements CommandHandler {
 	}
 	
 	private List<String> getParticipleArgument(int data) {
+		if (data == 3) return new ArrayList<>(AmazingTitles.getLoadedExtensionNames());
 		if (data == -1) return  Collections.singletonList("There are no more characters | Wrong command");
 		List<String> array = new ArrayList<>();
 		File[] files = extensionsFolder.listFiles();

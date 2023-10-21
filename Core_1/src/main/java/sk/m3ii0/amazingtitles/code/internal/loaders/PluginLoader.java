@@ -95,13 +95,9 @@ public class PluginLoader {
 							}
 						}
 					} catch (ClassNotFoundException | InvocationTargetException | NoSuchMethodException |
-					         InstantiationException | IllegalAccessException ex) {
-						throw new RuntimeException(ex);
-					}
+					         InstantiationException | IllegalAccessException ignore) {}
 				}
-			} catch (IOException e) {
-				throw new RuntimeException(e);
-			}
+			} catch (IOException ignore) {}
 		}
 	}
 	
