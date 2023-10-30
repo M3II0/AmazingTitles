@@ -1,5 +1,6 @@
 package sk.m3ii0.amazingtitles.code.internal;
 
+import net.md_5.bungee.api.chat.BaseComponent;
 import org.bukkit.Bukkit;
 import org.bukkit.boss.BarColor;
 import org.bukkit.command.CommandSender;
@@ -15,6 +16,7 @@ import org.jetbrains.annotations.Nullable;
 import sk.m3ii0.amazingtitles.code.api.AmazingTitles;
 import sk.m3ii0.amazingtitles.code.api.builders.AnimationBuilder;
 import sk.m3ii0.amazingtitles.code.api.enums.DisplayType;
+import sk.m3ii0.amazingtitles.code.internal.announcements.UpdateChecker;
 import sk.m3ii0.amazingtitles.code.internal.commands.PluginCommand;
 import sk.m3ii0.amazingtitles.code.internal.commands.commandreaders.readers.ArgsHelper;
 import sk.m3ii0.amazingtitles.code.internal.components.ComponentArguments;
@@ -26,6 +28,8 @@ import sk.m3ii0.amazingtitles.code.internal.smartbar.SmartBarManager;
 import sk.m3ii0.amazingtitles.code.internal.spi.NmsBuilder;
 import sk.m3ii0.amazingtitles.code.internal.spi.NmsProvider;
 import sk.m3ii0.amazingtitles.code.internal.utils.ColorTranslator;
+import sk.m3ii0.amazingtitles.code.internal.utils.MessageUtils;
+import sk.m3ii0.amazingtitles.code.internal.utils.TextComponentBuilder;
 
 import java.text.DecimalFormat;
 import java.util.List;
@@ -69,10 +73,18 @@ public class Booter extends JavaPlugin implements Listener {
 		
 		reload(null);
 		
+		if (getCustomConfiguration().getShortcutOptions().getUpdateNotifier()) {
+			new UpdateChecker(this, "AmazingTitles", "https://www.spigotmc.org/resources/109916/", "amazingtitles.admin", "4.1", 109916);
+		}
+		
+		
 	}
 	
 	@Override
 	public void onDisable() {
+		
+		// Unload extensions
+		AmazingTitles.unloadAllExtensions();
 		
 		// Unregister listeners
 		HandlerList.unregisterAll((Plugin) this);
@@ -212,7 +224,10 @@ public class Booter extends JavaPlugin implements Listener {
 		sendEnableReport(took, pluginMode);
 		
 		if (receiver != null) {
-			receiver.sendMessage("§aAmazingTitles has been reloaded in " + took + "ms!");
+			TextComponentBuilder hex = new TextComponentBuilder().appendLegacy("<#a217ff>AmazingTitles ✎ </#ff7ae9> &fReloaded plugin in &{#ffa6fc}" + took + "&fms!");
+			TextComponentBuilder legacy = new TextComponentBuilder().appendLegacy("&5AmazingTitles ✎ &fReloaded plugin &d" + took + "&fms!");
+			BaseComponent[] message = MessageUtils.getCorrect(hex, legacy);
+			receiver.spigot().sendMessage(message);
 		}
 	}
 	
@@ -226,9 +241,13 @@ public class Booter extends JavaPlugin implements Listener {
 	
 	}
 	
-	private String getTookMs(Runnable action) {
+	public static String getTookMs(Runnable action) {
 		long nanos = -System.nanoTime();
-		action.run();
+		try {
+			action.run();
+		} catch (Exception e) {
+			return "-1";
+		}
 		nanos += System.nanoTime();
 		return new DecimalFormat("#.###").format(nanos/1e+6);
 	}

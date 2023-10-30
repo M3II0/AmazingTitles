@@ -4,6 +4,7 @@ import org.bukkit.boss.BarColor;
 import sk.m3ii0.amazingtitles.code.api.AmazingTitles;
 import sk.m3ii0.amazingtitles.code.api.enums.AnimationType;
 import sk.m3ii0.amazingtitles.code.api.enums.DisplayType;
+import sk.m3ii0.amazingtitles.code.api.interfaces.AmazingExtension;
 import sk.m3ii0.amazingtitles.code.api.interfaces.FramesBuilder;
 import sk.m3ii0.amazingtitles.code.internal.Booter;
 import sk.m3ii0.amazingtitles.code.internal.components.AnimationComponent;
@@ -41,6 +42,7 @@ public class AnimationBuilder {
 	private int overrideFps = -99;
 	private DisplayType overrideDisplayType = null;
 	
+	private final AmazingExtension owner;
 	private final AnimationType animationType;
 	private final boolean requiresHex;
 	private final List<String> arguments;
@@ -51,7 +53,8 @@ public class AnimationBuilder {
 	*
 	* */
 	
-	public AnimationBuilder(AnimationType animationType, boolean requiresHex, String... arguments) {
+	public AnimationBuilder(AmazingExtension owner, AnimationType animationType, boolean requiresHex, String... arguments) {
+		this.owner = owner;
 		this.animationType = animationType;
 		this.requiresHex = requiresHex;
 		this.arguments = Arrays.asList((arguments));
@@ -62,6 +65,10 @@ public class AnimationBuilder {
 	* Getters
 	*
 	* */
+	
+	public AmazingExtension getOwner() {
+		return owner;
+	}
 	
 	public FramesBuilder getFramesBuilder() {
 		return framesBuilder;

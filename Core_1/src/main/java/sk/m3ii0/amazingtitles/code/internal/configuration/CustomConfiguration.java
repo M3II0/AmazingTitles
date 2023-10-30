@@ -60,6 +60,11 @@ public class CustomConfiguration {
 			return options.getDouble("Config");
 		}
 		
+		public boolean getUpdateNotifier() {
+			int result = options.getInt("UpdateNotifier", 1);
+			return result != 0;
+		}
+		
 	}
 	
 	public class SmartBar {

@@ -17,6 +17,7 @@ import sk.m3ii0.amazingtitles.code.internal.interactivemessages.InteractiveMessa
 import sk.m3ii0.amazingtitles.code.internal.smartbar.SmartBar;
 import sk.m3ii0.amazingtitles.code.internal.smartbar.SmartNotification;
 
+import java.io.File;
 import java.util.*;
 
 public class AmazingTitles {
@@ -32,6 +33,7 @@ public class AmazingTitles {
 	private static final Map<String, AmazingExtension> extensions = new HashMap<>();
 	private static final Map<String, List<Listener>> extensionsListeners = new HashMap<>();
 	private static final Set<String> loadedExtensions = new HashSet<>();
+	public static final File EXTENSIONS_FOLDER = new File(Booter.getInstance().getDataFolder(), "Extensions");
 	
 	/*
 	*
@@ -63,16 +65,32 @@ public class AmazingTitles {
 	
 	public static void loadExtension(AmazingExtension extension) {
 		extensions.put(extension.extension_name(), extension);
-		extension.load();
-		loadedExtensions.add(extension.getAsFile().getName());
+		try {
+			extension.load();
+			loadedExtensions.add(extension.getAsFile().getName());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
-	public static void unloadExtension(String extensionName) {
-		AmazingExtension extension = extensions.get(extensionName);
-		if (extension == null) return;
+	public static AmazingExtension unloadExtension(String extensionName) {
+		AmazingExtension extension = extensions.remove(extensionName);
+		if (extension == null) return null;
 		loadedExtensions.remove(extension.getAsFile().getName());
 		extension.unload();
 		unregisterExtensionListeners(extensionName);
+		Set<String> toRemove = new HashSet<>();
+		for (Map.Entry<String, AnimationBuilder> entry : animations.entrySet()) {
+			AmazingExtension loadedAs = entry.getValue().getOwner();
+			if (loadedAs == null) continue;
+			if (loadedAs.extension_name().equalsIgnoreCase(extensionName)) {
+				toRemove.add(entry.getKey());
+			}
+		}
+		for (String var : toRemove) {
+			animations.remove(var);
+		}
+		return extension;
 	}
 	
 	public static void registerExtensionListener(AmazingExtension extension, Listener listener) {
@@ -345,6 +363,10 @@ public class AmazingTitles {
 	
 	public static void clearCacheInternally() {
 		animations.clear();
+		components.clear();
+		unloadAllExtensions();
+		loadedExtensions.clear();
+		extensionsListeners.clear();
 		for (AnimationComponent component : components.values()) {
 			component.end();
 		}

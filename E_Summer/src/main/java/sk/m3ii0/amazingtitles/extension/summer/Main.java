@@ -8,7 +8,6 @@ import sk.m3ii0.amazingtitles.code.api.interfaces.AmazingExtension;
 import sk.m3ii0.amazingtitles.code.internal.components.ComponentArguments;
 import sk.m3ii0.amazingtitles.code.internal.utils.ColorTranslator;
 
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,7 +26,7 @@ public class Main implements AmazingExtension {
 	@Override
 	public void load() {
 		
-		AnimationBuilder wrapped_sun = new AnimationBuilder(AnimationType.LIGHT, false);
+		AnimationBuilder wrapped_sun = new AnimationBuilder(this, AnimationType.REPEATING, false);
 		wrapped_sun.setComponentArguments(ComponentArguments.create("Text is null", "SubText is null", BarColor.WHITE, 10, 1, DisplayType.TITLE));
 		wrapped_sun.setFramesBuilder((arguments, args) -> {
 			List<String> frames = new ArrayList<>();

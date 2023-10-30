@@ -2,6 +2,11 @@
 # WARNING: You can destroy plugin functionality...
 Config: 0.1
 
+# Update announcements
+# 0 - You won't receive update announcements
+# x > 0 - You will receive update announcements
+UpdateNotifier: 1
+
 # Settings of SmartBar & Static animation
 # WARNING: Can affect server performance
 SmartBar:

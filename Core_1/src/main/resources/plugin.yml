@@ -1,6 +1,6 @@
 name: AmazingTitles
 api-version: 1.13
-version: 4.0
+version: 4.1
 main: sk.m3ii0.amazingtitles.code.internal.Booter
 author: M3II0
 commands:

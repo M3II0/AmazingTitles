@@ -97,4 +97,9 @@ public class MessageUtils {
 		return builder.createMessage();
 	}
 	
+	public static BaseComponent[] getCorrect(TextComponentBuilder hex, TextComponentBuilder legacy) {
+		if (ColorTranslator.isHexSupport()) return hex.createMessage();
+		return legacy.createMessage();
+	}
+	
 }

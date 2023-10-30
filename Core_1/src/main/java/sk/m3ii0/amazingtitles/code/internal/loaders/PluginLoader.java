@@ -19,7 +19,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.*;
@@ -42,73 +41,81 @@ public class PluginLoader {
 	
 	public static void loadExtensions(Plugin owner) {
 		ClassLoader parent = owner.getClass().getClassLoader();
-		File directory = owner.getDataFolder();
-		File location = new File(directory, "Extensions");
+		File location = AmazingTitles.EXTENSIONS_FOLDER;
 		location.mkdirs();
 		File[] extensions = location.listFiles();
 		if (extensions == null) return;
 		for (File var : extensions) {
 			if (!var.getName().endsWith(".jar")) continue;
-			try (JarFile jar = new JarFile(var)) {
-				ZipEntry document = jar.getEntry("extension.yml");
-				try (InputStream stream = jar.getInputStream(document)) {
-					Scanner s = new Scanner(stream).useDelimiter("\\A");
-					String result = s.hasNext() ? s.next() : "";
-					String main = result.replace("Class:", "").replace(" ", "");
-					Enumeration<JarEntry> e = jar.entries();
-					URL[] urls = {new URL("jar:file:" + var.getPath() + "!/")};
-					try (URLClassLoader cl = new URLClassLoader(urls, parent)) {
-						while (e.hasMoreElements()) {
-							JarEntry je = e.nextElement();
-							if(je.isDirectory() || !je.getName().endsWith(".class")){
-								continue;
-							}
-							String className = je.getName().substring(0,je.getName().length()-6);
-							className = className.replace('/', '.');
-							Class<?> c = cl.loadClass(className);
-							if (className.equals(main)) {
-								Constructor<?> constructor = c.getConstructor();
-								Object object = constructor.newInstance();
-								AmazingExtension extension = (AmazingExtension) object;
-								AmazingExtension finalExtension = new AmazingExtension() {
-									@Override
-									public String extension_name() {
-										return extension.extension_name();
-									}
-									
-									@Override
-									public void load() {
-										extension.load();
-									}
-									
-									@Override
-									public void unload() {
-										extension.unload();
-									}
-									
-									@Override
-									public File getAsFile() {
-										return var;
-									}
-								};
-								AmazingTitles.loadExtension(finalExtension);
-							}
-						}
-					} catch (ClassNotFoundException | InvocationTargetException | NoSuchMethodException |
-					         InstantiationException | IllegalAccessException ignore) {}
-				}
-			} catch (IOException ignore) {}
+			AmazingExtension extension = getExtension(parent, var);
+			if (extension != null) {
+				AmazingTitles.loadExtension(extension);
+			}
 		}
+	}
+	
+	public static AmazingExtension getExtension(ClassLoader parent, File file) {
+		if (!file.getName().endsWith(".jar")) return null;
+		try (JarFile jar = new JarFile(file)) {
+			ZipEntry document = jar.getEntry("extension.yml");
+			try (InputStream stream = jar.getInputStream(document)) {
+				Scanner s = new Scanner(stream).useDelimiter("\\A");
+				String result = s.hasNext() ? s.next() : "";
+				String main = result.replace("Class:", "").replace(" ", "");
+				Enumeration<JarEntry> e = jar.entries();
+				URL[] urls = {new URL("jar:file:" + file.getPath() + "!/")};
+				try (URLClassLoader cl = new URLClassLoader(urls, parent)) {
+					while (e.hasMoreElements()) {
+						JarEntry je = e.nextElement();
+						if(je.isDirectory() || !je.getName().endsWith(".class")){
+							continue;
+						}
+						String className = je.getName().substring(0,je.getName().length()-6);
+						className = className.replace('/', '.');
+						Class<?> c = cl.loadClass(className);
+						if (className.equals(main)) {
+							Constructor<?> constructor = c.getConstructor();
+							Object object = constructor.newInstance();
+							AmazingExtension extension = (AmazingExtension) object;
+							AmazingExtension finalExtension = new AmazingExtension() {
+								@Override
+								public String extension_name() {
+									return extension.extension_name();
+								}
+								
+								@Override
+								public void load() {
+									extension.load();
+								}
+								
+								@Override
+								public void unload() {
+									extension.unload();
+								}
+								
+								@Override
+								public File getAsFile() {
+									return file;
+								}
+							};
+							return finalExtension;
+						}
+					}
+				} catch (ClassNotFoundException | InvocationTargetException | NoSuchMethodException |
+				         InstantiationException | IllegalAccessException ignore) {}
+			}
+		} catch (IOException ignore) {}
+		return null;
 	}
 	
 	public static void loadDefaultAnimations() {
 		
-		AnimationBuilder none = new AnimationBuilder(AnimationType.LIGHT, false);
+		AnimationBuilder none = new AnimationBuilder(null, AnimationType.LIGHT, false);
 		none.setComponentArguments(ComponentArguments.create("Text is null", "SubText is null", BarColor.WHITE, 20, 20, DisplayType.TITLE));
 		none.setFramesBuilder((arguments, args) -> Collections.singletonList(ColorTranslator.colorize(arguments.getMainText())));
 		none.register("NONE");
 		
-		AnimationBuilder symbolWrap = new AnimationBuilder(AnimationType.REPEATING, false, "Symbol(Text)");
+		AnimationBuilder symbolWrap = new AnimationBuilder(null, AnimationType.REPEATING, false, "Symbol(Text)");
 		symbolWrap.setComponentArguments(ComponentArguments.create("Text is null", "SubText is null", BarColor.WHITE, 20, 10, DisplayType.TITLE));
 		symbolWrap.setFramesBuilder((arguments, args) -> {
 			List<String> frames = new ArrayList<>();
@@ -120,7 +127,7 @@ public class PluginLoader {
 		});
 		symbolWrap.register("FLASHING_SYMBOL_WRAP");
 		
-		AnimationBuilder rainbow = new AnimationBuilder(AnimationType.REPEATING, true);
+		AnimationBuilder rainbow = new AnimationBuilder(null, AnimationType.REPEATING, true);
 		rainbow.setComponentArguments(ComponentArguments.create("Text is null", "SubText is null", BarColor.WHITE, 20, 20, DisplayType.TITLE));
 		rainbow.setFramesBuilder((arguments, args) -> {
 			List<String> frames = new ArrayList<>();
@@ -163,7 +170,7 @@ public class PluginLoader {
 		});
 		rainbow.register("RAINBOW");
 		
-		AnimationBuilder waves = new AnimationBuilder(AnimationType.REPEATING, true, "Color1(HEX/Legacy)", "Color2(HEX/Legacy)");
+		AnimationBuilder waves = new AnimationBuilder(null, AnimationType.REPEATING, true, "Color1(HEX/Legacy)", "Color2(HEX/Legacy)");
 		waves.setComponentArguments(ComponentArguments.create("Text is null", "SubText is null", BarColor.WHITE, 10, 20, DisplayType.TITLE));
 		waves.setFramesBuilder((arguments, args) -> {
 			List<String> frames = new ArrayList<>();
@@ -205,7 +212,7 @@ public class PluginLoader {
 		});
 		waves.register("WAVES");
 		
-		AnimationBuilder bounce = new AnimationBuilder(AnimationType.REPEATING, true, "Color1(Hex/Legacy)", "Color2(Hex/Legacy)");
+		AnimationBuilder bounce = new AnimationBuilder(null, AnimationType.REPEATING, true, "Color1(Hex/Legacy)", "Color2(Hex/Legacy)");
 		bounce.setComponentArguments(ComponentArguments.create("Text is null", "SubText is null", BarColor.WHITE, 10, 20, DisplayType.TITLE));
 		bounce.setFramesBuilder((arguments, args) -> {
 			List<String> frames = new ArrayList<>();
@@ -232,7 +239,7 @@ public class PluginLoader {
 		});
 		bounce.register("BOUNCE");
 		
-		AnimationBuilder flashing = new AnimationBuilder(AnimationType.REPEATING, false);
+		AnimationBuilder flashing = new AnimationBuilder(null, AnimationType.REPEATING, false);
 		flashing.setComponentArguments(ComponentArguments.create("Text is null", "SubText is null", BarColor.WHITE, 10, 10, DisplayType.TITLE));
 		flashing.setFramesBuilder((arguments, args) -> {
 			List<String> frames = new ArrayList<>();
@@ -242,7 +249,7 @@ public class PluginLoader {
 		});
 		flashing.register("FLASHING");
 		
-		AnimationBuilder split = new AnimationBuilder(AnimationType.REPEATING, false);
+		AnimationBuilder split = new AnimationBuilder(null, AnimationType.REPEATING, false);
 		split.setComponentArguments(ComponentArguments.create("Text is null", "SubText is null", BarColor.WHITE, 10, 10, DisplayType.TITLE));
 		split.setFramesBuilder((arguments, args) -> {
 			String input = ColorTranslator.colorize(arguments.getMainText());
@@ -250,7 +257,7 @@ public class PluginLoader {
 		});
 		split.register("SPLIT");
 		
-		AnimationBuilder words_split = new AnimationBuilder(AnimationType.REPEATING, false);
+		AnimationBuilder words_split = new AnimationBuilder(null, AnimationType.REPEATING, false);
 		words_split.setComponentArguments(ComponentArguments.create("Text is null", "SubText is null", BarColor.WHITE, 10, 10, DisplayType.TITLE));
 		words_split.setFramesBuilder((arguments, args) -> {
 			String input = ColorTranslator.colorize(arguments.getMainText());
@@ -258,7 +265,7 @@ public class PluginLoader {
 		});
 		words_split.register("WORDS_SPLIT");
 		
-		AnimationBuilder from_left = new AnimationBuilder(AnimationType.FADE_IN, false);
+		AnimationBuilder from_left = new AnimationBuilder(null, AnimationType.FADE_IN, false);
 		from_left.setComponentArguments(ComponentArguments.create("Text is null", "SubText is null", BarColor.WHITE, 20, 20, DisplayType.TITLE));
 		from_left.setFramesBuilder((arguments, args) -> {
 			List<String> frames = new ArrayList<>();
@@ -278,7 +285,7 @@ public class PluginLoader {
 		});
 		from_left.register("FROM_LEFT");
 		
-		AnimationBuilder from_right = new AnimationBuilder(AnimationType.FADE_IN, false);
+		AnimationBuilder from_right = new AnimationBuilder(null, AnimationType.FADE_IN, false);
 		from_right.setComponentArguments(ComponentArguments.create("Text is null", "SubText is null", BarColor.WHITE, 20, 20, DisplayType.TITLE));
 		from_right.setFramesBuilder((arguments, args) -> {
 			List<String> frames = new ArrayList<>();
@@ -298,7 +305,7 @@ public class PluginLoader {
 		});
 		from_right.register("FROM_RIGHT");
 		
-		AnimationBuilder fade_in = new AnimationBuilder(AnimationType.FADE_IN, false);
+		AnimationBuilder fade_in = new AnimationBuilder(null, AnimationType.FADE_IN, false);
 		fade_in.setComponentArguments(ComponentArguments.create("Text is null", "SubText is null", BarColor.WHITE, 20, 20, DisplayType.TITLE));
 		fade_in.setFramesBuilder((arguments, args) -> {
 			List<String> frames = new ArrayList<>();
@@ -312,7 +319,7 @@ public class PluginLoader {
 		});
 		fade_in.register("FADE_IN");
 		
-		AnimationBuilder fade_in_writer = new AnimationBuilder(AnimationType.FADE_IN, false);
+		AnimationBuilder fade_in_writer = new AnimationBuilder(null, AnimationType.FADE_IN, false);
 		fade_in_writer.setComponentArguments(ComponentArguments.create("Text is null", "SubText is null", BarColor.WHITE, 20, 20, DisplayType.TITLE));
 		fade_in_writer.setFramesBuilder((arguments, args) -> {
 			List<String> frames = new ArrayList<>();
@@ -330,7 +337,7 @@ public class PluginLoader {
 		});
 		fade_in_writer.register("FADE_IN_WRITER");
 		
-		AnimationBuilder from_both_sides = new AnimationBuilder(AnimationType.FADE_IN, false);
+		AnimationBuilder from_both_sides = new AnimationBuilder(null, AnimationType.FADE_IN, false);
 		from_both_sides.setComponentArguments(ComponentArguments.create("Text is null", "SubText is null", BarColor.WHITE, 20, 20, DisplayType.TITLE));
 		from_both_sides.setFramesBuilder((arguments, args) -> {
 			List<String> frames = new ArrayList<>();
@@ -352,7 +359,7 @@ public class PluginLoader {
 		});
 		from_both_sides.register("FROM_BOTH_SIDES");
 		
-		AnimationBuilder pulsing = new AnimationBuilder(AnimationType.REPEATING, true, "Color1(Hex/Legacy)", "Color2(Hex/Legacy)");
+		AnimationBuilder pulsing = new AnimationBuilder(null, AnimationType.REPEATING, true, "Color1(Hex/Legacy)", "Color2(Hex/Legacy)");
 		pulsing.setComponentArguments(ComponentArguments.create("Text is null", "SubText is null", BarColor.WHITE, 20, 20, DisplayType.TITLE));
 		pulsing.setFramesBuilder((arguments, args) -> {
 			List<String> frames = new ArrayList<>();
