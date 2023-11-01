@@ -74,7 +74,7 @@ public class Booter extends JavaPlugin implements Listener {
 		reload(null);
 		
 		if (getCustomConfiguration().getShortcutOptions().getUpdateNotifier()) {
-			new UpdateChecker(this, "AmazingTitles", "https://www.spigotmc.org/resources/109916/", "amazingtitles.admin", "4.1", 109916);
+			new UpdateChecker(this, "AmazingTitles", "https://www.spigotmc.org/resources/109916/", "amazingtitles.admin", "4.2", 109916);
 		}
 		
 		

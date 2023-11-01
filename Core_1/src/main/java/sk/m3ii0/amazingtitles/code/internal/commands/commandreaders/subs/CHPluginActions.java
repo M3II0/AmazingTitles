@@ -199,7 +199,7 @@ public class CHPluginActions implements CommandHandler {
 			return CommandUtils.copyAllStartingWith(new ArrayList<>(firstArgs.keySet()), args[0]);
 		}
 		int data = firstArgs.getOrDefault(args[0], -1);
-		return getParticipleArgument(data);
+		return CommandUtils.copyAllStartingWith(getParticipleArgument(data), args[args.length-1]);
 	}
 	
 	private List<String> getParticipleArgument(int data) {

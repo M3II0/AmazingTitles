@@ -34,17 +34,26 @@ public class ArgsHelper implements Listener {
 			result.addAll(Bukkit.getOnlinePlayers());
 			return result;
 		}
-		if (argument.startsWith("-p:")) {
-			argument = argument.replaceFirst("-p:", "");
-			for (Player player : players.values()) {
-				if (player != null && player.hasPermission(argument)) {
-					result.add(player);
+		for (String var : argument.split(",")) {
+			if (var.startsWith("-p:")) {
+				var = var.replaceFirst("-p:", "");
+				for (Player player : players.values()) {
+					if (player != null && player.hasPermission(var)) {
+						result.add(player);
+					}
 				}
+				continue;
 			}
-			return result;
-		}
-		for (String playerName : argument.split(",")) {
-			Player player = players.get(playerName);
+			if (var.startsWith("-w:")) {
+				var = var.replaceFirst("-w:", "");
+				for (Player player : players.values()) {
+					if (player != null && player.getWorld().getName().equalsIgnoreCase(var)) {
+						result.add(player);
+					}
+				}
+				continue;
+			}
+			Player player = players.get(var);
 			if (player != null) {
 				result.add(player);
 			}
@@ -56,6 +65,8 @@ public class ArgsHelper implements Listener {
 		List<String> results = new ArrayList<>();
 		Set<String> contains = new HashSet<>(Arrays.asList(argument.split(",")));
 		results.add("all");
+		results.add("-p:your.permission");
+		results.add("-w:worldName");
 		for (Player var : Bukkit.getOnlinePlayers()) {
 			String name = var.getName();
 			if (contains.contains(name)) continue;
