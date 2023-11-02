@@ -319,7 +319,7 @@ public class PluginLoader {
 		});
 		fade_in.register("FADE_IN");
 		
-		AnimationBuilder fade_in_writer = new AnimationBuilder(null, AnimationType.FADE_IN, false);
+		AnimationBuilder fade_in_writer = new AnimationBuilder(null, AnimationType.FADE_IN, false, "Writer(Single Word)");
 		fade_in_writer.setComponentArguments(ComponentArguments.create("Text is null", "SubText is null", BarColor.WHITE, 20, 20, DisplayType.TITLE));
 		fade_in_writer.setFramesBuilder((arguments, args) -> {
 			List<String> frames = new ArrayList<>();
