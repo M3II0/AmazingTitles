@@ -31,6 +31,7 @@
         <module>E_Timer</module>
         <module>Core_1</module>
         <module>R1_20_R2</module>
+        <module>R1_20_R3</module>
     </modules>
 
     <properties>
