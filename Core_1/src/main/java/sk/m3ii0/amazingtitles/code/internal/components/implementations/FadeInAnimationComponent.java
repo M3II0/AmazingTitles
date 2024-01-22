@@ -243,7 +243,7 @@ public class FadeInAnimationComponent implements AnimationComponent {
 	}
 	
 	private int framesPerSecond() {
-		return 20/fps;
+		return fps;
 	}
 	
 }

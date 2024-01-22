@@ -16,7 +16,7 @@ public class Main implements AmazingTitleExtension {
 	
 	@Override
 	public void load() {
-
+		
 		AmazingTitlesAPI.getApi().createAndRegister("EXTENSION_BOUNCE_TEXT", true, true, true, (type, input, args) -> {
 			List<String> frames = new ArrayList<>();
 			List<String> builtSpaces = new ArrayList<>();
