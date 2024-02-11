@@ -32,6 +32,7 @@
         <module>Core_1</module>
         <module>R1_20_R2</module>
         <module>R1_20_R3</module>
+        <module>R1_12_R1</module>
     </modules>
 
     <properties>
@@ -64,7 +65,7 @@
         <dependency>
             <groupId>io.netty</groupId>
             <artifactId>netty-all</artifactId>
-            <version>4.1.91.Final</version>
+            <version>5.0.0.Alpha2</version>
             <scope>provided</scope>
         </dependency>
         <dependency>

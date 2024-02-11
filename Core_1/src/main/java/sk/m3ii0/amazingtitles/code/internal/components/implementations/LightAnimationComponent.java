@@ -217,7 +217,7 @@ public class LightAnimationComponent implements AnimationComponent {
 			bossBar.removeAll();
 		}
 		receivers.clear();
-		frames.clear();
+		if (frames != null) frames.clear();
 	}
 	
 	private boolean next() {
