@@ -9,7 +9,7 @@
 <p align="center">
   <img alt="Static Badge" src="https://img.shields.io/badge/Spigot-%23FFAA00?style=for-the-badge&link=https%3A%2F%2Fwww.spigotmc.org%2Fresources%2Fauthors%2Fm3ii0.1052589%2F">
   <img alt="Static Badge" src="https://img.shields.io/badge/Java%208%2B-%23B35900?style=for-the-badge&link=https%3A%2F%2Fwww.spigotmc.org%2Fresources%2Fauthors%2Fm3ii0.1052589%2F">
-  <img alt="Static Badge" src="https://img.shields.io/badge/Minecraft%201.13%2B-%232A8000?style=for-the-badge&link=https%3A%2F%2Fwww.spigotmc.org%2Fresources%2Fauthors%2Fm3ii0.1052589%2F">
+  <img alt="Static Badge" src="https://img.shields.io/badge/Minecraft%201.12.2%2B-%232A8000?style=for-the-badge&link=https%3A%2F%2Fwww.spigotmc.org%2Fresources%2Fauthors%2Fm3ii0.1052589%2F">
   <img alt="Static Badge" src="https://img.shields.io/badge/APACHE%20MAVEN-%23CC2200?style=for-the-badge&link=https%3A%2F%2Fwww.spigotmc.org%2Fresources%2Fauthors%2Fm3ii0.1052589%2F">
 </p>
 
