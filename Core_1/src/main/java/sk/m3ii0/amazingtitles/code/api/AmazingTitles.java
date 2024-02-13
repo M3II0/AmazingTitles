@@ -6,6 +6,8 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.event.HandlerList;
 import org.bukkit.event.Listener;
+import sk.m3ii0.amazingtitles.code.Iintegrations.CMIIntegration;
+import sk.m3ii0.amazingtitles.code.Iintegrations.Integration;
 import sk.m3ii0.amazingtitles.code.api.builders.AnimationBuilder;
 import sk.m3ii0.amazingtitles.code.api.interfaces.AmazingExtension;
 import sk.m3ii0.amazingtitles.code.internal.Booter;
@@ -34,7 +36,13 @@ public class AmazingTitles {
 	private static final Map<String, List<Listener>> extensionsListeners = new HashMap<>();
 	private static final Set<String> loadedExtensions = new HashSet<>();
 	public static final File EXTENSIONS_FOLDER = new File(Booter.getInstance().getDataFolder(), "Extensions");
-	
+	public static final File INTEGRATIONS_FOLDER = new File(Booter.getInstance().getDataFolder(), "Integrations");
+
+	static {
+		if (!EXTENSIONS_FOLDER.exists()) EXTENSIONS_FOLDER.mkdirs();
+		if (!INTEGRATIONS_FOLDER.exists()) INTEGRATIONS_FOLDER.mkdirs();
+	}
+
 	/*
 	*
 	* Internal
@@ -370,6 +378,29 @@ public class AmazingTitles {
 		for (AnimationComponent component : components.values()) {
 			component.end();
 		}
+	}
+
+	/*
+	*
+	* Integrations
+	*
+	* */
+
+	public static void loadIntegrations() {
+
+		List<Integration> integrations = new ArrayList<>();
+
+		// CMI Integration
+		if (isPluginHere("CMI")) integrations.add(new CMIIntegration());
+
+		for (Integration var : integrations) {
+			var.reload();
+		}
+
+	}
+
+	private static boolean isPluginHere(String name) {
+		return Bukkit.getPluginManager().getPlugin(name) != null;
 	}
 	
 }

@@ -1,8 +1,10 @@
 name: AmazingTitles
 api-version: 1.13
-version: 4.7
+version: 4.8
 main: sk.m3ii0.amazingtitles.code.internal.Booter
 author: M3II0
+softdepend:
+  - CMI
 commands:
   amazingtitles:
     permission: "amazingtitles.command"

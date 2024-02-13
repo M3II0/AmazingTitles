@@ -76,7 +76,7 @@ public class Booter extends JavaPlugin implements Listener {
 		reload(null);
 		
 		if (getCustomConfiguration().getShortcutOptions().getUpdateNotifier()) {
-			new UpdateChecker(this, "AmazingTitles", "https://www.spigotmc.org/resources/109916/", "amazingtitles.admin", "4.7", 109916);
+			new UpdateChecker(this, "AmazingTitles", "https://www.spigotmc.org/resources/109916/", "amazingtitles.admin", "4.8", 109916);
 		}
 		
 		metrics = new Metrics(this, 18588);
@@ -195,7 +195,10 @@ public class Booter extends JavaPlugin implements Listener {
 				pluginCommand = new PluginCommand(this);
 				command.setExecutor(pluginCommand);
 				command.setTabCompleter(pluginCommand);
-				
+
+				// Load integrations
+				AmazingTitles.loadIntegrations();
+
 				// Load static-bar
 				String staticBarText = getCustomConfiguration().getShortcutSmartBar().getStaticBarText();
 				String staticBarAnimation = getCustomConfiguration().getShortcutSmartBar().getStaticBarAnimation();

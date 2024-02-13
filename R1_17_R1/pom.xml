@@ -27,7 +27,7 @@
         </dependency>
         <dependency>
             <groupId>nms</groupId>
-            <artifactId>171</artifactId>
+            <artifactId>172</artifactId>
             <version>LATEST</version>
             <scope>system</scope>
             <systemPath>${project.basedir}/../libs/spigot-1.17.1.jar</systemPath>
