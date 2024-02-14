@@ -28,7 +28,7 @@ public class LightAnimationComponent implements AnimationComponent {
 	private int loopedSeconds = 0;
 	private final List<Player> receivers = new ArrayList<>();
 	private final Plugin plugin;
-	private final List<String> frames;
+	private final String frame;
 	private final String mainText;
 	private final String subText;
 	private final int duration;
@@ -41,9 +41,9 @@ public class LightAnimationComponent implements AnimationComponent {
 	*
 	* */
 	
-	public LightAnimationComponent(Plugin plugin, List<String> frames, String mainText, String subText, int duration, DisplayType displayType, BarColor componentColor) {
+	public LightAnimationComponent(Plugin plugin, String frame, String mainText, String subText, int duration, DisplayType displayType, BarColor componentColor) {
 		this.plugin = plugin;
-		this.frames = frames;
+		this.frame = frame;
 		this.mainText = mainText;
 		this.subText = subText;
 		this.duration = duration;
@@ -59,7 +59,7 @@ public class LightAnimationComponent implements AnimationComponent {
 	
 	@Override
 	public List<String> frames() {
-		return frames;
+		return Collections.singletonList(frame);
 	}
 	
 	@Override
@@ -126,7 +126,7 @@ public class LightAnimationComponent implements AnimationComponent {
 	
 	@Override
 	public String callCurrentFrame() {
-		return frames.get(0);
+		return frame;
 	}
 	
 	@Override
@@ -145,7 +145,6 @@ public class LightAnimationComponent implements AnimationComponent {
 		if (displayType == DisplayType.TITLE) {
 			this.runnable = () -> {
 				if (next()) {
-					String frame = frames.get(0);
 					Object[] packets = Booter.getNmsProvider().createTitlePacket(frame, subText, 0, 20, 0);
 					for (Player p : receivers) {
 						if (p == null) continue;
@@ -159,7 +158,6 @@ public class LightAnimationComponent implements AnimationComponent {
 		if (displayType == DisplayType.SUBTITLE) {
 			this.runnable = () -> {
 				if (next()) {
-					String frame = frames.get(0);
 					Object[] packets = Booter.getNmsProvider().createTitlePacket(subText, frame, 0, 20, 0);
 					for (Player p : receivers) {
 						if (p == null) continue;
@@ -173,7 +171,6 @@ public class LightAnimationComponent implements AnimationComponent {
 		if (displayType == DisplayType.ACTION_BAR) {
 			this.runnable = () -> {
 				if (next()) {
-					String frame = frames.get(0);
 					Object packet = Booter.getNmsProvider().createActionbarPacket(frame);
 					for (Player p : receivers) {
 						if (p == null) continue;
@@ -187,7 +184,6 @@ public class LightAnimationComponent implements AnimationComponent {
 		if (displayType == DisplayType.BOSS_BAR) {
 			this.runnable = () -> {
 				if (next()) {
-					String frame = frames.get(0);
 					bossBar.setTitle(frame);
 				} else {
 					end();
@@ -217,7 +213,6 @@ public class LightAnimationComponent implements AnimationComponent {
 			bossBar.removeAll();
 		}
 		receivers.clear();
-		if (frames != null) frames.clear();
 	}
 	
 	private boolean next() {

@@ -13,10 +13,7 @@ import sk.m3ii0.amazingtitles.code.internal.components.implementations.FadeInAni
 import sk.m3ii0.amazingtitles.code.internal.components.implementations.LightAnimationComponent;
 import sk.m3ii0.amazingtitles.code.internal.components.implementations.RepeatingAnimationComponent;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 public class AnimationBuilder {
 	
@@ -32,7 +29,7 @@ public class AnimationBuilder {
 	private ComponentArguments componentArguments = ComponentArguments.create("Default Text", "Default SubText", BarColor.WHITE, 1, 20, DisplayType.TITLE);
 	private FramesBuilder framesBuilder = (componentArguments, args) -> {
 		String mainText = componentArguments.getMainText();
-		return new ArrayList<>(Collections.singletonList(mainText));
+		return new LinkedList<>(Collections.singletonList(mainText));
 	};
 	
 	private String overrideMainText = null;
@@ -159,14 +156,14 @@ public class AnimationBuilder {
 		int fps = (overrideFps != -99)? overrideFps : (arguments.getFps() > 0)? arguments.getFps() : componentArguments.getFps();
 		DisplayType displayType = (overrideDisplayType != null)? overrideDisplayType : (arguments.getDisplayType() != null)? arguments.getDisplayType() : componentArguments.getDisplayType();
 		ComponentArguments builtArguments = ComponentArguments.create(mainText, subText, barColor, duration, fps, displayType);
-		List<String> frames = framesBuilder.buildFrames(builtArguments, args);
+		LinkedList<String> frames = framesBuilder.buildFrames(builtArguments, args);
 		if (animationType == AnimationType.REPEATING) {
 			return new RepeatingAnimationComponent(Booter.getInstance(), frames, mainText, subText, fps, duration, displayType, barColor);
 		}
 		if (animationType == AnimationType.FADE_IN) {
 			return new FadeInAnimationComponent(Booter.getInstance(), frames, mainText, subText, fps, duration, displayType, barColor);
 		}
-		return new LightAnimationComponent(Booter.getInstance(), frames, mainText, subText, duration, displayType, barColor);
+		return new LightAnimationComponent(Booter.getInstance(), frames.get(0), mainText, subText, duration, displayType, barColor);
 	}
 	
 }

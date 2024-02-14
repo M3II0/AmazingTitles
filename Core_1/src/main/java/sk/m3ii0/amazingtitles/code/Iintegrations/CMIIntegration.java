@@ -126,7 +126,6 @@ public class CMIIntegration implements Integration, Listener {
             put("{From}", e.getFrom() + "");
             put("{To}", e.getTo() + "");
             put("{Player}", e.getUser().getPlayer().getName());
-            put("{Source}", e.getSource().getPlayer().getName());
         }};
 
         String path = "BalanceChange.";

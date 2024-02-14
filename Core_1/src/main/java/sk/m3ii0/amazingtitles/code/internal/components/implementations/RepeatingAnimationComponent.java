@@ -30,7 +30,7 @@ public class RepeatingAnimationComponent implements AnimationComponent {
 	private int framesCounter = 0;
 	private final List<Player> receivers = new ArrayList<>();
 	private final Plugin plugin;
-	private final List<String> frames;
+	private final LinkedList<String> frames;
 	private final String mainText;
 	private final String subText;
 	private final int duration;
@@ -44,7 +44,7 @@ public class RepeatingAnimationComponent implements AnimationComponent {
 	*
 	* */
 	
-	public RepeatingAnimationComponent(Plugin plugin, List<String> frames, String mainText, String subText, int fps, int duration, DisplayType displayType, BarColor componentColor) {
+	public RepeatingAnimationComponent(Plugin plugin, LinkedList<String> frames, String mainText, String subText, int fps, int duration, DisplayType displayType, BarColor componentColor) {
 		this.plugin = plugin;
 		this.frames = frames;
 		this.mainText = mainText;
