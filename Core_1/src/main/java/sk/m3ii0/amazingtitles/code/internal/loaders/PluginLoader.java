@@ -112,13 +112,15 @@ public class PluginLoader {
 		
 		AnimationBuilder none = new AnimationBuilder(null, AnimationType.LIGHT, false);
 		none.setComponentArguments(ComponentArguments.create("Text is null", "SubText is null", BarColor.WHITE, 20, 20, DisplayType.TITLE));
-		none.setFramesBuilder((arguments, args) -> Collections.singletonList(ColorTranslator.colorize(arguments.getMainText())));
+		none.setFramesBuilder((arguments, args) -> new LinkedList<String>() {{
+			add(ColorTranslator.colorize(arguments.getMainText()));
+		}});
 		none.register("NONE");
 		
 		AnimationBuilder symbolWrap = new AnimationBuilder(null, AnimationType.REPEATING, false, "Symbol(Text)");
 		symbolWrap.setComponentArguments(ComponentArguments.create("Text is null", "SubText is null", BarColor.WHITE, 20, 10, DisplayType.TITLE));
 		symbolWrap.setFramesBuilder((arguments, args) -> {
-			List<String> frames = new ArrayList<>();
+			LinkedList<String> frames = new LinkedList<>();
 			String symbol = " " + args[0] + "&r ";
 			String input = arguments.getMainText();
 			frames.add(ColorTranslator.colorize(input));
@@ -130,7 +132,7 @@ public class PluginLoader {
 		AnimationBuilder rainbow = new AnimationBuilder(null, AnimationType.REPEATING, true);
 		rainbow.setComponentArguments(ComponentArguments.create("Text is null", "SubText is null", BarColor.WHITE, 20, 20, DisplayType.TITLE));
 		rainbow.setFramesBuilder((arguments, args) -> {
-			List<String> frames = new ArrayList<>();
+			LinkedList<String> frames = new LinkedList<>();
 			String red = "#FF2424";
 			String blue = "#002AFF";
 			String green = "#00FF08";
@@ -173,7 +175,7 @@ public class PluginLoader {
 		AnimationBuilder waves = new AnimationBuilder(null, AnimationType.REPEATING, true, "Color1(HEX/Legacy)", "Color2(HEX/Legacy)");
 		waves.setComponentArguments(ComponentArguments.create("Text is null", "SubText is null", BarColor.WHITE, 10, 20, DisplayType.TITLE));
 		waves.setFramesBuilder((arguments, args) -> {
-			List<String> frames = new ArrayList<>();
+			LinkedList<String> frames = new LinkedList<>();
 			String input = arguments.getMainText();
 			String color1 = (String) args[0];
 			String color2 = (String) args[1];
@@ -215,7 +217,7 @@ public class PluginLoader {
 		AnimationBuilder bounce = new AnimationBuilder(null, AnimationType.REPEATING, true, "Color1(Hex/Legacy)", "Color2(Hex/Legacy)");
 		bounce.setComponentArguments(ComponentArguments.create("Text is null", "SubText is null", BarColor.WHITE, 10, 20, DisplayType.TITLE));
 		bounce.setFramesBuilder((arguments, args) -> {
-			List<String> frames = new ArrayList<>();
+			LinkedList<String> frames = new LinkedList<>();
 			String input = arguments.getMainText();
 			String smoothed = "          " + input + "          ";
 			String color1 = (String) args[0];
@@ -242,7 +244,7 @@ public class PluginLoader {
 		AnimationBuilder flashing = new AnimationBuilder(null, AnimationType.REPEATING, false);
 		flashing.setComponentArguments(ComponentArguments.create("Text is null", "SubText is null", BarColor.WHITE, 10, 10, DisplayType.TITLE));
 		flashing.setFramesBuilder((arguments, args) -> {
-			List<String> frames = new ArrayList<>();
+			LinkedList<String> frames = new LinkedList<>();
 			frames.add(ColorTranslator.colorize(arguments.getMainText()));
 			frames.add("");
 			return frames;
@@ -253,7 +255,7 @@ public class PluginLoader {
 		split.setComponentArguments(ComponentArguments.create("Text is null", "SubText is null", BarColor.WHITE, 10, 10, DisplayType.TITLE));
 		split.setFramesBuilder((arguments, args) -> {
 			String input = ColorTranslator.colorize(arguments.getMainText());
-			return new ArrayList<>(Arrays.asList(input.split("%frame%")));
+			return new LinkedList<>(Arrays.asList(input.split("%frame%")));
 		});
 		split.register("SPLIT");
 		
@@ -261,14 +263,14 @@ public class PluginLoader {
 		words_split.setComponentArguments(ComponentArguments.create("Text is null", "SubText is null", BarColor.WHITE, 10, 10, DisplayType.TITLE));
 		words_split.setFramesBuilder((arguments, args) -> {
 			String input = ColorTranslator.colorize(arguments.getMainText());
-			return new ArrayList<>(Arrays.asList(input.split(" ")));
+			return new LinkedList<>(Arrays.asList(input.split(" ")));
 		});
 		words_split.register("WORDS_SPLIT");
 		
 		AnimationBuilder from_left = new AnimationBuilder(null, AnimationType.FADE_IN, false);
 		from_left.setComponentArguments(ComponentArguments.create("Text is null", "SubText is null", BarColor.WHITE, 20, 20, DisplayType.TITLE));
 		from_left.setFramesBuilder((arguments, args) -> {
-			List<String> frames = new ArrayList<>();
+			LinkedList<String> frames = new LinkedList<>();
 			String input = arguments.getMainText();
 			int lastSpaces = 180;
 			StringBuilder spaces = new StringBuilder();
@@ -288,7 +290,7 @@ public class PluginLoader {
 		AnimationBuilder from_right = new AnimationBuilder(null, AnimationType.FADE_IN, false);
 		from_right.setComponentArguments(ComponentArguments.create("Text is null", "SubText is null", BarColor.WHITE, 20, 20, DisplayType.TITLE));
 		from_right.setFramesBuilder((arguments, args) -> {
-			List<String> frames = new ArrayList<>();
+			LinkedList<String> frames = new LinkedList<>();
 			String input = arguments.getMainText();
 			int lastSpaces = 180;
 			StringBuilder spaces = new StringBuilder();
@@ -308,7 +310,7 @@ public class PluginLoader {
 		AnimationBuilder fade_in = new AnimationBuilder(null, AnimationType.FADE_IN, false);
 		fade_in.setComponentArguments(ComponentArguments.create("Text is null", "SubText is null", BarColor.WHITE, 20, 20, DisplayType.TITLE));
 		fade_in.setFramesBuilder((arguments, args) -> {
-			List<String> frames = new ArrayList<>();
+			LinkedList<String> frames = new LinkedList<>();
 			List<String> chars = ColorTranslator.charactersWithColors(ColorTranslator.colorize(arguments.getMainText()));
 			StringBuilder frameBuilder = new StringBuilder();
 			for (String var : chars) {
@@ -322,7 +324,7 @@ public class PluginLoader {
 		AnimationBuilder fade_in_writer = new AnimationBuilder(null, AnimationType.FADE_IN, false, "Writer(Single Word)");
 		fade_in_writer.setComponentArguments(ComponentArguments.create("Text is null", "SubText is null", BarColor.WHITE, 20, 20, DisplayType.TITLE));
 		fade_in_writer.setFramesBuilder((arguments, args) -> {
-			List<String> frames = new ArrayList<>();
+			LinkedList<String> frames = new LinkedList<>();
 			String symbol = ColorTranslator.colorize((String) args[0]);
 			String colorizedInput = ColorTranslator.colorize(arguments.getMainText());
 			List<String> chars = ColorTranslator.charactersWithColors(colorizedInput);
@@ -340,7 +342,7 @@ public class PluginLoader {
 		AnimationBuilder from_both_sides = new AnimationBuilder(null, AnimationType.FADE_IN, false);
 		from_both_sides.setComponentArguments(ComponentArguments.create("Text is null", "SubText is null", BarColor.WHITE, 20, 20, DisplayType.TITLE));
 		from_both_sides.setFramesBuilder((arguments, args) -> {
-			List<String> frames = new ArrayList<>();
+			LinkedList<String> frames = new LinkedList<>();
 			String input = arguments.getMainText();
 			int lastSpaces = 180;
 			StringBuilder spaces = new StringBuilder();
@@ -362,7 +364,7 @@ public class PluginLoader {
 		AnimationBuilder pulsing = new AnimationBuilder(null, AnimationType.REPEATING, true, "Color1(Hex/Legacy)", "Color2(Hex/Legacy)");
 		pulsing.setComponentArguments(ComponentArguments.create("Text is null", "SubText is null", BarColor.WHITE, 20, 20, DisplayType.TITLE));
 		pulsing.setFramesBuilder((arguments, args) -> {
-			List<String> frames = new ArrayList<>();
+			LinkedList<String> frames = new LinkedList<>();
 			String input = arguments.getMainText();
 			String color1 = (String) args[0];
 			String color2 = (String) args[1];
