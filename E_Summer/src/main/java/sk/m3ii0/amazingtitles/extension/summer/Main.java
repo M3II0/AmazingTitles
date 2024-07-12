@@ -10,6 +10,7 @@ import sk.m3ii0.amazingtitles.code.internal.utils.ColorTranslator;
 
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 public class Main implements AmazingExtension {
@@ -26,11 +27,11 @@ public class Main implements AmazingExtension {
 	
 	@Override
 	public void load() {
-		
+
 		AnimationBuilder wrapped_sun = new AnimationBuilder(this, AnimationType.REPEATING, false);
 		wrapped_sun.setComponentArguments(ComponentArguments.create("Text is null", "SubText is null", BarColor.WHITE, 10, 1, DisplayType.TITLE));
 		wrapped_sun.setFramesBuilder((arguments, args) -> {
-			List<String> frames = new ArrayList<>();
+			LinkedList<String> frames = new LinkedList<>();
 			String sun = " &e☀&r ";
 			frames.add(ColorTranslator.colorize(arguments.getMainText()));
 			frames.add(ColorTranslator.colorize(sun + arguments.getMainText() + sun));
@@ -41,7 +42,7 @@ public class Main implements AmazingExtension {
 		AnimationBuilder wrapped_colored_sun = new AnimationBuilder(this, AnimationType.REPEATING, false, "Hex(Sun-Color)");
 		wrapped_colored_sun.setComponentArguments(ComponentArguments.create("Text is null", "SubText is null", BarColor.WHITE, 10, 1, DisplayType.TITLE));
 		wrapped_colored_sun.setFramesBuilder((arguments, args) -> {
-			List<String> frames = new ArrayList<>();
+			LinkedList<String> frames = new LinkedList<>();
 			String input = arguments.getMainText();
 			String sunColor = (String) args[0];
 			String sun = " &{" + sunColor + "}☀&r ";
@@ -54,7 +55,7 @@ public class Main implements AmazingExtension {
 		AnimationBuilder summer_gradient = new AnimationBuilder(this, AnimationType.REPEATING, false, "0/1(1=bold,0=normal)");
 		summer_gradient.setComponentArguments(ComponentArguments.create("Text is null", "SubText is null", BarColor.WHITE, 10, 1, DisplayType.TITLE));
 		summer_gradient.setFramesBuilder((arguments, args) -> {
-			List<String> frames = new ArrayList<>();
+			LinkedList<String> frames = new LinkedList<>();
 			int code = Integer.parseInt((String) args[0]);
 			String bold = "";
 			if (code == 1) bold = "&l";
@@ -66,7 +67,7 @@ public class Main implements AmazingExtension {
 		AnimationBuilder summer_waves = new AnimationBuilder(this, AnimationType.REPEATING, false);
 		summer_waves.setComponentArguments(ComponentArguments.create("Text is null", "SubText is null", BarColor.WHITE, 10, 1, DisplayType.TITLE));
 		summer_waves.setFramesBuilder((arguments, args) -> {
-			List<String> frames = new ArrayList<>();
+			LinkedList<String> frames = new LinkedList<>();
 			String input = arguments.getMainText();
 			String color1 = "#ffff12";
 			String color2 = "#CC6600";
@@ -99,7 +100,7 @@ public class Main implements AmazingExtension {
 		AnimationBuilder summer_bounce = new AnimationBuilder(this, AnimationType.REPEATING, false);
 		summer_bounce.setComponentArguments(ComponentArguments.create("Text is null", "SubText is null", BarColor.WHITE, 10, 1, DisplayType.TITLE));
 		summer_bounce.setFramesBuilder((arguments, args) -> {
-			List<String> frames = new ArrayList<>();
+			LinkedList<String> frames = new LinkedList<>();
 			String input = arguments.getMainText();
 			String smoothed = "          " + input + "          ";
 			String color1 = "#ffff12";
@@ -126,7 +127,7 @@ public class Main implements AmazingExtension {
 		AnimationBuilder summer_pulsing = new AnimationBuilder(this, AnimationType.REPEATING, false);
 		summer_pulsing.setComponentArguments(ComponentArguments.create("Text is null", "SubText is null", BarColor.WHITE, 10, 1, DisplayType.TITLE));
 		summer_pulsing.setFramesBuilder((arguments, args) -> {
-			List<String> frames = new ArrayList<>();
+			LinkedList<String> frames = new LinkedList<>();
 			String input = arguments.getMainText();
 			Color from = Color.decode("#ffff12");
 			Color to = Color.decode("#CC6600");
@@ -196,7 +197,7 @@ public class Main implements AmazingExtension {
 		summer_pulsing.register("EXTENSION_SUMMER_PULSING");
 		
 	}
-	
-	
-	
+
+
+
 }

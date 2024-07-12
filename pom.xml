@@ -29,6 +29,7 @@
         <module>R1_20_R2</module>
         <module>R1_20_R3</module>
         <module>R1_12_R1</module>
+        <module>R1_21_R1</module>
     </modules>
 
     <properties>
@@ -61,13 +62,13 @@
         <dependency>
             <groupId>io.netty</groupId>
             <artifactId>netty-all</artifactId>
-            <version>5.0.0.Alpha2</version>
+            <version>4.1.111.Final</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>it.unimi.dsi</groupId>
             <artifactId>fastutil</artifactId>
-            <version>8.5.12</version>
+            <version>8.5.13</version>
             <scope>provided</scope>
         </dependency>
         <dependency>

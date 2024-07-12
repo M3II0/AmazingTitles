@@ -36,6 +36,12 @@
             <scope>compile</scope>
         </dependency>
         <dependency>
+            <groupId>sk.m3ii0.amazingtitles.code.providers.R1_21_R1</groupId>
+            <artifactId>R1_21_R1</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
             <groupId>sk.m3ii0.amazingtitles.code.providers.R1_20_R3</groupId>
             <artifactId>R1_20_R3</artifactId>
             <version>1.0-SNAPSHOT</version>
