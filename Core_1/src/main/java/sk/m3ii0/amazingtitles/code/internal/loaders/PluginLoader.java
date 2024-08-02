@@ -29,8 +29,13 @@ import java.util.zip.ZipEntry;
 
 public class PluginLoader {
 	
-	public static NmsBuilder loadBuilder(ClassLoader classLoader) {
-		String nmsVersion = getVersion();
+	public static NmsBuilder loadBuilder(ClassLoader classLoader, boolean old) {
+		String nmsVersion;
+		if (old) {
+			nmsVersion = getVersion();
+		} else {
+			nmsVersion = getNewVersion();
+		}
 		for (NmsBuilder builder : ServiceLoader.load(NmsBuilder.class, classLoader)) {
 			if (builder.checked(nmsVersion)) {
 				return builder;
@@ -446,10 +451,14 @@ public class PluginLoader {
 		pulsing.register("PULSING");
 		
 	}
-	
-	private static String getVersion() {
+
+	public static String getVersion() {
 		final String packageName = Bukkit.getServer().getClass().getPackage().getName();
 		return packageName.substring(packageName.lastIndexOf('.') + 1);
+	}
+
+	public static String getNewVersion() {
+		return Bukkit.getBukkitVersion();
 	}
 	
 }

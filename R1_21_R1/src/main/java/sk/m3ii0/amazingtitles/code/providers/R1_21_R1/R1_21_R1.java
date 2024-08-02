@@ -23,8 +23,6 @@ public class R1_21_R1 implements NmsProvider {
 	public Object[] createTitlePacket(String title, String subtitle, int in, int keep, int out) {
 		if (title.isEmpty()) title = " ";
 		if (subtitle.isEmpty()) subtitle = " ";
-		title = parseServerBasedPlaceholders(title);
-		subtitle = parseServerBasedPlaceholders(subtitle);
 		ClientboundSetTitlesAnimationPacket animation = new ClientboundSetTitlesAnimationPacket(in, keep, out);
 		ClientboundSetTitleTextPacket text = new ClientboundSetTitleTextPacket(CraftChatMessage.fromStringOrNull(title));
 		ClientboundSetSubtitleTextPacket subtext = new ClientboundSetSubtitleTextPacket(CraftChatMessage.fromStringOrNull(subtitle));

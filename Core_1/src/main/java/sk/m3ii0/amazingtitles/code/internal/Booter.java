@@ -166,11 +166,18 @@ public class Booter extends JavaPlugin implements Listener {
 				AmazingTitles.unloadAllExtensions();
 				
 				// Try to load NmsProvider
-				NmsBuilder builder = PluginLoader.loadBuilder(getClassLoader());
+				NmsBuilder builder = PluginLoader.loadBuilder(getClassLoader(), false);
+				Bukkit.getConsoleSender().sendMessage("Trying to access NMS implementation with: " + PluginLoader.getVersion());
 				if (builder == null) {
-					pluginMode = PluginMode.UNSUPPORTED_VERSION;
-					System.out.println(pluginMode.getReport());
-					return;
+					Bukkit.getConsoleSender().sendMessage("Failed...");
+					builder = PluginLoader.loadBuilder(getClassLoader(), true);
+					Bukkit.getConsoleSender().sendMessage("Trying to access NMS implementation with: " + PluginLoader.getNewVersion());
+					if (builder == null) {
+						Bukkit.getConsoleSender().sendMessage("Failed...");
+						pluginMode = PluginMode.UNSUPPORTED_VERSION;
+						System.out.println(pluginMode.getReport());
+						return;
+					}
 				}
 				nmsProvider = builder.build();
 				
